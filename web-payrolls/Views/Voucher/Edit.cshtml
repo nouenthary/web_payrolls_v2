@@ -1,0 +1,867 @@
+@{
+    ViewBag.Title = Resources.Voucher.Edit +" " + Resources.Voucher.Voucher_;
+    ViewBag.Page = Resources.Voucher.Edit +" " + Resources.Voucher.Voucher_;
+}
+
+<style>
+    .clockpicker-popover {
+        z-index: 999999 !important;
+    }
+</style>
+
+<h3 class="m-b-0 card-text">@Resources.Voucher.Edit @Resources.Voucher.Voucher_</h3>
+
+<div class="card" style="border-top: #28A745 3px solid;">
+
+    <div class="card-body">
+        <form action="@Url.Action("Save","Voucher")" method="post" id="form-add-voucher-details">
+
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+
+                <div class="col-md-8">
+
+                    <div class="row">
+                        @* choose master *@
+                        <div class="form-group col-md-6">
+                            <label>@Resources.Voucher.HOD<span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <select name="txtManager" id="txtManager" class="form-control" aria-invalid="false">
+                                    <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                                    @{
+                                        foreach (var row in ViewBag.Manager)
+                                        {
+                                            <option value="@row.PK_Boss_Id">@row.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>@Resources.Voucher.Company<span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <select name="txtCompany" id="txtCompany" class="form-control" aria-invalid="false">
+                                    <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>
+                                </select>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>@Resources.Voucher.Location<span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <select name="txtLocation" id="txtLocation" class="form-control" aria-invalid="false">
+                                    <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>
+                                </select>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>@Resources.Voucher.Department<span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <select name="txtDepartment" id="txtDepartment" class="form-control" aria-invalid="false">
+                                    <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>
+                                </select>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>@Resources.Voucher.Position<span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <select name="txtPosition" id="txtPosition" class="form-control" aria-invalid="false">
+                                    <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Position --</option>
+                                </select>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group  col-md-6">
+                            <label>@Resources.Voucher.Staff @Resources.Voucher.Name <span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <select name="txtStaff" id="txtStaff" class="form-control" aria-invalid="false">
+                                    <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Staff --</option>
+                                </select>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label>Voucher Type<span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <select name="txtVoucherRentType" id="txtVoucherRentType" class="form-control" aria-invalid="false">
+                                    <option value="">-- Choose Voucher Type --</option>
+                                    <option value="Rent">Rent</option>
+                                    <option value="Buy">Buy</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group  col-md-3">
+                            <label>@Resources.Voucher.VoucherRent<span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <select name="txtVoucherType" id="txtVoucherType" class="form-control" aria-invalid="false">
+                                    <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.VoucherRent --</option>
+                                </select>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        @* choose master *@
+
+                        <div class="form-group col-md-6">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>@Resources.Voucher.Date<span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <input type="date" name="date" id="date" class="form-control">
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@Resources.Voucher.Time<span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <input type="text" name="time" id="time" class="form-control">
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <button type="button" class="btn btn-dropbox btn-sm" id="btn-add-row" style="background: #28A745">
+                                <i class="ti-plus"></i>
+                                @Resources.Voucher.AddRow
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <img id="image_view_voucher" 
+                             class="img-fluid img-thumbnail" 
+                             alt="attachment" width="350" 
+                             src="~/Content/images/no-image.jpg" 
+                             onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'"
+                        >
+                        <input type="file" name="choose_voucher" id="choose_voucher" style="display: none">
+                        <input type="hidden" id="photo_voucher" name="photo_voucher" />
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="row">
+                 <div class="form-group col-md-12">
+                    <div class="card">
+                        <table class="table table-sm" id="table-details">
+                            <thead class="bg-light-info" style="background: #28A745; color: #fff">
+                            <tr>
+                                <th class="text-center" style="width: 100px">@Resources.Voucher.ItemName</th>
+                                <th class="text-center" style="width: 100px">@Resources.Voucher.Quantity</th>
+                                <th class="text-center" style="width: 100px">@Resources.Voucher.UnitCost</th>
+                                <th class="text-center" style="width: 100px">@Resources.Voucher.Discount</th>
+                                <th class="text-center" style="width: 100px">@Resources.Voucher.Subtotal</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @* <tr id="0"> *@
+                            @*     <td class="text-center"> *@
+                            @*         <input id="name" name="name" class="form-control form-control-sm text-center" autocomplete="true" value="Item" /> *@
+                            @*     </td> *@
+                            @*     <td class="text-center"> *@
+                            @*         <input id="qty" name="qty" class="form-control form-control-sm text-center" autocomplete="true" value="0" /> *@
+                            @*     </td> *@
+                            @*     <td class="text-center"> *@
+                            @*         <input id="cost" name="cost" class="form-control form-control-sm text-center" autocomplete="true" value="1" /> *@
+                            @*     </td> *@
+                            @* *@
+                            @*     <td class="text-center"> *@
+                            @*         <input id="discount" name="discount" class="form-control form-control-sm text-center" autocomplete="true" value="0" /> *@
+                            @*     </td> *@
+                            @*     <td class="text-center" id="row_total"> *@
+                            @*         $ <span>0</span>  *@
+                            @*         <label class="float-right pr-1"> *@
+                            @*             <button type="button" class="btn btn-danger btn-sm"> *@
+                            @*                 <i class="ti-minus"></i> *@
+                            @*             </button> *@
+                            @*         </label> *@
+                            @*     </td> *@
+                            @* </tr> *@
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th class="text-center">@Resources.Voucher.Total</th>
+                                <th class="text-center"></th>
+                                <th class="text-center"></th>
+                                <th class="text-center"></th>
+                                <th class="text-center">
+                                    $ <span class="pr-4" id="total">0</span>
+                                </th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="form-group  col-md-12">
+                    <label>@Resources.Voucher.Description</label>
+                    <textarea class="form-control" name="desc" id="desc" rows="4" placeholder="@Resources.Voucher.Enter @Resources.Voucher.Description"></textarea>
+                </div>
+            </div> 
+            
+            <div class="form-group">
+                <div class="form-group">
+                    <div class="text-xs-right">
+                        <button type="button" class="btn btn-dropbox btn-sm float-right" id="btn-update-voucher" style="background: #28A745">
+                            <i class="ti-plus"></i> @Resources.Voucher.Save @Resources.Voucher.Voucher_
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(function (){
+            let token = $('input[name="__RequestVerificationToken"]').val();
+            let bid = $('#txtManager');
+            let cid = $('#txtCompany');
+            let lid = $('#txtLocation');
+            let did = $('#txtDepartment');
+            let pid = $('#txtPosition');
+            let sid = $('#txtStaff');
+            let voucherTypeRent = $('#txtVoucherType');
+            let txtDate = $('#date');
+            let txtTime = $('#time');
+            let photo = $('#photo_voucher');
+            let image = $('#image_view_voucher');
+            let txtDesc = $('#desc');
+            let table = $('#table-details').children('tbody');
+         // <--- utils function -->
+                
+            // get drop down list
+             $.fn.GetDropListSelect = function (object) {
+                   function GetLabel(text) {
+                             return '<option value="">-- @Resources.Voucher.Choose ' + text + ' -- </option>';
+                    }
+                         
+                    $(this).change(function () {
+                        let data = {
+                            id: $(this).val(),
+                            __RequestVerificationToken: object.token
+                        };
+                        if (object.removeChild === true) {
+                            for (let i = 0; i < object.child.length; i++) {
+                                $('#' + object.child[i].key).html(GetLabel(object.child[i].value));
+                            }
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: object.url,
+                            data: data,
+                            success: function (response) {
+                                let option = GetLabel(object.label);
+                                for (let i = 0; i < response.length; i++) {
+                                    option += '<option value="' + response[i].key + '">' + response[i].value + '</option>';
+                                }
+                                $(object.supChild).html(option);
+                            },
+                            error: function () {
+                                $(object.supChild).html(GetLabel(object.label));
+                            }
+                        });
+            
+                    });
+                }
+             // get drop down list 
+             // <--- utils function --> 
+             
+           // Manager 
+           bid.GetDropListSelect({
+               url: "/Other/GetCompany",
+               token : token,
+               supChild: '#txtCompany',
+               removeChild: true,
+               child: [{key: "txtLocation", value : "@Resources.Voucher.Location"}, {key: "txtDepartment", value: "@Resources.Voucher.Department"}, {key: "txtPosition", value: "@Resources.Voucher.Position"}, {key: "txtStaff", value: "@Resources.Voucher.Staff"} ],
+               label: "@Resources.Voucher.Company"
+           });
+           //Manager 
+           
+           // company
+            cid.GetDropListSelect({
+                  url: "/Other/GetLocation",
+                  token : token,
+                  supChild: '#txtLocation',
+                  removeChild: true,
+                  child: [{key: "txtDepartment", value : "@Resources.Voucher.Department"}, {key: "txtPosition", value: "@Resources.Voucher.Position"}, {key: "txtStaff", value: "@Resources.Voucher.Staff"} ],
+                  label: "@Resources.Voucher.Location"
+              });
+           // company 
+           
+           // Location
+           lid.GetDropListSelect({
+                 url: "/Other/GetDepartment",
+                 token : token,
+                 supChild: '#txtDepartment',
+                 removeChild: true,
+                 child: [{key: "txtPosition", value : "@Resources.Voucher.Position"}, {key: "txtStaff", value: "@Resources.Voucher.Staff"} ],
+                 label: "@Resources.Voucher.Department"
+             });
+           
+            // lid.GetDropListSelect({
+            //      url: "/Other/GetVoucherType",
+            //      token : token,
+            //      supChild: '#txtVoucherType',              
+            //      label: "@Resources.Voucher.VoucherRent"
+            //  });
+            
+            $('#txtVoucherRentType').change(function (){
+              let voucherType = $(this).val();
+              let locationId = $('#txtLocation').val();
+              
+              if (locationId === ''){
+                  SweatAlert("Choose Location","warning")
+                  return false;
+              }
+              
+              let dataForSent = {
+                  __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                  voucherType,
+                  locationId                
+              };
+              
+              let {data} = GetDataApi('/voucher/GetVoucherRent',dataForSent);
+              
+              $('#txtVoucherType').html(setToSelect({data : data, label : "Voucher"}));
+           });
+           // Location
+           
+            // get data from api
+           function GetDataApi(url, data) {
+              let dataResponse = null;
+              let error = false;
+              $.ajax({
+                url: url,
+                async: false,
+                type: "POST",
+                global: false,
+                dataType: 'json',             
+                data: data,
+                success: function(response) {                  
+                   dataResponse = response 
+                },
+                error: function() {
+                  error =  true 
+                }
+              });                           
+              return {data: dataResponse, error};
+          }         
+                      
+          // get select option
+          function setToSelect({data : data, label : label}) {                               
+                let option = '<option value="">-- ' + 'Choose ' +  label + ' --</option>';
+                for(let item in data){
+                    option += '<option value="'+data[item].key+'">' + data[item].value + '</option>'; 
+                }
+                return option;
+          }
+                      
+           
+            // sweat alert
+            function SweatAlert(message, type) {
+                 swal({
+                     title: message,                       
+                     type: type,
+                     timer: 1500
+                 }); 
+            }
+           
+           // Department 
+             did.GetDropListSelect({
+                 url: "/Other/GetPosition",
+                 token : token,
+                 supChild: '#txtPosition',
+                 removeChild: true,
+                 child: [{key: "txtStaff", value : "@Resources.Voucher.Staff"}],
+                 label: "@Resources.Voucher.Position"
+             });
+           // Department
+           
+           // Staff
+            pid.GetDropListSelect({
+                url: "/Other/GetStaff",
+                token : token,
+                supChild: '#txtStaff',
+                label: "@Resources.Voucher.Staff"
+            });
+           // Staff  
+           
+            // clock picker
+           function ClockPicker(ctx) {
+               $(ctx).clockpicker({
+                   donetext: 'Done',
+                   todayHighlight: true,
+                   todayBtn: "linked",
+                   format: "yyyy-m-d",
+                   autoclose: true,
+                   'default': 'now',
+               });
+
+           }
+           // call clock picker
+           ClockPicker('#time');
+           
+           //
+           let url = window.location.pathname;
+           let id = url.substring(url.lastIndexOf('/') + 1);  
+         
+           $.ajax({
+                type: 'POST',
+                url : '@Url.Action("GetVoucherById", "Voucher")',
+                data: {id: id , __RequestVerificationToken : token},
+                dataType: 'json',
+                success: function (response){
+                    //console.log(response + '\n');
+                    let { managerId, companyId, company , locationId, location,departmentId ,department, positionId, position, staffId, staff , voucherType ,rentId , date, time, picture ,voucherLists , desc, type} = response;
+                    console.log(response);
+                    // manager id
+                    bid.val(managerId);
+                    
+                    // company
+                    let comp = '';
+                    for(let i = 0 ; i <company.length;i++){
+                        if (company[i].key === companyId){
+                            comp += '<option value="'+company[i].key+'" selected>'+company[i].value +'</option>';  
+                        }else {
+                             comp += '<option value="'+company[i].key+'">'+company[i].value +'</option>';  
+                        }   
+                    }
+                    cid.html(comp);
+                    
+                    // location
+                    let loc = "";
+                    for(let i = 0 ; i <location.length;i++){
+                        if (location[i].key === locationId){
+                            loc += '<option value="'+location[i].key+'" selected>'+location[i].value +'</option>';  
+                        }else {
+                             loc += '<option value="'+location[i].key+'">'+location[i].value +'</option>';  
+                        }   
+                    }
+                    lid.html(loc);
+                    
+                    // department
+                    let dept = '';
+                    for(let i = 0 ; i <department.length; i++){
+                        if (department[i].key === departmentId){
+                            dept += '<option value="'+department[i].key+'" selected>'+department[i].value +'</option>';  
+                        }else {
+                             dept += '<option value="'+department[i].key+'">'+department[i].value +'</option>';  
+                        }   
+                    }
+                    did.html(dept);
+                    
+                    // position
+                    let post = '';
+                    for(let i = 0 ; i <position.length; i++){
+                        if (position[i].key === positionId){
+                            post += '<option value="'+position[i].key+'" selected>'+position[i].value +'</option>';  
+                        }else {
+                             post += '<option value="'+position[i].key+'">'+position[i].value +'</option>';  
+                        }   
+                    }
+                    pid.html(post);
+                    
+                    // staff
+                    let staffs = '';                 
+                    for(let i = 0 ; i <staff.length; i++){
+                        if (staff[i].key === staffId){
+                            staffs += '<option value="'+staff[i].key+'" selected>'+staff[i].value +'</option>';  
+                        }else {
+                             staffs += '<option value="'+staff[i].key+'">'+staff[i].value +'</option>';  
+                        }   
+                    }
+                    sid.html(staffs);
+                    
+                    // voucher type
+                    let vouchers = '';
+                    for(let i = 0 ; i <voucherType.length; i++){
+                        if (voucherType[i].key === rentId){
+                            vouchers += '<option value="'+voucherType[i].key+'" selected>'+voucherType[i].value +'</option>';  
+                        }else {
+                             vouchers += '<option value="'+voucherType[i].key+'">'+voucherType[i].value +'</option>';  
+                        }   
+                    }
+                    voucherTypeRent.html(vouchers);
+                    
+                    // date 
+                    txtDate.val(date);
+                    time = time.split(':');
+                    txtTime.val(time[0] +':'+ time[1]);
+                    photo.val(picture);
+                    image.attr('src','/Content/Uploads/Voucher/' + picture);
+                    txtDesc.text(desc);
+                    // loop data to table 
+                    for(let i = 0 ; i < voucherLists.length ; i++){
+                        table.append(getTableRows(voucherLists[i]));
+                        SumTotal();
+                    }
+                    
+                    $('#txtVoucherRentType').val(type);
+                } 
+           });
+           
+           //
+           
+            // Upload Image
+               function isImage(icon) {
+                 const ext = ['.jpg', '.jpeg', '.gif', '.png', '.PNG','.JPG','.JPEG'];
+                 return ext.some(el => icon.endsWith(el));
+             }
+   
+             // show preview choose image
+             function showPreview(id, doClick){
+                   $(id).click(function () {
+                      $(doClick).focus().trigger("click");
+                  });
+             }
+   
+             showPreview('#image_view_voucher','#choose_voucher');
+   
+   
+             function onUpload(control, imagePreview, imageForSave) {
+   
+                 $(control).change(function () {
+   
+                     let fileUpload = $(control).get(0);
+   
+                     let files = fileUpload.files;
+   
+                     let fileSize = files[0].size / 1024 / 1024;
+   
+                     let fileType = files[0].name;
+   
+                     if (!isImage(fileType)) {
+   
+                         $(control).val("");
+   
+                         swal({
+                             title: "Warning",
+                             text: "File must be file Image.",
+                             type: "warning",
+                         });
+                         return false;
+                     }
+   
+                     if (fileSize > 5) {
+   
+                         $(control).val("");
+   
+                         swal({
+                             title: "Warning",
+                             text: "File size must under 5M",
+                             type: "warning",
+                         });
+                         return false;
+                     }
+   
+                     let fileData = new FormData();
+   
+                     for (let i = 0; i < files.length; i++) {
+                         fileData.append(files[i].name, files[i]);
+                     }
+   
+                     let token = $('input[name="__RequestVerificationToken"]').val();
+   
+                     fileData.append('path', 'Voucher/');
+                     fileData.append('__RequestVerificationToken', token);
+   
+                     $.ajax({
+                         type: "POST",
+                         url: "/Other/Upload",
+                         contentType: false,
+                         processData: false,
+                         data: fileData,
+                         success: function (response) {
+   
+                             if (response.message) {
+                                 $(imagePreview).attr('src', '/Content/Uploads/Voucher/' + response.message);
+                                 $(imageForSave).val(response.message);
+                             }
+   
+                         },
+                         error: function (error) {
+                             console.log(error);
+                         }
+                     });
+                 });
+             }
+   
+             onUpload('#choose_voucher','#image_view_voucher','#photo_voucher');
+             // Upload Image
+            
+            // check time format
+            function checkFormatTime(time) {
+                let regexp = /^\d\d:\d\d$/;
+                return regexp.test(time);
+            }
+
+            // table row           
+            function getTableRows(data){
+                let json = {...data};
+                return '<tr id="'+json.id+'">' +
+                    '<td class="text-center">' +
+                       '<input id="name" name="name" class="form-control form-control-sm text-center" autocomplete="true" value="'+json.name+'"/>' +
+                    '</td>' +
+                    '<td class="text-center">' +
+                       '<input id="qty" name="qty" class="form-control form-control-sm text-center" autocomplete="true" value="'+json.qty+'"/>' +
+                    '</td>'+
+                    '<td class="text-center">'+
+                       '<input id="cost" name="cost" class="form-control form-control-sm text-center" autocomplete="true" value="'+json.cost+'"/>'+
+                    '</td>'+
+                    '<td class="text-center">'+
+                        '<input id="discount" name="discount" class="form-control form-control-sm text-center" autocomplete="true" value="'+json.discount+'"/>'+
+                     '</td>'+
+                    '<td class="text-center" id="row_total">$ <span>'+ json.total+'</span> <label class="float-right pr-1"> <button type="button" class="btn btn-danger btn-sm"><i class="ti-minus"></i></button> </label></td>'+
+               '</tr>';
+            }
+            
+            // add more table row
+            $('#btn-add-row').click(function (){
+                 let json = {
+                    amount: 0,
+                    cost: 0,
+                    discount: 0,
+                    id: 0,
+                    name: "Item",
+                    qty: 1,
+                    total: 0 
+                 };
+                 table.append(getTableRows(json));
+                 SumTotal();
+            });
+
+            // Sum Total
+            function SumTotal(){
+                 let sum = 0;
+                 $('tr').find('#row_total span').each(function () {
+                     let combat = $(this).text();
+                     if (!isNaN(combat) && combat.length !== 0) {
+                         sum += parseFloat(combat);
+                     }
+                 });
+                 $('#total').text(parseFloat(sum).toFixed(2));
+            }
+           
+            function CalculateTableRow(ctn){
+                 $(document).delegate('#table-details tbody input'+ctn,'change',function (){
+                    let row = $(this).closest('tr');
+
+                    let cost = row.find('#cost').val() !== '' ?  row.find('#cost').val() : 0;
+                    let qty = row.find('#qty').val() !== '' ? row.find('#qty').val() : 0;
+                    let discount = row.find('#discount').val() ? row.find('#discount').val() : 0 ;
+                    let amount = row.find('span');
+
+                    let sum = parseFloat(cost) * parseFloat(qty) ;
+                    if (discount > 0){
+                       sum = sum - ((discount / 100) * sum);
+                    }
+
+                    amount.text(sum);
+                    SumTotal();
+                });
+            }
+            // remove table row
+           $(document).delegate('#table-details tbody button','click',function (){
+               let row = $('#table-details tbody tr').length;
+               if (row === 1){
+                   return false;
+               }             
+               $(this).closest('tr').remove();
+               SumTotal();
+           });
+           
+           CalculateTableRow('#qty');
+           CalculateTableRow('#cost');
+           CalculateTableRow('#discount');
+
+           // protected all control qty only number
+           function IsPriceOnTableRow(ctn){
+               $(document).on('keypress','#table-details tbody input'+ctn,function (e) {
+                  
+                   
+                   $(ctn).on('input', function(e) {
+                       if (/^(\d+(\.\d{0,3})?)?$/.test($(this).val())) {
+                           $(this).data('prevValue', $(this).val());
+                       } else {
+                           $(this).val($(this).data('prevValue') || '');
+                       }
+                   }).trigger('input');
+                   
+               });
+           }
+           IsPriceOnTableRow('#cost');
+           IsPriceOnTableRow('#discount');
+           
+           // input qty
+           function InputQtyOnTableRow(ctn){
+               $(document).on('keypress' , '#table-details tbody input' + ctn , function (e){
+
+                   if(e.which === 46){
+                      return false;
+                   }
+
+                   if (e.which !== 8 && e.which !== 0 && e.which !== 46 && (e.which < 48 || e.which > 57)) {
+                       return false;
+                   }
+
+                   let text = $(this).val();
+
+                   if (text[0] === '0') {
+                      $(this).val(text.substring(1, text.length))
+                   }
+               });
+           }
+           InputQtyOnTableRow('#qty');
+
+           //
+           function setClassError(id) {
+               $(id).attr('class', 'form-control is-invalid');
+           }
+
+           //
+           function setRemoveError(id) {
+               $(id).attr('class', 'form-control');
+           }
+
+           //
+           function onChange(id) {
+               $(id).change(function () {
+                   setRemoveError(id);
+               });
+           }
+
+            function protectedControl(control) {
+               $(control).bind("cut copy paste drag drop", function (e) {
+                   e.preventDefault();
+               });
+           }
+
+           function OnlyNumber(control) {
+               protectedControl(control);
+
+               $(control).keypress(function (event) {
+                   let value = event.target.value;
+
+                   if (value[0] === '.') {
+                       return false;
+                   }
+
+                   if (value[0] === '0') {
+                       $(control).val(value.substring(1, value.length))
+                   }
+
+                   if ((event.which !== 46 || $(this).val().indexOf('.') !== -1) && (event.which < 48 || event.which > 57)) {
+                       event.preventDefault();
+                   }
+               });
+           }
+
+           OnlyNumber('#txtDiscount');
+
+           // control
+           $(document).bind("cut copy paste drag drop",'#table-details tbody input', function (e) {
+                e.preventDefault();
+            });
+           //
+           $(document).on('change','#table-details tbody input',function (e) {
+             if ($(this).val() === ''){
+                 $(this).val(0);
+             }
+           });
+
+           let arrControl = ['txtManager','txtCompany','txtLocation','txtDepartment','txtPosition', 'txtStaff','txtVoucherRentType','txtVoucherType','date' , 'time'];
+
+           // Validate control
+           function ValidateControl(ctn){
+               for (let item in ctn){
+                   if ($('#' + ctn[item]).val() === ''){
+                       setClassError('#'+ ctn[item]);
+                   }
+               }
+               return false;
+           }
+
+           // onchange control
+           for (let item in arrControl){
+               onChange('#'+ arrControl[item]);
+           } 
+           
+           // click update
+           $('#btn-update-voucher').click(function (){
+               ValidateControl(arrControl);
+               
+               let data = {
+                   StaffId: $('#txtStaff').val(),
+                   Date: $('#date').val(),
+                   Time: $('#time').val(),
+                   PhotoVoucher:$('#photo_voucher').val(),
+                   Desc: $('#desc').val(),
+                   VoucherTypeId: $('#txtVoucherType').val()                   
+               };              
+               
+               let table = document.querySelectorAll('#table-details tbody tr');
+               let voucher = [];
+               for(let i= 0 ; i < table.length; i ++){
+                   let row = table[i];
+                   voucher.push({
+                       Id: row.getAttribute('id'), 
+                       Name: row.querySelector('#name').value,
+                       Qty: row.querySelector('#qty').value,
+                       Cost : row.querySelector('#cost').value,
+                       Discount: row.querySelector('#discount').value,
+                       Amount: row.querySelector('span').textContent
+                   });
+               }
+               let voucherId = url.substring(url.lastIndexOf('/') + 1);
+               let dataForSent = {
+                   __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                   voucherModels : voucher,
+                   listVouchers: data,
+                   voucherNo : voucherId
+               };
+              
+               $.ajax({
+                type: "POST",
+                url: '@Url.Action("Update", "Voucher")',
+                dataType: 'json',
+                traditional:true,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(dataForSent),
+                success: function (response){
+                    if(response){
+                        swal({
+                            title: "Success",
+                            text: response,
+                            type: "success",
+                            timer: 2000
+                        });
+                    }
+                }
+               });
+           });
+           
+        });
+    </script>
+}

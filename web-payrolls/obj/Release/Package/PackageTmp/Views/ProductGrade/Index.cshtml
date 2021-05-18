@@ -1,0 +1,766 @@
+@{
+  ViewBag.Title = "Product Grade";
+  ViewBag.Page = "Product Grade";
+}
+
+@* Card Filter *@
+<div class="card" style="margin-bottom: 0;border-top: #428bca 3px solid">
+  <div class="card-header">
+    <div class="card-actions">
+      <a class="" data-action="collapse"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide</a>
+    </div>
+    <h4 class="card-title m-b-0 card-text"><i class="ti-filter"></i> @Resources.Voucher.Product Grade</h4>
+  </div>
+  <div class="card-body collapse show b-t">
+    <div>
+      <div class="row">
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label>HOD</label>
+          <div class="input-group">
+            <select id="txt_bid" name="txt_bid" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+
+              @foreach (var item in ViewBag.Manager)
+              {
+                if (item.PK_Boss_Id + "" == ViewData["ManagerId"] + "")
+                {
+                  <option value="@item.PK_Boss_Id" selected="selected">@item.Name</option>
+                }
+                else
+                {
+                  <option value="@item.PK_Boss_Id">@item.Name</option>
+                }
+              }
+            </select>
+
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label>Product Type</label>
+          <div class="input-group">
+            <select id="txt_product_type" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose Product Type --</option>
+              <option value="Accessory">Accessory</option>
+              <option value="Fabric">Fabric</option>
+              <option value="Processing">Processing</option>
+              <option value="Recycling">Recycling</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label>Type Name</label>
+          <div class="input-group">
+            <select id="txt_product_type_name" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose Type Name --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label>Product Name</label>
+          <div class="input-group">
+            <select id="txt_product_name" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose Product --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label>Color</label>
+          <div class="input-group">
+            <select id="txt_color" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose Color --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label>Size</label>
+          <div class="input-group">
+            <select id="txt_size" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose Size --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label>Grade</label>
+          <div class="input-group">
+            <select id="txt_grade" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose Grade --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label>Barcode</label>
+          <div class="input-group">
+            <input class="form-control" id="txt_barcode" placeholder="Search barcode" autocomplete="off"/>
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="ti-layout-column4"></i>
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label>Qr Code</label>
+          <div class="input-group">
+            <input class="form-control" id="txt_qrCode" placeholder="Search Qr code" autocomplete="off"/>
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="ti-layout-grid4"></i>
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label>Status</label>
+          <div class="input-group">
+            <select class="form-control" id="txt_status">
+              <option value="">-- All Status --</option>
+              <option value="Enable">Enable</option>
+              <option value="Disabled">Disabled</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-info btn-sm float-right" id="btn-search-grade" style="display: none">
+      <i class="ti-search"></i> @Resources.Voucher.Searchhere
+    </button>
+
+    <button class="btn btn-default btn-sm float-right mr-2" id="btn-modify-grade">
+      <i class="ti-pencil"></i> Product Grade
+    </button>
+  </div>
+</div>
+@* Card Filter *@
+
+
+<div id="show-grade"></div>
+
+@* view photo *@
+<div class="modal fade" id="Modal-View-Photo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <img id="image-card-view"
+             class="card-img-top"
+             alt="Card image cap"
+             src="">
+      </div>
+
+    </div>
+  </div>
+</div>
+@* view photo *@
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("ModalModifyGrade")
+
+@section Javascript{
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+}
+
+@section Scripts
+{
+  <script>
+        $(function() {
+             let token = $('input[name="__RequestVerificationToken"]').val();
+             let bid = $('#txt_bid');
+             let type = $('#txt_product_type');
+             let typeName = $('#txt_product_type_name');
+             let productId = $('#txt_product_name');
+             let barcode = $('#txt_barcode');
+             let qrCode = $('#txt_qrCode');
+             let grade = $('#txt_grade');
+             let color = $('#txt_color');
+             let size = $('#txt_size');
+             let status = $('#txt_status');
+
+             localStorage.setItem('token_link',token + token);
+
+             function GetSearchObject() {
+                    return {
+                        bid: bid.val(),
+                        type: type.val(),
+                        typeName: typeName.val(),
+                        productId : productId.val(),
+                        barcode: barcode.val(),
+                        qrCode : qrCode.val(),
+                        grade: grade.val(),
+                        color: color.val(),
+                        size: size.val(),
+                        status: status.val()
+                    }
+              }
+
+              // Load
+                function LoadProductGrade() {
+                    let objSearch = GetSearchObject();
+                    $('#show-grade').load('/ProductGrade/GetTable', {
+                        ...objSearch,
+                        pageSize: $('#pageSize').val()
+                    });
+                }
+
+                LoadProductGrade();
+
+                $('#btn-search-grade').click(function() {
+                  LoadProductGrade();
+                });
+
+                 //
+                $(document).on('change', '#show-grade #pageSize', function () {
+                    let objSearch = GetSearchObject();
+                    $('#show-grade').load('/ProductGrade/GetTable', {
+                        pageSize: $(this).val(),
+                        ...objSearch
+                    });
+                });
+                //
+                $(document).on('click', '#show-grade a', function (e) {
+                    try {
+                        let link = $(this).attr("href").split('=');
+                        let objSearch = GetSearchObject();
+                        $('#show-grade').load('/ProductGrade/GetTable', {
+                            pageSize: $('#pageSize').val(),
+                            page: link[1],
+                            ...objSearch
+                        });
+                        e.preventDefault();
+                    } catch (ex) {
+                    }
+                });
+                 // Load
+
+             // preview image
+             $(document).on('click','#table-grade tbody img',function (){
+                 $('#Modal-View-Photo').modal('show');
+                 $('#image-card-view').attr('src',$(this).attr('src'));
+             });
+             // Export
+             $(document).on('click', '#show-grade #btn-export-grade', function () {
+                $('#table-grade').csvExport();
+            });
+
+
+            // click edit
+            $(document).on('click','#btn-edit-grade',function() {
+                let row = $(this).closest('tr');
+                $('#txtProductSizeId').val(row.attr('data-size'));
+                $('#txtGradeIdGradeId').val(row.attr('id'));
+                $('#txtProductMeasure').val(row.attr("data-measure"));
+                $('#txtBarcodeGrade').val(row.attr("data-barcode"));
+                $('#txtQrCodeGrade').val(row.attr("data-qrCode"));
+                $('#txtGrade').val(row.attr("data-grade"));
+                $('#txtDoubleWholePrice').val(row.attr("data-double-whole"));
+                $('#txtWholePrice').val(row.attr("data-whole"));
+                $('#txtUnitPrice').val(row.attr("data-unit"));
+                $('#txtCost').val(row.attr("data-cost"));
+                $('#txtNormalPrice').val(row.attr("data-normal"));
+                $('#txtStatusDiscount').val(row.attr("data-status"));
+                $('#txtDiscount').val(row.attr("data-discount"));
+                $('#txtStartDiscount').val(row.attr("data-start-discount"));
+                $('#txtEndDiscount').val(row.attr("data-end-discount"));
+                $('#txtDescGrade').val(row.attr("data-desc"));
+                $('#txtPicturePath').val(row.attr("data-picture"));
+                $('#picture-response-grade-edit').attr('src','/Content/Uploads/Grade/' + row.attr('data-picture'));
+
+                $('#modal-update-grade').modal("show");
+            });
+
+           // utils
+           //
+           function setClassError(id) {
+               $(id).attr('class', 'form-control is-invalid');
+           }
+
+           //
+           function setRemoveError(id) {
+               $(id).attr('class', 'form-control');
+           }
+
+           //
+           function onChange(id) {
+               $(id).change(function () {
+                   setRemoveError(id);
+               });
+           }
+
+            function protectedControl(control) {
+               $(control).bind("cut copy paste drag drop", function (e) {
+                   e.preventDefault();
+               });
+           }
+
+            function OnlyNumber(control) {
+               protectedControl(control);
+
+               $(control).keypress(function (event) {
+                   let value = event.target.value;
+
+                   if (value[0] === '.') {
+                       return false;
+                   }
+
+                   if ((event.which !== 46 || $(this).val().indexOf('.') !== -1) && (event.which < 48 || event.which > 57)) {
+                       event.preventDefault();
+                   }
+               });
+           }
+
+
+           let form = $('#form-update-grade').serializeArray();
+           for(let item in form){
+               onChange('#' + form[item].name);
+           }
+
+            // click update
+            $('#btn-update-grade').click(function() {
+                let form = $('#form-update-grade').serializeArray();
+                console.log(form);
+
+                 for (let item in form) {
+                      if(form[item].name === "txtDesc"){
+                          setRemoveError('#txtDesc');
+                      }
+                      else if(form[item].name === '"txtPicturePath"'){
+                          setRemoveError('#"txtPicturePath"');
+                      }
+                      else if (form[item].value === "") {
+                          setClassError('#' + form[item].name);
+                          return false;
+                      }
+                   }
+
+                 $.ajax({
+                    type: "POST",
+                    url : "/ProductGrade/Update",
+                    data: form,
+                    success: function(response) {
+                      console.log(response);
+
+                    if(response.error){
+                          SweatAlert(response.error, 'error');
+                    }
+                    if(response.qrCode){
+                        setClassError('#txtQrCodeGrade');
+                        $('#error-qrCode-grade-edit').text(response.qrCode);
+                        return false;
+                    }
+                    if(response.barcode){
+                        setClassError('#txtBrcodeGrade');
+                        $('#error-barcode-grade-edit').text(response.barcode);
+                        return false;
+                    }
+                    if(response.grade){
+                        setClassError('#grade');
+                        $('#error-grade-edit').text(response.grade);
+                        return false;
+                    }
+
+                    }
+                 });
+
+            });
+
+           function SweatAlert(message, type) {
+                 swal({
+                     title: message,
+                     type: type,
+                     timer: 1500
+                 });
+           }
+
+           // Auto complete
+           function AutoComplete(control, url) {
+               $(control).typeahead({
+                   minLength: 1,
+                   name: control,
+                   highlight: false,
+                   source: function (request, response) {
+                       $.ajax({
+                           url: url,
+                           data: {
+                               bid: bid.val() !== '' ? bid.val() :  0,
+                               value: request,
+                               __RequestVerificationToken : token
+                           },
+                           type: "POST",
+                           success: function (data) {
+                               response(data);
+                           },
+                           error: function (response) {
+                               console.log(response.responseText);
+                           },
+                       });
+                   },
+               });
+           }
+
+           // call
+           AutoComplete('#txt_barcode', '/ProductGrade/GetBarcode');
+           AutoComplete('#txt_qrCode', '/ProductGrade/GetQrCode');
+
+
+           // Filter Card
+          bid.change(function() {
+            typeName.html(GetLabelOption("Type Name"));
+            productId.html(GetLabelOption("Product Name"));
+            color.html(GetLabelOption("Color"));
+            size.html(GetLabelOption("Size"));
+            grade.html(GetLabelOption("Grade"));
+
+            barcode.val("");
+            qrCode.val("");
+            $("#txt_status option:first").attr('selected','selected');
+
+          });
+
+           // get product type name by type
+           function GetProductTypeByTypeName() {
+                $('#txt_product_type').change(function() {
+                    let value = $(this).val()
+
+                    productId.html(GetLabelOption("Product Name"));
+                    color.html(GetLabelOption("Color"));
+                    size.html(GetLabelOption("Size"));
+                    grade.html(GetLabelOption("Grade"));
+
+                    barcode.val("");
+                    qrCode.val("");
+                    $("#txt_status option:first").attr('selected','selected');
+
+                    $.ajax({
+                       type: "POST",
+                       url: "/ProductGrade/GetProductTypeNameByProductType",
+                       data: {
+                            value,
+                            __RequestVerificationToken: token
+                       },
+                       success: function(response) {
+                           let typeObject = '<option value="">-- Choose Type Name -- </option>';
+                           // product type name
+                           for (let item in response){
+                               typeObject += "<option value='"+ response[item].key +"'>" + response[item].value + "</option>" ;
+                           }
+                           // set data to control
+                           $('#txt_product_type_name').html(typeObject);
+                       }
+                   });
+                });
+           }
+
+           GetProductTypeByTypeName();
+
+           //
+            function GetProductByProductType() {
+               $('#txt_product_type_name').change(function() {
+                    let id = $(this).val();
+
+                     color.html(GetLabelOption("Color"));
+                     size.html(GetLabelOption("Size"));
+                     grade.html(GetLabelOption("Grade"));
+
+                     barcode.val("");
+                     qrCode.val("");
+                     $("#txt_status option:first").attr('selected','selected');
+
+                    $.ajax({
+                       type: "POST",
+                       url: "/Product/GetProductByProductType",
+                       data: {
+                            id,
+                            __RequestVerificationToken: token
+                       },
+                       success: function(response) {
+                           let typeObject = '<option value="">-- Choose Product -- </option>';
+                           // product type name
+                           for (let item in response){
+                               typeObject += "<option value='"+ response[item].key +"'>" + response[item].value + "</option>" ;
+                           }
+                           // set data to control
+                           $('#txt_product_name ').html(typeObject);
+                       }
+                   });
+
+               });
+            }
+            GetProductByProductType();
+
+            // Product Name
+           productId.change(function (){
+
+               barcode.val("");
+               qrCode.val("");
+               $("#txt_status option:first").attr('selected','selected');
+
+               let json = {
+                    id: $(this).val(),
+                    __RequestVerificationToken: token
+               };
+
+               let {data} = GetDataApi("/Other/GetProductGradeByProductId", json);
+
+               let {grades, colors, sizes} = data;
+
+               let listGrade = setToSelect({data : grades, label: 'Grade'});
+
+               let listColor = setToSelect({data : colors, label: 'Color'});
+
+               let listSize = setToSelect({data : sizes, label: 'Size'});
+
+               grade.html(listGrade);
+
+               color.html(listColor);
+
+               size.html(listSize);
+
+           });
+           // Product Name
+
+            // Filter Card
+
+            // get data from api
+              function GetDataApi(url, data) {
+                 let dataResponse = null;
+                 let error = false;
+                 $.ajax({
+                   url: url,
+                   async: false,
+                   type: "POST",
+                   global: false,
+                   dataType: 'json',
+                   data: data,
+                   success: function(response) {
+                      dataResponse = response
+                   },
+                   error: function() {
+                     error =  true
+                   }
+                 });
+                 return {data: dataResponse, error};
+             }
+
+             // get select option
+             function setToSelect({data : data, label : label}) {
+                   let option = '<option value="">-- ' + 'Choose ' +  label + ' --</option>';
+                   for(let item in data){
+                       option += '<option value="'+data[item].key+'">' + data[item].value + '</option>';
+                   }
+                   return option;
+             }
+
+             // get option
+            function GetLabelOption(label){
+                  return "<option value=''>-- Choose " + label + " --</option>";
+            }
+
+           // Area Searching
+
+              // modify products grade
+              $(document).on('click','#btn-modify-grade',function (){
+                  $('#modal-modify-grade').modal('show');
+              });
+
+              // only number
+              OnlyNumber("#double_whole_txt");
+              OnlyNumber("#whole_price_txt");
+              OnlyNumber("#unit_txt");
+              OnlyNumber("#unit_cost");
+              OnlyNumber("#normal_txt");
+
+              // hod
+              $('#hod_txt').change(function (){
+                  $('#product_type_txt').val("");
+                  $('#product_type_name_txt').val("");
+                  $('#product_name_txt').val('');
+              });
+
+              // product type
+              $('#product_type_txt').change(function (){
+
+                  $('#product_name_txt').val('');
+
+                  let jsonForSent = {
+                      productType: $(this).val(),
+                      id: $('#hod_txt').val(),
+                      __RequestVerificationToken: token
+                  };
+
+                  let {data} = GetDataApi("/Other/GetProductTypeNameByProductType",jsonForSent);
+
+                   let list = setToSelect({data: data, label : 'Type Name'});
+
+                   $('#product_type_name_txt').html(list);
+
+              });
+
+              // product name
+              $('#product_type_name_txt').change(function (){
+                  let id = $(this).val();
+
+                  let dataForSent = {
+                      id: id,
+                      __RequestVerificationToken: token
+                  };
+
+                  let {data} = GetDataApi("/Other/GetProductByProductType", dataForSent);
+
+                  let list = setToSelect({data: data, label : 'Product Name'});
+
+                  $('#product_name_txt').html(list);
+              });
+
+              // click save
+              $('#btn-save-modify-grade').click(function (){
+                  let form = $('#form-modify-grade').serializeArray();
+
+                  for (let item in form) {
+                    if (form[item].value === "") {
+                        setClassError('#' + form[item].name);
+                        return false;
+                    }
+                 }
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/ProductGrade/ModifyProductsGrade",
+                    data: form,
+                    success: function (response){
+
+                        if(response.error){
+                            SweatAlert(response.error, 'error');
+                            return false;
+                        }
+
+                        $('#modal-modify-grade').modal('hide');
+
+                        SweatAlert(response, 'success');
+                    }
+                 })
+              });
+              // modify products grade
+
+
+               // Select 2
+              function Select2(ctn){
+                 $(ctn).select2({ width: '100%', placeholder: "Select an Option", allowClear: true });
+              }
+              // call
+              let select2 = [
+                  'txt_bid','txt_product_type','txt_product_type_name' , 'txt_product_name', 'txt_color', 'txt_size', 'txt_grade', 'txt_status'
+              ];
+
+              for (let item in select2){
+                   Select2('#' + select2[item]);
+              }
+
+              // change
+              for (let item in select2){
+                  $('#'+ select2[item]).change(function (){
+                      LoadProductGrade();
+                  });
+              }
+
+             // manager on change
+             bid.change(function(){
+                 $('select#txt_product_type').val(0).select2();
+                 $('select#txt_product_type_name').val(0).select2();
+                 $('select#txt_product_name').val(0).select2();
+                 $('select#txt_color').val(0).select2();
+                 $('select#txt_size').val(0).select2();
+                 $('select#txt_grade').val(0).select2();
+                 $('#txt_barcode').val('');
+                 $('#txt_qrCode').val('');
+                 $('select#txt_status').val(0).select2();
+             });
+
+             // product type
+             type.change(function (){
+                 $('select#txt_product_type_name').val(0).select2();
+                 $('select#txt_product_name').val(0).select2();
+                 $('select#txt_color').val(0).select2();
+                 $('select#txt_size').val(0).select2();
+                 $('select#txt_grade').val(0).select2();
+                 $('#txt_barcode').val('');
+                 $('#txt_qrCode').val('');
+                 $('select#txt_status').val(0).select2();
+             });
+
+             // type name
+             typeName.change(function (){
+                $('select#txt_product_name').val(0).select2();
+                $('select#txt_color').val(0).select2();
+                $('select#txt_size').val(0).select2();
+                $('select#txt_grade').val(0).select2();
+                $('#txt_barcode').val('');
+                $('#txt_qrCode').val('');
+                $('select#txt_status').val(0).select2();
+             });
+             // product
+             productId.change(function (){
+                 $('select#txt_color').val(0).select2();
+                 $('select#txt_size').val(0).select2();
+                 $('select#txt_grade').val(0).select2();
+                 $('#txt_barcode').val('');
+                 $('#txt_qrCode').val('');
+                 $('select#txt_status').val(0).select2();
+             });
+
+             // color
+             color.change(function (){
+                  $('select#txt_size').val(0).select2();
+                  $('select#txt_grade').val(0).select2();
+                  $('#txt_barcode').val('');
+                  $('#txt_qrCode').val('');
+                  $('select#txt_status').val(0).select2();
+             });
+             // size
+             size.change(function (){
+                   $('select#txt_grade').val(0).select2();
+                   $('#txt_barcode').val('');
+                   $('#txt_qrCode').val('');
+                   $('select#txt_status').val(0).select2();
+             });
+             // grade
+             grade.change(function (){
+                 $('#txt_barcode').val('');
+                 $('#txt_qrCode').val('');
+                 $('select#txt_status').val(0).select2();
+             });
+             //barcode
+             barcode.change(function (){
+                 $('#txt_qrCode').val('');
+                 $('select#txt_status').val(0).select2();
+             });
+             // qrcode
+             qrCode.change(function (){
+                 $('select#txt_status').val(0).select2();
+             });
+
+        });
+    </script>
+}

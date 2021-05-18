@@ -1,0 +1,17 @@
+@model List<web_payrolls.Controllers.CheckIn>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<ul>
+  @foreach (var row in Model)
+  {
+  <li>
+    @row.Id - @row.Date - @row.Time 
+  </li>}
+</ul>
+

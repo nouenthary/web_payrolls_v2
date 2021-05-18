@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8776bceb1beb4fa5b3b361ee865ce22a" Name="Diagram1">
+        <EntityTypeShape EntityType="PAYROLL_20211Model.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblAnnouncment" Width="1.5" PointX="7.5" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblBoss" Width="1.5" PointX="0.75" PointY="61.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblBrokendBalance" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblCompany" Width="1.5" PointX="3" PointY="54.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblConfig" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblCut_Money" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblDepartment" Width="1.5" PointX="7.5" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblExchange" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblForget_Scan" Width="1.5" PointX="14.25" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblInput_Money" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblInputLastyear" Width="1.5" PointX="14.25" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblInventory" Width="1.5" PointX="7.5" PointY="100.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblLocation" Width="1.5" PointX="5.25" PointY="54" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblLost_Inventory" Width="1.5" PointX="9.75" PointY="97.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblLostBalance" Width="1.5" PointX="9.75" PointY="102.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblLostInventoryNo" Width="1.5" PointX="7.5" PointY="105.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblModel_Of_Inventory" Width="1.5" PointX="5.25" PointY="101.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblNotification" Width="1.5" PointX="14.25" PointY="35.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblOver_Time" Width="1.5" PointX="14.25" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblPermission" Width="1.5" PointX="14.25" PointY="44.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblPosition" Width="1.5" PointX="9.75" PointY="52.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Color" Width="1.5" PointX="5.25" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Grade" Width="1.5" PointX="5.25" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Measur" Width="1.5" PointX="3" PointY="94.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_PK_Stock_In_Product_Cut" Width="1.5" PointX="10.5" PointY="43.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_PK_Stock_In_Product_Import_Balance" Width="1.5" PointX="7.5" PointY="40.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Product" Width="1.5" PointX="3" PointY="47" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_ProductType" Width="1.5" PointX="0.75" PointY="47.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Repair_Closth" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Repair_Closth_Balance" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Repair_Closth_No" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Size" Width="1.5" PointX="7.5" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Stock_In_Product_Cut_No" Width="1.5" PointX="8.25" PointY="48.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Stock_In_Product_Import" Width="1.5" PointX="7.5" PointY="43.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_StockIn_Complete_Balance" Width="1.5" PointX="7.5" PointY="62.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_StockIn_Cut_On_Loc" Width="1.5" PointX="7.5" PointY="56.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_StockIn_Cut_On_LocBalance" Width="1.5" PointX="7.5" PointY="66.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_StockIn_Cut_On_LocNo" Width="1.5" PointX="5.25" PointY="62.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_StockIn_Product_Cut_Balance" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Tranfer_From_LocTo_Comp" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Use_Fabrik_On_Cut" Width="1.5" PointX="7.5" PointY="69.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProduction_Use_Fabrik_On_Cut_Balance" Width="1.5" PointX="7.5" PointY="73.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblProducttion_StockIn_Complete_Product" Width="1.5" PointX="7.5" PointY="76.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblPuchase" Width="1.5" PointX="17.25" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblPuchaseNo" Width="1.5" PointX="15" PointY="49.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblRemain_Leave" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblReturnInventory" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblReturnInventoryNo" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblRoster" Width="1.5" PointX="14.25" PointY="62.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblSalary_Type" Width="1.5" PointX="14.25" PointY="52.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblShareHolder" Width="1.5" PointX="14.25" PointY="59" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblStaff" Width="1.5" PointX="12" PointY="49.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblStock_In_Inventory_Id" Width="1.5" PointX="9.75" PointY="105.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblStockBalance_Inventory" Width="1.5" PointX="9.75" PointY="110.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblStockBalanceInventoryInDepartment" Width="1.5" PointX="9.75" PointY="77.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblStockinventoryOnDepartment" Width="1.5" PointX="9.75" PointY="72.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblSum_Sal" Width="1.5" PointX="14.25" PointY="73.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblSupplyer" Width="1.5" PointX="7.5" PointY="87" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblTax" Width="1.5" PointX="5.25" PointY="90.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblTrack_User" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblType_Of_Inventory" Width="1.5" PointX="3" PointY="101.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblVoucher" Width="1.5" PointX="9.75" PointY="89.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblVoucher_No" Width="1.5" PointX="7.5" PointY="96.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAYROLL_20211Model.tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" Width="1.5" PointX="7.5" PointY="90.5" IsExpanded="true" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblAnnouncment_tblLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Bo__174363E2" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblCompany_tblBoss" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblType_Of_Inventory_tblBoss" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblBrokendBalance_tblReturnInventory" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblExchange_tblCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblLocation_tblCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblTax_tblCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblDepartment_tblLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblPosition_tblDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblStockBalanceInventoryInDepartment_tblDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblStockinventoryOnDepartment_tblDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblForget_Scan_tblStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblInputLastyear_tblStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblInventory_tblModel_Of_Inventory" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblLost_Inventory_tblInventory" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblLostBalance_tblInventory" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblStock_In_Inventory_Id_tblInventory" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblStockBalance_Inventory_tblInventory" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblStockBalanceInventoryInDepartment_tblInventory" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblStockinventoryOnDepartment_tblInventory" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Lo__507BE13E" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblSupplyer_tblLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblVoucher_Rent_Invertory_Rent_And_Other_Voucher_tblLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblLost_Inventory_tblLostInventoryNo" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblModel_Of_Inventory_tblType_Of_Inventory" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblNotification_tblStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblOver_Time_tblStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblPermission_tblStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblStaff_tblPosition" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Co__164F3FA9" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Pr__1372D2FE" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Gr__0EAE1DE1" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Gr__0FA2421A" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Gr__10966653" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Gr__118A8A8C" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Gr__2A8B4280" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Gr__2B7F66B9" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Gr__61DB776A" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Gr__75E27017" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Gr__76D69450" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Pr__29971E47" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_St__0DB9F9A8" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__FK_Pr__27AED5D5" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK__tblProduc__Stock__51700577" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblPuchase_tblPuchaseNo" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblPuchase_tblStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblReturnInventory_tblReturnInventoryNo" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblRoster_tblStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblSalary_Type_tblStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblShareHolder_tblStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblSum_Sal_tblStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblVoucher_tblVoucher_No" ManuallyRouted="false" />
+        <AssociationConnector Association="PAYROLL_20211Model.FK_tblVoucher_tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

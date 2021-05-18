@@ -1,0 +1,23 @@
+@using web_payrolls.Helpers
+@using web_payrolls.Models
+@{
+  var db = new DB_Connection();
+
+  var provider = new ContextProvider(new ClHelper(), new DB_Connection());
+
+  var hod = db
+    .tblBosses
+    .Select(boss => new SelectListItem
+    {
+      Value = boss.PK_Boss_Id + "",
+      Text = boss.Name,
+      Selected = provider.ManagerId == boss.PK_Boss_Id
+    });
+}
+
+<div class="form-group col-xlg-3 col-md-4 pb-2">
+  <label>HOD</label>
+  <div class="input-group">
+    @Html.DropDownList("bid", hod, "-- Choose HOD --", new {@class = "form-control"})
+  </div>
+</div>

@@ -1,0 +1,221 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetAllForgetScan_Result>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+
+    .btn-green {
+        background: #28A745 !important;
+        color: white;
+    }
+
+    .label-green {
+        background: #28A745 !important;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }
+
+    thead, tbody tr {
+        display: table;
+        width: 2000px;
+        table-layout: fixed;
+    }
+
+    thead {
+        width: calc(2000px - 0.1em);
+    }
+
+    tbody {
+        height: 720px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2 pb-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize" name="pageSize">
+                @foreach (var item in ViewBag.PageSize)
+                {
+                    if (item.Value == ViewBag.size + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row justify-content-end pr-3 pb-2">
+            <div class="float-right">
+            
+                <div class="btn-group btn-sm" data-toggle="buttons">
+
+                    <label class="btn btn-sm bg-white" id="btn-export-forget">
+                        <input type="radio" name="options" id="option3" autocomplete="off">
+                        <span class="text-inverse">
+                            <i class="ti-printer"></i> @Resources.Voucher.Excel
+                        </span>
+                    </label>
+                     
+                </div>
+
+                @* <button type="button" class="btn btn-sm" style="background: #28a745; color: white" id="btn-add-forget"> *@
+                @*     <i class="ti-plus"></i> Add Forget Scan *@
+                @* </button> *@
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-hover table-md" id="table-forget">
+        <thead class="text-uppercase">
+            <tr style="border: 1px solid #f3f1f1">
+                <th width="50px">#</th>
+                <th>@Resources.Voucher.Confirm</th>
+                <th>@Resources.Voucher.Name</th>
+                <th>@Resources.Voucher.Date</th>
+                <th>@Resources.Voucher.Total</th>
+                <th>@Resources.Voucher.Status</th>
+                <th>@Resources.Voucher.Picture</th>
+                <th>@Resources.Voucher.ConfirmBy</th>
+                <th>@Resources.Voucher.DateConfirm</th>
+                <th>@Resources.Voucher.TimeConfirm</th>
+                <th>@Resources.Voucher.UpdateBy</th>
+                <th>@Resources.Voucher.DateUpdate</th>
+                <th>@Resources.Voucher.TimeUpdate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+                <tr id="@item.PK_Forget_Scan_Id"
+                    data-price="@item.Total_Price"
+                    data-date="@item.Forget_Date"
+                    data-desc="@item.Descr"
+                    data-photo="@item.Picture"
+                    data-status="@item.Status"
+                    >
+                    <td width="50px">@(rowNo += 1)</td>
+                    <td>
+                        @if (item.Status.Trim() == "Done" || item.Status.Trim() == "Reject")
+                        {
+                            <button class="btn btn-instagram btn-sm" disabled><i class="ti-check"></i></button>
+                            <button class="btn btn-instagram btn-sm" disabled><i class="ti-close"></i></button>
+                            <button class="btn btn-instagram btn-sm" disabled><i class="ti-pencil"></i></button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-green btn-sm" id="btn-confirm-forget" data-id="@item.PK_Forget_Scan_Id"><i class="ti-check"></i></button>
+                            <button class="btn btn-danger btn-sm" data-id="@item.PK_Forget_Scan_Id" id="btn-reject-forget"><i class="ti-close"></i></button>
+                            <button class="btn btn-dropbox btn-sm" id="btn-edit-forget"><i class="ti-pencil"></i></button>
+                        }
+                    </td>
+                    <td>@item.Staff_Name</td>
+                    <td>@item.Forget_Date</td>
+                    <td>$ @item.Total_Price</td>
+                    <td>
+                        @if (item.Status.Trim() == "Done")
+                        {
+                            <span class="label label-green">@item.Status</span>
+                        }
+                        else if (item.Status.Trim() == "Reject")
+                        {
+                            <span class="label label-danger">@item.Status</span>
+                        }
+                        else
+                        {
+                            <span class="label label-success">@item.Status</span>
+                        }
+                    </td>
+
+                    <td>
+                       <img src="~/Content/Uploads/ForgetScan/@item.Picture" height="30" onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'" alt="me"/>
+                    </td>
+
+                    <td>
+                        @if (item.User_Confirm == null)
+                        {
+                            <span class="label label-light-info">No Confirm</span>
+                        }
+                        else
+                        {
+                            @item.User_Confirm
+                        }
+                    </td>
+                    <td>
+                        @if (item.Date_Confirm == null)
+                        {
+                            <span><i class="ti-time"></i></span>
+                        }
+                        else
+                        {
+                            @item.Date_Confirm
+                        }
+                    </td>
+                    <td>
+                        @if (item.Time_Confirm == null)
+                        {
+                            <span><i class="ti-time"></i></span>
+                        }
+                        else
+                        {
+                            @item.Time_Confirm
+                        }
+                    </td>
+                    <td>@item.User_Update</td>
+                    <td>@item.Date_Update</td>
+                    <td>@item.Time_Update</td>
+                </tr>
+            }
+
+            <tr>
+                <td width="50px"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="font-weight-bold">$ @ViewData["Sum_Total"]</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th></th>
+            </tr>
+        </tbody>      
+    </table>
+</div>
+
+<div class="float-left" style="padding: 20px 0;">
+    @Resources.Voucher.Showing @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @Resources.Voucher.to @Model.PageCount @Resources.Voucher.of @ViewBag.Records @Resources.Voucher.Entries
+</div>
+
+<div class="float-right" id="Paginator"> @Html.PagedListPager(Model, page => Url.Action("GetTable", new { page }))</div>

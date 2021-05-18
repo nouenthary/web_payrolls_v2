@@ -1,0 +1,238 @@
+﻿@{
+    ViewBag.Title = @Resources.Voucher.ViewProfile;
+    ViewBag.Page = @Resources.Voucher.ViewProfile;
+}
+
+<style>  
+    .btn-list {
+        height: 100px;
+        padding-right: 0px !important;
+    }
+
+    .col-lg-4 {
+        padding-right: 0;
+        padding-bottom: 0px;
+    }
+
+    .list-group-item {
+        border: none;
+    }
+
+    .card-outline-info .card-header {
+        background: #fff !important;
+        border-bottom: 1px solid #d7dfe3 !important;
+    }
+
+    .card {
+        margin-bottom: 10px;
+    }
+</style>
+
+
+<div id="view-card" style="height: 100vh">
+    <div class="container-fluid pt-2">
+        <div class="card card-outline-info">
+            <div class="card-header">
+                <h4 class="m-b-0 text-secondary card-text">@Resources.Voucher.EmployeeInformation</h4>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-6 pb-    3">
+                                <h5 class="float-right font-weight-bold text-secondary card-text"> @Resources.Voucher.idcard : </h5>
+                            </div>
+                            <div class="col-md-6 pb-3">
+                                C4400
+                            </div>
+                            <div class="col-md-6 pb-3">
+                                <h5 class="float-right font-weight-bold text-secondary card-text">  @Resources.Voucher.Name :</h5>
+                            </div>
+                            <div class="col-md-6 pb-3">
+                                Heng Dara
+                            </div>
+                            <div class="col-md-6 pb-3">
+                                <h5 class="float-right font-weight-bold text-secondary card-text">  @Resources.Voucher.Position :</h5>
+                            </div>
+                            <div class="col-md-6 pb-3">
+                                IT Manager
+                            </div>
+                            <div class="col-md-6 pb-3">
+                                <h5 class="float-right font-weight-bold text-secondary ">  SK Group Co.,Ltd :</h5>
+                            </div>
+                            <div class="col-md-6 pb-3">
+                                SK-Auto
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card" style="width: 180px; height: 180px ; float: right">
+                            <img class="card-img-top img-responsive" src='@Url.Content("~/Content/assets/images/users/8.jpg")' style="height: 100%" alt="Card image cap">
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row button-group mr-1">
+
+                    <div class="col-lg-4 col-md-4 ">
+                        <a href="/">
+                            <div class="card card-body bg-light-inverse">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-3 text-center">
+                                        <span>
+                                            <i class="ti-user text-info" style="font-size: 60px;float: left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <h4 class="box-title m-b-0 card-text">@Resources.Voucher.MyProfile</h4> <small class="text-inverse"> Update persional details and contacts</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4">
+                        <a href="/">
+                            <div class="card card-body bg-light-inverse">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-3 text-center">
+                                        <span>
+                                            <i class="ti-wallet text-success" style="font-size: 60px;float: left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <h4 class="box-title m-b-0 card-text">@Resources.Voucher.MyDocument</h4> <small class="text-inverse"> Update persional details and contacts</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4">
+                        <a href="/">
+                            <div class="card card-body bg-light-inverse">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-3 text-center">
+                                        <span>
+                                            <i class="ti-stats-up text-warning" style="font-size: 60px;float: left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <h4 class="box-title m-b-0 card-text">@Resources.Voucher.MyLeaveManage</h4> <small class="text-inverse"> Update persional details and contacts</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4">
+                        <a href="/">
+                            <div class="card card-body bg-light-inverse">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-3 text-center">
+                                        <span>
+                                            <i class="ti-calendar text-purple" style="font-size: 60px;float: left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <h4 class="box-title m-b-0 card-text">@Resources.Voucher.Holiday</h4> <small class="text-inverse">View my holiday of year</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4">
+                        <a href="/">
+                            <div class="card card-body bg-light-inverse">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-3 text-center">
+                                        <span>
+                                            <i class="ti-alarm-clock text-purple" style="font-size: 60px;float: left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <h4 class="box-title m-b-0 card-text">@Resources.Voucher.TimeSheet</h4> <small class="text-inverse">View my time sleep</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4">
+                        <a href="/">
+                            <div class="card card-body bg-light-inverse">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-3 text-center">
+                                        <span>
+                                            <i class="ti-file text-purple" style="font-size: 60px;float: left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <h4 class="box-title m-b-0 card-text">@Resources.Voucher.MyPaySleep</h4> <small class="text-inverse">View and downlaod pay sleep</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4">
+                        <a href="/">
+                            <div class="card card-body bg-light-inverse">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-3 text-center">
+                                        <span>
+                                            <i class="ti-wallet text-warning" style="font-size: 60px;float: left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <h4 class="box-title m-b-0 card-text">@Resources.Voucher.CheckIn & @Resources.Voucher.CheckOutLet</h4> <small class="text-inverse">View check in late</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+            
+                    <div class="col-lg-4 col-md-4">
+                        <a href="/">
+                            <div class="card card-body bg-light-inverse">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-3 text-center">
+                                        <span>
+                                            <i class="ti-key text-inverse" style="font-size: 60px;float: left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <h4 class="box-title m-b-0 card-text">@Resources.Voucher.ChangePassword</h4> <small class="text-inverse"> Update persional details and contacts</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4">
+                        <a href="/">
+                            <div class="card card-body bg-light-inverse">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-3 text-center">
+                                        <span>
+                                            <i class="ti-share text-danger" style="font-size: 60px;float: left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <h4 class="box-title m-b-0 card-text">@Resources.Voucher.Logout</h4> <small class="text-inverse"> Update persional details and contacts</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

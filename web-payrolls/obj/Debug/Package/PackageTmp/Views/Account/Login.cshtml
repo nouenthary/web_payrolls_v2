@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    @* @Styles.Render("~/Content/assets") *@
+    @* @Styles.Render("~/Content/css") *@
+    <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/spinners.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet" type="text/css" /> 
+    <link href="@Url.Content("~/Content/css/colors/blue.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/animate.css")" rel="stylesheet" type="text/css" />
+    
+    @Scripts.Render("~/Content/scripts/login.js")
+    <style>
+        .form-login {
+            background-image: url('/Content/images/bg.jpg');
+            height: 100vh;
+            width: auto;
+            display: flex;
+        }
+
+        .item {
+            margin: auto;
+            width: 450px;
+        }
+
+        .form-control {
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-login">
+        <div class="item">
+
+            <div style="display: flex ; justify-content: center; padding-bottom : 10px">
+                <img src="https://logosrated.net/wp-content/uploads/parser/WHO-Logo-1.png" with="80px" height="100px" />
+            </div>
+
+            <div class="card card-outline-info">
+                <div class="card-header">
+                    <h2 class="card-title text-center text-white">User Login</h2>
+                </div>
+                <div class="card-body">
+
+                    <div style="padding: 10px 20px">
+                        <form action="/Account/Login" method="post">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-user"></i></span>
+                                </div>
+                                <input type="text" name="username" class="form-control" required="" data-validation-required-message="This field is required" aria-invalid="false" placeholder="Username or Email">
+                            </div>
+                            <br />
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-lock"></i></span>
+                                </div>
+                                <input type="password" name="password" class="form-control" required="" data-validation-required-message="This field is required" aria-invalid="false" placeholder="Password">
+                            </div>
+                            <br />
+
+
+                            <div class="form-group">
+                                <h5></h5>
+                                <fieldset class="controls">
+                                    <label class="custom-control custom-radio">
+                                        <input type="radio" value="true" name="remember_me" class="custom-control-input"><span class="custom-control-label">Remember me</span>
+                                    </label>
+                                </fieldset>
+                            </div>
+                            @Html.AntiForgeryToken()
+                            <div class="text-xs-right">
+                                <button type="submit" class="btn btn-info btn-block" id="btnLogin">Login</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="card-footer text-center text-muted">
+                    <a href="#">Forgot Password</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+
+

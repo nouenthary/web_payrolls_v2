@@ -1,0 +1,258 @@
+@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetAllStockInProductCutBalance_Result>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }   
+    
+    td {
+        vertical-align: middle !important; 
+    }
+    
+     .label-green {
+            background: #28A745 !important;
+     }
+                 
+     .table-header-shadow{
+        box-shadow: 0 .20rem 1rem rgba(0,0,0,.10);
+     }
+     
+     .btn-green {
+         background: #28A745 !important;
+         color: white;
+     }
+     
+     thead, tbody tr {
+           display: table;
+           width: 3200px;
+           table-layout: fixed;
+       }
+       
+       thead {
+           width: calc(3200px - 0.1em);
+       }
+       
+       tbody {
+           height: 720px;
+           overflow-y: scroll;
+           overflow-x: hidden;
+       }
+       
+</style>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize" name="pageSize">
+                @foreach (var item in ViewBag.PageSize)
+                {
+                    if (item.Value == ViewBag.psize + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row justify-content-end pr-3 pb-2">
+            <div class="float-right">
+
+                <div class="btn-group btn-sm" data-toggle="buttons">
+
+                    <label class="btn btn-sm bg-white" id="btn-export-stock-in-product-cut-balance">
+                        <input type="radio" name="options" id="option3" autocomplete="off">
+                        <span class="text-inverse">
+                            <i class="ti-printer"></i> @Resources.Voucher.Excel
+                        </span>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-md text-center" id="table-stock-in-product-cut-balance">
+        <thead class="text-capitalize font-weight-bold table-header-shadow">
+            <tr style="border: 1px solid #f3f1f1">
+                <th style="width: 80px">#</th>
+                <th>HOD</th>
+                <th>Company</th>
+                <th>Product Type</th>
+                <th>Type Name</th>
+                <th>Product Name</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Grade</th>
+                <th>Measure</th>
+                <th>Code Product</th>
+                <th>Barcode</th>
+                <th>Qr Code</th>
+                <th>Double Whole Price</th>
+                <th>Whole Price</th>
+                <th>Unit Price</th>
+                <th>Cost</th>
+                <th>Normal Price</th>
+                <th>Product Status</th>
+                <th>Status Discount</th>
+                <th>Discount</th>
+                <th>Start Discount</th>
+                <th>End Discount</th>
+                <th>Qty Balance</th>
+                <th>Picture</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+                <tr
+                >
+                    <td style="width: 80px">@(rowNo += 1)</td>
+
+                    <td>@item.Name</td>
+            
+                    <td><i class="ti-home"></i> @item.Comp_Name</td>
+            
+                    <td><span class="label label-light-danger"># @item.Pro_Type</span> </td>
+            
+                    <td>@item.ProType_Name </td>
+            
+                    <td>@item.Pro_Name</td>
+            
+                    <td>
+                        <span class="label label-default p-1" style="background: @item.Color.ToLower();color: grey"></span> @item.Color
+                    </td>
+                    
+                    <td>@item.Size</td>
+                    
+                    <td>@item.Grade_Name</td>
+                    
+                    <td>@item.Measu_Name</td>
+                    
+                    <td>@item.Code_Product</td>
+                    
+                    <td>@item.BarCode</td>
+                    
+                    <td>@item.QR_Code</td>
+                    
+                    <td>$ @item.Double_Whole_Price</td> 
+                                        
+                    <td>$ @item.Whole_Price</td> 
+                    
+                    <td>$ @item.Cost</td> 
+                    
+                    <td>$ @item.Unit_Price</td> 
+                    
+                    <td>$ @item.Normal_Price</td> 
+                    
+                    <td>
+                        @if (item.Pro_Status == "Enable")
+                        {
+                            <span class="label label-green"><i class="ti-check"></i> @item.Pro_Status</span>
+                        }
+                        else
+                        {
+                            <span class="label label-danger"><i class="ti-close"></i> @item.Pro_Status</span>   
+                        }
+                    </td>
+                    
+                    <td>
+                        @if (item.Status_Dis == "Enable")
+                        {
+                            <span class="label label-green"><i class="ti-check"></i> @item.Status_Dis</span>
+                        }
+                        else
+                        {
+                            <span class="label label-danger"><i class="ti-close"></i> @item.Status_Dis</span>   
+                        }
+                    </td> 
+                    
+                    <td>@item.Discount %</td> 
+                    
+                    <td>
+                        @{
+                            if (item.Start_Dis == "")
+                            {
+                                <i class="ti-time"></i>
+                            }
+                            else
+                            {
+                                <span>@item.Start_Dis</span>   
+                            }
+                        }
+                    </td> 
+                    
+                    
+                     <td>
+                        @{
+                            if (item.End_Dis == "")
+                            {
+                                <i class="ti-time"></i>
+                            }
+                            else
+                            {
+                                <span>@item.End_Dis</span>   
+                            }
+                        }
+                    </td> 
+                    
+                    <td>@item.QTY_Balance</td>
+
+                    <td>
+                        <img
+                            id="image_view_stock_balance"
+                            alt="attachment"
+                            height="25"
+                            width="25"
+                            src="/Content/Uploads/Grade/@item.Picture_Path"
+                            onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'"
+                        >
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div class="float-left" style="padding: 20px 0;">
+    @Resources.Voucher.Showing 
+    @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 
+    @Resources.Voucher.to 
+    @Model.PageCount 
+    @Resources.Voucher.of @ViewBag.Records 
+    @Resources.Voucher.Entries
+</div>
+
+<div class="float-right">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new {page}))
+</div>

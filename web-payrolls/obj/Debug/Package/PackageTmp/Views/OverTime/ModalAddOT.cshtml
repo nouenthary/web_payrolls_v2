@@ -1,0 +1,73 @@
+﻿<!--Form Create-->
+<div class="modal fade" id="modal-add-ot" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title font-weight-bold text-primary card-text" id="exampleModalLabel">
+                    <i class="ti-plus pr-2"></i>@Resources.Voucher.Add @Resources.Voucher.Overtime
+                </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="#" id="form-ad-ot">
+
+                <div class="modal-body">
+                  
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <input type="hidden" class="form-control" id="staff_id" name="staff_id" />
+
+                            <div class="form-group">
+                                <label for="date_ot">@Resources.Voucher.OTDate<span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="date_ot" name="date_ot">
+                                <div class="invalid-feedback" id="error-date"></div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="txt_start">@Resources.Voucher.Time<span class="text-danger">*</span></label>
+                                <div class="input-daterange input-group">
+
+                                    <input type="text" class="form-control" id="start_ot" name="start_ot" placeholder="HH:mm">
+
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-info b-0 text-white">@Resources.Voucher.OTTo</span>
+                                    </div>
+
+                                    <input type="text" class="form-control" id="end_ot" name="end_ot" placeholder="HH:mm">
+
+                                </div>
+                            </div>                          
+
+                            <div class="form-group">
+                                <label for="unit_price">@Resources.Voucher.OTPrice<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="unit_price" name="unit_price" disabled>
+                                <div class="invalid-feedback" id="error-price-ot"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="desc">@Resources.Voucher.Description</label>
+                                <textarea class="form-control" id="desc" name="desc" placeholder="@Resources.Voucher.Enter @Resources.Voucher.Description" rows="4"></textarea>
+                            </div>
+
+                        </div>
+                      
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-add-ot" style="background: #28a745; color: #fff; font-size: 20px">
+                        <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Add @Resources.Voucher.Overtime
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--Form Create-->

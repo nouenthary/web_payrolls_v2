@@ -1,0 +1,558 @@
+﻿@{
+    ViewBag.Title = Resources.Voucher.Forget;
+    ViewBag.Page = Resources.Voucher.Forget;
+}
+
+<div class="card" style="margin-bottom: 0">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse" id="boss-collaspe"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide</a>
+        </div>
+        <h4 class="card-title m-b-0 card-text">
+            <i class="ti-filter"></i> @Resources.Voucher.Forget
+        </h4>
+    </div>
+    <div class="card-body collapse show b-t" id="set-boss-collaspe">
+        <div>
+            <div class="row">
+
+                @Html.AntiForgeryToken()
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+
+                    <div class="input-group">
+                        <select id="txtManager" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                            @foreach (var item in ViewBag.Manager)
+                            {
+                                <option value="@item.PK_Boss_Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+
+                        <select id="txtCompany" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+                        <select id="txtLocation" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+                        <select id="txtDepartment" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+                        <select id="txtPosition" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Position --</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+                        <select id="txtStatus" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Status --</option>
+                            <option value="Done">@Resources.Voucher.Done</option>
+                            <option value="Pending">@Resources.Voucher.Pending</option>
+                            <option value="Reject">@Resources.Voucher.Rejected</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+                        <input type="text" id="txtName" class="form-control form-control-sm" placeholder="@Resources.Voucher.Search @Resources.Voucher.Name ..." autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+                        <input type="text" id="txtCardId" class="form-control form-control-sm" placeholder="@Resources.Voucher.Search @Resources.Voucher.idcard  ..." autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-3 col-sm-12">
+                    <button type="button" class="btn btn-info btn-sm" id="btn-search-forget">
+                        <i class="ti-search pr-2"></i>@Resources.Voucher.Searchhere
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="show-forget"></div>
+
+@Html.Partial("MDUpdateForgot")
+@Html.Partial("ModalCreateForgetScan")
+
+@* view photo *@
+<div class="modal fade" id="Modal-View-Photo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="image-card-view"
+                     class="card-img-top"
+                     alt="Card image cap"
+                     src="">
+            </div>
+            
+        </div>
+    </div>
+</div>
+@* view photo *@
+
+@section Scripts
+{
+    <script>
+        $(function (){    
+            let token = $('input[name="__RequestVerificationToken"]').val();
+            
+            let bid = $('#txtManager');
+            let cid = $('#txtCompany');
+            let lid = $('#txtLocation');
+            let did = $('#txtDepartment');
+            let pid = $('#txtPosition');
+            let status = $('#txtStatus');
+            let name = $('#txtName');
+            let id = $('#txtCardId');
+            
+            function getSearchObj(){
+                return {
+                    bid : bid.val(), 
+                    cid : cid.val(),
+                    lid: lid.val(),
+                    did: did.val(), 
+                    pid: pid.val(), 
+                    status : status.val(), 
+                    name : name.val(),
+                    id : id.val()
+                }
+            }            
+            function LoadView(){
+                let objSearch = getSearchObj();
+                $('#show-forget').load('@Url.Action("GetTable", "ForgetScan")',{
+                    ...objSearch,
+                    pageSize: $('#pageSize').val()
+                });
+            }
+            LoadView();
+            
+            $('#btn-search-forget').click(function (){
+                LoadView();
+            });
+            
+             $(document).on('change', '#show-forget #pageSize', function () {        
+                let objSearch = getSearchObj();
+                $('#show-forget').load('@Url.Action("GetTable", "ForgetScan")',{
+                    pageSize : $(this).val(),
+                    ...objSearch
+                });
+             });
+            // 
+            $(document).on('click', '#show-forget a', function (e) {
+                try {
+                    let link = $(this).attr("href").split('=');       
+                    let objSearch = getSearchObj();
+                    $('#show-forget').load('@Url.Action("GetTable", "ForgetScan")',{
+                        pageSize : $('#pageSize').val(),
+                        page: link[1],
+                        ...objSearch
+                    });
+                    e.preventDefault();
+                } catch (ex) { }
+            }); 
+            
+            let lblCompany = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company -- </option>';
+            let lblLocation = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location -- </option>';
+            let lblDepartment = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department -- </option>';
+            let lblPosition = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Position -- </option>';
+            
+            // manager
+             bid.change(function () {
+                let data = {
+                    boss_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                lid.html(lblLocation);
+                did.html(lblDepartment);
+                pid.html(lblPosition);
+                
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetCompany","Location")",
+                    data: data,
+                    success: function (response) {
+                        let option = lblCompany;
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                        }
+                        cid.html(option);
+                    },
+                    error: function () {
+                        cid.html(lblCompany);
+                    }
+                });
+            });
+            // manager
+            
+             // company
+             cid.change(function () {
+                 let data = {
+                     com_id: $(this).val(),
+                     __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                 };
+
+                  did.html(lblDepartment);
+                  pid.html(lblPosition);  
+                 
+                 $.ajax({
+                     type: "POST",
+                     url: "@Url.Action("GetLocation","Location")",
+                     data: data,
+                     success: function (response) {
+                         let option = lblLocation;
+                         for (let i = 0; i < response.length; i++) {
+                             option += '<option value="' + response[i].PK_Location_Id + '">' + response[i].Loc_Name + '</option>';
+                         }
+                         lid.html(option);
+                     },
+                     error: function () {
+                         lid.html(lblLocation);
+                     }
+                 });
+             });
+             // company
+            
+            // location
+            lid.change(function () {
+                let data = {
+                    loc_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };                
+
+                 pid.html(lblPosition);  
+                 
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetDepartment",
+                    data: data,
+                    success: function (response) {
+                        let option = lblDepartment;
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Depart_Id + '">' + response[i].Deppart_Name + '</option>';
+                        }
+                        did.html(option);
+                    },
+                    error: function () {
+                        did.html(lblDepartment);
+                    }
+                });
+            });
+            // location
+            
+            // department
+            did.change(function () {
+                let data = {
+                    dept_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };               
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetPosition",
+                    data: data,
+                    success: function (response) {
+                        let option = lblPosition;
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Pos_Id + '">' + response[i].Pos_Name + '</option>';
+                        }
+                        pid.html(option);
+                    },
+                    error: function () {
+                        pid.html(lblPosition);
+                    }
+                });
+            });
+            // department
+            
+             // Export
+            $(document).on('click', '#btn-export-forget', function () {
+                $('#table-forget').csvExport();
+            });
+            
+            // show model 
+            $(document).on('click', '#btn-add-forget',function (){
+                $('#modal-add-forget').modal('show');
+            });
+            
+            // Confirm Forget
+            $(document).on('click', '#btn-confirm-forget', function () {
+                let id = $(this).attr('data-id');
+
+                swal({
+                    title: "Are you sure confirm ?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: "No, cancel it!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                    function (isConfirm) {
+                        ConfirmForget(isConfirm, id, "Done");
+                    });
+            });
+            
+             function UpdateStatusNotification(Status ,optionKey) {
+                let data = {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    status: Status,
+                    optionKey : optionKey
+                };
+
+                 $.ajax({
+                    url: '@Url.Action("UpdateStatus", "Notification")',
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        console.log(response);
+                    },                 
+                });
+            }
+            
+             // function Confirm
+            function ConfirmForget(isConfirm, id , status) {
+                if (isConfirm) {
+
+                    let form = {
+                        id_forget_scan: id,
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                        status: status
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/ForgetScan/ConfirmForget",
+                        data: form,
+                        success: function (response) {
+                            swal({
+                                title: "Success",
+                                text: response,
+                                type: "success",
+                                timer: 1500
+                            });        
+                            UpdateStatusNotification(status,'FS_'+id);
+                            LoadView();
+                        }
+                    });
+                }
+                else {
+                    swal({
+                        title: "Cancelled",
+                        text: "Your cancel confirm :)",
+                        type: "error",
+                        timer: 1500
+                    })
+                }
+            }
+            
+             // Reject Forget
+            $(document).on('click', '#btn-reject-forget', function () {              
+                let id = $(this).attr('data-id');
+                swal({
+                    title: "Are you sure reject ?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: "No, cancel it!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                    function (isConfirm) {
+                        ConfirmForget(isConfirm, id, "Reject");
+                    }
+                );
+            });
+           
+            function Upload(controlChoose, imagePreview, txtImage, path) {
+                $(controlChoose).change(function () {
+    
+                    var fileUpload = $(controlChoose).get(0);
+                    var files = fileUpload.files;
+    
+                    var fileData = new FormData();
+    
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    }
+    
+                    fileData.append('__RequestVerificationToken', token);
+                    fileData.append('path', path);
+    
+                    $.ajax({
+                        type: "POST",
+                        url: "/Other/Upload",
+                        contentType: false,
+                        processData: false,
+                        data: fileData,
+                        success: function (response) {
+                            if (response.message) {
+                                $(imagePreview).attr('src', '/Content/Uploads/' + path + response.message);
+                                $(txtImage).val(response.message);
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            } 
+            
+                      
+             // Preview  Upload
+             $('#photo-view-forget-edit').click(function () {
+                 $("#photo_fotget_edit").focus().trigger("click");
+             });
+ 
+             Upload('#photo_fotget_edit', '#photo-view-forget-edit','#txt_photo_forget_edit','ForgetScan/');
+             
+              $('#btn-update-forget').click(function () {
+                     let form = $('#form-update-forget').serializeArray();
+     
+                     for (let item in form) {
+                         
+                         if (form[item].name === "desc_forget_edit" || form[item].name === 'txt_photo_forget_edit') {
+                             setClassError('#txt_photo_forget_edit');
+                             setRemoveError('#desc_forget_edit');                        
+                         }
+                         else if (form[item].value === '') {
+                             setClassError('#' + form[item].name);
+                             onChange('#' + form[item].name);
+                             return false;
+                         }
+                     } 
+                     CreateOrUpdate(form);                
+                 });
+     
+                 // 
+                 function CreateOrUpdate(data) {                
+                     $.ajax({
+                         type: "POST",
+                         url: "/ForgetScan/Update",
+                         data: data,
+                         success: function (response) {
+                             if (response) {
+                                 $('#modal-update-forget').modal('hide');
+                             }
+                             LoadView();
+                         },
+                         error: function (error) {
+                            console.log(error);
+                         }
+                     });
+                 } 
+                 //
+          $(document).on('click', '#btn-edit-forget', function () {
+                 let row = $(this).closest('tr');
+    
+                 $('#txt_forget_id').val(row.attr('id'));
+                 $('#txt_photo_forget_edit').val(row.attr('data-photo'));                
+                 $('#photo-view-forget-edit').attr('src', '/Content/Uploads/ForgetScan/' + row.attr('data-photo'));
+                 $('#txt_date_forget_edit').val(row.attr('data-date'));                
+                 $('#desc_forget_edit').val(row.attr('data-desc'));
+                 $('#txt_price_forget_edit').val(row.attr('data-price'));
+                 $('#txt_price_forget_edit').attr('readonly', true);
+    
+                 $('#modal-update-forget').modal('show');               
+             });
+                         
+             // Update 
+                                     
+            $('#txt_date_forget').change(function () {
+                $(this).attr('class', 'form-control');
+            });
+            
+            //
+            function setClassError(id) {
+                $(id).attr('class', 'form-control is-invalid');
+            }
+
+            //
+            function setRemoveError(id) {
+                $(id).attr('class', 'form-control');
+            }
+
+            //
+            function onChange(id) {
+                $(id).change(function () {
+                    setRemoveError(id);
+                });
+            }
+
+            function protectedControl(control) {
+                $(control).bind("cut copy paste drag drop", function (e) {
+                    e.preventDefault();
+                });
+            }
+
+            function OnlyNumber(control) {
+                protectedControl(control);
+
+                $(control).keypress(function (event) {
+                    let value = event.target.value;
+
+                    if (value[0] === '.') {
+                        return false;
+                    }
+
+                    if (value[0] === '0') {
+                        $(control).val(value.substring(1, value.length))
+                    }
+
+                    if ((event.which !== 46 || $(this).val().indexOf('.') !== -1) && (event.which < 48 || event.which > 57)) {
+                        event.preventDefault();
+                    }
+                });
+            }
+             OnlyNumber('#txt_price_forget');
+            onChange('#txt_price_forget');                        
+            // Edit
+            OnlyNumber('#txt_price_forget_edit');
+            
+            $(document).on('click','#table-forget tbody img',function (){
+                  $('#Modal-View-Photo').modal('show');
+                  $('#image-card-view').attr('src',$(this).attr('src'));
+              });
+        });
+    </script>
+}

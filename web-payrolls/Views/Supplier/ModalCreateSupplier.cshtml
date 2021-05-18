@@ -1,0 +1,75 @@
+﻿<!--Form Create-->
+<div class="modal fade" id="modal-supplier-create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+                    <i class="ti-plus pr-2"></i>@Resources.Voucher.Add @Resources.Voucher.Supplier
+                </h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="" id="form-add-supplier">
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="sup_boss">@Resources.Voucher.HOD</label>
+                            <select id="sup_boss" name="sup_boss" class="form-control">
+                                <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                                @foreach (var item in ViewBag.GetBoss)
+                                {
+                                    <option value="@item.PK_Boss_Id">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="sup_company">@Resources.Voucher.Company</label>
+                            <select id="sup_company" name="sup_company" class="form-control">
+                                <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <label for="sup_location">@Resources.Voucher.Location</label>
+                        <select id="sup_location" name="sup_location" class="form-control">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>
+                          
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">@Resources.Voucher.Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="supplier" name="supplier" placeholder="@Resources.Voucher.Enter @Resources.Voucher.Name" required maxlength="50">
+                        <div class="invalid-feedback" id="error-supplier"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">@Resources.Voucher.Phone <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="@Resources.Voucher.Enter @Resources.Voucher.Phone" required maxlength="20">
+                        <div class="invalid-feedback" id="error-phone"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">@Resources.Voucher.Address</label>
+                        <textarea class="form-control" id="address" name="address" placeholder="@Resources.Voucher.Enter @Resources.Voucher.Address" rows="4"></textarea>
+                    </div>
+
+                      @Html.AntiForgeryToken()
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-save-supplier" style="background: #28a745; color: #fff; font-size: 20px">
+                        <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Add @Resources.Voucher.Supplier
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Form Create-->

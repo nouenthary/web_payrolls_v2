@@ -1,0 +1,408 @@
+﻿@{
+    ViewBag.Title = @Resources.Voucher.Tax;
+    ViewBag.Page = @Resources.Voucher.Tax;
+}
+
+<div class="card" style="margin-bottom: 0">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide</a>
+        </div>
+        <h4 class="card-title m-b-0 card-text"><i class="ti-filter"></i> @Resources.Voucher.Tax</h4>
+    </div>
+    <div class="card-body collapse show b-t">
+        <div>
+            <div class="row">
+
+                <div class="input-group col-xlg-2 col-md-4 pb-2">
+                  
+                    <select id="txt_bid" name="txt_bid" class="form-control form-control-sm">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+
+                        @foreach (var item in ViewBag.Manager)
+                        {
+                            <option value="@item.PK_Boss_Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="input-group col-xlg-2 col-md-4 pb-2">
+                   
+                    <select id="txt_cid" name="txt_cid" class="form-control form-control-sm">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>
+                    </select>
+                </div>
+
+                <div class="input-group col-xlg-2 col-md-4 pb-2">
+                    <button class="btn btn-info btn-sm" id="btn-search-tax">
+                        <i class="ti-search"></i> @Resources.Voucher.Searchhere
+                    </button>
+                </div>
+
+                @Html.AntiForgeryToken()
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---->
+<div id="show-tax"></div>
+<!---->
+
+@Html.Partial("MD_Add_Tax")
+
+@Html.Partial("MD_Update_Tax")
+
+@section Scripts{
+    <script>
+        $(function () {
+            // New Code
+            function Load() {
+                $('#show-tax').load('/Tax/GetTable', {
+                    bid: $('#txt_bid').val(),
+                    cid: $('#txt_cid').val(),
+                    pageSize: $('#pageSize').val()
+                });
+            }
+
+            Load();
+
+            $(document).on('click', '#show-tax a', function (e) {
+                try {
+                    let link = $(this).attr("href").split('=');
+                    $('#show-tax').load('/Tax/GetTable', {
+                        bid: $('#txt_bid').val(),
+                        cid: $('#txt_cid').val(),
+                        page: link[1],
+                        pageSize: $('#pageSize').val()
+                    });
+                    e.preventDefault()
+                } catch (ex) { }
+            });
+
+            $('#btn-search-tax').click(function () {
+                $('#show-tax').load('/Tax/GetTable', {
+                    bid: $('#txt_bid').val(),
+                    cid: $('#txt_cid').val(),
+                    pageSize: $('#pageSize').val()
+                });
+            });
+
+            $(document).on('change', '#show-tax #pageSize', function () {
+                $('#show-tax').load('/Tax/GetTable', {
+                    bid: $('#txt_bid').val(),
+                    cid: $('#txt_cid').val(),
+                    pageSize: $(this).val()
+                });
+            });
+            // New Code
+
+            // Export
+            $(document).on('click', '#show-tax #btn-export-tax', function () {
+                $('#table-tax').csvExport();
+            });
+
+            // on change boss
+            $('#txt_bid').change(function () {
+                let data = {
+                    boss_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetCompany",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company -- </option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                        }
+                        $('#txt_cid').html(option);
+                    },
+                    error: function () {
+                        $('#txt_cid').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>');
+                    }
+                });
+            });
+
+            // Add Tax
+            $(document).on('click', '#btn-add-tax', function () {
+                $('#modal-add-tax').modal('show');
+            });
+
+            // create tax
+            $('#PK_Boss_Id').change(function () {
+                let data = {
+                    boss_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetCompany",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company -- </option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                        }
+                        $('#FK_Comp_Id').html(option);
+                    },
+                    error: function () {
+                        $('#FK_Comp_Id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>');
+                    }
+                });
+            });
+
+            //
+            function setClassError(id) {
+                $(id).attr('class', 'form-control is-invalid');
+            }
+
+            //
+            function setRemoveError(id) {
+                $(id).attr('class', 'form-control');
+            }
+
+            //
+            function onChange(id) {
+                $(id).change(function () {
+                    setRemoveError(id);
+                });
+            }
+
+            function protectedControl(control) {
+                $(control).bind("cut copy paste drag drop", function (e) {
+                    e.preventDefault();
+                });
+            }
+
+            function OnlyNumber(control) {
+                protectedControl(control);
+
+                $(control).keypress(function (event) {
+                    let value = event.target.value;
+
+                    if (value[0] === '.') {
+                        return false;
+                    }
+
+                    if (value[0] === '0') {
+                        $(control).val(value.substring(1, value.length))
+                    }
+
+                    if ((event.which !== 46 || $(this).val().indexOf('.') !== -1) && (event.which < 48 || event.which > 57)) {
+                        event.preventDefault();
+                    }
+                });
+            }
+
+            OnlyNumber('#txt_start');
+            OnlyNumber('#txt_end');
+            OnlyNumber('#txt_tax');
+            OnlyNumber('#txt_decrease');
+            OnlyNumber('#txt_family');
+            OnlyNumber('#txt_foreign');           
+            
+            
+            // Save Tax
+            $(document).on('click', '#btn-save-tax', function () {
+                let form = $('#form-tax').serializeArray();
+                      
+                for (let item in form) {
+                    if (form[item].value === "") {
+                        setClassError('#' + form[item].name);
+                        return false;
+                    }
+                }
+                
+                let textStart = parseInt($('#txt_start').val());
+                let textEnd = parseInt($('#txt_end').val());
+
+                if (textStart > textEnd) {                   
+                    setClassError('#txt_end');
+                    return false;
+                }
+
+                if (textStart < 1) {
+                    setClassError('#txt_start');
+                    return false;
+                }
+                else if (textEnd < 1) {
+                    setClassError('#txt_end');
+                    return false;
+                }
+                else if (textStart === textEnd) {
+                    setClassError('#txt_end');
+                    return false;
+                }                               
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Tax/AddTax",
+                    data: form,
+                    success: function (response) {
+                        if (response) {
+                            $('#modal-add-tax').modal('hide');
+                        }
+
+                        swal({
+                            title: "Success",
+                            text: response,
+                            type: "success",
+                            timer: 1500
+                        });
+
+                        Load();
+
+                        $("#form-tax").get(0).reset()
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                });
+            });
+
+            onChange("#PK_Boss_Id");
+            onChange("#FK_Comp_Id");
+            onChange("#txt_start");
+            onChange("#txt_end");
+            onChange("#txt_tax");
+            onChange("#txt_decrease");
+            onChange("#txt_family");
+            onChange("#txt_foreign");
+          
+            // Delete Tax
+            $(document).on('click', '#btn-delete-tax', function () {
+                let id = $(this).attr('data-id');
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: "No, cancel it!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                    function (isConfirm) {
+
+                        if (isConfirm) {
+                            $.ajax({
+                                type: 'POST',
+                                url: '/Tax/DeleteTax',
+                                data: {
+                                    taxId: id,
+                                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                                },
+                                success: function (response) {
+                                    swal({
+                                        title: "Success",
+                                        text: response,
+                                        type: "success",
+                                        timer: 1500
+                                    });
+                                    Load();
+                                }
+                            });                            
+                        } else {
+                            swal({
+                                title: "Cancelled",
+                                type: "error",
+                                timer: 1500
+                            });
+                        }
+                    });
+            });
+
+            // Update
+            $(document).on('click', '#show-tax #btn-edit-tax', function () {
+             
+                let row = $(this).closest('tr');
+
+                $('#tax_id_edit').val($(row).attr('id'));
+                $('#txt_tax_edit').val($(row).attr('data-tax'));
+                $('#txt_start_edit').val($(row).attr('data-start'));
+                $('#txt_end_edit').val($(row).attr('data-end'));
+                $('#txt_decrease_edit').val($(row).attr('data-decrease'));
+                $('#txt_family_edit').val($(row).attr('data-family'));
+                $('#txt_foreign_edit').val($(row).attr('data-foreign'));
+
+                $('#modal-update-tax').modal('show');
+
+            });
+
+
+            onChange("#txt_start_edit");
+            onChange("#txt_end_edit");
+            onChange("#txt_tax_edit");
+            onChange("#txt_decrease_edit");
+            onChange("#txt_family_edit");
+            onChange("#txt_foreign_edit");
+
+            $('#btn-update-tax').click(function () {
+
+                let form = $('#form-update-tax').serializeArray();
+
+                let txtStart = parseInt($('#txt_start_edit').val());
+                let txtEnd = parseInt($('#txt_end_edit').val());
+                
+                if (txtStart > txtEnd) {               
+                    setClassError('#txt_end_edit');
+                    return false;
+                }
+               
+                if (txtStart < 1){
+                    setClassError('#txt_start_edit');
+                    return false;                    
+                }
+                
+                if (txtEnd < 1){
+                    setClassError('#txt_end_edit');
+                    return false;                    
+                }
+
+                if (txtEnd === txtStart) {
+                    setClassError('#txt_end_edit');
+                    return false;
+                }
+
+                for (let item in form) {
+                    if (form[item].value === "") {
+                        setClassError('#' + form[item].name);
+                        return false;
+                    }
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/Tax/Update",
+                    data: form,
+                    success: function (response) {
+                        swal({
+                            title: "Success",
+                            text: response,
+                            type: "success",
+                            timer: 1500
+                        });
+
+                        $('#modal-update-tax').modal('hide');
+                        Load();
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                });                
+            });
+
+            OnlyNumber('#txt_start_edit');
+            OnlyNumber('#txt_end_edit');
+            OnlyNumber('#txt_tax_edit');
+            OnlyNumber('#txt_decrease_edit');
+            OnlyNumber('#txt_family_edit');
+            OnlyNumber('#txt_foreign_edit');
+        });
+    </script>
+}

@@ -1,0 +1,164 @@
+<!--Form Create-->
+<div class="modal fade" id="modal-add-grade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 80% !important;">
+        <div class="modal-content" >
+            <div class="modal-header">
+
+                <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+                    <i class="ti-plus pr-2"></i>@Resources.Voucher.Add Product Grade
+                </h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+             
+            <form method="post" action="" id="form-add-grade">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-4">
+                            
+                            <div class="form-group">
+                                <label>Product Measure</label>
+                                <select class="form-control" id="productMeasure" name="productMeasure">
+                                    <option value="">-- Choose Product Measure --</option>
+                                    @{
+                                        foreach (var row in ViewBag.Measure)
+                                        {
+                                            <option value="@row.Measu_Name">@row.Measu_Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Product Color</label>
+                                <select class="form-control" id="productColor" name="productColor">
+                                    <option>-- Choose Product Color --</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Product Size</label>
+                                <select class="form-control" id="productSize" name="productSize">
+                                    <option>-- Choose Product Size --</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group ">
+                                <label for="">Barcode </label>
+                                <input class="form-control" id="barcodeGrade" name="barcodeGrade" placeholder="Enter Barcode" maxlength="50"/>
+                                <div class="invalid-feedback" id="error-barcode-grade"></div>
+                            </div>
+                            
+                             <div class="form-group">
+                                <label for="">Qr code </label>
+                                <input class="form-control" id="qrCodeGrade" name="qrCodeGrade" placeholder="Enter QR Code" maxlength="50"/>
+                                <div class="invalid-feedback" id="error-qrCode-grade"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Product Grade </label>
+                                <input class="form-control" id="grade" name="grade" placeholder="Enter Grade Name" maxlength="50"/>
+                                <div class="invalid-feedback" id="error-grade"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Double Whole Price </label>
+                                <input class="form-control" id="doubleWholePrice" name="doubleWholePrice" placeholder="Enter Double Whole Price" maxlength="50"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Whole Price </label>
+                                <input class="form-control" id="wholePrice" name="wholePrice" placeholder="Enter Whole Price" maxlength="50"/>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="col-md-4">
+                            
+                            <div class="form-group ">
+                                <label for="">Unit Price </label>
+                                <input class="form-control" id="unitPrice" name="unitPrice" placeholder="Enter Unit Price" maxlength="50"/>
+                            </div>
+                                                    
+                            <div class="form-group">
+                                <label for="">Cost </label>
+                                <input class="form-control" id="cost" name="cost" placeholder="Enter Cost" maxlength="50"/>
+                            </div>
+                                                    
+                            <div class="form-group">
+                                <label for="">Normal Price </label>
+                                <input class="form-control" id="normalPrice" name="normalPrice" placeholder="Enter Normal Price" maxlength="50"/>
+                            </div>
+                                  
+                            <div class="form-group">
+                               <label for="">Discount Status </label>
+                                <div class="demo-radio-button">
+                                    <div class="row">
+                                        <div class="col-6">
+                                           <input name="statusDiscount" type="radio" id="radio_1" checked="" class="with-gap" value="Enable">
+                                           <label for="radio_1" style="font-size: 12px">Enable</label>
+                                       </div> 
+                                       <div class="col-6">
+                                          <input name="statusDiscount" type="radio" id="radio_2" class="with-gap" value="Disabled">
+                                          <label for="radio_2" style="font-size: 12px">Disable</label>
+                                      </div>
+                                    </div>
+
+                                </div>
+                           </div> 
+                            
+                            <div class="form-group">
+                                <label for="">Discount </label>
+                                <input class="form-control" id="discount" name="discount" placeholder="Enter Discount" maxlength="50"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Start Discount </label>
+                                <input type="date" class="form-control" id="StartDiscount" name="StartDiscount"/>
+                                <div class="invalid-feedback" id="error-start-discount"></div>
+                            </div>
+                            
+                             <div class="form-group">
+                                <label for="">End Discount </label>
+                                <input type="date" class="form-control" id="EndDiscount" name="EndDiscount"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Description </label>
+                                <textarea class="form-control" placeholder="Enter Description" id="descGrade" name="descGrade" rows="4"></textarea>
+                            </div>    
+                        </div>
+                        
+                        <div class="col-md-4">
+                             <div class="form-group text-center">
+                                <img style="height: 270px"
+                                     src="~/Content/images/no-image.jpg"
+                                     alt="me" 
+                                     class="img-thumbnail"
+                                     id="picture-response-grade">
+                            </div>
+
+                            <div class="form-group">
+                                <input accept="image/png, image/jpeg, image/gif" type="file" id="choose-picture-grade" style="display: none">
+                                <input type="hidden" id="picturePath" name="picturePath" value="no-image.jpg"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-save-grade" style="background: #28a745; color: #fff; font-size: 20px">
+                        <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Save Product Grade
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--Form Create-->
+
+
+

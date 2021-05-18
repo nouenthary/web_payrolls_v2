@@ -1,0 +1,1065 @@
+﻿@{
+    ViewBag.Title = Resources.Voucher.Roster;
+    ViewBag.Page = Resources.Voucher.Roster;
+}
+
+<!--CSS-->
+<style>
+    thead, tbody tr {
+        display: table;
+        width: 3000px;
+        table-layout: fixed;
+    }
+
+    thead {
+        width: calc(3000px - 0.1em);
+    }
+
+    tbody {
+        height: 720px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        /*display: inline-block;*/
+    }
+
+    .cell-color {
+        background: salmon;
+        color: white;
+    }
+
+    .bg-green {
+        background: #28a745;
+        color: white;
+    }
+
+    .bg-gray {
+        background: #99abb4;
+        color: white;
+    }
+
+    .bg-salmon {
+        background: salmon;
+        color: white;
+    }
+
+    [type="checkbox"].filled-in:not(:checked) + label:after {
+        border: 1.5px solid #1e88e5;
+    }
+
+    .customtab2 li a.nav-link.active {
+        background: #4267b2 !important;
+    }
+
+    .customtab2 li a.nav-link:hover {
+        background: #4267b2 !important;
+    }
+
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    } 
+</style>
+<!--CSS-->
+
+@{
+    string month = DateTime.Now.Month.ToString();
+
+    string year = DateTime.Now.Year.ToString();
+
+    int days = DateTime.DaysInMonth(Convert.ToInt32(year), Convert.ToInt32(month));
+
+    int currentDay = DateTime.Now.Date.Day;
+}
+<!--Card Filter Searching-->
+<div class="card" style="margin-bottom: 10px">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse" id="collapse-filter"><i class="ti-plus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide </a>
+        </div>
+        <h4 class="card-title m-b-0"><i class="ti-filter pr-2"></i>@Resources.Voucher.Attendance</h4>        
+    </div>
+
+    <div class="card-body b-t collapse" style="" id="set-collapse">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+                <div class="carousel-item flex-column active">
+
+                    <div id="form-filter">
+                        <div class="row">
+
+                            <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                                <label>@Resources.Voucher.HOD</label>
+                                <div class="input-group">
+                                    
+                                    <select id="boss_id" name="boss_id" class="form-control form-control-sm">
+                                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                                        @foreach (var boss in ViewBag.Boss)
+                                        {
+                                            <option value="@boss.PK_Boss_Id">@boss.Name</option>
+                                        }
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                                 <label>@Resources.Voucher.Company</label>
+                                <div class="input-group">
+
+                                    <select id="com_id" name="com_id" class="form-control form-control-sm">
+                                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                                 <label>@Resources.Voucher.Location</label>
+                                <div class="input-group">
+
+                                    <select id="loc_id" name="loc_id" class="form-control form-control-sm">
+                                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                                  <label>@Resources.Voucher.Department</label>
+                                <div class="input-group">
+                                    <select id="dept_id" name="dept_id" class="form-control form-control-sm">
+                                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                                 <label>@Resources.Voucher.Position</label>
+                                <div class="input-group">
+
+                                    <select id="pos_id" name="pos_id" class="form-control form-control-sm">
+                                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Position --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                                 <label>@Resources.Voucher.Date</label>
+                                <div class="input-group">
+                                    <select id="year" name="year" class="form-control form-control-sm">
+                                        @{ 
+                                            var current_year = Convert.ToInt32(year);
+                                        }
+                                        @for (var years = current_year - 10; years <= current_year + 100; years++)
+                                        {
+                                            <option value="@years">@years</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                                 <label>@Resources.Voucher.Month</label>
+                                <div class="input-group">
+                                    <select id="month" name="month" class="form-control form-control-sm">
+                                        <option value="">@Resources.Voucher.Choose @Resources.Voucher.Month</option>
+                                        @for (var m = 1; m <= 12; m++)
+                                        {
+                                            <option value="@m">@m</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                                <label>@Resources.Voucher.Status</label>
+                                <div class="input-group">
+                                    <select id="status" name="status" class="form-control form-control-sm">
+                                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Status --</option>
+                                        <option value="Enable">@Resources.Voucher.Enable</option>
+                                        <option value="Disabled">@Resources.Voucher.Disabled</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                                <label>@Resources.Voucher.Name</label>
+                                <div class="input-group">
+                                    <input type="text" name="staff_name" id="staff_name" class="form-control form-control-sm" placeholder="@Resources.Voucher.Search @Resources.Voucher.Name ...">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                                 <label>@Resources.Voucher.idcard</label>
+                                <div class="input-group">
+                                    <input type="text" name="card_id" id="card_id" class="form-control form-control-sm" placeholder="@Resources.Voucher.Search @Resources.Voucher.idcard ...">
+                                </div>
+                            </div>
+
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group col-xlg-3 col-md-3 col-sm-12">
+                                <label>.</label>
+                               
+                                 <div class="input-group">
+                                    <button class="btn btn-info btn-sm" id="btn-search-roster">
+                                        <i class="ti-search pr-2"></i>@Resources.Voucher.Searchhere
+                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Card Filter Searching-->
+<!---->
+<div id="show-roster"></div>
+<!---->
+
+<div class="modal fade" id="modal-roster" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info" id="modal-header">
+                <h5 class="modal-title text-white" id="exampleModalLongTitle" style="font-size: 14px">
+                    <i class="ti-user"></i> @Resources.Voucher.Staff @Resources.Voucher.Name : <spane id="staff_name-modal" style="font-size: 16px"></spane>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="text-white" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs customtab2" role="tablist">
+                    <li class="nav-item col-md-6"> <a class="nav-link active show" data-toggle="tab" href="#checkin" role="tab" aria-selected="true" style="font-size: 14px">
+                        <i class="ti-check-box pr-3"></i> @Resources.Voucher.CheckIn
+                    </a> </li>
+                    <li class="nav-item col-md-6"> <a class="nav-link" data-toggle="tab" href="#leave_day" role="tab" aria-selected="false" style="font-size: 14px">
+                        <i class=" ti-shift-right pr-3"></i>@Resources.Voucher.Edit @Resources.Voucher.Leave
+                    </a> </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active show" id="checkin" role="tabpanel">
+                        <div class="card-body">
+
+                            <form action="#" id="form-set-time">
+
+                                <input type="hidden" class="form-control mb-4" name="roster_id" id="roster_id" />
+
+                                <div class="input-daterange input-group" id="date-range">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@Resources.Voucher.StartDate</span>
+                                    </div>
+                                    <select class="custom-select form-control" id="start_date" name="start_date">
+                                        @for (var start_date = 1; start_date <= days; start_date++)
+                                        {                                           
+                                            <option value="@start_date">@start_date</option>                                            
+                                        }
+                                    </select>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-info b-0 text-white">TO</span>
+                                    </div>
+                                    <select class="custom-select form-control" id="end_date" name="end_date">
+                                        @for (var end_date = 1; end_date <= days; end_date++)
+                                        {                                           
+                                            <option value="@end_date">@end_date</option>                                            
+                                        }
+                                    </select>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">@Resources.Voucher.EndDate</span>
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@Resources.Voucher.Time</span>
+                                    </div>
+                                    <select class="custom-select form-control" id="time" name="time">
+                                        @for (var time = 1; time < 24; time++)
+                                        {
+                                            <option value="@time">@time h</option>
+                                        }
+                                        <option value="0">0 h</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><l class="ti-alarm-clock"></l></span>
+                                    </div>
+                                </div>
+
+                                <br />
+                                @Html.AntiForgeryToken()
+                                <button type="button" class="btn btn-info btn-block" id="btn-set-time">
+                                    <i class="ti-save pr-2"></i> @Resources.Voucher.Save
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                    <!--second tab-->
+                    <div class="tab-pane" id="leave_day" role="tabpanel">
+                        <div class="card-body">
+                            <form action="#" id="form-set-leave">
+
+                                <!--Identity Hidden-->
+                                <input type="hidden" class="form-control mb-4" name="rosters_id" id="rosters_id" />
+                                <input type="hidden" class="form-control mb-4" name="staff_id" id="staff_id" />
+                                <input type="hidden" class="form-control mb-4" name="year_roster" id="year_roster" />
+                                <!--Identity Hidden-->
+
+                                <div class="input-daterange input-group" id="date-range">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@Resources.Voucher.StartDate</span>
+                                    </div>
+                                    @{
+                                        string GetDay(int value)
+                                        {
+                                            return value + "";
+                                        }
+                                    }
+
+                                    <select class="custom-select form-control" id="start_date_leave" name="start_date_leave">
+                                        @for (var start_date = 1; start_date <= days; start_date++)
+                                        {                                           
+                                            <option value="@GetDay(start_date)">@start_date</option>                                            
+                                        }
+                                    </select>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text b-0 text-white bg-danger">TO</span>
+                                    </div>
+                                    <select class="custom-select form-control" id="end_date_leave" name="end_date_leave">
+                                        @for (var end_date = 1; end_date <= days; end_date++)
+                                        {                                           
+                                            <option value="@GetDay(end_date)">@end_date</option>                                         
+                                        }
+                                    </select>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">@Resources.Voucher.EndDate</span>
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div class="row">
+                                    <div class="input-group col-md-7" style="width: 50%">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">@Resources.Voucher.Leave @Resources.Voucher.Type</span>
+                                        </div>
+                                        @*@{
+                                            string[] leave_type = { "AB", "AL", "CM", "OFF", "PH", "UPL", "SIC" };
+                                        }*@
+                                        <select class="custom-select form-control" id="leave_type" name="leave_type">
+                                            <option value="" class="Empty">Empty</option>
+                                           @foreach (var item in ViewBag.LeaveType) {
+                                               <option value="@item.Lev_Name" class="@item.Descr">@item.Lev_Name</option>
+                                           }
+                                        </select>
+
+                                    </div>
+
+                                    <div class="input-group-prepend col-md-5">
+                                        <span class="pt-2 text-danger" id="label-leave-type">@Resources.Voucher.Leave @Resources.Voucher.Type</span>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ul class="list-group">
+
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        ALL Days
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        ALL Rest
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        ALL Use
+                                                    </div>
+                                                </div>
+
+                                            </li>
+
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">OFF</label>
+                                                        <span class="badge badge-danger" id="all-off"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">OFF</label>
+                                                        <span class="badge badge-danger" id="rest-off"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">OFF</label>
+                                                        <span class="badge badge-danger" id="use-off"></span>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">PH</label>
+                                                        <span class="badge badge-danger" id="all-ph"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">PH</label>
+                                                        <span class="badge badge-danger" id="rest-ph"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">PH</label>
+                                                        <span class="badge badge-danger" id="use-ph"></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">AL</label>
+                                                        <span class="badge badge-danger" id="all-al"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">AL</label>
+                                                        <span class="badge badge-danger" id="rest-al"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">AL</label>
+                                                        <span class="badge badge-danger" id="use-al"></span>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">SIC</label>
+                                                        <span class="badge badge-danger" id="all-sic"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">SIC</label>
+                                                        <span class="badge badge-danger" id="rest-sic"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">SIC</label>
+                                                        <span class="badge badge-danger" id="use-sic"></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">AB</label>
+                                                        <span class="badge badge-danger" id="all-ab"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">AB</label>
+                                                        <span class="badge badge-danger" id="rest-ab"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">AB</label>
+                                                        <span class="badge badge-danger" id="use-ab"></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">CM</label>
+                                                        <span class="badge badge-danger" id="all-cm"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">CM</label>
+                                                        <span class="badge badge-danger" id="rest-cm"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">CM</label>
+                                                        <span class="badge badge-danger" id="use-cm"></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">UPL</label>
+                                                        <span class="badge badge-danger" id="all-upl"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">UPL</label>
+                                                        <span class="badge badge-danger" id="rest-upl"></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label style="width: 25px">UPL</label>
+                                                        <span class="badge badge-danger" id="use-upl"></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+
+                                <br />
+                                @Html.AntiForgeryToken()
+                            <button type="button" class="btn btn-info btn-block" id="btn-set-leave">
+                                <i class="ti-save pr-2"></i> @Resources.Voucher.Save
+                            </button>
+                            </form>
+                        </div>
+                    </div>
+                    <!--second tab-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            // export
+            $(document).on('click','#btn-export-roster', function () {
+                $('#table-roster').csvExport();
+            });           
+
+            // filter collapse
+            function Collapse(){
+                let classShow = 'card-body b-t collapse show';
+                let classHide = 'card-body b-t collapse';
+    
+                if (sessionStorage.getItem('off') == null) {
+                    $('#set-collapse').attr('class', classShow);
+                    sessionStorage.setItem('off', classShow);
+                }
+    
+                if (sessionStorage.getItem('off') != null) {
+                    $('#set-collapse').attr('class', sessionStorage.getItem('off'));
+                }
+    
+                $('#collapse-filter').click(function () {
+                    let off = sessionStorage.getItem('off');
+                    if (off != null) {
+    
+                        if (off === classShow) {
+                            $('#set-collapse').attr('class', classHide);
+                            sessionStorage.setItem('off', classHide);
+                        }
+                        if (off === classHide) {
+                            $('#set-collapse').attr('class', classShow);
+                            sessionStorage.setItem('off', classShow);
+                        }
+                    }
+                });
+            }
+            Collapse();
+            //filter collapse
+
+            // table row click
+            $(document).delegate('#table-roster tbody tr', 'dblclick', function () {            
+                let roster_id = $(this).attr("id");
+                $("#roster_id").val(roster_id);
+                $("#rosters_id").val(roster_id); 
+                
+                let staff_id = $(this).attr('data-staff-id');                
+                $('#staff_id').val(staff_id);          
+                
+                let name = $(this).attr('data-staff-name');      
+                $("#staff_name-modal").text(name);
+                             
+                let year = $(this).attr('data-year');
+                
+                let month = $(this).attr('data-month');
+                
+                $('#year_roster').val(year);
+                
+                SetDayOfMonthsOnControl(year,month);
+                
+                if (compareDate(year, month) === false){
+                     swal({
+                        title: "Warning",
+                        text: "You can't select last month",
+                        type: "warning",
+                        timer: 2000
+                     });  
+                     return false;
+                }   
+                
+                $("#modal-roster").modal({ show: true });
+                
+                GetLeave(staff_id, year);
+            });
+            //
+            function compareDate(year, month){
+                let date_current = '@year' + '-' + '@month' + '-' + '@currentDay';
+                                
+                let date_on_change =  year + '-' + month + '-' +  '@currentDay';
+    
+                date_current = Date.parse(date_current);
+                date_on_change = Date.parse(date_on_change);
+                
+                return date_on_change >= date_current;                           
+            }
+            
+            // Get List Type
+            function GetLeave(staff_id, year) {
+
+                let data = {
+                    staff_id, year,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $.ajax({                  
+                    url: '/Roster/GetAllLeave',
+                    type: "POST",
+                    data: data,
+                    success: function (value) {
+                        let { all, use, rest } = value;
+
+                        $('#all-off').text(all['ST_OFF']);
+                        $('#rest-off').text(use['R_OFF']);
+                        $('#use-off').text(rest['REST_OFF']);
+
+                        $('#all-ph').text(all['ST_PH']);
+                        $('#rest-ph').text(use['R_PH']);
+                        $('#use-ph').text(rest['REST_PH']);
+
+                        $('#all-al').text(all['ST_AL']);
+                        $('#rest-al').text(use['R_AL']);
+                        $('#use-al').text(rest['REST_AL']);
+
+                        $('#all-sic').text(all['ST_SIC']);
+                        $('#rest-sic').text(use['R_SIC']);
+                        $('#use-sic').text(rest['REST_SIC']);
+
+                        $('#all-ab').text(all['ST_AB']);
+                        $('#rest-ab').text(use['R_AB']);
+                        $('#use-ab').text(rest['REST_AB']);
+
+                        $('#all-cm').text(all['ST_SM']);
+                        $('#rest-cm').text(use['R_CM']);
+                        $('#use-cm').text(rest['REST_CM']);
+
+                        $('#all-upl').text(all['ST_UPL']);
+                        $('#rest-upl').text(use['R_UPL']);
+                        $('#use-upl').text(rest['REST_UPL']);
+                    },
+                });
+            }
+
+            
+            
+            //  set time 
+            $('#btn-set-time').click(function () {
+                let form = $('#form-set-time').serialize();                
+                                                   
+                if ($('#roster_id').val() === '' || $('#time').val() === '') {
+                    return false;
+                }
+
+                if ($('#end_time').val() === '' || $('#start_time').val() === '') {
+                    return false;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("SetRoster", "Roster")",
+                    data: form,
+                    success: function (response) {
+                        
+                        if (response.error){
+                             swal({
+                                title: "Error",
+                                text: response.error,
+                                type: "error",
+                                timer: 2000
+                             });
+                        }
+                        
+                        $('#form-set-time').get(0).reset();
+                        $("#modal-roster").modal('hide');
+                        
+                         swal({
+                            title: "Success",
+                            text: response,
+                            type: "success",
+                            timer: 1500
+                         });
+                        
+                        LoadRoster();                        
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+                
+            });
+
+            // set leave
+            $('#btn-set-leave').click(function () {
+                let form = $('#form-set-leave').serializeArray();
+
+                if ($("rosters_id").val() === '' || $("staff_id").val() === '') {
+                    return false;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("SetTimeLeave", "Roster")",
+                    data: form,
+                    success: function (response) {
+                        if (response.error){
+                             swal({
+                                title: "Error",
+                                text: response.error,
+                                type: "error",
+                                timer: 2000
+                             });
+                        }
+                        
+                        $('#form-set-leave').get(0).reset();
+                        $("#modal-roster").modal('hide');
+                        LoadRoster();                     
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });                            
+            });
+
+            // on select current year
+            Array.from(document.getElementById('year').options).forEach(function (option_value) {
+                let current_year = new Date().getFullYear();
+                if (option_value.value === current_year) {
+                    option_value.setAttribute("selected", 'selected');
+                }
+            });
+
+            // on change current month
+            Array.from(document.getElementById('month').options).forEach(function (opt_value) {
+                let current_month = new Date().getMonth() + 1;
+                if (opt_value.value === current_month) {
+                    opt_value.setAttribute("selected", 'selected');
+                }
+            });
+
+            // on change leave type
+            $('#leave_type').change(function () {             
+                let label = $('#label-leave-type');
+                let $option = $(this).find('option:selected');
+
+                let value = $option.attr('class');  
+
+                if (value === "")
+                {
+                    label.text("N/A");
+                }
+                else if (value === "Empty")
+                {
+                    label.text("Empty");
+                }
+                else
+                {
+                    label.text(value);
+                }                                               
+            });
+
+            //on change start date working
+            $("#start_date").change(function () {
+                let current_date = $(this).val();
+                Array.from(document.getElementById('end_date').options).forEach(function (opt_value) {
+                    if (opt_value.value === current_date) {
+                        opt_value.setAttribute("selected", 'selected');
+                    }
+                });
+            });
+
+            // on change start date leave
+            $('#start_date_leave').change(function () {
+                let current_date_leave = $(this).val();
+                Array.from(document.getElementById('end_date_leave').options).forEach(function (opt_value) {
+                    if (opt_value.value === current_date_leave) {
+                        opt_value.setAttribute("selected", 'selected');
+                    }
+                });
+            });              
+
+           // let day = new Date().getDate();
+            let month = new Date().getMonth() + 1;
+            let year = new Date().getFullYear();                  
+            
+            // set month
+            function setMonth() {
+                let allMonth = '<option value="" disabled>@Resources.Voucher.All @Resources.Voucher.Month</option>';
+                for (let m = 1; m <= 12; m++) {
+                    if (m === month) {
+                        allMonth += '<option value="' + m + '" selected>' + m + '</option>';
+                    } else {
+                        allMonth += '<option value="' + m + '">' + m + '</option>';
+                    }
+                }
+                $('#month').html(allMonth);
+            }
+            setMonth();
+
+            // set year
+            function setYear() {
+                let allYear = '';
+                for (let y = year - 10; y <= year + 100; y++) {
+                    if (y === year) {
+                        allYear += '<option value="' + y + '" selected>' + y + '</option>';
+                    } else {
+                        allYear += '<option value="' + y + '">' + y + '</option>';
+                    }
+                }
+                $('#year').html(allYear);
+            }
+            setYear();        
+            //           
+             
+             function SetDayOfMonthsOnControl(year, month) {
+                let lastDayOfMonth = new Date(year, month, 0).getDate();
+
+                let date_current = '@year' + '-' + '@month' + '-' + '@currentDay';
+                
+                let date_on_change =  year + '-' + month + '-' +  '@currentDay';
+
+                date_current = Date.parse(date_current);
+                date_on_change = Date.parse(date_on_change);
+
+                let compare = date_on_change > date_current;              
+                let dayOfMonth = '';                          
+               
+                if (compare === false) {
+                    for (let d = 1; d <= lastDayOfMonth; d++) {
+                        if (d < '@currentDay') 
+                        {
+                            dayOfMonth += '<option class="bg-danger text-white" value = "' + d + '" disabled>' + d + '</option>';
+                        }
+                        else 
+                        {
+                            dayOfMonth += '<option value = "' + d + '">' + d + '</option>';
+                        }
+                    }
+                } else if (compare === true) {
+                    for (let d = 1; d <= lastDayOfMonth; d++) 
+                    {
+                        dayOfMonth += '<option value = "' + d + '">' + d + '</option>';
+                    }
+                }
+
+                $("#start_date").html(dayOfMonth);
+                $("#end_date").html(dayOfMonth);
+                $("#start_date_leave").html(dayOfMonth);
+                $("#end_date_leave").html(dayOfMonth);
+            }
+                      
+            // new code
+            function LoadRoster() {
+                 $('#show-roster').load('@Url.Action("GetTable", "Roster")', {
+                    bid: $('#boss_id').val(),
+                    cid: $('#com_id').val(),
+                    lid: $('#loc_id').val(),
+                    did: $('#dept_id').val(),
+                    pid: $('#pos_id').val(),
+                    year: $('#year').val(),
+                    month: $('#month').val(),
+                    status: $('#status').val(),
+                    name: $('#staff_name').val(),
+                    id: $('#card_id').val(),
+                    pageSize: $('#pageSize').val()
+                }); 
+            }
+
+            LoadRoster();
+
+            $(document).on('click', '#show-roster a', function (e) {
+                try {
+                    let link = $(this).attr("href").split('=');
+                    $('#show-roster').load('/Roster/GetTable', {
+                        page: link[1],
+                        bid: $('#boss_id').val(),
+                        cid: $('#com_id').val(),
+                        lid: $('#loc_id').val(),
+                        did: $('#dept_id').val(),
+                        pid: $('#pos_id').val(),
+                        year: $('#year').val(),
+                        month: $('#month').val(),
+                        status: $('#status').val(),
+                        name: $('#staff_name').val(),
+                        id: $('#card_id').val(),
+                        pageSize: $('#pageSize').val()
+                    });
+                    e.preventDefault()
+                } catch (ex) { }
+            });
+
+            $('#btn-search-roster').click(function () {
+                $('#show-roster').load('/Roster/GetTable', {
+                    bid: $('#boss_id').val(),
+                    cid: $('#com_id').val(),
+                    lid: $('#loc_id').val(),
+                    did: $('#dept_id').val(),
+                    pid: $('#pos_id').val(),
+                    year: $('#year').val(),
+                    month: $('#month').val(),
+                    status: $('#status').val(),
+                    name: $('#staff_name').val(),
+                    id: $('#card_id').val(),
+                    pageSize: $('#pageSize').val()
+                });              
+            });
+
+            $(document).on('change', '#show-roster #pageSize', function () {
+                $('#show-roster').load('@Url.Action("GetTable", "Roster")', {
+                    bid: $('#boss_id').val(),
+                    cid: $('#com_id').val(),
+                    lid: $('#loc_id').val(),
+                    did: $('#dept_id').val(),
+                    pid: $('#pos_id').val(),
+                    year: $('#year').val(),
+                    month: $('#month').val(),
+                    status: $('#status').val(),
+                    name: $('#staff_name').val(),
+                    id: $('#card_id').val(),
+                    pageSize: $(this).val()
+                });
+            });
+            //new code
+    
+              // on change boss
+            $('#boss_id').change(function () {
+                let data = {
+                    boss_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $('#loc_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                $('#dept_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>');
+                $('#pos_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Position --</option>');
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetCompany",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company -- </option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                        }
+                        $('#com_id').html(option);
+                    },
+                    error: function () {
+                        $('#com_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>');
+                    }
+                });
+            });
+
+            // on change company search
+            $('#com_id').change(function () {
+                let data = {
+                    com_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $('#loc_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                $('#dept_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>');
+                $('#pos_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Position --</option>');
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetLocation",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Location_Id + '">' + response[i].Loc_Name + '</option>';
+                        }
+                        $('#loc_id').html(option);
+                    },
+                    error: function () {
+                        $('#loc_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                    }
+                });
+            });
+
+            // on change location search
+            $('#loc_id').change(function () {
+                let data = {
+                    loc_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $('#dept_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>');
+                $('#pos_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Position --</option>');
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetDepartment",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Depart_Id + '">' + response[i].Deppart_Name + '</option>';
+                        }
+                        $('#dept_id').html(option);
+                    },
+                    error: function () {
+                        $('#dept_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>');
+                    }
+                });
+            });
+
+            // on change department search
+            $('#dept_id').change(function () {
+                let data = {
+                    dept_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $('#pos_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Position --</option>');
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetPosition",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Position --</option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Pos_Id + '">' + response[i].Pos_Name + '</option>';
+                        }
+                        $('#pos_id').html(option);
+                    },
+                    error: function () {
+                        $('#pos_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Position --</option>');
+                    }
+                });
+            });
+        });
+    </script>
+} 

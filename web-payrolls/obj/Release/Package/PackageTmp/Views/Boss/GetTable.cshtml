@@ -1,0 +1,155 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetManager_Result>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }
+    .label-green {
+        background: #28A745 !important;
+    }
+</style>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize" name="pageSize">
+                @foreach (var item in ViewBag.PageSize)
+                {
+                    if (item.Value == @ViewBag.psize + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else { 
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }               
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row justify-content-end pr-3 pb-2">
+            <div class="float-right">
+
+                <div class="btn-group btn-sm" data-toggle="buttons">
+
+                    <label class="btn btn-sm bg-white" id="btn-export-boss">
+                        <input type="radio" name="options" id="option3" autocomplete="off">
+                        <span class="text-inverse">
+                            <i class="ti-printer"></i> @Resources.Voucher.Excel
+                        </span>
+                    </label>
+                </div>
+
+                <button type="button" class="btn btn-sm" style="background: #28a745; color: white" id="btn-create-boss">
+                    <i class="ti-plus"></i> @Resources.Voucher.Add @Resources.Voucher.HOD
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---->
+<div class="table-responsive m-t-0 bg-white">
+        <table class="table table-hover table-md" id="table-boss">
+            <thead class="text-capitalize">
+                <tr style="border: 1px solid #f3f1f1">
+                    <th>#</th>
+                    <th>@Resources.Voucher.Name</th>
+                    <th>@Resources.Voucher.Code</th>
+                    <th>@Resources.Voucher.Phone</th>
+                    <th>@Resources.Voucher.Status</th>
+                    <th>@Resources.Voucher.UpdateBy</th>
+                    <th>@Resources.Voucher.DateUpdate</th>
+                    <th>@Resources.Voucher.TimeUpdate</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ var rowNo = 0; }
+
+                @foreach (var item in Model)
+                {
+                    <tr id="@item.PK_Boss_Id"
+                        data-picture="@item.Picture"
+                        data-code="@item.Code"
+                        data-name="@item.Name"
+                        data-phone="@item.Phone"
+                        data-address="@item.Address"
+                        data-status="@item.Status">
+
+                        <td>@(rowNo += 1)</td>
+
+                        <td>
+                            <img 
+                                class="img-circle mr-2"
+                                id="image_view_no"
+                                alt="attachment"
+                                height="25"
+                                width="25"
+                                src="~/Content/Uploads/Boss/@item.Picture" 
+                                onerror="this.src=src='@Url.Content("~/Content/images/avatar.png")'"
+                            >
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+
+                        <td >
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+
+                        <td >
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+
+                        <td >
+                            @if (item.Status.Trim().Equals("Enable"))
+                            {
+                                <span class="text-center label label-green">Enable</span>
+                            }
+                            else if (item.Status.Trim().Equals("Disabled"))
+                            {
+                                <span class="text-center label label-danger">Disabled</span>
+                            }
+                        </td>
+
+                        <td >
+                            @Html.DisplayFor(modelItem => item.User_Update)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date_Update)
+                        </td>
+
+                        <td >
+                            @Html.DisplayFor(modelItem => item.Time_Update)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+
+<div id="contentPager" class="float-right">
+     @Html.PagedListPager(Model, page => Url.Action("Index", new {page}))
+</div>

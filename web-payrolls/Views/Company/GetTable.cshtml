@@ -1,0 +1,176 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetAllCompanies_Result>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }
+</style>
+
+<div class="card card-outline-white" style="margin-bottom: 0px;">
+    <div class="card-header">
+        @*<h4 class="m-b-0">
+                <i class="ti-user mr-3"></i>Manage Boss
+            </h4>*@
+        <div class="row">
+            <div class="col-md-3">
+                <div id="Paging" class="pt-2">
+                    Show :
+                    <select class="custom-select-form" id="pageSize" name="pageSize">
+                        @foreach (var item in ViewBag.PageSize)
+                        {
+                            if (item.Value == @ViewBag.psize + "")
+                            {
+                                <option value="@item.Value" selected>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    </select>
+                    entries
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row justify-content-end pr-3 pb-2">
+                    <div class="float-right">
+
+                        <div class="btn-group btn-sm" data-toggle="buttons">
+
+                            <label class="btn btn-sm bg-white" id="btn_export_company">
+                                <input type="radio" name="options" id="option3" autocomplete="off">
+                                <span class="text-inverse">
+                                    <i class="ti-printer"></i> Excel
+                                </span>
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-white ml-2" style="background: #28a745; color: white" id="btn_Add_Company">
+                            <i class="ti-plus"></i> Add New
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-hover table-bordered table-md" id="table_company">
+        <thead>
+            <tr style="border: 1px solid #f3f1f1">
+                <th class="text-center">No.</th>
+                <th class="text-center">Company Name</th>
+                <th class="text-center">HOD</th>
+                <th class="text-center">Staff Trans.</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Updated By</th>
+                <th class="text-center">Date Update</th>
+                <th class="text-center">Time Update</th>
+                <th class="text-center">Picture</th>
+            </tr>
+           
+        </thead>
+        <tbody>
+            @{ int rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+
+                <tr id="@item.PK_Comp_Id" class="@item.PK_Boss_Id" data-photo="@item.Picture_Company">
+
+                    <td class="text-center" style="vertical-align: middle;">@(rowNo += 1)</td>
+
+                    <td class="text-center" style="vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.Comp_Name)
+                    </td>
+                    <td class="text-center" style="vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.Boss_Name)
+                    </td>
+                    <td class="text-center" style="vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.Number_Staff_Transaction)
+                    </td>
+                    <td class="text-center" style="vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.Descr)
+                    </td>
+                    <td class="text-center" style="vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.User_Updated)
+                    </td>
+                    <td class="text-center" style="vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.Date_Update)
+                    </td>
+                    <td class="text-center" style="vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.Time_Update)
+                    </td>
+                    <td class="text-center" style="width: 50px; vertical-align: middle;">
+                        @*@Html.DisplayFor(modelItem => item.Picture)*@
+
+                        @if (item.Picture_Company == null)
+                        {
+                            <img id="image_view_has_ann"
+                                 class="img-fluid img-thumbnail"
+                                 alt="attachment"
+                                 height="50"
+                                 width="50"
+                                 src="~/Content/images/no-image.jpg"
+                                 onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'">
+                        }
+                        else if (item.Picture_Company != "")
+                        {
+                            <img id="image_view_no_ann"
+                                 class="img-fluid img-thumbnail"
+                                 alt="attachment"
+                                 height="50"
+                                 width="50"
+                                 src="~/Content/Uploads/Comp_Photoes/@item.Picture_Company"
+                                 onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'">
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div class="float-left" style="padding: 20px 0px;">
+    Showing @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) to @Model.PageCount of @ViewBag.Records entries
+</div>
+
+<div class="float-right"> @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+
+<div class="modal fade" id="Modal-View-Photo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="image-card-view-photo"
+                     class="card-img-top"
+                     alt="Card image cap">
+            </div>
+
+        </div>
+    </div>
+</div>

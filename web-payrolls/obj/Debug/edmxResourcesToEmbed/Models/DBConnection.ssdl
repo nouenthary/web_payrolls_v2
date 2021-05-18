@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="payroll_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Boss">
+    <Key>
+      <PropertyRef Name="bid" />
+    </Key>
+    <Property Name="bid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="boss_name" Type="nvarchar" MaxLength="500" />
+    <Property Name="boss_tel" Type="nvarchar" MaxLength="100" />
+    <Property Name="boss_address" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="did" />
+    </Key>
+    <Property Name="did" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="boss_id" Type="int" />
+    <Property Name="dept_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="dept_desc" Type="nvarchar" MaxLength="1000" />
+    <Property Name="user_udpate" Type="varchar" MaxLength="50" />
+    <Property Name="date_update" Type="varchar" MaxLength="50" />
+    <Property Name="time_update" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="did" />
+    </Key>
+    <Property Name="did" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="20" />
+    <Property Name="dis_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="dis_desc" Type="nvarchar" MaxLength="255" />
+    <Property Name="status" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="user_update" Type="nvarchar" MaxLength="50" />
+    <Property Name="date_update" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_id" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'payroll_db.dbo.Employee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="code" />
+      <PropertyRef Name="first_name" />
+      <PropertyRef Name="last_name" />
+      <PropertyRef Name="address" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="first_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="data_of_bird" Type="date" />
+    <Property Name="contact" Type="varchar" MaxLength="50" />
+    <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="status" Type="tinyint" />
+    <Property Name="position_id" Type="int" />
+  </EntityType>
+  <EntityType Name="LeaveRemain">
+    <Key>
+      <PropertyRef Name="lid" />
+    </Key>
+    <Property Name="lid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sid" Type="int" Nullable="false" />
+    <Property Name="off_remain" Type="int" Nullable="false" />
+    <Property Name="al_remain" Type="int" Nullable="false" />
+    <Property Name="ph_remain" Type="int" Nullable="false" />
+    <Property Name="sic_remain" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="pid" />
+    </Key>
+    <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="did" Type="int" />
+    <Property Name="position" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="salary" Type="float" />
+    <Property Name="accommodation" Type="float" />
+    <Property Name="food" Type="float" />
+    <Property Name="gasoline" Type="float" />
+    <Property Name="ot_unit_price" Type="float" Nullable="false" />
+    <Property Name="work_hour_target" Type="int" />
+    <Property Name="relex_hour" Type="int" />
+    <Property Name="off_day" Type="float" />
+    <Property Name="al_day" Type="float" />
+    <Property Name="ph_day" Type="float" />
+    <Property Name="sic" Type="float" />
+    <Property Name="user_update" Type="nchar" MaxLength="10" />
+    <Property Name="date_update" Type="nchar" MaxLength="10" />
+    <Property Name="time_update" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="pro_id" />
+    </Key>
+    <Property Name="pro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="varchar" MaxLength="20" />
+    <Property Name="pro_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_desc" Type="varchar" MaxLength="225" Nullable="false" />
+    <Property Name="user_update" Type="nvarchar" MaxLength="50" />
+    <Property Name="date_update" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="tinyint" />
+    <Property Name="boss_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="role" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="status" Type="tinyint" Nullable="false" />
+    <Property Name="description" Type="text" />
+  </EntityType>
+  <EntityType Name="Roster">
+    <Key>
+      <PropertyRef Name="PK_ROS_ID" />
+    </Key>
+    <Property Name="PK_ROS_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_STA_ID" Type="int" />
+    <Property Name="NUM_YEAR" Type="int" />
+    <Property Name="NUM_MONTH" Type="int" />
+    <Property Name="DAY1" Type="varchar" MaxLength="20" />
+    <Property Name="DAY2" Type="varchar" MaxLength="20" />
+    <Property Name="DAY3" Type="varchar" MaxLength="20" />
+    <Property Name="DAY4" Type="varchar" MaxLength="20" />
+    <Property Name="DAY5" Type="varchar" MaxLength="20" />
+    <Property Name="DAY6" Type="varchar" MaxLength="20" />
+    <Property Name="DAY7" Type="varchar" MaxLength="20" />
+    <Property Name="DAY8" Type="varchar" MaxLength="20" />
+    <Property Name="DAY9" Type="varchar" MaxLength="20" />
+    <Property Name="DAY10" Type="varchar" MaxLength="20" />
+    <Property Name="DAY11" Type="varchar" MaxLength="20" />
+    <Property Name="DAY12" Type="varchar" MaxLength="20" />
+    <Property Name="DAY13" Type="varchar" MaxLength="20" />
+    <Property Name="DAY14" Type="varchar" MaxLength="20" />
+    <Property Name="DAY15" Type="varchar" MaxLength="20" />
+    <Property Name="DAY16" Type="varchar" MaxLength="20" />
+    <Property Name="DAY17" Type="varchar" MaxLength="20" />
+    <Property Name="DAY18" Type="varchar" MaxLength="20" />
+    <Property Name="DAY19" Type="varchar" MaxLength="20" />
+    <Property Name="DAY20" Type="varchar" MaxLength="20" />
+    <Property Name="DAY21" Type="varchar" MaxLength="20" />
+    <Property Name="DAY22" Type="varchar" MaxLength="20" />
+    <Property Name="DAY23" Type="varchar" MaxLength="20" />
+    <Property Name="DAY24" Type="varchar" MaxLength="20" />
+    <Property Name="DAY25" Type="varchar" MaxLength="20" />
+    <Property Name="DAY26" Type="varchar" MaxLength="20" />
+    <Property Name="DAY27" Type="varchar" MaxLength="20" />
+    <Property Name="DAY28" Type="varchar" MaxLength="20" />
+    <Property Name="DAY29" Type="varchar" MaxLength="20" />
+    <Property Name="DAY30" Type="varchar" MaxLength="20" />
+    <Property Name="DAY31" Type="varchar" MaxLength="20" />
+    <Property Name="OFF" Type="varchar" MaxLength="20" />
+    <Property Name="PH" Type="varchar" MaxLength="20" />
+    <Property Name="AL" Type="varchar" MaxLength="20" />
+    <Property Name="SIC" Type="varchar" MaxLength="20" />
+    <Property Name="UPL" Type="varchar" MaxLength="20" />
+    <Property Name="AB" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="SalaryType">
+    <Key>
+      <PropertyRef Name="pk_salary_id" />
+    </Key>
+    <Property Name="pk_salary_id" Type="int" Nullable="false" />
+    <Property Name="fk_staff_id" Type="int" Nullable="false" />
+    <Property Name="salary_type" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="salary" Type="float" Nullable="false" />
+    <Property Name="accommodation" Type="float" />
+    <Property Name="food" Type="float" />
+    <Property Name="gasoline" Type="float" />
+    <Property Name="ot_unit_price" Type="float" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="site_id" Type="int" />
+    <Property Name="pid" Type="int" Nullable="false" />
+    <Property Name="sname" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="gender" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="dob" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="tel" Type="nvarchar" MaxLength="50" />
+    <Property Name="bank_account" Type="varchar" MaxLength="100" />
+    <Property Name="address" Type="nvarchar" MaxLength="100" />
+    <Property Name="id_card" Type="nvarchar" MaxLength="50" />
+    <Property Name="scard" Type="varchar" MaxLength="20" />
+    <Property Name="serial_card" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="char" MaxLength="1" />
+    <Property Name="join_date" Type="varchar" MaxLength="20" />
+    <Property Name="end_date" Type="varchar" MaxLength="20" />
+    <Property Name="photo" Type="nvarchar" MaxLength="1000" />
+    <Property Name="user_update" Type="nvarchar" MaxLength="250" />
+    <Property Name="date_udpate" Type="varchar" MaxLength="20" />
+    <Property Name="finger_print" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserPassword" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserRoles" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Photo" Type="varchar" MaxLength="255" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UserEmailID" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="uid" />
+    </Key>
+    <Property Name="uid" Type="int" Nullable="false" />
+    <Property Name="sid" Type="int" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="user_update" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_udpate" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Village">
+    <Key>
+      <PropertyRef Name="vid" />
+    </Key>
+    <Property Name="vid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="vil_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="vil_desc" Type="nvarchar" MaxLength="50" />
+    <Property Name="status" Type="char" MaxLength="1" />
+    <Property Name="user_update" Type="nvarchar" MaxLength="50" />
+    <Property Name="date_update" Type="nvarchar" MaxLength="50" />
+    <Property Name="did" Type="int" />
+  </EntityType>
+  <Association Name="FK__Departmen__boss___681373AD">
+    <End Role="Boss" Type="Self.Boss" Multiplicity="0..1" />
+    <End Role="Department" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Boss">
+        <PropertyRef Name="bid" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="boss_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__District__pro_id__3493CFA7">
+    <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
+    <End Role="District" Type="Self.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="pro_id" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="pro_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LeaveRemain__sid__6BE40491">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="LeaveRemain" Type="Self.LeaveRemain" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="LeaveRemain">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Position__did__08B54D69">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Position" Type="Self.Position" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="did" />
+      </Principal>
+      <Dependent Role="Position">
+        <PropertyRef Name="did" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Province__boss_i__690797E6">
+    <End Role="Boss" Type="Self.Boss" Multiplicity="0..1" />
+    <End Role="Province" Type="Self.Province" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Boss">
+        <PropertyRef Name="bid" />
+      </Principal>
+      <Dependent Role="Province">
+        <PropertyRef Name="boss_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Roster__FK_STA_I__44CA3770">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Roster" Type="Self.Roster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="Roster">
+        <PropertyRef Name="FK_STA_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalaryTyp__pk_sa__3A4CA8FD">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="SalaryType" Type="Self.SalaryType" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="SalaryType">
+        <PropertyRef Name="pk_salary_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__pid__3C34F16F">
+    <End Role="Position" Type="Self.Position" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="pid" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__sid__3B40CD36">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Village__did__339FAB6E">
+    <End Role="District" Type="Self.District" Multiplicity="0..1" />
+    <End Role="Village" Type="Self.Village" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="did" />
+      </Principal>
+      <Dependent Role="Village">
+        <PropertyRef Name="did" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="getAllEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Pro_Get_Commune_By_Dis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="com_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Pro_Get_Department" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Pro_Get_District_By_Pro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pro_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Pro_Get_Position_By_Dept" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="did" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Pro_Get_Roster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Pro_Get_Staff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Pro_Set_Roster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_date" Type="int" Mode="In" />
+    <Parameter Name="end_date" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Validate_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="payroll_dbModelStoreContainer">
+    <EntitySet Name="Boss" EntityType="Self.Boss" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LeaveRemain" EntityType="Self.LeaveRemain" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roster" EntityType="Self.Roster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryType" EntityType="Self.SalaryType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Village" EntityType="Self.Village" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Employee].[id] AS [id], 
+    [Employee].[code] AS [code], 
+    [Employee].[first_name] AS [first_name], 
+    [Employee].[last_name] AS [last_name], 
+    [Employee].[data_of_bird] AS [data_of_bird], 
+    [Employee].[contact] AS [contact], 
+    [Employee].[address] AS [address], 
+    [Employee].[status] AS [status], 
+    [Employee].[position_id] AS [position_id]
+    FROM [dbo].[Employee] AS [Employee]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Departmen__boss___681373AD" Association="Self.FK__Departmen__boss___681373AD">
+      <End Role="Boss" EntitySet="Boss" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK__District__pro_id__3493CFA7" Association="Self.FK__District__pro_id__3493CFA7">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="District" EntitySet="District" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LeaveRemain__sid__6BE40491" Association="Self.FK__LeaveRemain__sid__6BE40491">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="LeaveRemain" EntitySet="LeaveRemain" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Position__did__08B54D69" Association="Self.FK__Position__did__08B54D69">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Position" EntitySet="Position" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Province__boss_i__690797E6" Association="Self.FK__Province__boss_i__690797E6">
+      <End Role="Boss" EntitySet="Boss" />
+      <End Role="Province" EntitySet="Province" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Roster__FK_STA_I__44CA3770" Association="Self.FK__Roster__FK_STA_I__44CA3770">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Roster" EntitySet="Roster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalaryTyp__pk_sa__3A4CA8FD" Association="Self.FK__SalaryTyp__pk_sa__3A4CA8FD">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="SalaryType" EntitySet="SalaryType" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__pid__3C34F16F" Association="Self.FK__Staff__pid__3C34F16F">
+      <End Role="Position" EntitySet="Position" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__sid__3B40CD36" Association="Self.FK__Users__sid__3B40CD36">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Village__did__339FAB6E" Association="Self.FK__Village__did__339FAB6E">
+      <End Role="District" EntitySet="District" />
+      <End Role="Village" EntitySet="Village" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

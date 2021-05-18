@@ -1,0 +1,79 @@
+﻿<!--Form Edit-->
+<div class="modal fade" id="modal_department_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="ti-user pr-2"></i>Update Department Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="">
+                <div class="modal-body">
+
+                    <input type="hidden" id="hdDeptId" class="form-control" />
+                    <input type="hidden" id="hdBossId" class="form-control" />
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="boss">Boss:</label>
+                                <select name="ddlEditBoss" id="ddlEditBoss" class="form-control" aria-invalid="false">
+                                    <option value="0">-- All Bosses --</option>
+                                    @foreach (var boss in ViewBag.Manager)
+                                    {
+                                        <option value="@boss.PK_Boss_Id">@boss.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="staff_transaction">Company:</label>
+                                <select id="ddlEditCompany" name="ddlEditCompany" class="form-control">
+                                    <option value="0">-- All Companies --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="comp_name">Location:</label>
+                                <select id="ddlEditLocation" name="ddlEditLocation" class="form-control">
+                                    <option value="0">-- All Locations --</option>
+                                </select>
+                                <div class="invalid-feedback" id="msg_location_edit"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="staff_transaction">Staff Transaction:</label>
+                                <select name="ddlEditStaffTransaction" id="ddlEditStaffTransaction" class="form-control">
+                                    <option value="2">2</option>
+                                    <option value="4">4</option>
+                                </select>
+                                <div class="invalid-feedback" id="msg_staff_transaction"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txbEditDeptName">Department Name:</label>
+                        <input type="text" class="form-control" id="txbEditDeptName" name="txbEditDeptName" placeholder="Department name..." required maxlength="50">
+                        <div class="invalid-feedback" id="msg_dept_name_edit"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txbEditDescription">Description:</label>
+                        <textarea class="form-control" id="txbEditDescription" name="txbEditDescription" placeholder="Description..." rows="4"></textarea>
+                    </div>
+
+                    @Html.AntiForgeryToken()
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="ti-close pr-2"></i>Close</button>
+                    <button type="button" class="btn" id="btn_update_department" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Form Edit-->

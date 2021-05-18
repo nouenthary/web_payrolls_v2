@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div id="show-notificate"></div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts{
+<script>
+    $(function () {
+        $('#show-notificate').load('/Notification/GetTable', {
+            pageSize: $('#pageSize').val()
+        });
+
+        $(document).on('click', '#show-notificate a', function (e) {
+            try {
+                var link = $(this).attr("href").split('=');
+                $('#show-notificate').load('/Notification/GetTable', {                   
+                    page: link[1],
+                    pageSize: $('#pageSize').val()
+                });
+                e.preventDefault()
+            } catch (ex) { }
+        }); 
+
+        $(document).on('change', '#show-notificate #pageSize', function () {
+            $('#show-notificate').load('/Notification/GetTable', {               
+                pageSize: $(this).val()
+            });
+        });
+
+        $(document).on('click', '#btn-export-notificate', function () {
+            $('#table-notificate').csvExport();
+        });
+       
+    });
+</script>
+}

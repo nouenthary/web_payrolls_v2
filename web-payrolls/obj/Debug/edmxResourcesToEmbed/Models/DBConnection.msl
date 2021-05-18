@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="payroll_dbModelStoreContainer" CdmEntityContainer="DB_Connection">
+    <FunctionImportMapping FunctionImportName="Pro_Get_Department" FunctionName="payroll_dbModel.Store.Pro_Get_Department">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="payroll_dbModel.Pro_Get_Department_Result">
+          <ScalarProperty Name="did" ColumnName="did" />
+          <ScalarProperty Name="boss_id" ColumnName="boss_id" />
+          <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+          <ScalarProperty Name="dept_desc" ColumnName="dept_desc" />
+          <ScalarProperty Name="user_udpate" ColumnName="user_udpate" />
+          <ScalarProperty Name="date_update" ColumnName="date_update" />
+          <ScalarProperty Name="time_update" ColumnName="time_update" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pro_Get_Staff" FunctionName="payroll_dbModel.Store.Pro_Get_Staff">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="payroll_dbModel.Pro_Get_Staff_Result">
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="site_id" ColumnName="site_id" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="sname" ColumnName="sname" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="bank_account" ColumnName="bank_account" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="id_card" ColumnName="id_card" />
+          <ScalarProperty Name="scard" ColumnName="scard" />
+          <ScalarProperty Name="serial_card" ColumnName="serial_card" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="join_date" ColumnName="join_date" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="user_update" ColumnName="user_update" />
+          <ScalarProperty Name="date_udpate" ColumnName="date_udpate" />
+          <ScalarProperty Name="finger_print" ColumnName="finger_print" />
+          <ScalarProperty Name="pid1" ColumnName="pid1" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="did" ColumnName="did" />
+          <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getAllEmployee" FunctionName="payroll_dbModel.Store.getAllEmployee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="payroll_dbModel.getAllEmployee_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="data_of_bird" ColumnName="data_of_bird" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="position_id" ColumnName="position_id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Validate_User" FunctionName="payroll_dbModel.Store.Validate_User">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="payroll_dbModel.Validate_User_Result">
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="SID" ColumnName="SID" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pro_Get_Roster" FunctionName="payroll_dbModel.Store.Pro_Get_Roster">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="payroll_dbModel.Pro_Get_Roster_Result">
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="sname" ColumnName="sname" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="PK_ROS_ID" ColumnName="PK_ROS_ID" />
+          <ScalarProperty Name="NUM_YEAR" ColumnName="NUM_YEAR" />
+          <ScalarProperty Name="NUM_MONTH" ColumnName="NUM_MONTH" />
+          <ScalarProperty Name="DAY1" ColumnName="DAY1" />
+          <ScalarProperty Name="DAY2" ColumnName="DAY2" />
+          <ScalarProperty Name="DAY3" ColumnName="DAY3" />
+          <ScalarProperty Name="DAY4" ColumnName="DAY4" />
+          <ScalarProperty Name="DAY5" ColumnName="DAY5" />
+          <ScalarProperty Name="DAY6" ColumnName="DAY6" />
+          <ScalarProperty Name="DAY7" ColumnName="DAY7" />
+          <ScalarProperty Name="DAY8" ColumnName="DAY8" />
+          <ScalarProperty Name="DAY9" ColumnName="DAY9" />
+          <ScalarProperty Name="DAY10" ColumnName="DAY10" />
+          <ScalarProperty Name="DAY11" ColumnName="DAY11" />
+          <ScalarProperty Name="DAY12" ColumnName="DAY12" />
+          <ScalarProperty Name="DAY13" ColumnName="DAY13" />
+          <ScalarProperty Name="DAY14" ColumnName="DAY14" />
+          <ScalarProperty Name="DAY15" ColumnName="DAY15" />
+          <ScalarProperty Name="DAY16" ColumnName="DAY16" />
+          <ScalarProperty Name="DAY17" ColumnName="DAY17" />
+          <ScalarProperty Name="DAY18" ColumnName="DAY18" />
+          <ScalarProperty Name="DAY19" ColumnName="DAY19" />
+          <ScalarProperty Name="DAY20" ColumnName="DAY20" />
+          <ScalarProperty Name="DAY21" ColumnName="DAY21" />
+          <ScalarProperty Name="DAY22" ColumnName="DAY22" />
+          <ScalarProperty Name="DAY23" ColumnName="DAY23" />
+          <ScalarProperty Name="DAY24" ColumnName="DAY24" />
+          <ScalarProperty Name="DAY25" ColumnName="DAY25" />
+          <ScalarProperty Name="DAY26" ColumnName="DAY26" />
+          <ScalarProperty Name="DAY27" ColumnName="DAY27" />
+          <ScalarProperty Name="DAY28" ColumnName="DAY28" />
+          <ScalarProperty Name="DAY29" ColumnName="DAY29" />
+          <ScalarProperty Name="DAY30" ColumnName="DAY30" />
+          <ScalarProperty Name="DAY31" ColumnName="DAY31" />
+          <ScalarProperty Name="OFF" ColumnName="OFF" />
+          <ScalarProperty Name="PH" ColumnName="PH" />
+          <ScalarProperty Name="UPL" ColumnName="UPL" />
+          <ScalarProperty Name="SIC" ColumnName="SIC" />
+          <ScalarProperty Name="AL" ColumnName="AL" />
+          <ScalarProperty Name="AB" ColumnName="AB" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pro_Set_Roster" FunctionName="payroll_dbModel.Store.Pro_Set_Roster" />
+    <FunctionImportMapping FunctionImportName="Pro_Get_Position_By_Dept" FunctionName="payroll_dbModel.Store.Pro_Get_Position_By_Dept">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="payroll_dbModel.Pro_Get_Position_By_Dept_Result">
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="did" ColumnName="did" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pro_Get_District_By_Pro" FunctionName="payroll_dbModel.Store.Pro_Get_District_By_Pro">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="payroll_dbModel.Pro_Get_District_By_Pro_Result">
+          <ScalarProperty Name="did" ColumnName="did" />
+          <ScalarProperty Name="dis_name" ColumnName="dis_name" />
+          <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pro_Get_Commune_By_Dis" FunctionName="payroll_dbModel.Store.Pro_Get_Commune_By_Dis">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="payroll_dbModel.Pro_Get_Commune_By_Dis_Result">
+          <ScalarProperty Name="vid" ColumnName="vid" />
+          <ScalarProperty Name="vil_name" ColumnName="vil_name" />
+          <ScalarProperty Name="did" ColumnName="did" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Bosses">
+      <EntityTypeMapping TypeName="payroll_dbModel.Boss">
+        <MappingFragment StoreEntitySet="Boss">
+          <ScalarProperty Name="boss_address" ColumnName="boss_address" />
+          <ScalarProperty Name="boss_tel" ColumnName="boss_tel" />
+          <ScalarProperty Name="boss_name" ColumnName="boss_name" />
+          <ScalarProperty Name="bid" ColumnName="bid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="payroll_dbModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="time_update" ColumnName="time_update" />
+          <ScalarProperty Name="date_update" ColumnName="date_update" />
+          <ScalarProperty Name="user_udpate" ColumnName="user_udpate" />
+          <ScalarProperty Name="dept_desc" ColumnName="dept_desc" />
+          <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+          <ScalarProperty Name="boss_id" ColumnName="boss_id" />
+          <ScalarProperty Name="did" ColumnName="did" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Districts">
+      <EntityTypeMapping TypeName="payroll_dbModel.District">
+        <MappingFragment StoreEntitySet="District">
+          <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+          <ScalarProperty Name="date_update" ColumnName="date_update" />
+          <ScalarProperty Name="user_update" ColumnName="user_update" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="dis_desc" ColumnName="dis_desc" />
+          <ScalarProperty Name="dis_name" ColumnName="dis_name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="did" ColumnName="did" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeaveRemains">
+      <EntityTypeMapping TypeName="payroll_dbModel.LeaveRemain">
+        <MappingFragment StoreEntitySet="LeaveRemain">
+          <ScalarProperty Name="sic_remain" ColumnName="sic_remain" />
+          <ScalarProperty Name="ph_remain" ColumnName="ph_remain" />
+          <ScalarProperty Name="al_remain" ColumnName="al_remain" />
+          <ScalarProperty Name="off_remain" ColumnName="off_remain" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="lid" ColumnName="lid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Positions">
+      <EntityTypeMapping TypeName="payroll_dbModel.Position">
+        <MappingFragment StoreEntitySet="Position">
+          <ScalarProperty Name="time_update" ColumnName="time_update" />
+          <ScalarProperty Name="date_update" ColumnName="date_update" />
+          <ScalarProperty Name="user_update" ColumnName="user_update" />
+          <ScalarProperty Name="sic" ColumnName="sic" />
+          <ScalarProperty Name="ph_day" ColumnName="ph_day" />
+          <ScalarProperty Name="al_day" ColumnName="al_day" />
+          <ScalarProperty Name="off_day" ColumnName="off_day" />
+          <ScalarProperty Name="relex_hour" ColumnName="relex_hour" />
+          <ScalarProperty Name="work_hour_target" ColumnName="work_hour_target" />
+          <ScalarProperty Name="ot_unit_price" ColumnName="ot_unit_price" />
+          <ScalarProperty Name="gasoline" ColumnName="gasoline" />
+          <ScalarProperty Name="food" ColumnName="food" />
+          <ScalarProperty Name="accommodation" ColumnName="accommodation" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="position1" ColumnName="position" />
+          <ScalarProperty Name="did" ColumnName="did" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Provinces">
+      <EntityTypeMapping TypeName="payroll_dbModel.Province">
+        <MappingFragment StoreEntitySet="Province">
+          <ScalarProperty Name="boss_id" ColumnName="boss_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="date_update" ColumnName="date_update" />
+          <ScalarProperty Name="user_update" ColumnName="user_update" />
+          <ScalarProperty Name="pro_desc" ColumnName="pro_desc" />
+          <ScalarProperty Name="pro_name" ColumnName="pro_name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="payroll_dbModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="role1" ColumnName="role" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rosters">
+      <EntityTypeMapping TypeName="payroll_dbModel.Roster">
+        <MappingFragment StoreEntitySet="Roster">
+          <ScalarProperty Name="AB" ColumnName="AB" />
+          <ScalarProperty Name="UPL" ColumnName="UPL" />
+          <ScalarProperty Name="SIC" ColumnName="SIC" />
+          <ScalarProperty Name="AL" ColumnName="AL" />
+          <ScalarProperty Name="PH" ColumnName="PH" />
+          <ScalarProperty Name="OFF" ColumnName="OFF" />
+          <ScalarProperty Name="DAY31" ColumnName="DAY31" />
+          <ScalarProperty Name="DAY30" ColumnName="DAY30" />
+          <ScalarProperty Name="DAY29" ColumnName="DAY29" />
+          <ScalarProperty Name="DAY28" ColumnName="DAY28" />
+          <ScalarProperty Name="DAY27" ColumnName="DAY27" />
+          <ScalarProperty Name="DAY26" ColumnName="DAY26" />
+          <ScalarProperty Name="DAY25" ColumnName="DAY25" />
+          <ScalarProperty Name="DAY24" ColumnName="DAY24" />
+          <ScalarProperty Name="DAY23" ColumnName="DAY23" />
+          <ScalarProperty Name="DAY22" ColumnName="DAY22" />
+          <ScalarProperty Name="DAY21" ColumnName="DAY21" />
+          <ScalarProperty Name="DAY20" ColumnName="DAY20" />
+          <ScalarProperty Name="DAY19" ColumnName="DAY19" />
+          <ScalarProperty Name="DAY18" ColumnName="DAY18" />
+          <ScalarProperty Name="DAY17" ColumnName="DAY17" />
+          <ScalarProperty Name="DAY16" ColumnName="DAY16" />
+          <ScalarProperty Name="DAY15" ColumnName="DAY15" />
+          <ScalarProperty Name="DAY14" ColumnName="DAY14" />
+          <ScalarProperty Name="DAY13" ColumnName="DAY13" />
+          <ScalarProperty Name="DAY12" ColumnName="DAY12" />
+          <ScalarProperty Name="DAY11" ColumnName="DAY11" />
+          <ScalarProperty Name="DAY10" ColumnName="DAY10" />
+          <ScalarProperty Name="DAY9" ColumnName="DAY9" />
+          <ScalarProperty Name="DAY8" ColumnName="DAY8" />
+          <ScalarProperty Name="DAY7" ColumnName="DAY7" />
+          <ScalarProperty Name="DAY6" ColumnName="DAY6" />
+          <ScalarProperty Name="DAY5" ColumnName="DAY5" />
+          <ScalarProperty Name="DAY4" ColumnName="DAY4" />
+          <ScalarProperty Name="DAY3" ColumnName="DAY3" />
+          <ScalarProperty Name="DAY2" ColumnName="DAY2" />
+          <ScalarProperty Name="DAY1" ColumnName="DAY1" />
+          <ScalarProperty Name="NUM_MONTH" ColumnName="NUM_MONTH" />
+          <ScalarProperty Name="NUM_YEAR" ColumnName="NUM_YEAR" />
+          <ScalarProperty Name="FK_STA_ID" ColumnName="FK_STA_ID" />
+          <ScalarProperty Name="PK_ROS_ID" ColumnName="PK_ROS_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalaryTypes">
+      <EntityTypeMapping TypeName="payroll_dbModel.SalaryType">
+        <MappingFragment StoreEntitySet="SalaryType">
+          <ScalarProperty Name="ot_unit_price" ColumnName="ot_unit_price" />
+          <ScalarProperty Name="gasoline" ColumnName="gasoline" />
+          <ScalarProperty Name="food" ColumnName="food" />
+          <ScalarProperty Name="accommodation" ColumnName="accommodation" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="salary_type" ColumnName="salary_type" />
+          <ScalarProperty Name="fk_staff_id" ColumnName="fk_staff_id" />
+          <ScalarProperty Name="pk_salary_id" ColumnName="pk_salary_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Staffs">
+      <EntityTypeMapping TypeName="payroll_dbModel.Staff">
+        <MappingFragment StoreEntitySet="Staff">
+          <ScalarProperty Name="finger_print" ColumnName="finger_print" />
+          <ScalarProperty Name="date_udpate" ColumnName="date_udpate" />
+          <ScalarProperty Name="user_update" ColumnName="user_update" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="join_date" ColumnName="join_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="serial_card" ColumnName="serial_card" />
+          <ScalarProperty Name="scard" ColumnName="scard" />
+          <ScalarProperty Name="id_card" ColumnName="id_card" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="bank_account" ColumnName="bank_account" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="sname" ColumnName="sname" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="site_id" ColumnName="site_id" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="payroll_dbModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserMasters">
+      <EntityTypeMapping TypeName="payroll_dbModel.UserMaster">
+        <MappingFragment StoreEntitySet="UserMaster">
+          <ScalarProperty Name="UserEmailID" ColumnName="UserEmailID" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="UserRoles" ColumnName="UserRoles" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="payroll_dbModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="date_udpate" ColumnName="date_udpate" />
+          <ScalarProperty Name="user_update" ColumnName="user_update" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Villages">
+      <EntityTypeMapping TypeName="payroll_dbModel.Village">
+        <MappingFragment StoreEntitySet="Village">
+          <ScalarProperty Name="did" ColumnName="did" />
+          <ScalarProperty Name="date_update" ColumnName="date_update" />
+          <ScalarProperty Name="user_update" ColumnName="user_update" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="vil_desc" ColumnName="vil_desc" />
+          <ScalarProperty Name="vil_name" ColumnName="vil_name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="vid" ColumnName="vid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="payroll_dbModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="position_id" ColumnName="position_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="data_of_bird" ColumnName="data_of_bird" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

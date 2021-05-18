@@ -1,0 +1,464 @@
+@{
+    ViewBag.Title = @Resources.Voucher.Announcement;
+    ViewBag.Page = @Resources.Voucher.Announcement;
+}
+
+<style>
+    .btn-green{
+        background: #28a745;
+        color: #fff;
+        font-size: 16px;
+    }
+</style>
+
+@Html.AntiForgeryToken()
+
+<h2 style="font-weight: 500 ; text-transform: capitalize">@Resources.Voucher.Add @Resources.Voucher.Announcement</h2>
+
+<form action="" method="post" id="form-add-announcement">
+
+<div class="card" style="border-top: #28A745 3px solid;">
+    <div class="card-body">
+        <div class="row">
+                        
+            <div class="form-group col-3">
+                <label>@Resources.Voucher.HOD <span class="text-danger">*</span></label>
+                <div class="controls">
+                    <select name="boss_id" id="boss_id" class="form-control" aria-invalid="false">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                        @foreach (var item in ViewBag.Manager)
+                        {
+                            <option value="@item.PK_Boss_Id">@item.Name</option>
+                        }
+                    </select>
+                    <div class="help-block"></div>
+                </div>
+            </div>
+        
+            <div class="form-group col-3">
+                <label>@Resources.Voucher.Company <span class="text-danger">*</span></label>
+                <div class="controls">
+                    <select name="comp_id" id="comp_id" required="" class="form-control" aria-invalid="false">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>
+                    </select>
+                    <div class="help-block"></div>
+                </div>
+            </div>
+        
+            <div class="form-group col-3">
+                <label>@Resources.Voucher.Location <span class="text-danger">*</span></label>
+                <div class="controls">
+                    <select name="loc_id" id="loc_id" required="" class="form-control" aria-invalid="false">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>
+                    </select>
+                    <div class="help-block"></div>
+                </div>
+            </div>
+        
+        </div>
+        
+    </div>
+</div>
+
+<div class="card" style="border-top: #28A745 3px solid;">
+    <div class="card-body">      
+        <form >
+
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                
+                <div class="col-md-4">
+                    
+                    <div class="row">
+                         <div class="form-group col-md-6">
+                            <label>@Resources.Voucher.Title <span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="title" id="title" class="form-control" required="" placeholder=@Resources.Voucher.Title>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+    
+                        <div class="form-group col-md-6">
+                            <label>@Resources.Voucher.Booster <span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="title_booster" id="title_booster" class="form-control" required="" placeholder=@Resources.Voucher.Booster>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <img id="image_view_no" class="img-fluid img-thumbnail" alt="attachment" width="100%" src="~/Content/images/no-image.jpg">
+                                <input type="file" name="choose_photo" id="choose_photo" style="display: none">
+                                <input type="hidden" id="photo" name="photo"/>
+                            </div>
+                        </div>
+                        
+                         <div class="form-group col-md-12">
+                            <label><span class="text-danger"></span></label>
+                            <div class="controls">
+                                <textarea name="desc" id="desc" class="form-control" placeholder=@Resources.Voucher.Description rows="4"></textarea>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+               
+
+                <div class="col-md-4">
+                                    
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>@Resources.Voucher.Title 1 <span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="title1" id="title1" class="form-control" required="" placeholder=@Resources.Voucher.Title 1>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+                    
+                        <div class="form-group col-md-6">
+                            <label>@Resources.Voucher.Booster 1 <span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="title_booster1" id="title_booster1" class="form-control" required="" placeholder=@Resources.Voucher.Booster 1>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+                
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <img id="image_view_no1" class="img-fluid img-thumbnail" alt="attachment" width="100%" src="~/Content/images/no-image.jpg">
+                                <input type="file" name="choose_photo1" id="choose_photo1" style="display: none">
+                                <input type="hidden" id="photo1" name="photo1"/>
+                            </div>
+                        </div>
+                                        
+                        <div class="form-group col-md-12">
+                            <label><span class="text-danger"></span></label>
+                            <div class="controls">
+                                <textarea name="desc1" id="desc1" class="form-control" placeholder=@Resources.Voucher.Description rows="4"></textarea>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+                                        
+                    </div>
+                                    
+                </div>
+                
+                <div class="col-md-4">
+                                    
+                    <div class="row">
+                        
+                        <div class="form-group col-md-6">
+                            <label>@Resources.Voucher.Title 2 <span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="title2" id="title2" class="form-control" required="" placeholder=@Resources.Voucher.Title 2>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>@Resources.Voucher.Booster 2 <span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="title_booster2" id="title_booster2" class="form-control" required="" placeholder= @Resources.Voucher.Booster 2>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <img id="image_view_no2" class="img-fluid img-thumbnail" alt="attachment" width="100%" src="~/Content/images/no-image.jpg">
+                                <input type="file" name="choose_photo2" id="choose_photo2" style="display: none">
+                                <input type="hidden" id="photo2" name="photo2"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label><span class="text-danger"></span></label>
+                            <div class="controls">
+                                <textarea name="desc2" id="desc2" class="form-control" placeholder=@Resources.Voucher.Description rows="4"></textarea>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-xs-right">
+                <button type="button" class="btn btn-green btn-sm float-right  mr-1" id="btn-save-change">
+                    <i class="ti-save-alt"></i> @Resources.Voucher.SaveNew
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</form>
+
+@section Scripts{
+    <script>
+        $(function (){
+            let bossId = $('#boss_id');
+            let comId = $('#comp_id');
+            let locId = $('#loc_id');
+            
+            let title = $('#title');
+            let booster = $('#title_booster');
+            
+            let title1 = $('#title1');
+            let booster1 = $('#title_booster1');
+            
+            let title2 = $('#title2');
+            let booster2 = $('#title_booster2');
+            // Searching
+            
+            // on change boss
+            bossId.change(function () {
+                
+                locId.html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                
+                let data = {
+                    boss_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+                
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetCompany",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company -- </option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                        }
+                        $('#comp_id').html(option);
+                    },
+                    error: function () {
+                        $('#comp_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>');
+                    }
+                });
+            });
+            
+            // on change company search
+            comId.change(function () {
+                let data = {
+                    com_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetLocation",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Location_Id + '">' + response[i].Loc_Name + '</option>';
+                        }
+                        $('#loc_id').html(option);
+                    },
+                    error: function () {
+                        $('#loc_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                    }
+                });
+            });
+            
+             //
+            function setClassError(id) {
+                $(id).attr('class', 'form-control is-invalid');
+            }
+
+            //
+            function setRemoveError(id) {
+                $(id).attr('class', 'form-control');
+            }
+
+            //
+            function onChange(id) {
+                $(id).change(function () {
+                    setRemoveError(id);
+                });
+            }
+             
+            // create
+            onChange(bossId);
+            onChange(comId);
+            onChange(locId);
+            
+            onChange(title);
+            onChange(title1);
+            onChange(title2);
+            
+            onChange(booster);
+            onChange(booster1);
+            onChange(booster2);
+            
+            function Create(){
+                let form = $('#form-add-announcement').serializeArray();    
+                                
+                if (bossId.val() === ''){
+                    setClassError(bossId);
+                    return false;
+                }else if (comId.val() === ''){
+                    setClassError(comId);
+                    return false;
+                }else if (locId.val() === ''){
+                    setClassError(locId);
+                    return false;
+                } 
+                
+                for (let item in form){
+                    
+                    if (form[item].name === 'desc' || form[item].name === 'desc1'  || form[item].name === 'desc2' )
+                    {
+                        setRemoveError('#desc');
+                        setRemoveError('#desc1');
+                        setRemoveError('#desc2');
+                    }
+                    else if (form[item].name === 'photo' || form[item].name === 'photo1'  || form[item].name === 'photo2'){
+                        setRemoveError('#photo');
+                        setRemoveError('#photo1');
+                        setRemoveError('#photo2');
+                    }
+                    else if (form[item].value === ''){
+                         setClassError('#'+ form[item].name);
+                         return false;
+                    }   
+                }
+               
+                 $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Store", "Announcement")',
+                    data: form, 
+                    success: function (response){
+                        if (response.error){
+                            swal({
+                                title: response.error ,
+                                type: "error",
+                                timer: 1500
+                            }); 
+                            return false;
+                        }
+                        
+                        swal({
+                            title: response ,
+                            type: "success",
+                            timer: 1500
+                        });
+                        
+                        setTimeout(function (){
+                             window.location.reload();
+                        },2000);
+                                             
+                        
+                        $('#form-add-announcement').get(0).reset();
+                    }
+                });
+            }
+            
+            $('#btn-save-announcement').click(function (){
+                Create();
+                window.location.href = "/Announcement/";
+            });
+            
+            
+            $('#btn-save-change').click(function (){
+                Create();
+            });
+          
+             function isImage(icon) {
+                const ext = ['.jpg', '.jpeg', '.gif', '.png', '.PNG','.JPG','.JPEG'];
+                return ext.some(el => icon.endsWith(el));
+            }
+            
+            function showPreview(id, doClick){
+                  $(id).click(function () {
+                     $(doClick).focus().trigger("click");
+                 });
+            }
+                               
+            showPreview('#image_view_no', '#choose_photo');
+            showPreview('#image_view_no1', '#choose_photo1');
+            showPreview('#image_view_no2', '#choose_photo2');
+            
+            // function Upload
+            function onUpload(control, imagePreview, imageForSave) {
+
+                $(control).change(function () {
+
+                    let fileUpload = $(control).get(0);
+
+                    let files = fileUpload.files;                   
+
+                    let fileSize = files[0].size / 1024 / 1024;
+
+                    let fileType = files[0].name; 
+
+                    if (!isImage(fileType)) {
+
+                        $(control).val("");
+
+                        swal({
+                            title: "Warning",
+                            text: "File must be file Image.",
+                            type: "warning",
+                        });
+                        return false;
+                    }
+
+                    if (fileSize > 5) {
+
+                        $(control).val("");
+
+                        swal({
+                            title: "Warning",
+                            text: "File size must under 5M",
+                            type: "warning",
+                        });
+                        return false;
+                    }
+                                   
+                    let fileData = new FormData();
+
+                    for (let i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    }
+
+                    let token = $('input[name="__RequestVerificationToken"]').val();
+
+                    fileData.append('path', 'Announcement/');
+                    fileData.append('__RequestVerificationToken', token);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Other/Upload",
+                        contentType: false,
+                        processData: false,
+                        data: fileData,
+                        success: function (response) {
+                            
+                            if (response.message) {
+                                $(imagePreview).attr('src', '/Content/Uploads/Announcement/' + response.message);
+                                $(imageForSave).val(response.message);
+                            }
+                           
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                });
+                
+            }
+            
+            onUpload('#choose_photo','#image_view_no','#photo');
+            onUpload('#choose_photo1','#image_view_no1','#photo1');
+            onUpload('#choose_photo2','#image_view_no2','#photo2');
+            
+        });
+    </script>
+}

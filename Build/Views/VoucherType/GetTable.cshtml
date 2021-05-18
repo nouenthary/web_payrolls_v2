@@ -1,0 +1,214 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetAllVoucherRent_Result>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    thead, tbody tr {
+            display: table;
+            width: 2200px;
+            table-layout: fixed;
+        }
+    
+        thead {
+            width: calc(2200px - 0.1em);
+        }
+    
+        tbody {
+            height: 720px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+    
+        .table {
+            margin-bottom: 0;
+        }
+    
+        .table-responsive {
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+        }
+        
+         .custom-select-form {
+            padding: 2px;
+            border: #dddddd 1px solid;
+        }
+        
+        .label-green {
+            background: #28A745 !important;
+        }
+</style>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize" name="pageSize">
+                @foreach (var item in ViewBag.PageSize)
+                {
+                    if (item.Value == ViewBag.psize + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row justify-content-end pr-3 pb-2">
+            <div class="float-right">
+
+                <div class="btn-group  btn-sm" data-toggle="buttons">
+                    <label class="btn bg-white btn-sm" id="btn-export-voucher-type">
+                        <input type="radio" name="options" id="option3" autocomplete="off">
+                        <span class="text-inverse">
+                            <i class="ti-printer"></i> @Resources.Voucher.Excel
+                        </span>
+                    </label>
+                </div>
+
+                <button type="button" class="btn btn-sm" style="background: #28a745; color: white" id="btn-add-voucher">
+                    <i class="ti-plus"></i> @Resources.Voucher.Add @Resources.Voucher.VoucherRent
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-hover table-md" id="table-voucher-type">
+        <thead class="text-uppercase">
+            <tr style="border: 1px solid #f3f1f1">
+                <th style="width: 50px">#</th>
+                <th style="width: 80px">@Resources.Voucher.Picture</th>
+                <th>@Resources.Voucher.Code</th>
+                <th>@Resources.Voucher.Name</th>
+                <th>@Resources.Voucher.Type</th>
+                <th>@Resources.Voucher.QtyInMonth</th>
+                <th>@Resources.Voucher.PriceOfMonth</th>
+                <th>@Resources.Voucher.Amount</th>
+                @* <th>Status</th> *@
+                <th>@Resources.Voucher.StartRent</th>
+                <th>@Resources.Voucher.EndRent</th>
+                <th style="width: 200px">@Resources.Voucher.MonthOfYear</th>
+                <th>@Resources.Voucher.Discount</th>
+                <th>@Resources.Voucher.UpdateBy</th>
+                <th>@Resources.Voucher.DateUpdate</th>
+                <th>@Resources.Voucher.TimeUpdate</th>
+                <th>@Resources.Voucher.Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+                <tr 
+                    id="@item.PK_Voucher_Rent_Other_Id"
+                    data-locationId="@item.PK_Location_Id"
+                    data-type="@item.Type"
+                    data-code="@item.Code"
+                    data-name="@item.Name"
+                    data-qty-month="@item.QTY_in_Month"
+                    data-price="@item.Unit_Price_in_Month"
+                    data-status="@item.Status"
+                    data-start-rent="@item.Start_Rent"
+                    data-end-rent="@item.End_Rent"
+                    data-discount="@item.Discount"
+                    data-picture="@item.Picture"
+                    data-month-year="@item.Amount_Month_Year_Rent"
+                >
+                    <td style="width: 50px">@(rowNo += 1)</td>
+                    <td style="width: 80px">
+                         <img src="~/Content/Uploads/VoucherType/@item.Picture" height="25" alt="attachment" onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'"/>
+                    </td>
+                    <td>@item.Code</td>
+                    <td>@item.Name</td>
+                    <td>
+                    @switch (item.Type)
+                    {
+                         case "Buy":
+                             <span class="label label-primary">@item.Type</span>
+                             break;
+                         case "Other":
+                             <span class="label label-warning">@item.Type</span>
+                             break;
+                         default:
+                             <span class="label label-success">@item.Type</span>
+                             break;
+                    }
+                    </td>
+                    <td>@item.QTY_in_Month</td>
+                    <td>$  @item.Unit_Price_in_Month</td>
+                    <td>$  @item.Amount_In_Month</td>
+                    @* <td>@switch (item.Status) *@
+                    @*         { *@
+                    @*              case "Buy": *@
+                    @*                  <span class="label label-green">@item.Status</span> *@
+                    @*                  break; *@
+                    @*              case "Rent": *@
+                    @*                  <span class="label label-custom">@item.Status</span> *@
+                    @*                  break; *@
+                    @*              default: *@
+                    @*                  <span class="label label-danger">@item.Status</span> *@
+                    @*                  break; *@
+                    @*         } *@
+                    @* </td> *@
+                    <td>@item.Start_Rent</td>
+                    <td>@item.End_Rent</td>
+                    <td style="width: 200px"> @item.Amount_Month_Year_Rent</td>
+                    <td>@item.Discount %</td>
+                    <td>@item.User_Update</td>
+                    <td>@item.Date_Update </td>
+                    <td>@item.Time_Update</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0; left: 0; will-change: transform; font-size: 12px">
+                                <a class="dropdown-item" href="#" id="btn-edit-voucher-type">
+                                    <i class="ti-pencil"></i> @Resources.Voucher.Edit
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        <tr>
+            <td style="width: 80px"></td>
+            <td style="width: 80px"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-inverse font-weight-bold">$ @ViewData["sumTotal"]</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            @* <td ></td> *@
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="float-left" style="padding: 20px 0;">
+    @Resources.Voucher.Showing @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @Resources.Voucher.to @Model.PageCount @Resources.Voucher.of @ViewBag.Records @Resources.Voucher.Entries
+</div>
+
+<div class="float-right">
+     @Html.PagedListPager(Model, page => Url.Action("Index", new {page}))
+</div>
+
+

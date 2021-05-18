@@ -1,0 +1,80 @@
+﻿<!--Form Create-->
+<div class="modal fade" id="modal_create_company" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="ti-user pr-2"></i>Add Company Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="form-group text-center">
+                                    <img style="height: 270px"
+                                         src="~/Content/images/no-image.jpg"
+                                         alt="me" class="img-thumbnail"
+                                         id="photo-view-response">
+                                </div>
+
+                                <div class="form-group">
+                                    <input accept="image/png, image/jpeg, image/gif" type="file" class="form-control" id="photo" required>
+                                    <div class="invalid-feedback" id="error-file-edit"></div>
+                                    <input type="hidden" id="name-photo" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <label for="boss">Boss:<span class="text-danger">*</span></label>
+                                        <select name="boss_id" id="boss_id" class="form-control" aria-invalid="false">
+                                            <option value="0">All</option>
+                                            @foreach (var boss in ViewBag.Manager)
+                                            {
+                                                <option value="@boss.PK_Boss_Id">@boss.Name</option>
+                                            }
+                                        </select>
+                                        <div class="invalid-feedback" id="msg_boss_id"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="staff_transaction">Staff Transaction:</label>
+                                        <select name="staff_transaction" id="staff_transaction" class="form-control">
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <div class="invalid-feedback" id="msg_staff_transaction"></div>
+                                    </div>
+                                </div>
+                                <div class="invalid-feedback" id="error-code"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="comp_name">Company Name:<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="comp_name" name="comp_name" placeholder="Company name..." required maxlength="50">
+                                <div class="invalid-feedback" id="msg_company_name"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description:</label>
+                                <textarea class="form-control" id="description" name="description" placeholder="Description..." rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="ti-close pr-2"></i>Close</button>
+                    <button type="button" class="btn" id="btn_save_company" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Form Create-->

@@ -1,0 +1,108 @@
+<!--Form Update-->
+<div class="modal fade" id="modal-update-stock-in" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="border-top: #28A745 3px solid;">
+            <div class="modal-header">
+
+                <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+                    <i class="ti-plus pr-2"></i>@Resources.Voucher.Edit Stock
+                </h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post" action="" id="form-update-stock-in">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    
+                    <div class="row">
+                        
+                        <div class="col-md-6">
+                            
+                            @Html.Hidden("txtStockId")
+                            
+                            <div class="form-group">
+                                <label for="">HOD</label>
+                                <select id="txtManager" name="txtManager" class="form-control">
+                                    <option value="">-- Choose HOD --</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Company</label>
+                                <select id="txtCompany" name="txtCompany" class="form-control">
+                                    @* <option value="">-- Choose Company --</option> *@
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Type</label>
+                                <select id="txtType" name="txtType" class="form-control">
+                                    <option value="">-- Choose Type --</option>
+                                    <option value="Buy">Buy</option>
+                                    <option value="Hire">Hire</option>
+                                </select>
+                            </div>
+                            
+                            @* <div class="form-group"> *@
+                            @*     <label for="">Product Type</label> *@
+                            @*     <select id="txtStockInType" name="txtStockInType" class="form-control"> *@
+                            @*         <option value="">-- Choose Stock In Type --</option> *@
+                            @*         <option value="Accessory">Accessory</option> *@
+                            @*         <option value="Fabric">Fabric</option> *@
+                            @*     </select> *@
+                            @* </div> *@
+
+                            <div class="form-group">
+                                <label for="">Quantity</label>
+                                <input class="form-control form-group-sm" id="txtQty" name="txtQty" placeholder="Enter Quantity" maxlength="50"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Price</label>
+                                <input class="form-control form-group-sm" id="txtPrice" name="txtPrice" placeholder="Enter Price" maxlength="50"/>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group text-center">
+                                <img style="height: 270px"
+                                     src="~/Content/images/no-image.jpg"
+                                     alt="me" 
+                                     class="img-thumbnail"
+                                     id="picture-response-stock-edit"
+                                     onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'"
+                                     >
+                            </div>
+
+                            <div class="form-group">
+                                <input accept="image/png, image/jpeg, image/gif" type="file" id="choose-picture-stock-edit" style="display: none">
+                                <input type="hidden" id="picture-stock-edit" name="picture-stock-edit"/>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Remark </label>
+                                <textarea class="form-control form-group-sm" placeholder="Enter Remark" id="txtDescStock" name="txtDescStock" rows="4"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm" id="btn-update-stock-in" style="background: #28a745; color: #fff; font-size: 16px">
+                        <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Update Close
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--Form Update-->
+
+

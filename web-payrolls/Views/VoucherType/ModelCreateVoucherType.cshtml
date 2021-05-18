@@ -1,0 +1,169 @@
+<!--Form Create-->
+<div class="modal fade" id="modal-add-voucher-type" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+                    <i class="ti-plus pr-2"></i>@Resources.Voucher.Add @Resources.Voucher.VoucherRent
+                </h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form action="@Url.Action("Store","VoucherType")" method="post" id="form-add-voucher-type">
+                                            
+                    @Html.AntiForgeryToken()
+        
+                    <div class="row">
+        
+                        <div class="col-md-8">
+                            <div class="row">
+                            
+                                <div class="form-group col-md-6">
+                                    <label>@Resources.Voucher.HOD <span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <select name="manager" id="manager" class="form-control" aria-invalid="false">
+                                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                                            @foreach (var item in ViewBag.Manager)
+                                            {
+                                                <option value="@item.PK_Boss_Id">@item.Name</option>
+                                            }
+                                        </select>
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group col-md-6">
+                                    <label>@Resources.Voucher.Company <span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <select name="company" id="company" class="form-control" aria-invalid="false">
+                                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>
+                                        </select>
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group col-md-6">
+                                    <label>@Resources.Voucher.Location <span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <select name="location" id="location" class="form-control" aria-invalid="false">
+                                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>
+                                        </select>
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group col-6">
+                                    <label>@Resources.Voucher.Type <span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <select name="type" id="type" class="form-control" aria-invalid="false">
+                                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Type -- </option>
+                                            <option value="Buy">@Resources.Voucher.Buy</option>
+                                            <option value="Rent">@Resources.Voucher.Rent</option>
+                                            <option value="Other">@Resources.Voucher.Other </option>
+                                        </select>
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-6">
+                                    <label>@Resources.Voucher.Code <span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <input type="text" name="code" id="code" class="form-control" placeholder="@Resources.Voucher.Enter @Resources.Voucher.Code"> <div class="help-block"></div>
+                                    </div>
+                                    <div class="invalid-feedback" id="error-code"></div>
+                                </div>
+        
+                                <div class="form-group col-6">
+                                    <label>@Resources.Voucher.Name<span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <input type="text" name="name" id="name" placeholder="@Resources.Voucher.Enter @Resources.Voucher.Name" class="form-control" > <div class="help-block"></div>
+                                    </div>
+                                    <div class="invalid-feedback" id="error-name"></div>
+                                </div>
+        
+                                <div class="form-group col-6">
+                                    <label>@Resources.Voucher.Month (@Resources.Voucher.Qty)<span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <input 
+                                            type="text"
+                                            name="qtyOfMonth" 
+                                            id="qtyOfMonth" 
+                                            class="form-control"
+                                            placeholder="@Resources.Voucher.QtyInMonth"
+                                            onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="10">
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group col-6">
+                                    <label>@Resources.Voucher.PriceOfMonth<span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <input type="text" name="priceOfMonth" id="priceOfMonth" class="form-control" placeholder="@Resources.Voucher.PriceOfMonth"> <div class="help-block"></div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group col-6">
+                                    <label>@Resources.Voucher.Status <span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <select name="status" id="status" class="form-control" aria-invalid="false">
+                                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Status --</option>
+                                            <option value="Buy">@Resources.Voucher.Buy</option>
+                                            <option value="Rent">@Resources.Voucher.Rent</option>
+                                            <option value="Stop">Stop</option>
+                                        </select>
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group col-6">
+                                    <label>@Resources.Voucher.StartRent<span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <input type="date" name="start" id="start" class="form-control"> <div class="help-block"></div>
+                                    </div>
+                                </div>
+        
+                                @* <div class="form-group col-2"> *@
+                                @*     <label>+ Add Month<span class="text-danger">*</span></label> *@
+                                @*     <div class="controls"> *@
+                                @*         <input type="text" name="end" id="end" class="form-control" maxlength="5"> <div class="help-block"></div> *@
+                                @*     </div> *@
+                                @* </div> *@
+
+                                <div class="form-group col-6">
+                                    <label>@Resources.Voucher.Discount<span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                        <input type="text" name="discount" id="discount" class="form-control" placeholder="Discount" value="0"> <div class="help-block"></div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+        
+                        <div class="col-md-4">           
+                            <div class="text-center">
+                                <img id="image_view_voucher" class="img-fluid img-thumbnail" alt="attachment" width="350" src="~/Content/images/no-image.jpg">
+                                <input type="file" name="choose_voucher" id="choose_voucher" style="display: none">
+                                <input type="hidden" id="photo_voucher" name="photo_voucher"/>
+                            </div>                   
+                        </div>
+        
+                    </div>
+
+                </form>
+            </div>
+            
+          <div class="modal-footer">
+              <button type="button" class="btn btn-block" id="btn-add-voucher-type" style="background: #28a745; color: #fff; font-size: 20px"><i class="ti-save-alt pr-2">
+                 </i>@Resources.Voucher.Add @Resources.Voucher.VoucherRent
+              </button>
+         </div>
+            
+        </div>
+    </div>
+</div>
+<!--Form Create-->

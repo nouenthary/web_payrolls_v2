@@ -1,0 +1,58 @@
+﻿<!--Form Update-->
+<div class="modal fade" id="modal-cut-update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h3 class="modal-title text-primary card-text" id="exampleModalLabel" style="font-weight: 600">
+                    <i class="ti-pencil pr-2"></i>@Resources.Voucher.Edit @Resources.Voucher.Wagededucts
+                </h3>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="#" id="form-update-cut-money">
+                <div class="modal-body">
+
+                    @Html.Hidden("cut-money-id")
+
+                    @Html.Hidden("company-id-edit")
+
+                    <div class="form-group">
+                        @Html.Label(@Resources.Voucher.LeaveType) <span class="text-danger">*</span>
+                        @* @Html.TextBox("leave-type-edit", null, new { @class = "form-control", placeholder = "Leave Type", maxlength = "50", onkeyup = "this.value=this.value.replace(/[^a-zA-Z]/g,'');"}) *@
+                        <select id="leave-type-edit" name="leave-type-edit" class="form-control">
+                            @foreach (var type in ViewBag.DeductMoney)
+                            {
+                                <option value="@type">@type</option>
+                            }
+                        </select>
+                        <div class="invalid-feedback" id="error-type-edit"></div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label(@Resources.Voucher.Percent) <span class="text-danger">*</span>
+                        @Html.TextBox("cut-money-edit", null, new { @class = "form-control", placeholder = @Resources.Voucher.Percent, maxlength = "20" })
+                        <div class="invalid-feedback" id="error-money-edit"></div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label(@Resources.Voucher.Description)
+                        @Html.TextArea("desc-edit", null, new { @class = "form-control", placeholder = @Resources.Voucher.Enter +" " + @Resources.Voucher.Description, rows = "4" })
+                    </div>
+
+                    @Html.AntiForgeryToken()
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-update-money" style="background: #28a745; color: #fff; font-size: 20px">
+                        <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Update @Resources.Voucher.Wagededucts
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Form Update-->

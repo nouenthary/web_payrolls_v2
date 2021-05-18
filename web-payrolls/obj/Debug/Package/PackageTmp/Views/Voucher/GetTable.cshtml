@@ -1,0 +1,218 @@
+@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetAllVoucher_Result>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>    
+        .table {
+            margin-bottom: 0;
+        }
+        
+        .custom-select-form {
+            padding: 2px;
+            border: #dddddd 1px solid;
+        }
+        
+        .label-green {
+            background: #28A745 !important;
+        }
+</style>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize" name="pageSize">
+                @foreach (var item in ViewBag.PageSize)
+                {
+                    if (item.Value == ViewBag.psize + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row justify-content-end pr-3 pb-2">
+            <div class="float-right">
+
+                <div class="btn-group  btn-sm" data-toggle="buttons">
+                    <label class="btn bg-white btn-sm" id="btn-export-voucher">
+                        <input type="radio" name="options" id="option3" autocomplete="off">
+                        <span class="text-inverse">
+                            <i class="ti-printer"></i> @Resources.Voucher.Excel
+                        </span>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+ <div class="table-responsive m-t-0 bg-white">
+            <table class="table table-hover" id="table-voucher">
+                <thead class="text-capitalize text-center">
+                <tr style="display: table; table-layout: fixed;  width: calc(2400px - 0.1em)">
+                    <th style="width:50px">#</th>
+                    <th>@Resources.Voucher.VoucherNo</th>
+                    <th>@Resources.Voucher.Type</th>
+                    <th>@Resources.Voucher.Voucher_</th>
+                    <th>@Resources.Voucher.ItemName</th>
+                    <th>@Resources.Voucher.Qty</th>
+                    <th>@Resources.Voucher.UnitCost</th>
+                    <th>@Resources.Voucher.Amount</th>
+                    <th>@Resources.Voucher.Total</th>
+                    <th>@Resources.Voucher.Discount</th>
+                    <th>@Resources.Voucher.Status</th>
+                    <th>@Resources.Voucher.VoucherDate</th>
+                    <th>@Resources.Voucher.Staff @Resources.Voucher.Voucher_</th>
+                    <th>@Resources.Voucher.Location</th>
+                    <th>@Resources.Voucher.Company</th>
+                    <th>@Resources.Voucher.HOD</th>
+                    
+                    <th>@Resources.Voucher.ConfirmBy</th>
+                    <th>@Resources.Voucher.DateConfirm</th>
+                    <th>@Resources.Voucher.TimeConfirm</th>
+                    
+                    <th>@Resources.Voucher.UpdateBy</th>
+                    <th>@Resources.Voucher.DateUpdate</th>
+                    <th>@Resources.Voucher.TimeUpdate</th>
+                    <th>@Resources.Voucher.ApprovedBy</th>
+                    <th>@Resources.Voucher.ApprovedDate</th>
+                    <th>@Resources.Voucher.ApprovedTime</th>
+                </tr>
+                </thead>
+                <tbody>
+                @{ var rowNo = 0; }
+        
+                @foreach (var item in Model)
+                {
+                    <tr id="@item.PK_Voucher_Id" class="text-center" style="display: table;
+                                                            width: 2400px;
+                                                            table-layout: fixed;">
+                        <td width="50px">@(rowNo += 1)</td>
+                        <td><span class="label label-light-danger"># @item.FK_Voucher_No_Id </span></td>
+                         <td><span class="label label-light-info">@item.Type</span></td>
+                        <td><span>@item.Name</span></td>
+                        <td>@item.Voucher_Name</td>
+                        <td class="text-primary">@item.QTY</td>
+                        <td class="text-primary">$ @item.Unit_Cost</td>
+                        <td class="text-primary">$ @item.Amount</td>
+                        <td class="text-primary">$ @item.Total</td>
+                        <td class="text-primary">@item.Discount %</td>
+                        <td>
+                            @{
+                                if (item.Voucher_Status.Trim() == "Pending")
+                                {
+                                    <span class="label label-success"> @item.Voucher_Status</span>
+                                }
+                                else if (item.Voucher_Status.Trim() == "Reject")
+                                {
+                                    <span class="label label-danger"> @item.Voucher_Status</span>
+                                }
+                                else if (item.Voucher_Status.Trim() == "Done")
+                                {
+                                    <span class="label label-primary" style="background: #28A745"> @item.Voucher_Status</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-info"> @item.Voucher_Status</span>
+                                }
+                            }
+                        </td>
+                        <td>@item.Date_Voucher</td>
+                        <td>@item.Voucher_FK_Staff_Id</td>
+                        <td>@item.Loc_Name</td>
+                        <td>@item.Comp_Name</td>
+                        <td>@item.Manager</td>
+                        
+                        <td>
+                            @if (string.IsNullOrEmpty(item.Confirm_PK_U_Id))
+                            {
+                                <span class="label label-light-info">No Confirm</span>
+                            }
+                            else
+                            {
+                                @item.Confirm_PK_U_Id
+                            }
+                        </td>
+                        <td>
+                            @if (string.IsNullOrEmpty(item.Confirm_Date))
+                            {
+                                <span class="label label-light-info">No Confirm</span>
+                            }
+                            else
+                            {
+                                @item.Confirm_Date
+                            }
+                        </td>
+                        <td>
+                            @if (string.IsNullOrEmpty(item.Confirm_time))
+                            {
+                                <span class="label label-light-info">No Confirm</span>
+                            }
+                            else
+                            {
+                                @item.Confirm_time
+                            }
+                        </td>
+                        
+                        <td>@item.FK_Staff_Id</td>
+                        <td>@item.Date_Voucher</td>
+                        <td>@item.Time_Voucher</td>
+                        
+                        <td>
+                            @if (string.IsNullOrEmpty(item.Aprove_PK_U_Id))
+                            {
+                                <span class="label label-light-info">No Confirm</span>
+                            }
+                            else
+                            {
+                                @item.Aprove_PK_U_Id
+                            }
+                        </td>
+                        
+                        <td>
+                            @if (string.IsNullOrEmpty(item.Aprove_Date))
+                            {
+                                <span><i class="ti-time"></i></span>
+                            }
+                            else
+                            {
+                                @item.Aprove_Date
+                            }
+                        </td>
+                        
+                        <td>
+                            @if (string.IsNullOrEmpty(item.Aprove_Time))
+                            {
+                                <span><i class="ti-time"></i></span>
+                            }
+                            else
+                            {
+                                @item.Aprove_Time
+                            }
+                        </td>
+                        
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+
+<div class="float-left" style="padding: 20px 0;">
+@Resources.Voucher.Showing @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @Resources.Voucher.to @Model.PageCount @Resources.Voucher.of @ViewBag.Records @Resources.Voucher.Entries
+</div>
+        
+<div class="float-right">
+     @Html.PagedListPager(Model, page => Url.Action("Index", new {page}))
+</div>
+  

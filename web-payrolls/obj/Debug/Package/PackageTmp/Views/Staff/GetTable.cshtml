@@ -1,0 +1,431 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetAllStaffs_Result>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+
+    thead, tbody tr {
+        display: table;
+        width: 1700px;
+        table-layout: fixed;
+    }
+
+    thead {
+        width: calc(1700px - 0.1em);
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }
+
+    #frmCheckPassword {
+        border-top: #F0F0F0 2px solid;
+        background: #808080;
+        padding: 10px;
+    }
+
+    .medium_password {
+        color: #b7d60a;
+    }
+
+    .weak_password {
+        color: #12CC1A;
+    }
+
+    .strong_password {
+        color: #0b15cc;
+    }
+
+</style>
+
+<div class="card card-outline-white" style="margin-bottom: 0px;">
+    <div class="card-header">
+        @*<h4 class="m-b-0">
+                <i class="ti-user mr-3"></i>Manage Boss
+            </h4>*@
+        <div class="row">
+            <div class="col-md-3">
+                <div id="Paging" class="pt-2">
+                    Show :
+                    <select class="custom-select-form" id="pageSize" name="pageSize">
+                        @foreach (var item in ViewBag.PageSize)
+                        {
+                            if (item.Value == @ViewBag.psize + "")
+                            {
+                                <option value="@item.Value" selected>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    </select>
+                    entries
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row justify-content-end pr-3 pb-2">
+                    <div class="float-right">
+
+                        <div class="btn-group btn-sm" data-toggle="buttons">
+
+                            <label class="btn btn-sm bg-white" id="btn_export_staff">
+                                <input type="radio" name="options" id="option3" autocomplete="off">
+                                <span class="text-inverse">
+                                    <i class="ti-printer"></i> Excel
+                                </span>
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-white ml-2" style="background: #28a745; color: white" id="btn_modal_staff">
+                            <i class="ti-plus"></i> Add New
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-hover table-bordered table-md" id="table_staff" >
+        <thead>
+            <tr style="border: 1px solid #f3f1f1">
+                <th class="text-center">No.</th>
+                <th class="text-center">HOD</th>
+                <th class="text-center">Company</th>
+                <th class="text-center">Location</th>
+                <th class="text-center">Department</th>
+                <th class="text-center">Position</th>
+                <th class="text-center">Staff ID</th>
+                <th class="text-center">Staff Photo</th>
+                <th class="text-center">Staff ID Photo</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Sex</th>
+                <th class="text-center">Date Of Birth</th>
+                <th class="text-center">Phone</th>
+                <th class="text-center">Address</th>
+                <th class="text-center">Identification Card</th>
+                <th class="text-center">Status</th>
+                @*
+                <th class="text-center">Family Status</th>
+                <th class="text-center">Nationality</th>
+                <th class="text-center">Wife</th>
+                <th class="text-center">Son</th>
+                <th class="text-center">Daughter</th>
+                <th class="text-center">Serail Card</th>
+                <th class="text-center">UserName</th>
+                <th class="text-center">No_Scan</th>
+                <th class="text-center">Sal Type</th>
+                <th class="text-center">Salary</th>
+                <th class="text-center">Card Phone</th>
+                <th class="text-center">Gym</th>
+                <th class="text-center">Accommodation</th>
+                <th class="text-center">Food</th>
+                <th class="text-center">Insurance</th>
+                <th class="text-center">Money Prim</th>
+                <th class="text-center">Travel</th>
+                <th class="text-center">Gasoline</th>
+                <th class="text-center">OT Unit Price</th>
+                <th class="text-center">Work Hour Taget</th>
+                <th class="text-center">Relax Hour</th>
+                <th class="text-center">Day Off </th>
+                <th class="text-center">AL</th>
+                <th class="text-center">PH</th>
+                <th class="text-center">Sick</th>
+                <th class="text-center">UPL</th>
+                <th class="text-center">AB</th>
+                <th class="text-center">CM</th>
+                <th class="text-center">Year</th>
+                <th class="text-center">Month</th>
+                *@
+
+                <th class="text-center">Bank Name</th>
+                <th class="text-center">Bank Number</th>
+                <th class="text-center">Join Date</th>
+                <th class="text-center">End Date</th>
+                <th class="text-center">Updated By</th>
+                <th class="text-center">Date Update</th>
+                <th class="text-center">Time Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+
+            <tr id="@item.PK_Staff_Id" class="@item.PK_Sal_Type_Id" staff-photo="@item.Photo" staff-id-card-photo="@item.Identify_Picture" data-staff-status="@item.Staff_Status" data-identify-picture="@item.Identify_Picture">
+
+                <td class="text-center">@(rowNo += 1)</td>
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Comp_Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Loc_Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Deppart_Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Pos_Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Staff_Id_Card)
+                </td>
+                <td class="text-center">
+                    @if (item.Photo == null)
+                    {
+                        <img id="image_view_has_ann"
+                             class="img-fluid img-thumbnail"
+                             alt="attachment"
+                             height="50"
+                             width="50"
+                             src="~/Content/images/no-image.jpg"
+                             onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'">
+                    }
+                    else if (item.Photo != "")
+                    {
+                        <img id="image_view_no_ann"
+                             class="img-fluid img-thumbnail"
+                             alt="attachment"
+                             height="50"
+                             width="50"
+                             src="~/Content/Uploads/Staff_Photoes/@item.Photo"
+                             onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'">
+                    }
+                </td>
+                <td class="text-center">
+                    @if (item.Identify_Picture == null)
+                    {
+                        <img id="image_view_has_ann"
+                             class="img-fluid img-thumbnail"
+                             alt="attachment"
+                             height="50"
+                             width="50"
+                             src="~/Content/images/no-image.jpg"
+                             onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'">
+                    }
+                    else if (item.Identify_Picture != "")
+                    {
+                        <img id="image_view_no_ann"
+                             class="img-fluid img-thumbnail"
+                             alt="attachment"
+                             height="50"
+                             width="50"
+                             src="~/Content/Uploads/Staff_Photoes/@item.Identify_Picture"
+                             onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'">
+                    }
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Staff_Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Staff_DOB)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Tell)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Identity_Card)
+                </td>
+                <td class="text-center">
+                    @if (item.Staff_Status == "Enable")
+                    {
+                        <span class="label-success label">
+                            @item.Staff_Status
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="label-danger label">
+                            @item.Staff_Status
+                        </span>
+                    }
+                </td>
+
+
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Marry_Status)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Nationality)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Wife)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Son)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Daughter)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Serail_Card)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.No_Scan)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Sal_Type)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Card_Phone)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Gym)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Accommodation)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Food)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.insurance)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Money_Prim)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Travel)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Gasoline)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.OT_Unit_Price)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Work_Hour_Taget)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Relax_Hour)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Off_Day)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.AL_Day)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.PH_Day)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.Sick)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.UPL)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.AB)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.CM)
+                </td>
+                @*<td class="text-center" style="display: none;">
+            @Html.DisplayFor(modelItem => item.Num_Year)
+        </td>
+        <td class="text-center" style="display: none;">
+            @Html.DisplayFor(modelItem => item.Num_Month)
+        </td>*@
+
+
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Account_Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Account_Number)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Join_date)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.End_Date)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Staff_Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Date_Update)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Time_Update)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.FK_Boss_Id)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.FK_Comp_Id)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.FK_Loc_Id)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.FK_Depart_Id)
+                </td>
+                <td class="text-center" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.FK_Pos_Id)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div class="float-left" style="padding: 20px 0px;">
+    Showing @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) to @Model.PageCount of @ViewBag.Records entries
+</div>
+
+<div class="float-right"> @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+
+<div class="modal fade" id="Modal-View-Photo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="image-card-view-photo"
+                     class="card-img-top"
+                     alt="Card image cap">
+            </div>
+
+        </div>
+    </div>
+</div>

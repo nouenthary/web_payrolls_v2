@@ -1,0 +1,147 @@
+@using PagedList.Mvc
+@using web_payrolls.Models
+@model PagedList.IPagedList<web_payrolls.Models.GetAllMeasure_Result>
+
+@{
+    var permission = new Permission();
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }
+    
+    .table-header-shadow { 
+        box-shadow: 0 .20rem 1rem rgba(0,0,0,.10);
+     }
+      
+</style>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize" name="pageSize">
+                @foreach (var item in ViewBag.PageSize)
+                {
+                    if (item.Value == ViewBag.psize + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row justify-content-end pr-3 pb-2">
+            <div class="float-right">
+
+                <div class="btn-group btn-sm" data-toggle="buttons">
+
+                    <label class="btn btn-sm bg-white" id="btn-export-measure">
+                        <input type="radio" name="options" id="option3" autocomplete="off">
+                        <span class="text-inverse">
+                            <i class="ti-printer"></i> @Resources.Voucher.Excel
+                        </span>
+                    </label>
+                </div>
+                
+                @if (permission.Permissions.View_Measure == 1)
+                {
+                    <button type="button" class="btn btn-sm" style="background: #28a745; color: white" id="btn-create-measure">
+                        <i class="ti-plus"></i> @Resources.Voucher.Add New
+                    </button>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-hover table-md text-center" id="table-measure">
+        <thead class="table-header-shadow">
+            <tr style="border: 1px solid #f3f1f1;">
+                <th>#</th>
+                <th>@Resources.Voucher.HOD</th>
+                <th>@Resources.Voucher.ProductMeasure</th>
+                <th>@Resources.Voucher.Description</th>
+                <th>@Resources.Voucher.UpdateBy</th>
+                <th>@Resources.Voucher.DateUpdate</th>
+                <th>@Resources.Voucher.TimeUpdate</th>
+                <th class="text-center">@Resources.Voucher.Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+                <tr
+                    id="@item.Pk_Measu_Id"
+                    data-hodId="@item.PK_Boss_Id"
+                    data-name="@item.Measu_Name"
+                    data-desc="@item.Descr"
+                >
+
+                    <td >@(rowNo += 1)</td>
+                    
+                    <td >@item.Name</td>
+                    
+                    <td >@item.Measu_Name</td>
+                    
+                    <td >@item.Descr</td>
+
+                    <td >@item.User_Update</td>
+
+                    <td >@item.Date_Update</td>
+
+                    <td>@item.Time_Update</td>
+                    
+                    <td class="text-center">
+                        <button class="btn btn-default btn-sm" id="btn-edit-measure">
+                            <i class="ti-pencil"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div class="float-left" style="padding: 20px 0;">
+    @Resources.Voucher.Showing 
+    @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 
+    @Resources.Voucher.to 
+    @Model.PageCount 
+    @Resources.Voucher.of 
+    @ViewBag.Records 
+    @Resources.Voucher.Entries
+</div>
+
+<div class="float-right">
+     @Html.PagedListPager(Model, page => Url.Action("Index", new {page}))
+</div>

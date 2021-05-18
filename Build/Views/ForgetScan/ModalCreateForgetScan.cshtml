@@ -1,0 +1,57 @@
+﻿<!--Form Create-->
+<div class="modal fade" id="modal-add-forget" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h3 class="modal-title text-primary card-text" id="exampleModalLabel" style="font-weight: 600">
+                    <i class="ti-plus pr-2"></i>@Resources.Voucher.Add @Resources.Voucher.Forget
+                </h3>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="#" id="form-add-forget">
+                <div class="modal-body">
+
+
+                    <div class="form-group">
+                        <img style="height: 270px" width="100%" src="/Content/images/no-image.jpg" alt="me" class="img-thumbnail" id="photo-view-forget">
+                        <input type="file" id="photo_fotget" style="display: none" />
+                        <input type="hidden" id="txt_photo_forget" name="txt_photo_forget" />
+                    </div>
+
+                    @Html.Hidden("txt_sid_forget")
+
+                   
+                    <div class="form-group">
+                        <label for="">@Resources.Voucher.Date<span class="text-danger">*</span></label><br />
+                        <input type="date" class="form-control" id="txt_date_forget" name="txt_date_forget">
+                        <div class="invalid-feedback" id="error-date-forget"></div>
+                    </div>
+
+                    <div class="form-group" id="form-add-price">
+                        <label for="">@Resources.Voucher.Price<span class="text-danger">*</span></label><br />
+                        <input type="text" class="form-control" id="txt_price_forget" name="txt_price_forget" value="1">
+                        <div class="invalid-feedback" id="error-price-forget"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">@Resources.Voucher.Description</label>
+                        <textarea class="form-control" id="desc_forget" name="desc_forget" placeholder="@Resources.Voucher.Description" rows="4"></textarea>
+                    </div>
+
+                    @Html.AntiForgeryToken()
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-save-forget" style="background: #28a745; color: #fff; font-size: 20px">
+                        <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Add @Resources.Voucher.Forget
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Form Create-->

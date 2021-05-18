@@ -1,0 +1,70 @@
+﻿<!--Form Create-->
+<div class="modal fade" id="modal_position_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="ti-user pr-2"></i>Add Department Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="boss">Boss:</label>
+                                <select name="ddlAddBoss" id="ddlAddBoss" class="form-control" aria-invalid="false">
+                                    <option value="0">All Bosses</option>
+                                    @foreach (var boss in ViewBag.Manager)
+                                    {
+                                        <option value="@boss.PK_Boss_Id">@boss.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="staff_transaction">Company:</label>
+                                <select id="ddlAddCompany" name="ddlAddCompany" class="form-control">
+                                    <option value="0">All Companies</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="comp_name">Location:</label>
+                                <select id="ddlAddLocation" name="ddlAddLocation" class="form-control">
+                                    <option value="0">All Locations</option>
+                                </select>
+                                <div class="invalid-feedback" id="msg_location"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="comp_name">Department: <span class="text-danger">*</span></label>
+                                <select id="ddlAddDepartment" name="ddlAddDepartment" class="form-control">
+                                    <option value="0">All Departments</option>
+                                </select>
+                                <div class="invalid-feedback" id="msg_dept_add"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comp_name">Position Name: <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="txbPosition" name="txbPosition" placeholder="Position name..." required maxlength="50">
+                        <div class="invalid-feedback" id="msg_position_Name"></div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="ti-close pr-2"></i>Close</button>
+                    <button type="button" class="btn" id="btn_save_position" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Form Create-->

@@ -1,0 +1,248 @@
+@{
+   ViewBag.Title = "Product Measure";
+   ViewBag.Page = "Product Measure";
+}
+
+@* Card Filter *@
+<div class="card" style="margin-bottom: 0;border-top: #428bca 3px solid">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide</a>
+        </div>
+        <h4 class="card-title m-b-0 card-text"><i class="ti-filter"></i> Measure</h4>
+    </div>
+    <div class="card-body collapse show b-t">
+        <div>
+            <div class="row">
+                
+                <div class="form-group col-xlg-3 col-md-4">
+                    <label>HOD</label>
+                    <select id="txt_bid" name="txt_bid" class="form-control">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+
+                        @foreach (var item in ViewBag.Manager)
+                        {
+                            if (item.PK_Boss_Id + "" == ViewData["ManagerId"] + "")
+                            {
+                                <option value="@item.PK_Boss_Id" selected="selected">@item.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.PK_Boss_Id">@item.Name</option>
+                            }
+                        }
+                        
+                    </select>
+                </div>
+                
+                <div class="form-group col-xlg-2 col-md-4">
+                     <button class="btn btn-info" id="btn-search-measure" style="display: none">
+                        <i class="ti-search"></i> @Resources.Voucher.Searchhere
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+@* Card Filter *@
+
+<!---->
+<div id="show-measure"></div>
+@Html.AntiForgeryToken()
+<!---->
+@Html.Partial("ModalCreateMeasure")
+@Html.Partial("ModalUpdateMeasure")
+
+@section Scripts
+{
+    <script>
+    $(function() {
+          let bid =$('#txt_bid');  
+          
+          function GetSearchObject() {
+              return {
+                  bid: bid.val(),
+              }
+          }
+          
+          // Load
+          function LoadMeasure() {
+              let objSearch = GetSearchObject();
+              $('#show-measure').load('/Measure/GetTable', {
+                  ...objSearch,
+                  pageSize: $('#pageSize').val()
+              });
+          }        
+          // load   
+          LoadMeasure();
+         
+          $('#btn-search-measure').click(function (){
+              LoadMeasure();
+          });
+          
+           //
+          $(document).on('change', '#show-measure #pageSize', function () {
+              let objSearch = GetSearchObject();
+              $('#show-measure').load('/Measure/GetTable', {
+                  pageSize: $(this).val(),
+                  ...objSearch
+              });
+          });
+          //
+          $(document).on('click', '#show-measure a', function (e) {
+              try {
+                  let link = $(this).attr("href").split('=');
+                  let objSearch = GetSearchObject();
+                  $('#show-measure').load('/Measure/GetTable', {
+                      pageSize: $('#pageSize').val(),
+                      page: link[1],
+                      ...objSearch
+                  });
+                  e.preventDefault();
+              } catch (ex) {
+              }
+          });
+          
+           // Load 
+                   
+          $(document).on('click', '#show-measure #btn-export-measure', function () {
+              $('#table-measure').csvExport();
+          });
+          
+          // utils 
+            
+            //
+            function setClassError(id) {
+                $(id).attr('class', 'form-control is-invalid');
+            }
+    
+            //
+            function setRemoveError(id) {
+                $(id).attr('class', 'form-control');
+            }
+    
+            //
+            function onChange(id) {
+                $(id).change(function () {
+                    setRemoveError(id);
+                });
+            }
+          
+          // utils 
+          
+          //show modal create
+          $(document).on('click','#btn-create-measure',function() {
+            $('#modal-add-measure').modal({show: true});
+          });
+          
+          onChange('#measure');
+          onChange('#hodId');
+            
+          // click create
+          $(document).on('click','#btn-save-measure',function() {
+                let form = $('#form-add-measure').serializeArray();
+                
+                for (let item in form) {
+                    if(form[item].name === "desc"){
+                        setRemoveError('#desc');
+                    }
+                    else if (form[item].value === "") {
+                        setClassError('#' + form[item].name);
+                        return false;
+                    }
+                }
+              
+                $.ajax({
+                    type: 'POST',
+                    url: "/Measure/Create",
+                    data: form,
+                    success: function (response) {
+                        if(response.error){
+                            setClassError('#measure');
+                            $('#error-measure').text(response.error);
+                            return false;
+                        }
+                        swal({
+                            title: response,                       
+                            type: "success",
+                            timer: 1500
+                        });
+    
+                        $('#modal-add-measure').modal('hide');
+                        LoadMeasure();
+                        $('#form-add-measure').get(0).reset();
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });                            
+          });   
+          
+          // update 
+          $(document).on('click','#btn-edit-measure',function() {
+             let row = $(this).closest('tr');
+             
+             $('#txtMeasureId').val(row.attr('id'));
+             $('#txtHodId').val(row.attr('data-hodId'));
+             $('#txtMeasure').val(row.attr('data-name'));
+             $('#txtDesc').val(row.attr('data-desc'));
+             $('#modal-update-measure').modal("show");
+          });
+          
+          // click update
+          $('#btn-update-measure').click(function() {
+            let form = $('#form-update-measure').serializeArray();
+            
+            for (let item in form) {
+                if(form[item].name === "txtDesc"){
+                    setRemoveError('#txtDesc');
+                }
+                else if (form[item].value === "") {
+                    setClassError('#' + form[item].name);
+                    return false;
+                }
+            }    
+            
+            $.ajax({
+                type: 'POST',
+                url: "/Measure/Update",
+                data: form,
+                success: function (response) {
+                    if(response.error){
+                        setClassError('#txtMeasure');
+                        $('#error-measure-edit').text(response.error);
+                        return false;
+                    }
+                    swal({
+                        title: response,                       
+                        type: "success",
+                        timer: 1500
+                    });
+
+                    $('#modal-update-measure').modal('hide');
+                    LoadMeasure();
+                    $('#form-update-measure').get(0).reset();
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+            
+          });
+          
+         // select 2  
+         function Select2(ctn){
+            $(ctn).select2({ width: '100%', placeholder: "Select an Option", allowClear: true });
+         }
+         // call
+         Select2('#txt_bid');
+         
+         // change
+         bid.change(function (){
+            LoadMeasure();
+         });
+         
+    });
+   </script>
+}

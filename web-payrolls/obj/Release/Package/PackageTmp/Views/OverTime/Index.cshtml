@@ -1,0 +1,1012 @@
+﻿@{
+    ViewBag.Title = @Resources.Voucher.Overtime;
+    ViewBag.Page = @Resources.Voucher.Overtime;
+}
+
+<style>
+    .clockpicker-popover {
+        z-index: 999999 !important;
+    }
+</style>
+
+<div class="card" style="margin-bottom: 0">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse" id="boss-collaspe"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide</a>
+        </div>
+        <h4 class="card-title m-b-0 card-text">
+            <i class="ti-filter"></i> @Resources.Voucher.Overtime
+        </h4>
+    </div>
+    <div class="card-body collapse show b-t" id="set-boss-collaspe">
+        <div>
+            <div class="row">
+
+                @Html.AntiForgeryToken()
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+
+                    <div class="input-group">
+
+                        <select id="boss_id_search" name="boss_id_search" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                            @foreach (var item in ViewBag.GetBoss)
+                            {
+                                <option value="@item.PK_Boss_Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+
+                        <select id="company_id_search" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+
+                        <select id="location_id_search" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+                        <select id="dept_id_search" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+
+                        <select id="salaryType" name="salaryType" class="form-control form-control-sm">
+                            <option value="">--@Resources.Voucher.Choose  @Resources.Voucher.Salary @Resources.Voucher.Type --</option>
+                            <option value="Daily">Daily</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Bills">Bills</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+
+                        <select id="select_status" name="select_status" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Status --</option>
+                            <option value="Done">@Resources.Voucher.Done</option>
+                            <option value="Pending">@Resources.Voucher.Pending</option>
+                            <option value="Reject">@Resources.Voucher.Rejected</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+                        <input type="text" id="staff_name_search" class="form-control form-control-sm" placeholder="@Resources.Voucher.Search @Resources.Voucher.Name ...." autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <div class="input-group">
+                        <input type="text" id="card_id_search" class="form-control form-control-sm" placeholder="@Resources.Voucher.Search @Resources.Voucher.idcard ..." autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-3 col-sm-12">
+                    <button type="button" class="btn btn-info btn-sm" id="btn-search-staff">
+                        <i class="ti-search pr-2"></i>@Resources.Voucher.Searchhere
+                    </button>
+                </div>
+
+            </div>
+        </div>
+         
+        @Html.Partial("Dashboard")
+       
+    </div>
+</div>
+
+
+<ul class="nav nav-tabs customtab bg-white" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link " data-toggle="tab" href="#staff_ot" role="tab">
+            <span class="hidden-sm-up"><i class="ti-home"></i></span>
+            <span class="hidden-xs-down text-uppercase">@Resources.Voucher.ListAllStaff </span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#ot" role="tab">
+            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+            <span class="hidden-xs-down text-uppercase">@Resources.Voucher.Overtime</span>
+        </a>
+    </li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane " id="staff_ot" role="tabpanel">
+        <div id="show-staff-ot"></div>
+    </div>
+    <div class="tab-pane active" id="ot" role="tabpanel">
+        <div id="show-ot"></div>
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("ModalAddOT")
+
+@Html.Partial("ModalUpdateOT")
+
+@Html.Partial("~/Views/InputMoney/MD_Add_Input_Money.cshtml")
+@Html.Partial("~/Views/InputMoney/MD_Update.cshtml")
+
+@Html.Partial("~/Views/ForgetScan/ModalCreateForgetScan.cshtml")
+@Html.Partial("~/Views/ForgetScan/MDUpdateForgot.cshtml")
+
+@section Javascript{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+}
+
+@section Scripts{
+    <script>
+        
+        $(function () {
+            let token = $('input[name="__RequestVerificationToken"]').val();
+            let objToken = {__RequestVerificationToken : token};
+           // New Code
+            $('#show-staff-ot').load('/OverTime/GetTable',
+                {
+                    bid: $('#boss_id_search').val(),
+                    cid: $('#company_id_search').val(),
+                    lid: $('#location_id_search').val(),
+                    did: $('#dept_id_search').val(),
+                    sname: $('#staff_name_search').val(),
+                    idcard: $('#card_id_search').val(),
+                    pageSize: $('#pageSize').val(),
+                    salaryType: $('#salaryType').val()
+                }
+            );
+
+            function searchStaff() {
+                $('#show-staff-ot').load('/OverTime/GetTable', {
+                    bid: $('#boss_id_search').val(),
+                    cid: $('#company_id_search').val(),
+                    lid: $('#location_id_search').val(),
+                    did: $('#dept_id_search').val(),
+                    sname: $('#staff_name_search').val(),
+                    idcard: $('#card_id_search').val(),
+                    pageSize: $('#pageSize').val(),
+                    salaryType: $('#salaryType').val()
+                });
+            }
+
+            $('#btn-search-staff').click(function () {
+                searchStaff();
+                LoadTableOT();                
+            });
+
+            $(document).on('change', '#show-staff-ot #pageSize', function () {
+                $('#show-staff-ot').load('/OverTime/GetTable', {
+                    bid: $('#boss_id_search').val(),
+                    cid: $('#company_id_search').val(),
+                    lid: $('#location_id_search').val(),
+                    did: $('#dept_id_search').val(),
+                    sname: $('#staff_name_search').val(),
+                    idcard: $('#card_id_search').val(),
+                    pageSize: $('#pageSize').val(),
+                    salaryType: $('#salaryType').val()
+                });
+            });
+
+            $(document).on('click', '#show-staff-ot a', function (e) {
+                try {
+                    let link = $(this).attr("href").split('=');
+                    $('#show-staff-ot').load('/OverTime/GetTable', {
+                        bid: $('#boss_id_search').val(),
+                        cid: $('#company_id_search').val(),
+                        lid: $('#location_id_search').val(),
+                        did: $('#dept_id_search').val(),
+                        sname: $('#staff_name_search').val(),
+                        idcard: $('#card_id_search').val(),
+                        page: link[1],
+                        pageSize: $('#pageSize').val(),
+                        salaryType: $('#salaryType').val()
+                    });
+                    e.preventDefault()
+                } catch (ex) { }
+            });
+            // New Code
+
+            // Load Table OT
+            function LoadTableOT() {
+                $('#show-ot').load('/OverTime/GetTableOverTime', {
+                    bid: $('#boss_id_search').val(),
+                    cid: $('#company_id_search').val(),
+                    lid: $('#location_id_search').val(),
+                    did: $('#dept_id_search').val(),
+                    pageSize: $('#pageSizeOT').val(),
+                    status: $('#select_status').val(),
+                });
+            }
+
+            LoadTableOT();
+
+            $(document).on('click', '#show-ot a', function (e) {
+                try {
+                    let link = $(this).attr("href").split('=');
+                    $('#show-ot').load('/OverTime/GetTableOverTime', {
+                        bid: $('#boss_id_search').val(),
+                        cid: $('#company_id_search').val(),
+                        lid: $('#location_id_search').val(),
+                        did: $('#dept_id_search').val(),
+                        page: link[1],
+                        pageSize: $('#pageSizeOT').val(),
+                        status: $('#select_status').val(),
+                    });
+                    e.preventDefault()
+                } catch (ex) { }
+            });
+
+            $(document).on('change', '#show-ot #pageSizeOT', function () {
+                $('#show-ot').load('/OverTime/GetTableOverTime', {
+                    bid: $('#boss_id_search').val(),
+                    cid: $('#company_id_search').val(),
+                    lid: $('#location_id_search').val(),
+                    did: $('#dept_id_search').val(),
+                    pageSize: $('#pageSizeOT').val(),
+                    status: $('#select_status').val(),
+                });
+            });
+
+            // Load Table OT            
+
+            // export file
+            $(document).on('click', '#btn-export-ot', function () {
+                $('#table-ot').csvExport();
+            });
+
+            $(document).on('click', '#btn-export-input-money', function () {
+                $('#table-input-money').csvExport();
+            });
+
+            // GetOverTimeOfMonth
+            function GetOverTimeOfMonth(){
+                $.ajax({
+                    type: "POST",
+                    url: "/OverTime/GetOverTimeOfMonth",
+                    data: objToken,
+                    success: function (response){
+                        let {employees, hour, padding, rejected} = response;
+                        $('#lblEmployee').text(employees);
+                        $('#lblHour').text(hour);
+                        $('#lblPadding').text(padding);
+                        $('#lblRejected').text(rejected);
+                    }
+                });
+            }   
+            GetOverTimeOfMonth();
+            
+            // btn add ot
+            $(document).on('click', '#button-add-ot', function () {
+                $('#staff_id').val($(this).attr('data-id'));
+                $('#unit_price').val($(this).attr('data-ot'));
+                $('#modal-add-ot').modal('show');
+            });
+    
+            // boss Filter
+            $('#boss_id_search').change(function () {
+                let data = {
+                    boss_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $('#location_id_search').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                $('#dept_id_search').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>');
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetCompany",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                        }
+                        $('#company_id_search').html(option);
+                    },
+                    error: function () {
+                        $('#company_id_search').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>');
+                    }
+                });
+            });
+
+            // filter company
+            $('#company_id_search').change(function () {
+                let data = {
+                    com_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $('#location_id_search').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                $('#dept_id_search').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>');
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetLocation",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Location_Id + '">' + response[i].Loc_Name + '</option>';
+                        }
+                        $('#location_id_search').html(option);
+                    },
+                    error: function () {
+                        $('#location_id_search').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                    }
+                });
+            });
+
+            //Filter Location
+            $('#location_id_search').change(function () {
+                let data = {
+                    loc_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetDepartment",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Depart_Id + '">' + response[i].Deppart_Name + '</option>';
+                        }
+                        $('#dept_id_search').html(option);
+                    },
+                    error: function () {
+                        $('#dept_id_search').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Department --</option>');
+                    }
+                });
+
+            });
+
+            // convert secends
+            function toSecends(time) {
+                let parts = time.split(':');
+                let time_total = parseInt(parts[0]) + (parseInt(parts[1]) / 60);
+                return time_total;
+            }
+
+            // calculate Time
+            function calculateTime(start, end) {
+                return parseFloat(toSecends(end) - toSecends(start));
+            }
+
+            //
+            function setClassError(id) {
+                $(id).attr('class', 'form-control is-invalid');
+            }
+
+            //
+            function setRemoveError(id) {
+                $(id).attr('class', 'form-control');
+            }
+
+            //
+            function onChange(id) {
+                $(id).change(function () {
+                    setRemoveError(id);
+                });
+            }
+
+            function protectedControl(control) {
+                $(control).bind("cut copy paste drag drop", function (e) {
+                    e.preventDefault();
+                });
+            }
+
+            function OnlyNumber(control) {
+                protectedControl(control);
+
+                $(control).keypress(function (event) {
+                    let value = event.target.value;
+
+                    if (value[0] === '.') {
+                        return false;
+                    }
+
+                    if (value[0] === '0') {
+                        $(control).val(value.substring(1, value.length))
+                    }
+
+                    if ((event.which !== 46 || $(this).val().indexOf('.') !== -1) && (event.which < 48 || event.which > 57)) {
+                        event.preventDefault();
+                    }
+                });
+            }
+
+            // Clook Picker
+            function ClookPicker(ctx) {
+                $(ctx).clockpicker({
+                    donetext: 'Done',
+                    todayHighlight: true,
+                    todayBtn: "linked",
+                    format: "yyyy-m-d",
+                    autoclose: true,
+                    'default': 'now',
+                });
+                
+            }
+
+            ClookPicker('#start_ot');
+            ClookPicker('#end_ot');
+            ClookPicker('#start_ot_edit');
+            ClookPicker('#end_ot_edit');
+
+            function checkFormatTime(time) {
+                let regexp = /^\d\d:\d\d$/;
+                return regexp.test(time);
+            }         
+
+            OnlyNumber('#unit_price');
+            OnlyNumber('#unit_price_ot_edit');
+            //add ot
+            let today = moment();
+                            
+            $('#date_ot').val(today.format('YYYY-MM-DD'));
+            
+            $('#btn-add-ot').click(function () {
+                               
+                let staff_id = $('#staff_id').val();
+                let date = $('#date_ot').val();
+                let start_time = $('#start_ot').val();
+                let end_time = $('#end_ot').val();
+
+                let amount_time = calculateTime(start_time, end_time);
+                let unit_price = $('#unit_price').val();
+                let total_price = parseFloat(amount_time * unit_price);
+                let desc = $('#desc').val();
+                            
+                if (staff_id === '') {
+                    return false;
+                }
+                else if (date === '') {
+                    setClassError('#date_ot');
+                    return false;
+                }
+                else if (start_time === '') {
+                    setClassError('#start_ot');
+                    return false;
+                }
+                else if (end_time === '') {
+                    setClassError('#end_ot');
+                    return false;
+                }
+                // Check time format
+                if (checkFormatTime(start_time) === false) {
+                    setClassError('#start_ot');
+                    return false;
+                }
+                else if (checkFormatTime(end_time) === false) {
+                    setClassError('#end_ot');
+                    return false;
+                }
+
+                let start = start_time;
+                let end = end_time;
+
+                start = start.split(':');
+                end = end.split(':');
+
+               // check time 
+                if (start[0] > 23 || start[1] > 59) {
+                    setClassError('#start_ot');
+                    return false;
+                } else if (end[0] > 23 || end[1] > 59) {
+                    setClassError('#end_ot');
+                    return false;
+                }
+
+                let s = parseInt(start[0] * 3600 + start[1] * 60 + start[0]);
+                let e = parseInt(end[0] * 3600 + end[1] * 60 + end[0]);
+
+                if (s > e) {
+                    setClassError('#end_ot');
+                    return false;
+                } else if (s === e) {
+                    setClassError('#end_ot');
+                    return false;
+                }
+
+                let data = {
+                    staff_id,
+                    date,
+                    start_time,
+                    end_time,
+                    amount_time : parseFloat(amount_time).toFixed(2),
+                    unit_price,
+                    total_price : parseFloat(total_price).toFixed(2),
+                    desc,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+                
+                $.ajax({
+                    url: '@Url.Action("AddOverTime", "OverTime")',
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        if (response.error) {
+                            swal("Cancelled", response.error, "cancelled");
+                        }
+                        $('#modal-add-ot').modal("hide");
+
+                        LoadTableOT();
+                        searchStaff();
+
+                        SetAlert(
+                            window.location.pathname,
+                            "Add OT",
+                            'OT_'+ response.id 
+                        );
+                        
+                        $('#form-ad-ot').get(0).reset();
+                        GetOverTimeOfMonth();
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            onChange('#date_ot');
+            onChange('#start_ot');
+            onChange('#end_ot');
+
+            //CONFIRM
+            $(document).on('click', '#show-ot #BTN_COMFIRM', function () {           
+                let id = $(this).attr('data-id');
+                
+                swal({
+                    title: "Are you sure confirm ?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: "No, cancel it!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                    function (isConfirm) {
+                        ConfirmOT(isConfirm, id, 'Done');  
+                    }
+                );
+                GetOverTimeOfMonth();
+            });
+
+            // REJECT
+            $(document).on('click', '#show-ot #BTN_NO', function () {
+                let id = $(this).attr('data-id');
+
+                swal({
+                    title: "Are you sure confirm ?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: "No, cancel it!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                    function (isConfirm) {
+                        ConfirmOT(isConfirm, id, 'Reject');
+                        GetOverTimeOfMonth();
+                    }
+                );
+            });
+
+            //function Confirm OT  
+            function ConfirmOT(isConfirm, id, status) {
+                if (isConfirm) {
+
+                    let form = {
+                        ot_id: id,
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                        status: status
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/OverTime/SetStatus",
+                        data: form,
+                        success: function (response) {
+                            swal({
+                                title: "Success",
+                                text: response,
+                                type: "success",
+                                timer: 1500
+                            });
+
+                            if (status === "Done") {
+                                UpdateStatusNotification("Done", 'OT_'+id);
+                            } else if (status === "Reject") {
+                                UpdateStatusNotification("Reject", 'OT_'+id);
+                            }
+                           
+                            LoadTableOT();
+                        }
+                    });
+
+                }
+                else {
+                    swal({
+                        title: "Cancelled",
+                        text: "Your cancel confirm :)",
+                        type: "error",
+                        timer: 1500
+                    })
+                }
+            }
+           
+            // on click table edit
+            $(document).on('click', '#BTN_EDIT_OT', function () {
+                let row = $(this).closest('tr');
+
+                setRemoveError('#start_ot_edit');
+                setRemoveError('#end_ot_edit');
+
+                $('#over_time_id').val($(row).attr('id'));
+                $('#date_ot_edit').val($(row).attr('data-date'));
+                $('#start_ot_edit').val($(row).attr('data-start'));
+                $('#end_ot_edit').val($(row).attr('data-end'));
+                $('#desc_edit').val($(row).attr('data-desc'));
+                $('#unit_price_ot_edit').val($(row).attr('data-unit-price'));
+
+                $('#modal-update-ot').modal('show');
+            });
+
+            onChange('#date_ot_edit');
+            onChange('#start_ot_edit');
+            onChange('#end_ot_edit');
+
+            OnlyNumber('#unit_price_ot_edit');
+            // on update over time
+            $('#btn-udpate-ot').click(function () {
+
+                let overtime_id = $('#over_time_id').val();
+                let date = $('#date_ot_edit').val();
+                let start_time = $('#start_ot_edit').val();
+                let end_time = $('#end_ot_edit').val();
+                let desc = $('#desc_edit').val();
+
+                let amount_time = calculateTime(start_time, end_time);
+                
+                let unit_price = $('#unit_price_ot_edit').val();
+                let total_price = parseFloat(amount_time * unit_price);
+                
+                if (overtime_id === '') {
+                    return false;
+                }
+                else if (date === '') {
+                    setClassError('#date_ot_edit');
+                    return false;
+                }
+                else if (start_time === '') {
+                    setClassError('#start_ot_edit');
+                    return false;
+                }
+                else if (end_time === '') {
+                    setClassError('#end_ot_edit');
+                    return false;
+                }
+
+                let start = start_time;
+                let end = end_time;
+
+                start = start.split(':');
+                end = end.split(':');
+                // check time
+                if (start[0] > 23 || start[1] > 59) {
+                    setClassError('#start_ot_edit');
+                    return false;
+                } else if (end[0] > 23 || end[1] > 59) {
+                    setClassError('#end_ot_edit');
+                    return false;
+                }
+
+                let s = parseInt(start[0] * 3600 + start[1] * 60 + start[0]);
+                let e = parseInt(end[0] * 3600 + end[1] * 60 + end[0]);
+                // check time format
+                if (checkFormatTime(start_time) === false) {
+                    setClassError('#start_ot_edit');
+                    return false;
+                }
+                else if (checkFormatTime(end_time) === false) {
+                    setClassError('#end_ot_edit');
+                    return false;
+                }
+
+                if (s > e) {
+                    setClassError('#end_ot_edit');
+                    return false;
+                } else if (s === e) {
+                    setClassError('#end_ot_edit');
+                    return false;
+                }
+
+                let data = {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    overtime_id,
+                    date,
+                    start_time,
+                    end_time,
+                    desc,
+                    amount_time : parseFloat(amount_time).toFixed(2),
+                    unit_price,
+                    total_price : parseFloat(total_price).toFixed(3)
+                };
+                
+                $.ajax({
+                    url: '@Url.Action("UpdateOT", "OverTime")',
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        console.log(response);
+                        $('#modal-update-ot').modal("hide");
+
+                        LoadTableOT();
+                        searchStaff();
+                        GetOverTimeOfMonth();
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            function SetAlert(link, note, optionKey) {
+
+                let data = {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    link,
+                    note,
+                    optionKey:optionKey
+                };
+
+                $.ajax({
+                    url: '@Url.Action("SetAlert", "Notification")',
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function UpdateStatusNotification(Status ,optionKey) {
+                let data = {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    status: Status,
+                    optionKey : optionKey
+                };
+
+                 $.ajax({
+                    url: '@Url.Action("UpdateStatus", "Notification")',
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        console.log(response);
+                    },                 
+                });
+            }
+
+            // Function
+            function AutoComplete(control, url) {
+                $(control).typeahead({
+                    minLength: 1,
+                    name: control,
+                    highlight: false,
+                    source: function (request, response) {
+                        $.ajax({
+                            url: url,
+                            data: {
+                                value: request,
+                                __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                            },
+                            type: "GET",
+                            contentType: "json",
+                            success: function (data) {
+                                response(data);
+                            },
+                            error: function (response) {
+                                console.log(response.responseText);
+                            },
+                        });
+                    },
+                });
+            }
+
+            AutoComplete('#staff_name_search', '/Other/GetStaffName');
+            AutoComplete('#card_id_search', '/Other/GetCardID');
+
+            // Input Money
+            $(document).on('click', '#btn-add-input-money', function () {
+                $('#txt_sid_input_money').val($(this).attr('data-id'));
+                $('#salary_type').val($(this).attr('data-salary-type').trim());
+                $('#modal-add-input-money').modal("show");
+            });
+
+            $('#photo-view-input').click(function () {
+                $("#photo_input_money").focus().trigger("click");
+            });
+
+            Upload('#photo_input_money', '#photo-view-input', '#txt_photo','InputMoney/');
+            
+            OnlyNumber('#txt_total_money');
+
+            onChange("#txt_total_money");
+
+            $('#btn-add-input-money').click(function () {
+                let form = $('#form-add-input-money').serializeArray();
+
+                for (let item in form) {
+                    if (form[item].name === "txt_desc") {
+                        setRemoveError('#txt_desc');
+                    }
+                    else if (form[item].name === "txt_photo") {
+                        setRemoveError('#txt_photo');
+                    }
+                    else if (form[item].value === '') {
+                        setClassError('#' + form[item].name);
+                        return false;
+                    }
+                }
+
+                if ($('#txt_total_money').val() < 1) {
+                    setClassError('#txt_total_money');
+                    return false;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/InputMoney/CreateInputMoney',
+                    data: form,
+                    success: function (response) {
+                        $('#modal-add-input-money').modal("hide");
+                       
+                        $('#form-add-input-money').get(0).reset();
+
+                        SetAlert(
+                            "/InputMoney/Index",
+                            "Add Input Money",
+                            'IT_' + response.id
+                        );                        
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                });
+            });                                     
+    
+              // click save
+           $('#btn-save-forget').click(function () {
+               let form = $('#form-add-forget').serializeArray();
+
+               form.push({ name: "price", value: 0 });
+
+               if ($("#txt_sid_forget").val() === '') {
+                   return false;
+               }
+               else if ($("#txt_date_forget").val() === '') {
+                   $('#txt_date_forget').attr('class', 'form-control is-invalid');
+                   return false;
+               }
+               else if ($('#txt_price_forget').val() < 1) {
+                   setClassError('#txt_price_forget');
+                   return false;
+               }
+
+               $.ajax({
+                   type: "POST",
+                   url: "/ForgetScan/AddForget",
+                   data: form,
+                   success: function (response) {
+                       if (response.message) {
+                           $('#modal-add-forget').modal('hide');
+                       }             
+
+                       SetAlert(
+                           "/ForgetScan/Index",
+                           "Add Forget Scan",
+                           'FS_'+ response.id
+                       );
+
+                       $('#photo-view-forget').attr('src','/Content/images/no-image.jpg');
+
+                       $('#form-add-forget').get(0).reset();
+                   }
+               });
+           });
+            
+
+             // Input Money
+
+            // Forget Scan Code
+
+            $(document).on('click', '#btn-add-forget', function () {
+                $('#txt_sid_forget').val($(this).attr('data-id'));
+
+                let salaryType = $(this).attr('data-salary-type').trim();
+
+                if (salaryType === 'Monthly' || salaryType === 'Daily') {
+                    $('#modal-add-forget #form-add-price').css('display', 'none');
+                }
+                else if (salaryType === 'Bung') {
+                    $('#modal-add-forget #form-add-price').css('display', 'block');
+                    $('#form-add-price #txt_price_forget').val('0');
+                }
+
+                $('#modal-add-forget').modal('show');
+            });
+            
+            Upload('#photo_fotget', '#photo-view-forget', '#txt_photo_forget','ForgetScan/');
+                        
+             $('#photo-view-forget').click(function () {
+                $("#photo_fotget").focus().trigger("click");
+            });
+                         
+            // Forget Scan Code
+           
+            function Upload(controlChoose, imagePreview, txtImage, path) {
+                $(controlChoose).change(function () {
+
+                    var fileUpload = $(controlChoose).get(0);
+                    var files = fileUpload.files;
+
+                    var fileData = new FormData();
+
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    }
+
+                    fileData.append('__RequestVerificationToken', token);
+                    fileData.append('path', path);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Other/Upload",
+                        contentType: false,
+                        processData: false,
+                        data: fileData,
+                        success: function (response) {
+                            if (response.message) {
+                                $(imagePreview).attr('src', '/Content/Uploads/' + path + response.message);
+                                $(txtImage).val(response.message);
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            }
+            
+        });
+    </script>
+}

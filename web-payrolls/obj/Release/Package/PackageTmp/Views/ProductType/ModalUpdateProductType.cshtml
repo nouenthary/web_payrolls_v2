@@ -1,0 +1,67 @@
+<!--Form Update-->
+<div class="modal fade" id="modal-update-product-type" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+                    <i class="ti-plus pr-2"></i>@Resources.Voucher.Edit Product Type
+                </h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post" action="" id="form-update-product-type">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    
+                    @Html.Hidden("txtProductTypeId")
+                    
+                    <div class="form-group">
+                        <label for="">@Resources.Voucher.HOD</label>
+                        <select id="txtHodId" name="txtHodId" class="form-control">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                            @foreach (var item in ViewBag.Manager)
+                            {
+                                <option value="@item.PK_Boss_Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label for="">Product Type</label>
+                        <select id="txtProductType" name="txtProductType" class="form-control">
+                            <option value="">-- Chhose Product Type --</option>
+                            @foreach (var item in ViewBag.ProductType)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="">Product Type Name</label>
+                        <input class="form-control form-group-sm" id="txtProductTypeName" name="txtProductTypeName" placeholder="Enter Product Type Name" maxlength="50"/>
+                        <div class="invalid-feedback" id="error-product-type-name-edit"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="">Description </label>
+                        <textarea class="form-control form-group-sm" placeholder="Enter Description" id="txtDesc" name="txtDesc" rows="4"></textarea>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-update-product-type" style="background: #28a745; color: #fff; font-size: 20px">
+                        <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Update Product Type
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--Form Update-->

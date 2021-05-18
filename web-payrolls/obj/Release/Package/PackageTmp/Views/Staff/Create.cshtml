@@ -1,0 +1,225 @@
+﻿@{
+    ViewBag.Title = "Create Employee";
+    ViewBag.Page = "Create Employee";
+
+    //var Departments = ViewBag.Departments;
+    //var Positions = ViewBag.Positions;
+    //var Provinces = ViewBag.Provinces;
+    //var Districts = ViewBag.Districts;
+    //var Villages = ViewBag.Villages;
+}
+
+<div class="card card-outline-info">
+    <div class="card-header">
+        <h4 class="m-b-0 text-white">
+            <i class="ti-user mr-3"></i>Employee Information
+        </h4>
+    </div>
+    <div class="card-body">
+        <form action="/Staff/Save" method="post">
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="name" class="control-label">Staff Name :</label>
+                                <input type="text" class="form-control" id="staff_name" name="staff_name" placeholder="Staff Name" required>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Gender:</label>
+                                <select name="gender" id="gender" required class="form-control">
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Date of Birth:</label>
+                                <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Date of Birth">
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Identify Card:</label>
+                                <input type="number" class="form-control" id="identify_card" name="identify_card" placeholder="Identify Card">
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Serial Card:</label>
+                                <input type="number" class="form-control" id="serial_card" name="serial_card" placeholder="Serial Card">
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Phone:</label>
+                                <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone">
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Bank Account :</label>
+                                <input type="number" class="form-control" id="bank_acc" name="bank_acc" placeholder="Bank Account">
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Address :</label>
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                            </div>
+
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Department :</label>
+                                <select id="department" name="department" required class="form-control">
+                                    @*@foreach (var item in Departments)
+                                    {
+                                        <option value="@item.did">@item.dept_name</option>
+                                    }*@
+                                </select>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Join Date :</label>
+                                <input type="date" class="form-control" id="join_date" name="join_date" placeholder="Join Date">
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Position :</label>
+                                <select id="position" name="position" required class="form-control">
+                                    @*@foreach (var item in Positions)
+                                    {
+                                        <option value="@item.pid">@item.position1</option>
+                                    }*@
+                                </select>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Province :</label>
+                                <select name="province" id="province" required class="form-control">
+                                    @*@foreach (var item in Provinces)
+                                    {
+                                        <option value="@item.pro_id">@item.pro_name</option>
+                                    }*@
+                                </select>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">District :</label>
+                                <select name="district" id="district" required class="form-control">
+                                   
+                                    @*@foreach (var item in Districts)
+                                    {
+                                        <option value="@item.did">@item.dis_name</option>
+                                    }*@
+                                </select>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Commune :</label>
+                                <select name="commune" id="commune" required class="form-control">
+                                    @*@foreach (var item in Villages)
+                                    {
+                                        <option value="@item.vid">@item.vil_name</option>
+                                    }*@
+                                </select>
+                            </div>
+
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Salary Type :</label>
+                                <select id="salary_type" name="salary_type" required class="form-control">
+                                    <option value="D">Day</option>
+                                    <option value="M">Monthly</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Salary :</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="number" name="salary" class="form-control" value="0" required data-validation-required-message="This field is required">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Accommodation :</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="number" name="accommodation" class="form-control" value="0" required data-validation-required-message="This field is required">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Food :</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="number" name="food" class="form-control" value="0" required data-validation-required-message="This field is required">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">Gasoline :</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="number" name="gasoline" class="form-control" value="0" required data-validation-required-message="This field is required">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="message-text" class="control-label">OT Unit Price :</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="number" name="ot_unit_price" class="form-control" value="0" required data-validation-required-message="This field is required">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="input-file-now">Choose Photo</label>
+                        <input type="file" id="photo" class="dropify" />
+                    </div>
+                </div>
+
+            </div>
+
+            @Html.AntiForgeryToken()
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-info btn-sm">Save Record</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.dropify').dropify();
+    });
+</script>
+

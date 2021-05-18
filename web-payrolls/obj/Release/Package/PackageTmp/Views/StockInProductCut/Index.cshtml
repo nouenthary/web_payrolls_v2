@@ -1,0 +1,754 @@
+@using web_payrolls.Helpers
+@using web_payrolls.Models
+@{
+    ViewBag.Title = "Stock In Product Cut";
+    ViewBag.Page = "Stock In Product Cut";
+    // connection
+    var db = new DB_Connection();
+    var provider = new ContextProvider(new ClHelper(),new DB_Connection());
+
+    // hod
+    var hod = db
+        .tblBosses
+        .Select(boss => new SelectListItem()
+        {
+            Value = boss.PK_Boss_Id + "",
+            Text = boss.Name,
+            Selected = boss.PK_Boss_Id == provider.ManagerId
+        })
+        .ToList();
+
+    // company
+    var company = db
+        .tblCompanies
+        .Select(com => new SelectListItem()
+        {
+            Value = com.PK_Comp_Id + "",
+            Text = com.Comp_Name,
+            Selected = com.PK_Comp_Id == provider.CompanyId
+        })
+        .ToList();
+}
+@* Card Filter *@
+<div class="card" style="margin-bottom: 0;border-top: #428bca 3px solid">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse">
+                <i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide
+            </a>
+        </div>
+        <h4 class="card-title m-b-0 card-text">
+            <i class="ti-filter"></i> Filter
+        </h4>
+    </div>
+    <div class="card-body collapse show b-t">
+        <div>
+            <div class="row">
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>HOD</label>
+                    <div class="input-group">
+                       @Html.DropDownList("txt_bid", hod, "-- Choose Hod --", new {@class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Company</label>
+                    <div class="input-group">
+                        @Html.DropDownList("txt_company", company, "-- Choose Company --", new {@class = "form-control"})
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Product Type</label>
+                    <div class="input-group">
+                        <select id="txt_product_type" class="form-control ">
+                            <option value="">-- Choose Product Type --</option>
+                            <option value="Processing">Processing</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Type Name</label>
+                    <div class="input-group">
+                        <select id="txt_product_type_name" class="form-control ">
+                            <option value="">-- @Resources.Voucher.Choose Type Name --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Product Name</label>
+                    <div class="input-group">
+                        <select id="txt_product_name" class="form-control ">
+                            <option value="">-- @Resources.Voucher.Choose Product Name --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Color</label>
+                    <div class="input-group">
+                        <select id="txt_color" class="form-control ">
+                            <option value="">-- @Resources.Voucher.Choose Color --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Size</label>
+                    <div class="input-group">
+                        <select id="txt_size" class="form-control ">
+                            <option value="">-- @Resources.Voucher.Choose Size --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Grade</label>
+                    <div class="input-group">
+                        <select id="txt_grade" class="form-control">
+                            <option value="">-- @Resources.Voucher.Choose Grade --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Barcode</label>
+                    <div class="input-group">
+                        <input class="form-control" id="txt_barcode" placeholder="Search barcode" autocomplete="off"/>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="ti-layout-column4"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Qr Code</label>
+                    <div class="input-group">
+                        <input class="form-control " id="txt_qrCode" placeholder="Search Qr code" autocomplete="off"/>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="ti-layout-grid4"></i></span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Status</label>
+                    <div class="input-group">
+                        <select class="form-control" id="txt_status">
+                            <option value="">-- All Status --</option>
+                            <option value="Done">Done</option>
+                            <option value="Pending">Pending</option>
+                           <option value="Reject">Reject</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Product Cut No</label>
+                    <div class="input-group">
+                        <input id="productCutNo" class="form-control" placeholder="Search by product cut no"/>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="ti-receipt"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Start Date</label>
+                    <div class="input-group">
+                        <input type="date" id="start" class="form-control"/>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="icon-calender"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>End Date</label>
+                    <div class="input-group">
+                        <input type="date" id="end" class="form-control"/>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="icon-calender"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer" style="display: none">
+        <button class="btn btn-info btn-sm float-right" id="btn-search-stock-balance">
+            <i class="ti-search"></i> @Resources.Voucher.Searchhere
+        </button>
+    </div>
+
+</div>
+@* Card Filter *@
+
+
+<!-- Tab panes -->
+<ul class="nav nav-tabs customtab bg-white" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#transition" role="tab">
+            <span class="hidden-sm-up">
+                <i class="ti-user"></i>
+            </span>
+            <span class="hidden-xs-down">
+                List Stock In Product Cut
+            </span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#list-voucher" role="tab">
+            <span class="hidden-sm-up">
+                <i class="ti-home"></i>
+            </span>
+            <span class="hidden-xs-down">
+                List All Stock In Product Cut
+            </span>
+        </a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="transition" role="tabpanel">
+        <div id="show-stock-in-product-cut"></div>
+    </div>
+
+    <div class="tab-pane" id="list-voucher" role="tabpanel">
+        <div id="show-stock-in-product-cut-all"></div>
+    </div>
+</div>
+
+
+@Html.AntiForgeryToken()
+
+@section Javascript{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+}
+
+@section Scripts
+{
+  <script>
+        $(function () {
+            let results = "#show-stock-in-product-cut";
+            // token
+            let token = $('input[name="__RequestVerificationToken"]').val();
+            //
+            let tokenObj = {__RequestVerificationToken : token};
+
+            let bid = $('#txt_bid');
+            let cid = $('#txt_company');
+            let types = $('#txt_product_type');
+            let typeName = $('#txt_product_type_name');
+            let product = $('#txt_product_name');
+            let grade = $('#txt_grade');
+            let color = $('#txt_color');
+            let size = $('#txt_size');
+            let barcode = $('#txt_barcode');
+            let qrCode = $('#txt_qrCode');
+            let type = $('#txt_type');
+            let status = $('#txt_status');
+            let productCutNo = $('#productCutNo');
+            let startDate = $('#start');
+            let endDate = $('#end');
+
+            function GetSearchObject() {
+                return {
+                    bid: bid.val(),
+                    cid: cid.val(),
+                    type: types.val(),
+                    typeName: typeName.val(),
+                    product: product.val(),
+                    color: color.val(),
+                    size: size.val(),
+                    grade: grade.val(),
+                    barcode: barcode.val(),
+                    qrCode: qrCode.val(),
+                    status: status.val(),
+                    productCutNo: productCutNo.val(),
+                    start: startDate.val(),
+                    end : endDate.val()
+                }
+            }
+
+            // Product cut all
+            function LoadStockInProductCutAll(){
+                let objSearch = GetSearchObject();
+                //console.log(objSearch);
+                $("#show-stock-in-product-cut-all").load('/StockInProductCut/GetTableProductCut', {
+                    ...objSearch,
+                    pageSize: $('#pageSize_').val()
+                });
+            }
+
+            LoadStockInProductCutAll();
+
+            // Export
+            $(document).on('click', '#show-stock-in-product-cut-all #btn-export-stock-in-cut-all', function () {
+                $('#table-stock-in-product-cut-all').csvExport();
+            });
+
+            // on change page size
+            $(document).on('change', '#show-stock-in-product-cut-all #pageSize_', function () {
+                let objSearch = GetSearchObject();
+                $(results).load('/StockInProductCut/GetTableProductCut', {
+                    pageSize: $(this).val(),
+                    ...objSearch
+                });
+            });
+
+            // pagination
+            $(document).on('click', '#show-stock-in-product-cut-all a', function (e) {
+                try {
+                    let link = $(this).attr("href").split('=');
+                    let objSearch = GetSearchObject();
+                    $("#show-stock-in-product-cut-all").load('/StockInProductCut/GetTableProductCut', {
+                        pageSize: $('#pageSize_').val(),
+                        page: link[1],
+                        ...objSearch
+                    });
+                    e.preventDefault();
+                } catch (ex) {
+                }
+            });
+
+
+            // Product cut all
+
+
+            // Load
+            function LoadStockInProductCut() {
+                let objSearch = GetSearchObject();
+               // console.log(objSearch);
+                $("#show-stock-in-product-cut").load('/StockInProductCut/GetTable', {
+                    ...objSearch,
+                    pageSize: $('#pageSize').val()
+                });
+            }
+
+            LoadStockInProductCut();
+
+            // click search
+            $('#btn-search-stock-balance').click(function (){
+                LoadStockInProductCut();
+                LoadStockInProductCutAll();
+            });
+
+            // Export
+            $(document).on('click', '#show-stock-in-product-cut #btn-export-stock-in', function () {
+                $('#table-stock-in').csvExport();
+            });
+
+
+            //
+            $(document).on('change', '#show-stock-in-product-cut #pageSize', function () {
+                let objSearch = GetSearchObject();
+                $(results).load('/StockInProductCut/GetTable', {
+                    pageSize: $(this).val(),
+                    ...objSearch
+                });
+            });
+            //
+            $(document).on('click', results + ' a', function (e) {
+                try {
+                    let link = $(this).attr("href").split('=');
+                    let objSearch = GetSearchObject();
+                    $("#show-stock-in-product-cut").load('/StockInProductCut/GetTable', {
+                        pageSize: $('#pageSize').val(),
+                        page: link[1],
+                        ...objSearch
+                    });
+                    e.preventDefault();
+                } catch (ex) {
+                }
+            });
+            // Load
+
+            // confirm stock
+             $(document).on('click','#btn-confirm-stock-in-cut',function() {
+                 let id = $(this).attr('data-id')
+
+                 swal({
+                    title: "Are you sure confirm ?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: "No, cancel it!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                 },
+                    function (isConfirm) {
+                        ConfirmStockIn(isConfirm, id, 'Done');
+                    }
+                 );
+             });
+
+             // reject stock
+             $(document).on('click','#btn-reject-stock-in-cut',function() {
+                  let id = $(this).attr('data-id')
+
+                  swal({
+                       title: "Are you sure reject ?",
+                       type: "warning",
+                       showCancelButton: true,
+                       confirmButtonColor: '#DD6B55',
+                       confirmButtonText: 'Yes, I am sure!',
+                       cancelButtonText: "No, cancel it!",
+                       closeOnConfirm: false,
+                       closeOnCancel: false
+                   },
+                       function (isConfirm) {
+                           ConfirmStockIn(isConfirm, id, 'Reject');
+                       }
+                   );
+             });
+
+             // function confirm stock in
+
+             function ConfirmStockIn(isConfirm, id, status) {
+                 if (isConfirm) {
+
+                     let data = {
+                         __RequestVerificationToken: token,
+                         stockCutId: id,
+                         status: status
+                      };
+
+                     $.ajax({
+                         url: '@Url.Action("ConfirmStatus", "StockInProductCut")',
+                         type: 'POST',
+                         data: data,
+                         success: function (response) {
+                             if(response && status === "Done"){
+                                 SweatAlert('Stock in was confirm.','success');
+                                 UpdateStatusNotification("Done","SIC_"+id);
+                             }else{
+                                 SweatAlert('Stock in was reject.','warning');
+                                 UpdateStatusNotification("Reject","SIC_"+id);
+                             }
+                             LoadStockInProductCut();
+
+                         },
+                     });
+                 }
+                 else {
+                     swal({
+                         title: "Cancelled",
+                         text: "Your cancel confirm :)",
+                         type: "error",
+                         timer: 1500
+                     })
+                 }
+             }
+
+             // sweet alert
+             function SweatAlert(message, type) {
+                  swal({
+                      title: message,
+                      type: type,
+                      timer: 1500
+                  });
+             }
+
+             // update status notification
+               function UpdateStatusNotification(Status ,optionKey) {
+                   let data = {
+                       __RequestVerificationToken: token,
+                       status: Status,
+                       optionKey : optionKey
+                   };
+
+                    $.ajax({
+                       url: '@Url.Action("UpdateStatus", "Notification")',
+                       type: 'POST',
+                       data: data,
+                       success: function (response) {
+                           console.log(response);
+                       },
+                   });
+               }
+
+             // select 2
+               function Select2(ctn){
+                  $(ctn).select2({ width: '100%', placeholder: "Select an Option", allowClear: true });
+               }
+
+               let select2 = [
+                   'txt_bid', 'txt_company' , 'txt_product_type' ,
+                   'txt_product_type_name' , 'txt_product_name' ,
+                   'txt_color' ,'txt_size',
+                   'txt_grade' ,'txt_type' ,'txt_status'
+               ];
+
+               for(let item in select2){
+                   Select2('#'+select2[item]);
+               }
+
+               // edit
+               $(document).on('click','#btn-edit-stock-in-cut',function (){
+                   let id = $(this).attr('data-id');
+                   window.location.href = "/StockInProductCut/Create?token="+ token + "&PK_Stock_In_Product_Cut_No_Id=" + id + "&Edit=" + token ;
+               });
+
+
+               // searching
+
+               // get data from api
+                 function GetDataApi(url, data) {
+                    let dataResponse = null;
+                    let error = false;
+                    $.ajax({
+                      url: url,
+                      async: false,
+                      type: "POST",
+                      global: false,
+                      dataType: 'json',
+                      data: data,
+                      success: function(response) {
+                         dataResponse = response
+                      },
+                      error: function() {
+                        error =  true
+                      }
+                    });
+                    return {data: dataResponse, error};
+                }
+
+                // get select option
+                function setToSelect({data : data, label : label}) {
+                      let option = '<option value="">-- ' + 'Choose ' +  label + ' --</option>';
+                      for(let item in data){
+                          option += '<option value="'+data[item].key+'">' + data[item].value + '</option>';
+                      }
+                      return option;
+                }
+
+
+               // bid
+               bid.change(function (){
+                   $('select#txt_company').val(0).select2();
+                   $('select#txt_product_type').val(0).select2();
+                   $('select#txt_product_type_name').val(0).select2();
+                   $('select#txt_product_name').val(0).select2();
+                   $('select#txt_color').val(0).select2();
+                   $('select#txt_size').val(0).select2();
+                   $('select#txt_grade').val(0).select2();
+
+                   let dataForSent = {
+                       id: $(this).val(),
+                       ...tokenObj
+                   };
+
+                   let {data} = GetDataApi('/Other/GetCompany',dataForSent);
+
+                   cid.html(setToSelect({data: data, label: '@Resources.Voucher.Company'}));
+
+                   LoadStockInProductCut();
+                   LoadStockInProductCutAll();
+               });
+
+               // cid
+               cid.change(function (){
+                  $('select#txt_product_type').val(0).select2();
+                  $('select#txt_product_type_name').val(0).select2();
+                  $('select#txt_product_name').val(0).select2();
+                  $('select#txt_color').val(0).select2();
+                  $('select#txt_size').val(0).select2();
+                  $('select#txt_grade').val(0).select2();
+
+                  LoadStockInProductCut();
+                  LoadStockInProductCutAll();
+               });
+
+               // product type
+               types.change(function (){
+                 $('select#txt_product_type_name').val(0).select2();
+                 $('select#txt_product_name').val(0).select2();
+                 $('select#txt_color').val(0).select2();
+                 $('select#txt_size').val(0).select2();
+                 $('select#txt_grade').val(0).select2();
+
+                   let dataForSent = {
+                       bossId : bid.val(),
+                       productType: $(this).val(),
+                       ...tokenObj
+                   };
+
+                   let {data} = GetDataApi('/StockInProductCut/GetProductTypeByBoss', dataForSent);
+
+                   typeName.html(setToSelect({data: data, label: 'Type Name'}));
+
+
+                   LoadStockInProductCut();
+                   LoadStockInProductCutAll();
+               });
+
+               //type name
+               typeName.change(function (){
+
+                    $('select#txt_product_name').val(0).select2();
+                    $('select#txt_color').val(0).select2();
+                    $('select#txt_size').val(0).select2();
+                    $('select#txt_grade').val(0).select2();
+
+                   let dataForSent = {
+                      id: $(this).val(),
+                      ...tokenObj
+                   };
+
+                   let {data} = GetDataApi('/Other/GetProductByProductType', dataForSent);
+
+                   product.html(setToSelect({data: data, label : "Product"}));
+
+                   LoadStockInProductCut();
+                   LoadStockInProductCutAll();
+               });
+
+               // product name
+               product.change(function (){
+
+                   $('select#txt_color').val(0).select2();
+                   $('select#txt_size').val(0).select2();
+                   $('select#txt_grade').val(0).select2();
+
+                   let dataForSent = {
+                       id: $(this).val(),
+                       ...tokenObj
+                   };
+
+                   let {data} = GetDataApi('/Other/GetProductGradeByProductId',dataForSent);
+                   //
+                   let {colors, sizes, grades} = data;
+                   // set color
+                   color.html(setToSelect({data: colors, label : "Color"}));
+                   // set size
+                   size.html(setToSelect({data: sizes, label : "Size"}));
+                   // set grade
+                   grade.html(setToSelect({data: grades, label : "Grade"}));
+
+                   LoadStockInProductCut();
+                   LoadStockInProductCutAll();
+               });
+
+               // color
+               color.change(function (){
+                   $('select#txt_size').val(0).select2();
+                   $('select#txt_grade').val(0).select2();
+
+                   LoadStockInProductCut();
+                   LoadStockInProductCutAll();
+               });
+
+               // size
+               size.change(function (){
+                   $('select#txt_grade').val(0).select2();
+
+                   LoadStockInProductCut();
+                   LoadStockInProductCutAll();
+               });
+
+               // status
+               status.change(function (){
+                   LoadStockInProductCut();
+                   LoadStockInProductCutAll();
+               });
+
+               // product cut no
+               productCutNo.change(function (){
+                   LoadStockInProductCut();
+                   LoadStockInProductCutAll();
+               });
+
+               //date start
+               startDate.change(function (){
+                   LoadStockInProductCut();
+                   LoadStockInProductCutAll();
+               });
+
+               // end date
+               endDate.change(function (){
+                   LoadStockInProductCut();
+                   LoadStockInProductCutAll();
+               });
+
+               // searching
+
+               // group by
+
+               // Auto complete
+                 function AutoComplete(control, url) {
+                     $(control).typeahead({
+                         minLength: 1,
+                         name: control,
+                         highlight: false,
+                         source: function (request, response) {
+                             $.ajax({
+                                 url: url,
+                                 data: {
+                                      bid: bid.val() !== '' ? bid.val() :  0,
+                                     value: request,
+                                     __RequestVerificationToken : token
+                                 },
+                                 type: "POST",
+                                 success: function (data) {
+                                     response(data);
+                                 },
+                                 error: function (response) {
+                                     console.log(response.responseText);
+                                 },
+                             });
+                         },
+                     });
+                 }
+
+                 // call
+                 AutoComplete('#txt_barcode', '/ProductGrade/GetBarcode');
+                 AutoComplete('#txt_qrCode', '/ProductGrade/GetQrCode');
+
+                 // barcode
+                 barcode.change(function (){
+                     LoadStockInProductCut();
+                     LoadStockInProductCutAll();
+                 });
+
+                 //qr code
+                 qrCode.change(function (){
+                     LoadStockInProductCut();
+                     LoadStockInProductCutAll();
+                 });
+
+                // generate invoice id
+                 $(document).on('click','#btn-add-stock-in-product-cut',function (){
+                   $.ajax({
+                     url: '/StockInProductCut/GenerateInvoice',
+                     type: 'post',
+                     data: {__RequestVerificationToken: token},
+                     success:function (response){
+                       if (response.id){
+                          window.location.href = "/StockInProductCut/Create?token="+token +"&PK_Stock_In_Product_Cut_No_Id=" +response.id + "&production="+token;
+                       }
+                     },
+                   });
+                 });
+
+
+                 // btn-use-fabric
+                 $(document).on('click','#btn-use-fabric',function (){
+                    let id = $(this).attr('data-id');
+                    window.location.href = '/Fabric/Create?token='+ token + "&Stock_In_Product_Cut_No="+ id + "&use_fabric=" + token;
+                 });
+        });
+
+    </script>
+}

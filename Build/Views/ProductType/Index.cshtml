@@ -1,0 +1,286 @@
+@{
+    ViewBag.Title = "Product Type";
+    ViewBag.Page = "Product Type";
+}
+
+<div class="card" style="margin-bottom: 0;border-top: #428bca 3px solid">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide</a>
+        </div>
+        <h4 class="card-title m-b-0 card-text"><i class="ti-filter"></i> @Resources.Voucher.ProductType</h4>
+    </div>
+    <div class="card-body collapse show b-t">
+        <div>
+            <div class="row">
+
+                <div class="input-group col-xlg-3 col-md-4 pb-2">
+                    <label>HOD</label>
+                    <div class="input-group">
+                        <select id="txt_bid" name="txt_bid" class="form-control">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                            @foreach (var item in ViewBag.Manager)
+                            {
+                                if (item.PK_Boss_Id + "" == ViewData["ManagerId"] + "")
+                                {
+                                    <option value="@item.PK_Boss_Id" selected="selected">@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.PK_Boss_Id">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group col-xlg-3 col-md-4 pb-2">
+                    <label>Product Type</label>
+                    <div class="input-group">
+                        <select id="txt_product_type" name="txt_product_type" class="form-control">
+                            <option value="">-- @Resources.Voucher.Choose Product Type --</option>
+                            @foreach (var item in ViewBag.ProductType)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group col-xlg-3 col-md-4 pb-2">
+                    <label>Type Name</label>
+                    <div class="input-group">
+                        <input class="form-control" id="txt_product_type_name" placeholder="Search type name"/>
+                    </div>
+                </div>
+
+                <div class="input-group col-xlg-2 col-md-4 pb-2">
+                    <button class="btn btn-info btn-sm" id="btn-search-product-type" style="display: none">
+                        <i class="ti-search"></i> @Resources.Voucher.Searchhere
+                    </button>
+                </div>
+
+                @Html.AntiForgeryToken()
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="show-product-type"></div>
+
+@Html.Partial("ModalCreateProductType")
+@Html.Partial("ModalUpdateProductType")
+
+@section Scripts
+{
+    <script>
+         let token = $('input[name="__RequestVerificationToken"]').val();              
+         let bid = $('#txt_bid');
+         let type = $('#txt_product_type');
+         let product = $('#txt_product_type_name');
+         
+         function GetSearchObject() {
+               return {
+                   bid: bid.val(),
+                   type: type.val(),
+                   product : product.val()                
+               }
+         }
+         
+         // Load
+           function LoadProductType() {
+               let objSearch = GetSearchObject();
+               $('#show-product-type').load('/ProductType/GetTable', {
+                   ...objSearch,
+                   pageSize: $('#pageSize').val()
+               });
+           }        
+              
+           LoadProductType();
+            
+           $('#btn-search-product-type').click(function() {
+             LoadProductType();
+           });       
+         
+            //
+           $(document).on('change', '#show-product-type #pageSize', function () {
+               let objSearch = GetSearchObject();
+               $('#show-product-type').load('/ProductType/GetTable', {
+                   pageSize: $(this).val(),
+                   ...objSearch
+               });
+           });
+           //
+           $(document).on('click', '#show-product-type a', function (e) {
+               try {
+                   let link = $(this).attr("href").split('=');
+                   let objSearch = GetSearchObject();
+                   $('#show-product-type').load('/ProductType/GetTable', {
+                       pageSize: $('#pageSize').val(),
+                       page: link[1],
+                       ...objSearch
+                   });
+                   e.preventDefault();
+               } catch (ex) {
+               }
+           });         
+            // Load
+            
+           // utils 
+                       
+           //
+           function setClassError(id) {
+               $(id).attr('class', 'form-control is-invalid');
+           }
+   
+           //
+           function setRemoveError(id) {
+               $(id).attr('class', 'form-control');
+           }
+   
+           //
+           function onChange(id) {
+               $(id).change(function () {
+                   setRemoveError(id);
+               });
+           }
+         
+         // utils 
+            
+        $(document).on('click', '#show-product-type #btn-export-product-type', function () {
+            $('#table-product-type').csvExport();
+        });  
+            
+            
+          // show modal product type
+          $(document).on('click','#btn-create-product-type',function() {
+             $('#modal-add-product-type').modal("show");   
+          });  
+            
+          onChange("#hodId");
+          onChange("#productType");
+          onChange("#productTypeName");
+          
+          // click create save
+          $('#btn-save-product-type').click(function() {
+            let form = $('#form-add-product-type').serializeArray();
+           
+            for (let item in form) {
+                if(form[item].name === "desc"){
+                    setRemoveError('#desc');
+                }
+                else if (form[item].value === "") {
+                    setClassError('#' + form[item].name);
+                    return false;
+                }
+            }
+            
+             $.ajax({
+                type: 'POST',
+                url: "/ProductType/Create",
+                data: form,
+                success: function (response) {
+                    if(response.error){
+                        setClassError('#productTypeName');
+                        $('#error-product-type-name').text(response.error);
+                        return false;
+                    }
+                    swal({
+                        title: response,                       
+                        type: "success",
+                        timer: 1500
+                    });
+
+                    $('#modal-add-product-type').modal('hide');
+                    LoadProductType();
+                    $('#form-add-product-type').get(0).reset();
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });   
+            
+          });
+          
+          // show model edit
+          $(document).on('click','#btn-edit-product-type',function() {
+              let row = $(this).closest('tr');
+              $('#txtProductTypeId').val(row.attr('id'));
+              $('#txtHodId').val(row.attr('data-hodId'));
+              $('#txtProductType').val(row.attr('data-type'));
+              $('#txtProductTypeName').val(row.attr('data-name'));
+              $('#txtDesc').val(row.attr('data-desc'));
+              
+              $('#modal-update-product-type').modal("show");
+          });
+          
+          // click update
+          onChange("#txtHodId");
+          onChange("#txtProductType");
+          onChange("#txtProductTypeName");
+          
+          $('#btn-update-product-type').click(function() {
+             let form = $('#form-update-product-type').serializeArray();             
+             
+             for (let item in form) {
+                 if(form[item].name === "txtDesc"){
+                     setRemoveError('#txtDesc');
+                 }
+                 else if (form[item].value === "") {
+                     setClassError('#' + form[item].name);
+                     return false;
+                 }
+             }
+             
+             $.ajax({
+                 type: 'POST',
+                 url: "/ProductType/Update",
+                 data: form,
+                 success: function (response) {
+                     if(response.ProductType){
+                         setClassError('#txtProductTypeName');
+                         $('#error-product-type-name-edit').text(response.ProductType);
+                         return false;
+                     }
+                     swal({
+                         title: response,                       
+                         type: "success",
+                         timer: 1500
+                     });
+ 
+                     $('#modal-update-product-type').modal('hide');
+                     LoadProductType();
+                     $('#form-update-product-type').get(0).reset();
+                 },
+                 error: function (error) {
+                     console.log(error);
+                 }
+             });                         
+          });
+          
+          // select 2  
+            function Select2(ctn){
+               $(ctn).select2({ width: '100%', placeholder: "Select an Option", allowClear: true });
+            }
+            // call
+            Select2('#txt_bid');
+            Select2('#txt_product_type');
+            
+            // on change
+            bid.change(function (){
+                LoadProductType();
+                product.val("");
+                $('select#txt_product_type').val(0).select2();
+            });
+            
+            type.change(function (){
+                LoadProductType();
+                product.val("");
+            });
+            
+            product.keyup(function (){
+                LoadProductType();
+            });
+            
+    </script>
+}

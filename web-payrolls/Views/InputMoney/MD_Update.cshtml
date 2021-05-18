@@ -1,0 +1,57 @@
+﻿<!--Form Update-->
+<div class="modal fade" id="modal-update-input" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-primary card-text" id="exampleModalLabel" style="font-weight: 600">
+                    <i class="ti-pencil pr-2"></i>@Resources.Voucher.Edit @Resources.Voucher.InputMoney
+                </h3>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="#" id="form-update-input">
+
+                <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <img style="height: 270px" width="100%" src="/Content/images/no-image.jpg" alt="me" class="img-thumbnail" id="txtPhotoView" onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'">
+                                <input type="file" id="fileInput" style="display: none" />
+                                @Html.Hidden("txtPhoto")
+                                @Html.Hidden("txtInputId")
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label(@Resources.Voucher.Money)<span class="text-danger">*</span>
+                                @Html.TextBox("txtTotalMoney", null, new { @class = "form-control", placeholder = @Resources.Voucher.Money, maxlength = "12" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label(@Resources.Voucher.Description)
+                                @Html.TextArea("txtDesc", null, new { @class = "form-control", placeholder = @Resources.Voucher.Description, rows = "4" })
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-update-input" style="background: #28a745; color: #fff; font-size: 20px">
+                        <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Update @Resources.Voucher.InputMoney
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--Form Update-->

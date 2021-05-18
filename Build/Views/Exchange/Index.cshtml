@@ -1,0 +1,296 @@
+﻿@{
+    ViewBag.Title = Resources.Voucher.Exchange;
+    ViewBag.Page = Resources.Voucher.Exchange;
+}
+
+<div class="card" style="margin-bottom: 0px">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide</a>
+        </div>
+        <h4 class="card-title m-b-0 card-text"><i class="ti-filter"></i> @Resources.Voucher.Exchange</h4>
+    </div>
+    <div class="card-body collapse show b-t">
+
+        <div>
+            <div class="row">
+
+                <div class="input-group col-xlg-2 col-md-4 pt-1">
+                    <select id="bossid_search" name="bossid_search" class="form-control form-control-sm">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                        @foreach (var item in ViewBag.GetBoss)
+                        {                          
+                           <option value="@item.PK_Boss_Id">@item.Name</option>                            
+                        }
+                    </select>
+                </div>
+
+                <div class="input-group col-xlg-2 col-md-4 pt-1">
+                    <select id="comid_search" name="comid_search" class="form-control form-control-sm">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>                       
+                    </select>
+                </div>
+
+                @Html.AntiForgeryToken()
+
+                <div class="input-group col-xlg-2 col-md-4 pt-1">
+                    <button class="btn btn-info btn-sm" id="btn-search-exchange">
+                        <i class="ti-search"></i> @Resources.Voucher.Searchhere
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+<!---->
+<div id="show-exchange"></div>
+<!---->
+@Html.Partial("ModelCreateExchange")
+
+@Html.Partial("ModalEditExchange")
+
+@section Scripts{
+    <script>
+        $(function () {
+            // New Code
+            $('#show-exchange').load('/Exchange/GetTable', {
+                bid: $('#bossid_search').val(),
+                cid: $('#comid_search').val(),
+                pageSize: $('#pageSize').val()
+            });
+
+            $(document).on('click', '#show-exchange a', function (e) {
+                try {
+                    var link = $(this).attr("href").split('=');
+                    $('#show-exchange').load('/Exchange/GetTable', {
+                        bid: $('#bossid_search').val(),
+                        cid: $('#comid_search').val(),
+                        page: link[1],
+                        pageSize: $('#pageSize').val()
+                    });
+                    e.preventDefault()
+                } catch (ex) { }
+            });
+
+            $('#btn-search-exchange').click(function () {
+                $('#show-exchange').load('/Exchange/GetTable', {
+                    bid: $('#bossid_search').val(),
+                    cid: $('#comid_search').val(),
+                    pageSize: $('#pageSize').val()
+                });
+            });
+
+            $(document).on('change', '#show-exchange #pageSize', function () {
+                $('#show-exchange').load('/Exchange/GetTable', {
+                    bid: $('#bossid_search').val(),
+                    cid: $('#comid_search').val(),
+                    pageSize: $(this).val()
+                });
+            });
+            // New Code
+
+            $(document).on('click', '#btn-export-exchange', function () {
+                $('#table-exchange').csvExport();
+            });
+
+            $(document).on('click', '#btn-create-exchange', function () {
+                $('#modal-exchange-create').modal('show');
+            });
+
+            //
+            function setClassError(id) {
+                $(id).attr('class', 'form-control is-invalid');
+            }
+
+            //
+            function setRemoveError(id) {
+                $(id).attr('class', 'form-control');
+            }
+
+            //
+            function onChange(id) {
+                $(id).change(function () {
+                    setRemoveError(id);
+                });
+            }
+
+            onChange('#ex_name');
+            onChange('#ex_rate');
+            onChange('#ex_company');
+
+            // Create
+            $('#btn-save-exchange').click(function () {                             
+                let form = $('#form-add-exchange').serializeArray();
+
+                for (let item in form) {
+                    if (form[item].value === "") {
+                        setClassError('#' + form[item].name);
+                        return false;
+                    }
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Exchange/StoreOrEdit",
+                    data: form,
+                    success: function (response) {
+
+                        if (response.name) {
+                            setClassError('#ex_name');
+                            $('#error-ex-name').text(response.name);
+                        }
+                        else {
+                            $('#modal-exchange-create').modal("hide");
+                            swal("Success", response.message, "success")
+
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1500)
+                        }
+                    }
+                });
+            });
+
+            $(document).delegate('#table-exchange tbody tr', 'dblclick', function () {
+                $('#modal-exchange-edit').modal("show");
+
+                $('#exchange_id').val($(this).attr("id"));                
+                $('#ex_name_edit').val($(this).attr('data-name'));
+                $('#ex_rate_edit').val($(this).attr('data-rate'));
+                $('#ex_company_edit').val($(this).attr('data-com-id'));   
+            });
+
+            onChange('#ex_name_edit');
+            onChange('#ex_rate_edit');
+
+            $('#btn-update-exchange').click(function () {
+                let form = $('#form-edit-exchange').serializeArray();
+                
+                for (let item in form) {
+                    if (form[item].value === "") {
+                        setClassError('#' + form[item].name);
+                        return false;
+                    }
+                }
+                
+                $.ajax({
+                    type: "POST",
+                    url: "/Exchange/Update",
+                    data: form,
+                    success: function (response) {
+
+                        if (response.name) {
+                            setClassError('#ex_name_edit');
+                            $('#error-ex-name-edit').text(response.name);
+                        }
+                        else {
+                            $('#modal-exchange-edit').modal("hide");
+                            swal("Success", response.message, "success")
+
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1500)
+                        }
+                    }
+                });
+            });
+
+            function validateControl(control_id) {
+                $(control_id).keypress(function (event) {
+                    var ew = event.which;
+                    if (ew == 32)
+                        return true;
+                    if (48 <= ew && ew <= 57)
+                        return true;
+                    if (65 <= ew && ew <= 90)
+                        return true;
+                    if (97 <= ew && ew <= 122)
+                        return true;
+                    return false;
+                });
+            }
+
+            function protectdControl(control) {
+                $(control).bind("cut copy paste drag drop", function (e) {
+                    e.preventDefault();
+                });
+            }
+
+            validateControl('#ex_name');
+            protectdControl('#ex_name');
+
+            validateControl('#ex_name_edit');
+            protectdControl('#ex_name_edit');
+
+            $('#ex_rate').keypress(function (e) {
+                if (e.keyCode == 101 || e.keyCode == 69) {
+                    return false;
+                }
+            });
+
+            $('#ex_rate').bind('paste', function () {
+                return false;
+            });
+
+            $('#ex_rate_edit').keypress(function (e) {
+                if (e.keyCode == 101 || e.keyCode == 69) {
+                    return false;
+                }
+            });
+
+            $('#ex_rate_edit').bind('paste', function () {
+                return false;
+            });
+
+            //
+            $('#bossid_search').change(function () {
+                let data = {
+                    boss_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetCompany",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                        }
+                        $('#comid_search').html(option);
+                    },
+                    error: function () {
+                        $('#comid_search').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>');
+                    }
+                });
+            });
+
+            // on create Exchange
+            $('#ex_manager').change(function () {
+                let data = {
+                    boss_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetCompany",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                        }
+                        $('#ex_company').html(option);
+                    },
+                    error: function () {
+                        $('#ex_company').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>');
+                    }
+                });
+            });
+        });
+    </script>
+}

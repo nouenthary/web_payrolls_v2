@@ -1,0 +1,609 @@
+﻿@{
+    ViewBag.Title = Resources.Voucher.VoucherRent;
+    ViewBag.Page = Resources.Voucher.VoucherRent;
+}
+
+<div class="card" style="margin-bottom: 0">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse" id="boss-collaspe"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide</a>
+        </div>
+        <h4 class="card-title m-b-0 card-text"><i class="ti-filter"></i> @Resources.Voucher.VoucherRent</h4>
+    </div>
+    <div class="card-body collapse show b-t" id="set-boss-collaspe">
+        <div>
+            <div class="row">
+
+                @Html.AntiForgeryToken()
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                    <label>@Resources.Voucher.HOD</label>
+                    <div class="input-group">
+                        <select id="txtManager" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                            @foreach (var item in ViewBag.Manager)
+                            {
+                                <option value="@item.PK_Boss_Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                     <label>@Resources.Voucher.Company</label>
+                    <div class="input-group">
+                        <select id="txtCompany" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                     <label>@Resources.Voucher.Location</label>
+                    <div class="input-group">
+                        <select id="txtLocation" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                     <label>@Resources.Voucher.Type</label>
+                    <div class="input-group">
+                        <select id="txtType" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Status --</option>
+                            <option value="Rent">@Resources.Voucher.Rent</option>
+                            <option value="Buy">@Resources.Voucher.Buy</option>
+                            <option value="Other">@Resources.Voucher.Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                     <label>@Resources.Voucher.Code</label>
+                    <div class="input-group">
+                        <input type="text" id="txtCode" class="form-control form-control-sm" placeholder="@Resources.Voucher.Search @Resources.Voucher.Code" maxlength="50">
+                    </div>
+                </div>
+                
+                <div class="form-group col-xlg-3 col-md-4 col-sm-12">
+                     <label>@Resources.Voucher.Name</label>
+                    <div class="input-group">
+                        <input type="text" id="txtName" class="form-control form-control-sm" placeholder="@Resources.Voucher.Search @Resources.Voucher.Name" maxlength="50">
+                    </div>
+                </div>
+                
+                <div class="form-group col-xlg-3 col-md-3 col-sm-12">
+                     <label>.</label>
+                    <div class="input-group">
+                         <button type="button" class="btn btn-info btn-sm" id="btn-search-voucher">
+                              <i class="ti-search pr-2"></i>@Resources.Voucher.Searchhere
+                         </button>                  
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="show-voucher-type"></div>
+
+<div class="modal fade" id="Modal-View-Photo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="image-card-view"
+                     class="card-img-top"
+                     alt="Card image cap"
+                     src="">
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+@Html.Partial("ModelCreateVoucherType")
+@Html.Partial("ModalEditVoucherType")
+
+@section Scripts{
+    @* <script src="~/Content/scripts/utils.js"></script> *@
+    <script>
+        $(function () {
+            let token = $('input[name="__RequestVerificationToken"]').val();
+            let managerId = $('#txtManager');
+            let companyId = $('#txtCompany');
+            let locationId = $('#txtLocation');
+            let txtType = $('#txtType');
+            let txtCode = $('#txtCode');
+            let txtName = $('#txtName');
+            
+            // object search
+            
+            function getObjectSearch(){
+                return {
+                   bid: managerId.val(),
+                   cid: companyId.val(),
+                   lid: locationId.val(),
+                   type: txtType.val(),
+                   code: txtCode.val(),
+                   name: txtName.val() 
+                }
+            }
+            
+            // load table
+            function LoadTableVoucherType(){
+                let objectSearch = getObjectSearch();
+                 $('#show-voucher-type').load('@Url.Action("GetTable", "VoucherType")', {
+                    pageSize : $('#pageSize').val(),
+                   ...objectSearch,
+                });
+            }
+           
+            $('#btn-search-voucher').click(function (){
+                LoadTableVoucherType();
+            });
+            
+            LoadTableVoucherType();
+
+            $(document).on('click', '#show-voucher-type a', function (e) {
+                try {
+                    let objectSearch = getObjectSearch();
+                    let link = $(this).attr("href").split('=');
+                    $('#show-voucher-type').load('@Url.Action("GetTable", "VoucherType")', {
+                        ...objectSearch,
+                        page: link[1],
+                        pageSize: $('#pageSize').val()
+                    });
+                    e.preventDefault()
+                } catch (ex) { }
+            });
+            
+            $(document).on('change', '#show-voucher-type #pageSize', function () {
+                let objectSearch = getObjectSearch();
+                $('#show-voucher-type').load('@Url.Action("GetTable", "VoucherType")', {
+                    ...objectSearch,
+                    pageSize: $(this).val()
+                });
+            });
+            //
+            
+            // export
+            $(document).on('click', '#btn-export-voucher-type', function () {
+                $('#table-voucher-type').csvExport();
+            });
+            
+            // Preview Image
+            $(document).on('click','#table-voucher-type tbody img',function (){
+                $('#Modal-View-Photo').modal('show');
+                $('#image-card-view').attr('src',$(this).attr('src'));
+            });
+           
+             // get Label
+                function GetLabel(text) {
+                    return '<option value="">-- @Resources.Voucher.Choose ' + text + ' -- </option>';
+                }
+            
+                // get company
+                $.fn.GetDropListSelect = function (object) {
+                    $(this).change(function () {
+                        let data = {
+                            id: $(this).val(),
+                            __RequestVerificationToken: object.token
+                        };
+                        if (object.removeChild === true) {
+                            for (let i = 0; i < object.child.length; i++) {
+                                $('#' + object.child[i].key).html(GetLabel(object.child[i].value));
+                            }
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: object.url,
+                            data: data,
+                            success: function (response) {
+                                let option = GetLabel(object.label);
+                                for (let i = 0; i < response.length; i++) {
+                                    option += '<option value="' + response[i].key + '">' + response[i].value + '</option>';
+                                }
+                                $(object.supChild).html(option);
+                            },
+                            error: function () {
+                                $(object.supChild).html(GetLabel(object.label));
+                            }
+                        });
+            
+                    });
+                }
+            
+            // Manager 
+            managerId.GetDropListSelect({
+                url: "/Other/GetCompany",
+                token : token,
+                supChild: '#txtCompany',
+                removeChild: true,
+                child: [{key: "txtLocation", value : "@Resources.Voucher.Location"}],
+                label: "@Resources.Voucher.Company"
+            });
+            //Manager
+            
+            // Company
+            companyId.GetDropListSelect({
+                url: "/Other/GetLocation",
+                token : token,
+                supChild: '#txtLocation',
+                label: "@Resources.Voucher.Location"
+            });
+            // Company
+            
+            // show modal voucher
+            $(document).on('click','#btn-add-voucher',function (){
+                $('#modal-add-voucher-type').modal('show');
+            });
+            
+            let boss = $('#manager');
+            let company = $('#company');
+            let location = $('#location');           
+            
+            // on change manager    
+            boss.change(function () {
+                           
+               location.html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                           
+               let data = {
+                   boss_id: $(this).val(),
+                   __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+               };
+               
+               $.ajax({
+                   type: "POST",
+                   url: "/Location/GetCompany",
+                   data: data,
+                   success: function (response) {
+                       let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company -- </option>';
+                       for (let i = 0; i < response.length; i++) {
+                           option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                       }
+                       company.html(option);
+                   },
+                   error: function () {
+                       company.html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>');
+                   }
+               });
+           });
+                        
+           // on change company search
+           company.change(function () {
+               let data = {
+                   com_id: $(this).val(),
+                   __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+               };
+
+               $.ajax({
+                   type: "POST",
+                   url: "/Location/GetLocation",
+                   data: data,
+                   success: function (response) {
+                       let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>';
+                       for (let i = 0; i < response.length; i++) {
+                           option += '<option value="' + response[i].PK_Location_Id + '">' + response[i].Loc_Name + '</option>';
+                       }
+                       location.html(option);
+                   },
+                   error: function () {
+                       location.html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                   }
+               });
+           });                 
+           
+           let code = $('#code');
+           let name = $('#name');
+           let type = $('#type');
+           let qtyOfMonth = $('#qtyOfMonth');
+           let priceOfMonth = $('#priceOfMonth');
+           let status = $('#status');
+           let start = $('#start');
+           let end = $('#end');
+           let discount = $('#discount'); 
+            
+           function protectedControl(control) {
+               $(control).bind("cut copy paste drag drop", function (e) {
+                   e.preventDefault();
+               });
+           }
+
+           function OnlyNumber(control) {
+               protectedControl(control);
+
+               $(control).keypress(function (event) {
+                   let value = event.target.value;
+
+                   if (value[0] === '.') {
+                       return false;
+                   }
+
+                   if (value[0] === '0') {
+                       $(control).val(value.substring(1, value.length))
+                   }
+
+                   if ((event.which !== 46 || $(this).val().indexOf('.') !== -1) && (event.which < 48 || event.which > 57)) {
+                       event.preventDefault();
+                   }
+               });
+           }
+           // input number
+           OnlyNumber('#qtyOfMonth');
+           OnlyNumber('#priceOfMonth'); 
+           OnlyNumber('#discount');
+           // input number
+           
+           boss.onChangeRemoveError('#manager');
+           company.onChangeRemoveError('#company');
+           location.onChangeRemoveError('#location');
+           boss.onChangeRemoveError('#code');
+            
+            code.onChangeRemoveError('#code');
+            name.onChangeRemoveError('#name');
+            type.onChangeRemoveError('#type');
+            qtyOfMonth.onChangeRemoveError('#qtyOfMonth');
+            priceOfMonth.onChangeRemoveError('#priceOfMonth');
+            status.onChangeRemoveError('#status');
+            start.onChangeRemoveError('#start');
+            end.onChangeRemoveError('#end');
+            discount.onChangeRemoveError('#discount');    
+            
+            let today = moment();
+                                        
+            $('#start').val(today.format('YYYY-MM-DD'));
+            
+           OnlyNumber('#end');
+           $('#btn-add-voucher-type').click(function (){
+               let form = $('#form-add-voucher-type').serializeArray();
+               
+               let start = $('#start');
+                             
+               for (let item in form){                 
+                    if (form[item].value === '' ){
+                        company.setClassError('#' + form[item].name)
+                    }   
+               }
+                           
+               if (start.val() === '')
+               {
+                   start.setClassError('#start')
+                   return false;
+               }
+               
+               let month = $('#qtyOfMonth').val()
+               let amount = month * $('#priceOfMonth').val();
+               let discount = $('#discount').val(); 
+               
+               let amountInMonth = amount;
+               
+               if (discount > 0){
+                   amountInMonth = amount * (discount / 100);
+               }               
+               
+               let date = start.val();
+               
+               let setDate = moment(date, "YYYY/MM/DD")
+           
+               form.push({name : 'amountOfMonth', value:amountInMonth});
+               
+               form.push({name : 'ends', value: setDate.add(month -1 ,'M').format('YYYY-MM-DD')});  
+               
+               form.push({name:'amountMonthYearRent',value: month});
+              
+               $.ajax({
+                    type: 'POST',
+                    data :form,
+                    url: '@Url.Action("Store", "VoucherType")',
+                    success: function (response){
+                         if (response.code){
+                            code.setClassError('#code');
+                            $('#error-code').text(response.code);
+                            return false;
+                         }
+                         else if (response.name){
+                             name.setClassError('#name');
+                             $('#error-name').text(response.name);
+                             return false;
+                         }
+                         $('#image_view_voucher').attr('src','/Content/images/no-image.jpg');
+                         $('#form-add-voucher-type').get(0).reset();
+                         $('#modal-add-voucher-type').modal('hide');
+                         LoadTableVoucherType();
+                     }
+               });               
+           });
+            
+            
+          function isImage(icon) {
+              const ext = ['.jpg', '.jpeg', '.gif', '.png', '.PNG','.JPG','.JPEG'];
+              return ext.some(el => icon.endsWith(el));
+          }
+          
+          function showPreview(id, doClick){
+                $(id).click(function () {
+                   $(doClick).focus().trigger("click");
+               });
+          } 
+              
+           showPreview('#image_view_voucher','#choose_voucher');
+              
+            
+          function onUpload(control, imagePreview, imageForSave) {
+                
+              $(control).change(function () {
+
+                  let fileUpload = $(control).get(0);
+
+                  let files = fileUpload.files;                   
+
+                  let fileSize = files[0].size / 1024 / 1024;
+
+                  let fileType = files[0].name; 
+
+                  if (!isImage(fileType)) {
+
+                      $(control).val("");
+
+                      swal({
+                          title: "Warning",
+                          text: "File must be file Image.",
+                          type: "warning",
+                      });
+                      return false;
+                  }
+
+                  if (fileSize > 5) {
+
+                      $(control).val("");
+
+                      swal({
+                          title: "Warning",
+                          text: "File size must under 5M",
+                          type: "warning",
+                      });
+                      return false;
+                  }
+                                 
+                  let fileData = new FormData();
+
+                  for (let i = 0; i < files.length; i++) {
+                      fileData.append(files[i].name, files[i]);
+                  }
+
+                  let token = $('input[name="__RequestVerificationToken"]').val();
+
+                  fileData.append('path', 'VoucherType/');
+                  fileData.append('__RequestVerificationToken', token);
+
+                  $.ajax({
+                      type: "POST",
+                      url: "/Other/Upload",
+                      contentType: false,
+                      processData: false,
+                      data: fileData,
+                      success: function (response) {
+                          
+                          if (response.message) {
+                              $(imagePreview).attr('src', '/Content/Uploads/VoucherType/' + response.message);
+                              $(imageForSave).val(response.message);
+                          }
+                         
+                      },
+                      error: function (error) {
+                          console.log(error);
+                      }
+                  });
+              });
+          }
+          
+          onUpload('#choose_voucher','#image_view_voucher','#photo_voucher');      
+            
+          // Create Voucher  
+          
+          
+          // Edit Voucher Type 
+          $(document).on('click','#btn-edit-voucher-type',function (){
+              let row = $(this).closest('tr');
+              $('#voucherTypeId').val(row.attr('id'));
+              $('#locationId').val(row.attr('data-locationId'));
+              $('#type_edit').val(row.attr('data-type'));
+              $('#name_edit').val(row.attr('data-name'));
+              $('#code_edit').val(row.attr('data-code'));
+              $('#qtyOfMonth_edit').val(row.attr('data-qty-month'));
+              $('#priceOfMonth_edit').val(row.attr('data-price'));
+              $('#status_edit').val(row.attr('data-status'));
+              $('#start_edit').val(row.attr('data-start-rent'));
+              $('#discount_edit').val(row.attr('data-discount'));
+              $('#photo_voucher_edit').val(row.attr('data-picture'));
+              
+              $('#image_view_voucher_edit').attr('src','/Content/Uploads/VoucherType/'+ row.attr('data-picture'));
+              $('#modal-edit-voucher-type').modal('show');
+          });  
+          
+          showPreview('#image_view_voucher_edit','#choose_voucher_edit');
+          onUpload('#choose_voucher_edit','#image_view_voucher_edit','#photo_voucher_edit'); 
+          
+          $('#code_edit').onChangeRemoveError('#code_edit');
+          $('#name_edit').onChangeRemoveError('#name_edit');
+          $('#type_edit').onChangeRemoveError('#type_edit');
+          $('#qtyOfMonth_edit').onChangeRemoveError('#qtyOfMonth_edit');
+          $('#priceOfMonth_edit').onChangeRemoveError('#priceOfMonth_edit');
+          $('#status_edit').onChangeRemoveError('#status_edit');
+          $('#start_edit').onChangeRemoveError('#start_edit');
+          $('#discount_edit').onChangeRemoveError('#discount_edit'); 
+          
+          OnlyNumber('#qtyOfMonth_edit');
+          OnlyNumber('#priceOfMonth_edit'); 
+          OnlyNumber('#discount_edit');       
+          
+          // update
+          $('#btn-update-voucher-type').click(function (){
+              
+             let form = $("#form-edit-voucher-type").serializeArray();
+              
+             let start = $('#start_edit');        
+             
+             for (let item in form){                 
+                  if (form[item].value === '' ){
+                      company.setClassError('#' + form[item].name)
+                  }   
+             }            
+             
+             let month = $('#qtyOfMonth_edit').val()
+             let amount = month * $('#priceOfMonth_edit').val();
+             let discount = $('#discount_edit').val();            
+             
+             let amountMonthYearRent = amount;
+             if (discount > 0){
+                 amountMonthYearRent = amount * (discount / 100);
+             }
+             
+             let date = start.val();
+                            
+             let setDate = moment(date, "YYYY/MM/DD");
+             
+             form.push({name : 'end_edits', value: setDate.add(month -1 ,'M').format('YYYY-MM-DD')});  
+             
+             form.push({name : 'amountOfMonth_edit', value:amountMonthYearRent});
+             
+             form.push({name : 'amountMonthYearRent_edit', value: month});               
+         
+             $.ajax({
+                 type: 'POST',
+                 data :form,
+                 url: '@Url.Action("Update", "VoucherType")',
+                 success: function (response){
+                   
+                      if (response.code){
+                         code.setClassError('#code_edit');
+                         $('#error-code-edit').text(response.code);
+                         return false;
+                      }
+                      else if (response.name){
+                          name.setClassError('#name_edit');
+                          $('#error-name-edit').text(response.name);
+                          return false;
+                      }
+                      $('#image_view_voucher_edit').attr('src','/Content/images/no-image.jpg');
+                      $('#form-edit-voucher-type').get(0).reset();
+                      $('#modal-edit-voucher-type').modal('hide');
+                      LoadTableVoucherType();
+                  }
+            });
+             
+          });
+          
+        });
+    </script>
+}

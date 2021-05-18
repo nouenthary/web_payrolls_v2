@@ -1,0 +1,251 @@
+@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetAllStockProductCut_Result>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }   
+    
+    td {
+        vertical-align: middle !important; 
+    }
+    
+     .label-green {
+            background: #28A745 !important;
+     }
+     
+     
+     .table-header-shadow{
+        box-shadow: 0 .20rem 1rem rgba(0,0,0,.10);
+     }
+     
+     .btn-green {
+         background: #28A745 !important;
+         color: white;
+     }
+          
+     thead, tbody tr {
+          display: table;
+          width: 2400px;
+          table-layout: fixed;
+      }
+      
+      thead {
+          width: calc(2400px - 0.1em);
+      }
+      
+      tbody {
+          height: 720px;
+          overflow-y: scroll;
+          overflow-x: hidden;
+      }
+</style>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize_" name="pageSize_">
+                @foreach (var item in ViewBag.PageSize)
+                {
+                    if (item.Value == ViewBag.psize + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row justify-content-end pr-3 pb-2">
+            <div class="float-right">
+
+                <div class="btn-group btn-sm" data-toggle="buttons">
+
+                    <label class="btn btn-sm bg-white" id="btn-export-stock-in-cut-all">
+                        <input type="radio" name="options" id="option3" autocomplete="off">
+                        <span class="text-inverse">
+                            <i class="ti-printer"></i> @Resources.Voucher.Excel
+                        </span>
+                    </label>
+                </div>
+                
+                <button type="button" class="btn btn-sm" style="background: #28a745; color: white" onclick="window.location = '/StockInProductCut/Create'">
+                    <i class="ti-plus"></i> Add New
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-md text-center" id="table-stock-in-product-cut-all">
+        <thead class="text-capitalize font-weight-bold table-header-shadow">
+            <tr style="border: 1px solid #f3f1f1">
+                <th style="width: 60px">#</th>
+                <th>HOD</th>
+                <th>Company</th>
+                
+                <th>Product Type</th>
+                <th>Type Name</th>
+                <th>Product</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Grade</th>
+                <th>Measure</th>
+                <th>Barcode</th>
+                <th>Qr Code</th>
+                
+                <th>Product Cut No</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Status</th>
+                
+                <th>Import Date</th>
+                <th>Import Time</th>
+                <th>Import By</th>
+                
+                <th>Confirm by</th>
+                <th>Date Confirm</th>
+                <th>Time Confirm</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+                <tr
+                    data-product-no-id="@item.Stock_In_Product_Cut_No"
+                >
+                    <td style="width: 60px">
+                        @(rowNo += 1)
+                    </td>
+                    
+                    <td>@item.Name</td>
+                    <td><i class="ti-home"></i> @item.Comp_Name</td>
+                    <td><span class="label label-info">@item.Pro_Type </span></td>
+                    <td>@item.ProType_Name</td>
+                    <td>@item.Pro_Name</td>
+                    <td>
+                        <span class="label label-default p-1" style="background: @item.Color.ToLower();color: grey"></span> @item.Color
+                    </td>
+                    <td>@item.Size</td>
+                    <td>@item.Grade_Name</td>
+                    <td>@item.Measu_Name</td>
+                    <td>@item.BarCode</td>
+                    <td>@item.QR_Code</td>
+                    
+                    <td><span class="label label-light-danger"># @item.Stock_In_Product_Cut_No</span> </td>
+                    
+                    <td>@item.In_QTY</td>
+                    
+                    <td>@item.Price</td>
+                    
+                    <td>@item.Total_Price</td>
+                    
+                    <td>
+                        @if (item.Confirm_Status == "Done")
+                        {
+                            <span class="label label-green" style="width: 70px"><i class="ti-check"></i> @item.Confirm_Status</span>
+                        }
+                        else if (item.Confirm_Status == "Reject")
+                        {
+                            <span class="label label-danger" style="width: 70px"><i class="ti-close"></i> @item.Confirm_Status</span>
+                        }
+                        else
+                        {
+                            <span class="label label-success" style="width: 70px"><i class="ti-reload"></i> @item.Confirm_Status</span>
+                        }
+                    </td>
+
+                    <td>@item.In_Date</td>
+            
+                    <td>@item.In_Time</td>
+            
+                    <td>
+                        @if (string.IsNullOrEmpty(item.User_Update))
+                        {
+                            <span class="label label-light-info">No Confirm</span>
+                        }
+                        else
+                        {
+                            @item.User_Update
+                        }
+                    </td>
+                    
+                    <td>
+                          @if (string.IsNullOrEmpty(item.User_Confirm))
+                           {
+                               <span><i class="ti-time"></i></span>
+                           }
+                           else
+                           {
+                               @item.User_Confirm
+                           }
+                    </td>
+            
+                    <td>
+                        @if (string.IsNullOrEmpty(item.Confirm_Date))
+                        {
+                            <span><i class="ti-time"></i></span>
+                        }
+                        else
+                        {
+                            @item.Confirm_Date
+                        }
+                    </td>
+            
+                    <td>
+                        @if (string.IsNullOrEmpty(item.Confirm_Time))
+                        {
+                            <span><i class="ti-time"></i></span>
+                        }
+                        else
+                        {
+                            @item.Confirm_Time
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div class="float-left" style="padding: 20px 0;">
+    @Resources.Voucher.Showing 
+    @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 
+    @Resources.Voucher.to 
+    @Model.PageCount 
+    @Resources.Voucher.of @ViewBag.Records 
+    @Resources.Voucher.Entries
+</div>
+
+<div class="float-right">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new {page}))
+</div>

@@ -1,0 +1,528 @@
+@model web_payrolls.Models.tblProduction_Grade
+
+@{
+    ViewBag.Title = "Edit Product Grade";
+    ViewBag.Page = "Edit Product Grade";
+}
+
+<div class="card card-outline-info">
+<div class="card-header">
+    <h4 class="m-b-0 text-white card-text">@Resources.Voucher.Edit @Resources.Voucher.Product Grade</h4>
+</div>
+<div class="card-body">
+<form action="@Url.Action("Update","ProductGrade")" id="form-update-product-grade">
+
+@Html.AntiForgeryToken()
+
+<div class="row">
+
+<div class="col-md-8">
+
+<div class="row">
+
+ <div class="form-group col-md-6">
+
+     <label>Product Type<span class="text-danger">*</span></label>
+     <select id="productType" name="productType" class="form-control" required="required" disabled>
+         <option value="">-- Choose Product Type --</option>
+          @foreach (var item in ViewBag.ProductType)
+          {
+              <option value="@item.Value">@item.Text</option>
+          }
+     </select>
+ </div>
+
+<div class="form-group col-md-6">
+    @Html.Hidden("gradeId", Model.PK_Grade_Id)
+    @Html.Hidden("productId", Model.tblProduction_Product.PK_Pro_Id)
+    <label>@Resources.Voucher.Product Measure <span class="text-danger">*</span></label>
+    <div class="controls">
+        <select class="form-control" id="productMeasure" name="productMeasure" required="required">
+            <option value="">-- Choose Product Measure --</option>
+            @{
+                foreach (var row in ViewBag.Measure)
+                {
+                    if (Model.Measu_Name == row.Measu_Name)
+                    {
+                        <option value="@row.Measu_Name" selected="selected">@row.Measu_Name</option>
+                    }
+                    else
+                    {
+                        <option value="@row.Measu_Name">@row.Measu_Name</option>
+                    }
+
+                }
+            }
+        </select>
+
+        <div class="help-block"></div>
+    </div>
+</div>
+
+<div class="form-group col-md-6">
+    <label>Product Code<span class="text-danger">*</span></label>
+    <div class="controls">
+        <div class="input-group">
+            <input type="text" id="productCode" name="productCode" class="form-control" placeholder="Enter Product Code" value="@Model.Code_Product">
+        </div>
+    </div>
+</div>
+
+<div class="form-group col-md-6">
+    <label>Barcode <span class="text-danger">*</span></label>
+    <div class="controls">
+        <div class="input-group">
+            <input type="text" id="barcode" name="barcode" class="form-control" placeholder="Enter Barcode" value="@Model.BarCode">
+            <div class="input-group-append">
+                <button class="btn btn-default" type="button" id="btn-barcode">
+                    <i class="ti-control-shuffle"></i>
+                </button>
+            </div>
+            <div class="invalid-feedback" id="error-barcode"></div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group col-md-6">
+    <label>Qr code<span class="text-danger">*</span></label>
+    <div class="controls">
+        <input id="qrCode" name="qrCode" class="form-control" placeholder="Enter Qr Code" value="@Model.QR_Code"/>
+        <div class="invalid-feedback" id="error-qrCode"></div>
+    </div>
+</div>
+
+<div class="form-group col-md-6">
+    <label>Grade<span class="text-danger">*</span></label>
+    <div class="controls">
+        <input id="grade" name="grade" class="form-control" placeholder="Enter Grade" required="required" value="@Model.Grade_Name"/>
+        <div class="help-block"></div>
+    </div>
+</div>
+
+<div class="form-group col-md-6">
+    <label>Color<span class="text-danger">*</span></label>
+    <div class="controls">
+        <input id="color" name="color" class="form-control" placeholder="Enter Color" required="required" value="@Model.Color"/>
+        <div class="help-block"></div>
+    </div>
+</div>
+
+
+<div class="form-group col-md-6">
+    <label>Size<span class="text-danger">*</span></label>
+    <div class="controls">
+        <input id="size" name="size" class="form-control" placeholder="Enter Size" required="required" value="@Model.Size"/>
+        <div class="invalid-feedback" id="error-size"></div>
+    </div>
+
+</div>
+
+<div class="form-group  col-md-6" id="ctnDoubleWhole">
+    <label>Double Whole Price<span class="text-danger">*</span></label>
+    <div class="controls">
+        <input id="doubleWholePrice" name="doubleWholePrice" class="form-control" required="required" placeholder="Enter Double Whole Price" value="@Model.Double_Whole_Price"/>
+        <div class="help-block"></div>
+    </div>
+</div>
+
+<div class="form-group  col-md-6" id="ctnWhole">
+    <label>Whole Price<span class="text-danger">*</span></label>
+    <div class="controls">
+        <input id="wholePrice" name="wholePrice" class="form-control" required="required" placeholder="Enter Double Whole " value="@Model.Whole_Price"/>
+        <div class="help-block"></div>
+    </div>
+</div>
+
+<div class="form-group  col-md-6" id="ctnUnitPrice">
+    <label>Unit Price<span class="text-danger">*</span></label>
+    <div class="controls">
+        <input id="unitPrice" name="unitPrice" class="form-control" required="required" placeholder="Enter Unit Price " value="@Model.Unit_Price"/>
+        <div class="help-block"></div>
+    </div>
+</div>
+
+<div class="form-group  col-md-6" id="ctnCost">
+    <label>Cost<span class="text-danger">*</span></label>
+    <div class="controls">
+        <input id="cost" name="cost" class="form-control" required="required" placeholder="Enter Cost " value="@Model.Cost"/>
+        <div class="help-block"></div>
+    </div>
+</div>
+
+<div class="form-group  col-md-6" id="ctnPrice">
+    <label>Normal Price<span class="text-danger">*</span></label>
+    <div class="controls">
+        <input id="normalPrice" name="normalPrice" class="form-control" required="required" placeholder="Enter Normal Price" value="@Model.Normal_Price"/>
+        <div class="help-block"></div>
+    </div>
+</div>
+
+<div class="form-group col-md-6">
+    <label>Product Status <span class="text-danger">*</span></label>
+    <div class="controls">
+        <select class="form-control" id="ProductStatus" name="ProductStatus">
+            @foreach (var item in ViewBag.Status)
+            {
+                if (item == Model.Pro_Status)
+                {
+                    <option value="@item" selected="selected">@item</option>
+                }
+                else
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+        <div class="help-block"></div>
+    </div>
+</div>
+
+
+<div class="form-group col-md-6">
+    <label>Status Discount <span class="text-danger">*</span></label>
+    <div class="controls">
+        <select class="form-control" id="statusDiscount" name="statusDiscount">
+            @foreach (var item in ViewBag.Status)
+            {
+                if (item == Model.Status_Dis)
+                {
+                    <option value="@item" selected="selected">@item</option>
+                }
+                else
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <div class="help-block"></div>
+    </div>
+</div>
+
+
+<div class="form-group  col-md-6" id="ctnDiscount">
+    <label>Discount<span class="text-danger">*</span></label>
+    <div class="controls">
+        <input id="discount" name="discount" class="form-control" required="required" placeholder="Enter Discount" value="0"/>
+        <div class="help-block"></div>
+    </div>
+</div>
+
+<div class="form-group col-md-6" id="ctnDateDiscount">
+    <label for="">@Resources.Voucher.Date @Resources.Voucher.Discount<span class="text-danger">*</span></label>
+    <div class="input-daterange input-group">
+
+        <input type="date" class="form-control" id="startDiscount" name="startDiscount" value="@Model.Start_Dis">
+
+        <div class="input-group-append">
+            <span class="input-group-text bg-info b-0 text-white">@Resources.Voucher.OTTo</span>
+        </div>
+
+        <input type="date" class="form-control" id="endDiscount" name="endDiscount" value="@Model.End_Dis">
+
+    </div>
+</div>
+
+@* choose master *@
+
+</div>
+</div>
+
+<div class="col-md-4">
+    <div class="text-center">
+        <img
+            id="image_view_picture"
+            class="img-fluid img-thumbnail"
+            alt="attachment"
+            width="350"
+            src="~/Content/Uploads/Grade/@Model.Picture_Path"
+            onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'">
+
+        <input type="file" name="choose_picture" id="choose_picture" style="display: none">
+        <input type="hidden" id="picturePath" name="picturePath" value="@Model.Picture_Path"/>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <label>Description</label>
+    <textarea class="form-control" rows="4" placeholder="Enter Description" id="desc" name="desc">@Model.Descr</textarea>
+</div>
+
+</div>
+
+<div class="form-group">
+    <div class="form-group">
+
+        <div class="text-xs-right">
+            <button type="button" class="btn btn-default float-left" onclick="window.location = '/ProductGrade/Index'">
+                <i class="ti-back-right"></i> Back
+            </button>
+
+            <button type="submit" class="btn btn-default float-right" id="btn-update-product-grade" style="background: #28a745; color: white;">
+                <i class="ti-save-alt"></i> @Resources.Voucher.Update Close
+            </button>
+        </div>
+
+    </div>
+</div>
+
+</form>
+</div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(function() {
+            let getParamsMap = function () {
+                let params = window.location.search.split("&");
+                let paramsMap = {};
+                params.forEach(function (p) {
+                    let v = p.split("=");
+                    paramsMap[v[0]]=decodeURIComponent(v[1]);
+                });
+                return paramsMap;
+            };
+
+            let id = getParamsMap()['id'];
+
+            let productType = getParamsMap()['productType'];
+
+            $('#productId').val(id);
+            //alert(id);
+            //alert(productType);
+            $('#productType').val(productType);
+
+
+          if(productType === 'Fabric' || productType === 'Accessory'){
+
+                 Disabled('#doubleWholePrice');
+                 Disabled('#wholePrice');
+                 Disabled('#unitPrice');
+                 Disabled('#cost');
+                 Disabled('#normalPrice');
+                 Disabled('#ProductStatus');
+                 Disabled('#statusDiscount');
+                 Disabled('#discount');
+                 Disabled('#startDiscount');
+                 Disabled('#endDiscount');
+            }
+            else if (productType === 'Recycling' || productType === 'Processing'){
+                 Enable('#doubleWholePrice');
+                 Enable('#wholePrice');
+                 Enable('#unitPrice');
+                 Enable('#cost');
+                 Enable('#normalPrice');
+                 Enable('#ProductStatus');
+                 Enable('#statusDiscount');
+                 Enable('#discount');
+                 Enable('#startDiscount');
+                 Enable('#endDiscount');
+            }
+
+           // Disable control
+          function Disabled(ctn){
+              $(ctn).attr('readonly','readonly');
+          }
+
+          // Enable
+          function Enable(ctn){
+              $(ctn).removeAttr('readonly');
+          }
+
+          // utils function
+          //
+          function setClassError(id) {
+              $(id).attr('class', 'form-control is-invalid');
+          }
+
+          //
+          function setRemoveError(id) {
+              $(id).attr('class', 'form-control');
+          }
+
+          //
+          function onChange(id) {
+              $(id).change(function () {
+                  setRemoveError(id);
+              });
+          }
+
+           function protectedControl(control) {
+              $(control).bind("cut copy paste drag drop", function (e) {
+                  e.preventDefault();
+              });
+          }
+
+           function OnlyNumber(control) {
+              protectedControl(control);
+
+              $(control).keypress(function (event) {
+                  let value = event.target.value;
+
+                  if (value[0] === '.') {
+                      return false;
+                  }
+
+                  if ((event.which !== 46 || $(this).val().indexOf('.') !== -1) && (event.which < 48 || event.which > 57)) {
+                      event.preventDefault();
+                  }
+              });
+          }
+
+
+          // utils function
+
+          // on remove class error
+          let form = $('#form-update-product-grade').serializeArray();
+          for(let item in form){
+              onChange('#'+ form[item].name)
+          }
+
+          // Input Only Number
+          OnlyNumber('#doubleWholePrice');
+          OnlyNumber('#wholePrice');
+          OnlyNumber('#unitPrice');
+          OnlyNumber('#cost');
+          OnlyNumber('#normalPrice');
+          OnlyNumber('#discount');
+
+          function SweatAlert(message, type) {
+                swal({
+                    title: message,
+                    type: type,
+                    timer: 1500
+                });
+          }
+
+          // click save
+          $(document).on('submit','#form-update-product-grade',function(e) {
+
+            e.preventDefault();
+
+            let form = $('#form-update-product-grade').serializeArray();
+
+            //console.log(form); return;
+            $.ajax({
+                type: 'POST',
+                url: $('#form-update-product-grade').attr('action'),
+                data: form,
+                success: function(response) {
+
+                    if(response.barcode){
+                        setClassError('#barcode');
+
+                        $('#error-barcode').text(response.barcode);
+                        return false;
+                    }
+
+                    if(response.qrCode){
+                        setClassError('#qrCode');
+                        $('#error-qrCode').text(response.qrCode);
+                        return false;
+                    }
+
+                    if(response.size){
+                        setClassError('#size');
+                        $('#error-size').text(response.size);
+                        return false;
+                    }
+                    //
+                    SweatAlert(response,'success');
+                    window.location = '/ProductGrade/Index';
+                }
+            });
+          });
+
+          // Show
+          function showPreview(id, doClick){
+              $(id).click(function () {
+                 $(doClick).focus().trigger("click");
+             });
+          }
+
+          //
+          showPreview('#image_view_picture','#choose_picture');
+
+          //
+          function isImage(icon) {
+              const ext = ['.jpg', '.jpeg', '.gif', '.png', '.PNG','.JPG','.JPEG'];
+              return ext.some(el => icon.endsWith(el));
+          }
+
+          // function Upload
+          function onUpload(control, imagePreview, imageForSave) {
+
+              $(control).change(function () {
+
+                  let fileUpload = $(control).get(0);
+
+                  let files = fileUpload.files;
+
+                  let fileSize = files[0].size / 1024 / 1024;
+
+                  let fileType = files[0].name;
+
+                  if (!isImage(fileType)) {
+
+                      $(control).val("");
+
+                      swal({
+                          title: "Warning",
+                          text: "File must be file Image.",
+                          type: "warning",
+                      });
+                      return false;
+                  }
+
+                  if (fileSize > 5) {
+
+                      $(control).val("");
+
+                      swal({
+                          title: "Warning",
+                          text: "File size must under 5M",
+                          type: "warning",
+                      });
+                      return false;
+                  }
+
+                  let fileData = new FormData();
+
+                  for (let i = 0; i < files.length; i++) {
+                      fileData.append(files[i].name, files[i]);
+                  }
+
+                  let token = $('input[name="__RequestVerificationToken"]').val();
+
+                  fileData.append('path', 'Grade/');
+                  fileData.append('__RequestVerificationToken', token);
+
+                  $.ajax({
+                      type: "POST",
+                      url: "/Other/Upload",
+                      contentType: false,
+                      processData: false,
+                      data: fileData,
+                      success: function (response) {
+
+                          if (response.message) {
+                              $(imagePreview).attr('src', '/Content/Uploads/Grade/' + response.message);
+                              $(imageForSave).val(response.message);
+                          }
+                      },
+                      error: function (error) {
+                          console.log(error);
+                      }
+                  });
+              });
+
+          }
+
+          // call
+          onUpload('#choose_picture', '#image_view_picture', '#picturePath');
+
+        });
+    </script>
+}
+

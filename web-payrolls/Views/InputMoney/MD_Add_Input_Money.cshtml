@@ -1,0 +1,72 @@
+﻿<!--Form Create-->
+<div class="modal fade" id="modal-add-input-money" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="font-weight: 600" class="modal-title text-primary card-text" id="exampleModalLabel">
+                    <i class="ti-plus pr-2"></i>@Resources.Voucher.Add @Resources.Voucher.InputMoney
+                </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="#" id="form-add-input-money">
+
+                <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <img style="height: 270px" width="100%" src="/Content/images/no-image.jpg" alt="me" class="img-thumbnail" id="photo-view-input">
+                                <input type="file" id="photo_input_money" style="display: none" />
+                                <input type="hidden" id="txt_photo" name="txt_photo" />
+                                <input type="hidden" id="salary_type" name="salary_type" />
+                            </div>
+
+                            @Html.Hidden("txt_sid_input_money")
+
+                            @*<div class="form-group">
+                                @Html.Label("Date")<span class="text-danger">*</span>
+                                @Html.TextBox("date_input_money", null, new { @class = "form-control", type = "date" })
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txt_start">Time<span class="text-danger">*</span></label>
+                                <div class="input-daterange input-group">
+                                    <input type="time" class="form-control" name="txt_start_input" id="txt_start_input"  maxlength="12">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-info b-0 text-white">TO</span>
+                                    </div>
+                                    <input type="time" class="form-control" id="txt_end_input" name="txt_end_input" maxlength="12">
+                                </div>
+                            </div>*@
+
+                            <div class="form-group">
+                                @Html.Label(Resources.Voucher.Money)<span class="text-danger">*</span>
+                                @Html.TextBox("txt_total_money", null, new { @class = "form-control", placeholder =@Resources.Voucher.Enter +" "+@Resources.Voucher.Money, maxlength = "12" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label(Resources.Voucher.Description)
+                                @Html.TextArea("txt_desc", null, new { @class = "form-control", placeholder = @Resources.Voucher.Description, rows = "4" })
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-add-input-money" style="background: #28a745; color: #fff; font-size: 20px"><i class="ti-save-alt pr-2"></i>@Resources.Voucher.Add @Resources.Voucher.InputMoney</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--Form Create-->

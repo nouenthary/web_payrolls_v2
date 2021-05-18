@@ -1,0 +1,80 @@
+@{
+    ViewBag.Title = "Product Attribute";
+    ViewBag.Page = "Product Attribute";
+}
+
+<ul class="nav nav-tabs customtab bg-white" role="tablist">
+    <!-- Tab Color -->
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#color" role="tab">
+            <span class="hidden-sm-up"><i class="ti-home"></i></span>
+            <span class="hidden-xs-down text-uppercase">Color</span>
+        </a>
+    </li>
+    
+    <!-- Tab Size -->
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#size" role="tab">
+            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+            <span class="hidden-xs-down text-uppercase">Size</span>
+        </a>
+    </li>
+    
+    <!-- Tab Grade -->
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#grade" role="tab">
+            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+            <span class="hidden-xs-down text-uppercase">Grade</span>
+        </a>
+    </li>
+    
+    <!-- Tab Grade -->
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#stock" role="tab">
+            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+            <span class="hidden-xs-down text-uppercase">Stock</span>
+        </a>
+    </li>
+    
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    
+    <div class="tab-pane" id="color" role="tabpanel">
+        <div id="show-color"></div>
+    </div>
+
+    <div class="tab-pane" id="size" role="tabpanel">
+        <div id="show-size"></div>
+    </div> 
+
+    <div class="tab-pane" id="grade" role="tabpanel">
+        <div id="show-grade"></div>
+    </div>
+
+    <div class="tab-pane active" id="stock" role="tabpanel">
+        <div id="show-stock-in"></div>
+    </div>
+    
+</div>
+
+@section Scripts
+{
+    <script>
+    $(function() {
+        
+        // Tab Stock
+        $('#show-stock-in').load("/StockIn/GetTable",{
+            
+        });
+        
+        // show modal create
+        $(document).on('click','#btn-create-stock-in',function() {
+            $('#modal-add-stock-in').modal('show');
+        });
+        // Tab Stock
+        
+    });
+    </script>
+}

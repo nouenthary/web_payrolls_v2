@@ -1,0 +1,644 @@
+@using web_payrolls.Models
+@{
+    ViewBag.Title = "Product";
+    ViewBag.Page = "Product";
+}
+
+<div class="card" style="margin-bottom: 0;border-top: #428bca 3px solid">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide</a>
+        </div>
+        <h4 class="card-title m-b-0 card-text"><i class="ti-filter"></i> @Resources.Voucher.Product</h4>
+    </div>
+    <div class="card-body collapse show b-t">
+        <div>
+            <div class="row">
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>HOD</label>
+                    <div class="input-group">
+                        <select id="txt_bid" name="txt_bid" class="form-control">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+
+                            @foreach (var item in ViewBag.Manager)
+                            {
+                                if (item.PK_Boss_Id + "" == ViewData["ManagerId"] + "")
+                                {
+                                    <option value="@item.PK_Boss_Id" selected="selected">@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.PK_Boss_Id">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Product Type</label>
+                    <div class="input-group">
+                        <select id="txt_product_type" class="form-control">
+                            <option value="">-- @Resources.Voucher.Choose Product Type --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Type Name</label>
+                    <div class="input-group">
+                        <select id="txt_product_type_name" class="form-control">
+                            <option value="">-- @Resources.Voucher.Choose Product Type Name --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-4 pb-2">
+                    <label>Product Name</label>
+                    <div class="input-group">
+                        <input class="form-control" id="txt_product_name" placeholder="Search Product name"/>
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-2 col-md-4 pb-2" style="display:none;">
+                    <label>.</label>
+                    <div class="input-group">
+                        <button class="btn btn-info" id="btn-search-product">
+                            <i class="ti-search"></i> @Resources.Voucher.Searchhere
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+<div id="show-product"></div>
+
+@Html.Partial("ModalCreateProduct")
+@Html.Partial("ModalUpdateProduct")
+
+@* view photo *@
+<div class="modal fade" id="Modal-View-Photo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="image-card-view"
+                     class="card-img-top"
+                     alt="Card image cap"
+                     src="">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@* view photo *@
+@section Scripts
+{
+    <script>
+        $(function() {
+             let token = $('input[name="__RequestVerificationToken"]').val();
+             localStorage.setItem('token_link',token + token);
+             let bid = $('#txt_bid');
+             let type = $('#txt_product_type');
+             let typeName = $('#txt_product_type_name');
+             let product = $('#txt_product_name');
+
+
+              function GetSearchObject() {
+                    return {
+                        bid: bid.val(),
+                        type: type.val(),
+                        typeName: typeName.val(),
+                        product : product.val()
+                    }
+              }
+
+              // Load
+                function LoadProduct() {
+                    let objSearch = GetSearchObject();
+                    $('#show-product').load('/Product/GetTable', {
+                        ...objSearch,
+                        pageSize: $('#pageSize').val()
+                    });
+                }
+
+                LoadProduct();
+
+                $('#btn-search-product').click(function() {
+                  LoadProduct();
+                });
+
+                 //
+                $(document).on('change', '#show-product #pageSize', function () {
+                    let objSearch = GetSearchObject();
+                    $('#show-product').load('/Product/GetTable', {
+                        pageSize: $(this).val(),
+                        ...objSearch
+                    });
+                });
+                //
+                $(document).on('click', '#show-product a', function (e) {
+                    try {
+                        let link = $(this).attr("href").split('=');
+                        let objSearch = GetSearchObject();
+                        $('#show-product').load('/Product/GetTable', {
+                            pageSize: $('#pageSize').val(),
+                            page: link[1],
+                            ...objSearch
+                        });
+                        e.preventDefault();
+                    } catch (ex) {
+                    }
+                });
+                 // Load
+
+               $(document).on('click', '#show-product #btn-export-product', function () {
+                   $('#table-product').csvExport();
+               });
+
+                // utils
+               //
+               function setClassError(id) {
+                   $(id).attr('class', 'form-control is-invalid');
+               }
+
+               //
+               function setRemoveError(id) {
+                   $(id).attr('class', 'form-control');
+               }
+
+               //
+               function onChange(id) {
+                   $(id).change(function () {
+                       setRemoveError(id);
+                   });
+               }
+
+               // get drop down list
+                $.fn.GetDropListSelect = function (object) {
+                      function GetLabel(text) {
+                                return '<option value="">-- @Resources.Voucher.Choose ' + text + ' -- </option>';
+                       }
+
+                       $(this).change(function () {
+                           let data = {
+                               id: $(this).val(),
+                               __RequestVerificationToken: object.token
+                           };
+                           if (object.removeChild === true) {
+                               for (let i = 0; i < object.child.length; i++) {
+                                   $('#' + object.child[i].key).html(GetLabel(object.child[i].value));
+                               }
+                           }
+                           $.ajax({
+                               type: "POST",
+                               url: object.url,
+                               data: data,
+                               success: function (response) {
+                                   let option = GetLabel(object.label);
+                                   for (let i = 0; i < response.length; i++) {
+                                       option += '<option value="' + response[i].key + '">' + response[i].value + '</option>';
+                                   }
+                                   $(object.supChild).html(option);
+                               },
+                               error: function () {
+                                   $(object.supChild).html(GetLabel(object.label));
+                               }
+                           });
+
+                       });
+                   }
+                // get drop down list
+                // <--- utils function -->
+
+             // utils
+
+              // HOD
+                $('#hodId').GetDropListSelect({
+                    url: "/Other/GetProductType",
+                    token : token,
+                    supChild: '#productTypeId',
+                    label:"Product Type"
+                });
+                //HOD
+
+                $('#hodId').change(function (){
+                    $('#productTypeId').val('');
+                });
+
+              // search
+              bid.GetDropListSelect({
+                     url: "/Other/GetProductTypeByBoss",
+                     token : token,
+                     supChild: '#txt_product_type',
+                     removeChild: true,
+                     child: [{key: "txt_product_type_name", value : "Product Type Name"} ],
+                     label:"Product Type"
+               });
+
+              type.GetDropListSelect({
+                   url: "/Other/GetProductTypeNameByType",
+                   token : token,
+                   supChild: '#txt_product_type_name',
+                   label:"Product Type Name"
+              });
+              // search
+
+              // Upload Image
+                 function isImage(icon) {
+                   const ext = ['.jpg', '.jpeg', '.gif', '.png', '.PNG','.JPG','.JPEG'];
+                   return ext.some(el => icon.endsWith(el));
+               }
+
+               // show preview choose image
+               function showPreview(id, doClick){
+                     $(id).click(function () {
+                        $(doClick).focus().trigger("click");
+                    });
+               }
+
+               showPreview('#picture-response','#choose-picture');
+
+               function onUpload(control, imagePreview, imageForSave, path) {
+
+                   $(control).change(function () {
+
+                       let fileUpload = $(control).get(0);
+
+                       let files = fileUpload.files;
+
+                       let fileSize = files[0].size / 1024 / 1024;
+
+                       let fileType = files[0].name;
+
+                       if (!isImage(fileType)) {
+
+                           $(control).val("");
+
+                           swal({
+                               title: "Warning",
+                               text: "File must be file Image.",
+                               type: "warning",
+                           });
+                           return false;
+                       }
+
+                       if (fileSize > 5) {
+
+                           $(control).val("");
+
+                           swal({
+                               title: "Warning",
+                               text: "File size must under 5M",
+                               type: "warning",
+                           });
+                           return false;
+                       }
+
+                       let fileData = new FormData();
+
+                       for (let i = 0; i < files.length; i++) {
+                           fileData.append(files[i].name, files[i]);
+                       }
+
+                       let token = $('input[name="__RequestVerificationToken"]').val();
+
+                       fileData.append('path', path);
+                       fileData.append('__RequestVerificationToken', token);
+
+                       $.ajax({
+                           type: "POST",
+                           url: "/Other/Upload",
+                           contentType: false,
+                           processData: false,
+                           data: fileData,
+                           success: function (response) {
+
+                               if (response.message) {
+                                   $(imagePreview).attr('src', '/Content/Uploads/' + path + response.message);
+                                   $(imageForSave).val(response.message);
+                               }
+
+                           },
+                           error: function (error) {
+                               console.log(error);
+                           }
+                       });
+                   });
+               }
+
+               onUpload('#choose-picture','#picture-response','#picture', 'Product/');
+               // Upload Image
+
+
+             // click show create product
+             $(document).on('click','#btn-create-product',function() {
+               $("#modal-add-product").modal("show");
+             });
+
+
+             onChange('#hodId');
+             onChange('#productTypeId');
+             onChange('#product');
+             // click create product
+
+            $('#btn-save-product').click(function() {
+              let form = $('#form-add-product').serializeArray();
+
+               for (let item in form) {
+                  if(form[item].name === "desc"){
+                      setRemoveError('#desc');
+                  }
+                  else if(form[item].name === 'picture'){
+                      setRemoveError('#picture');
+                  }
+                  else if (form[item].value === "") {
+                      setClassError('#' + form[item].name);
+                      return false;
+                  }
+               }
+
+               $.ajax({
+                   type: 'POST',
+                   url: "/Product/Create",
+                   data: form,
+                   success: function (response) {
+                       if(response.error){
+                           setClassError('#productName');
+                           $('#error-product-name').text(response.error);
+                           return false;
+                       }
+                       swal({
+                           title: response,
+                           type: "success",
+                           timer: 1500
+                       });
+
+                       $('#modal-add-product').modal('hide');
+                       LoadProduct();
+                       $('#form-add-product').get(0).reset();
+                   },
+                   error: function (error) {
+                       console.log(error);
+                   }
+               });
+
+            });
+
+            // get data from api
+          function GetDataApi(url, data) {
+             let dataResponse = null;
+             let error = false;
+             $.ajax({
+               url: url,
+               async: false,
+               type: "POST",
+               global: false,
+               dataType: 'json',
+               data: data,
+               success: function(response) {
+                  dataResponse = response
+               },
+               error: function() {
+                 error =  true
+               }
+             });
+             return {data: dataResponse, error};
+         }
+
+         // get select option
+         function setToSelect({data : data, label : label}) {
+               let option = '<option value="">-- ' + 'Choose ' +  label + ' --</option>';
+               for(let item in data){
+                   option += '<option value="'+data[item].key+'">' + data[item].value + '</option>';
+               }
+               return option;
+         }
+
+            // onchange product type
+            $("#productType").change(function (){
+                 let dataForSent = {
+                      __RequestVerificationToken: token,
+                      id : $("#hodId").val(),
+                      productType : $(this).val()
+                 };
+
+                 let {data} = GetDataApi('/Other/GetProductTypeNameByProductType', dataForSent);
+
+                 $('#productTypeId').html(setToSelect({data : data , label : 'Type Name'}));
+            });
+
+
+          // onchange product type update
+            $('#txtProductType').change(function (){
+                let dataForSent = {
+                      __RequestVerificationToken: token,
+                      id : $("#txtHodId").val(),
+                      productType : $(this).val()
+                 };
+
+                let {data} = GetDataApi('/Other/GetProductTypeNameByProductType', dataForSent);
+
+                $('#txtProductTypeId').html(setToSelect({data : data , label : 'Type Name'}));
+            });
+
+            // preview image
+            $(document).on('click','#table-product tbody img',function (){
+                $('#Modal-View-Photo').modal('show');
+                $('#image-card-view').attr('src',$(this).attr('src'));
+            });
+
+            // click show edit
+            $(document).on('click','#btn-edit-product',function() {
+                let row = $(this).closest('tr');
+                let id = row.attr('id');
+
+                let {productType, productTypes} = getProductId(id);
+
+                $('#txtProductType').val(productType);
+
+                $('#txtHodId').val(row.attr('data-hodId'));
+                $('#txtProduct').val(row.attr('data-name'));
+                $('#txtDesc').val(row.attr('data-desc'));
+                $('#txtPicture').val(row.attr('data-photo'));
+                $('#txtProductId').val(id);
+
+                let optionProductType = '<option value="">-- Choose Type Name --</option>';
+
+                for (let item in productTypes) {
+                    if (productTypes[item].Selected){
+                       optionProductType += '<option value="'+ productTypes[item].Value +'" selected="selected">' + productTypes[item].Text + '</option>';
+                    }else{
+                        optionProductType += '<option value="'+ productTypes[item].Value +'">' + productTypes[item].Text + '</option>';
+                    }
+                }
+
+                $('#txtProductTypeId').html(optionProductType);
+
+                $('#picture-response-edit').attr('src','/Content/Uploads/Product/' + row.attr('data-photo'));
+
+                $('#modal-update-product').modal("show");
+            });
+
+            function getProductId(productId){
+                let dataForSent = {
+                    __RequestVerificationToken: token,
+                    productId: productId
+                };
+
+                let {data} = GetDataApi('/Product/EditProductById', dataForSent);
+
+                return data
+            }
+
+
+            // HOD
+            $('#txtHodId').GetDropListSelect({
+                url: "/Other/GetProductType",
+                token : token,
+                supChild: '#txtProductTypeId',
+                label:"Product Type"
+            });
+            //HOD
+
+            showPreview('#picture-response-edit','#choose-picture-edit');
+            onUpload('#choose-picture-edit','#picture-response-edit','#txtPicture','Product/');
+
+            onChange('#txtHodId');
+            onChange('#txtProductTypeId');
+            onChange('#txtProduct');
+            // click update
+            $('#btn-update-product').click(function() {
+                let form = $('#form-update-product').serializeArray();
+                console.log(form);
+
+                for (let item in form) {
+                  if(form[item].name === "txtDesc"){
+                      setRemoveError('#txtDesc');
+                  }
+                  else if(form[item].name === 'txtPicture'){
+                      setRemoveError('#txtPicture');
+                  }
+                  else if (form[item].value === "") {
+                      setClassError('#' + form[item].name);
+                      return false;
+                  }
+                }
+
+                $.ajax({
+                   type: 'POST',
+                   url: "/Product/Update",
+                   data: form,
+                   success: function (response) {
+                       if(response.error){
+                           setClassError('#productName');
+                           $('#error-product-name-edit').text(response.error);
+                           return false;
+                       }
+                       swal({
+                           title: response,
+                           type: "success",
+                           timer: 1500
+                       });
+
+                       $('#modal-update-product').modal('hide');
+                       LoadProduct();
+                       $('#form-update-product').get(0).reset();
+                   },
+                   error: function (error) {
+                       console.log(error);
+                   }
+                });
+            });
+
+
+            // filter product by type set to control
+            function GetProductTypeByBoss(){
+                $.ajax({
+                    type: "POST",
+                    url: "/Product/GetProductTypeByBoss",
+                    data: {
+                         id: bid.val(),
+                         __RequestVerificationToken: token
+                    },
+                    success: function(response) {
+                        let {types, typeName} = response;
+
+                        let typeObject = '<option value="">-- Choose Product Type -- </option>';
+                        // product type
+                        for (let item in types){
+                            typeObject += "<option value='"+ types[item] +"'>" + types[item] + "</option>" ;
+                        }
+
+                        // product type name
+                        let typeNameObject = '<option value="">-- Choose Type Name -- </option>';
+                        for(let item in typeName){
+                             typeNameObject += "<option value='"+ typeName[item] +"'>" + typeName[item] + "</option>" ;
+                        }
+                        // set data to control
+                        $('#txt_product_type').html(typeObject);
+                        $('#txt_product_type_name').html(typeNameObject);
+                    }
+                });
+            }
+
+            GetProductTypeByBoss();
+
+
+            // sweat alert
+            function SweatAlert(message, type) {
+                  swal({
+                      title: message,
+                      type: type,
+                      timer: 1500
+                  });
+            }
+
+            //
+            if('@TempData["message"]' !== ""){
+                SweatAlert('@TempData["message"]','error');
+            }
+            // -- Add grade --
+
+            // Select 2
+            function Select2(ctn){
+               $(ctn).select2({ width: '100%', placeholder: "Select an Option", allowClear: true });
+            }
+            // call
+            Select2('#txt_bid');
+            Select2('#txt_product_type');
+            Select2('#txt_product_type_name');
+
+            // change
+            bid.change(function (){
+                LoadProduct();
+                $('#txt_product_name').val('');
+            });
+
+            type.change(function (){
+                LoadProduct();
+                $('#txt_product_name').val('');
+            });
+
+            typeName.change(function (){
+                LoadProduct();
+                $('#txt_product_name').val('');
+            });
+
+            product.keyup(function (){
+               LoadProduct();
+            });
+        });
+    </script>
+}

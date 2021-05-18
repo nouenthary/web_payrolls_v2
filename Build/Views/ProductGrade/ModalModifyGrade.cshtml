@@ -1,0 +1,130 @@
+﻿@using Microsoft.Ajax.Utilities
+@using web_payrolls.Helpers
+@using web_payrolls.Models
+@{
+    var db = new DB_Connection();
+    
+    var provider = new ContextProvider(new ClHelper(), new DB_Connection());
+    
+    var managers = db.tblBosses.ToList();
+
+    var productType = db
+        .tblProduction_ProductType
+        .Where(type => 
+            type.FK_Boss_Id == provider.ManagerId && 
+            type.Pro_Type == "Recycling" ||
+            type.Pro_Type == "Processing" 
+            )
+        .Select(type => new
+        {
+            key = type.PK_ProType_Id,
+            value = type.Pro_Type
+        })
+        .DistinctBy(arg => arg.value)
+        .ToList();
+}
+
+<!--Form Create-->
+<div class="modal fade" id="modal-modify-grade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="border-top: #28A745 3px solid;">
+            <div class="modal-header">
+
+                <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+                    <i class="ti-pencil pr-2"></i> Modify Product Grade
+                </h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+             
+            <form method="post" action="" id="form-modify-grade">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="">HOD</label>
+                                <select class="form-control" id="hod_txt" name="hod_txt"> 
+                                    <option value="">-- Choose HOD -- </option>
+                                    @foreach (var item in managers)
+                                    {
+                                        if (item.PK_Boss_Id + "" == provider.ManagerId + "")
+                                        {
+                                            <option value="@item.PK_Boss_Id" selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.PK_Boss_Id">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Product Type</label>
+                                <select class="form-control" id="product_type_txt" name="product_type_txt"> 
+                                    <option value="">-- Choose Product Type -- </option>
+                                    <option value="Processing">Processing</option>
+                                    <option value="Recycling">Recycling</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Type Name</label>
+                                <select class="form-control" id="product_type_name_txt" name="product_type_name_txt"> 
+                                    <option value="">-- Choose Type Name -- </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Product Name</label>
+                                <select class="form-control" id="product_name_txt" name="product_name_txt"> 
+                                    <option value="">-- Choose Product Name -- </option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Double While Price</label>
+                                <input class="form-control" id="double_whole_txt" name="double_whole_txt" placeholder="Enter Double While Price" maxlength="50" value="0"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Whole Price</label>
+                                <input class="form-control" id="whole_price_txt" name="whole_price_txt" placeholder="Enter Whole Price" maxlength="50" value="0"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Unit Price</label>
+                                <input class="form-control" id="unit_txt" name="unit_txt" placeholder="Enter Unit Price" maxlength="50" value="0"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Cost</label>
+                                <input class="form-control" id="cost_txt" name="cost_txt" placeholder="Enter Cost" maxlength="50" value="0"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Normal Price</label>
+                                <input class="form-control" id="normal_txt" name="normal_txt" placeholder="Enter Normal Price" maxlength="50" value="0"/>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-save-modify-grade" style="background: #28a745; color: #fff; font-size: 20px">
+                        <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Update Product Grade
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--Form Create-->

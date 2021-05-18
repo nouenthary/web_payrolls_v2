@@ -1,0 +1,2543 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PAYROLL_20211Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tblAnnouncment">
+    <Key>
+      <PropertyRef Name="PK_Announment_Id" />
+    </Key>
+    <Property Name="PK_Announment_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Loc_Id" Type="int" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Title_Booter" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Picture1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr1" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Title_Booter1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Picture2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr2" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Title_Booter2" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblBoss">
+    <Key>
+      <PropertyRef Name="PK_Boss_Id" />
+    </Key>
+    <Property Name="PK_Boss_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code" Type="char" MaxLength="100" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="char" MaxLength="100" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblBrokendBalance">
+    <Key>
+      <PropertyRef Name="PK_Brokend_Bal_Id" />
+    </Key>
+    <Property Name="PK_Brokend_Bal_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Return_Inventory_Id" Type="int" />
+    <Property Name="FK_Dep_Id" Type="int" />
+    <Property Name="Brokend_QTY" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'PAYROLL_20211.dbo.tblCheck_In_Late' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tblCheck_In_Late">
+          <Property Name="FK_Staff_Id" Type="bigint" />
+          <Property Name="CIN_Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="CIN_Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="Check_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="CIN_Late_Hour" Type="float" />
+          <Property Name="Work_Hour" Type="float" />
+          <Property Name="Late_Detail" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'PAYROLL_20211.dbo.tblCin_Cout' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tblCin_Cout">
+          <Property Name="FK_Staff_Id" Type="bigint" />
+          <Property Name="Tran_In_Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tran_In_Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tran_In_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tran_Out_Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tran_Out_Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tran_Out_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="PHOTO_Wecam_Path" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityType Name="tblCompany">
+    <Key>
+      <PropertyRef Name="PK_Comp_Id" />
+    </Key>
+    <Property Name="PK_Comp_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Boss_Id" Type="int" />
+    <Property Name="Comp_Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Picture_Company" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="500" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="500" />
+    <Property Name="Number_Staff_Transaction" Type="int" />
+  </EntityType>
+  <EntityType Name="tblConfig">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="key" Type="varchar" MaxLength="255" />
+    <Property Name="value" Type="text" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblCut_Money">
+    <Key>
+      <PropertyRef Name="PK_Cut_Id" />
+    </Key>
+    <Property Name="PK_Cut_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="Lev_Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+    <Property Name="Cut_Percent" Type="float" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblDepartment">
+    <Key>
+      <PropertyRef Name="PK_Depart_Id" />
+    </Key>
+    <Property Name="PK_Depart_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Loc_Id" Type="int" />
+    <Property Name="Deppart_Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="500" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="500" />
+    <Property Name="Number_Staff_Transaction" Type="int" />
+  </EntityType>
+  <EntityType Name="tblExchange">
+    <Key>
+      <PropertyRef Name="PK_Exchang_Id" />
+    </Key>
+    <Property Name="PK_Exchang_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Rate" Type="float" />
+    <Property Name="User_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblForget_Scan">
+    <Key>
+      <PropertyRef Name="PK_Forget_Scan_Id" />
+    </Key>
+    <Property Name="PK_Forget_Scan_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="Forget_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Total_Price" Type="float" />
+    <Property Name="Status" Type="nchar" MaxLength="10" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="500" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Confirm" Type="int" />
+    <Property Name="Date_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Confirm" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblInput_Money">
+    <Key>
+      <PropertyRef Name="PK_Input_Money_Id" />
+    </Key>
+    <Property Name="PK_Input_Money_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="Total_Price" Type="float" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="500" />
+    <Property Name="Descr" Type="nchar" MaxLength="10" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Confirm" Type="int" />
+    <Property Name="Date_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Confirm" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblInputLastyear">
+    <Key>
+      <PropertyRef Name="PK_LastY_Money_Id" />
+    </Key>
+    <Property Name="PK_LastY_Money_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="Num_Year" Type="int" />
+    <Property Name="Num_month" Type="int" />
+    <Property Name="Salary" Type="float" />
+    <Property Name="Multiply" Type="float" />
+    <Property Name="Input_LastY_Money" Type="float" />
+    <Property Name="Total_LastYear" Type="float" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblInventory">
+    <Key>
+      <PropertyRef Name="PK_Inventory_Id" />
+    </Key>
+    <Property Name="PK_Inventory_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Model_Of_Inventory_Id" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Code" Type="nvarchar" MaxLength="100" />
+    <Property Name="Unit_Price" Type="float" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="100" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblLocation">
+    <Key>
+      <PropertyRef Name="PK_Location_Id" />
+    </Key>
+    <Property Name="PK_Location_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Comp_Id" Type="int" />
+    <Property Name="Loc_Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="500" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblLost_Inventory">
+    <Key>
+      <PropertyRef Name="PK_Lost_Inventor_Id" />
+    </Key>
+    <Property Name="PK_Lost_Inventor_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Inventory_Id" Type="int" />
+    <Property Name="FK_LostInventoryNo_Id" Type="int" />
+    <Property Name="Add_Lost_User_Update" Type="int" />
+    <Property Name="Add_Lost_Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Add_Lost_Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lost_By_U" Type="int" />
+    <Property Name="Lost_QTY" Type="int" />
+    <Property Name="Unit_Price" Type="float" />
+    <Property Name="Total_Price" Type="float" />
+    <Property Name="User_Confrim" Type="int" />
+    <Property Name="Date_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lost_Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblLostBalance">
+    <Key>
+      <PropertyRef Name="PK_Lost_Balance_Id" />
+    </Key>
+    <Property Name="PK_Lost_Balance_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Inventory_Id" Type="int" />
+    <Property Name="FK_Dep_Id" Type="int" />
+    <Property Name="Lost_Balance_QTY" Type="int" />
+  </EntityType>
+  <EntityType Name="tblLostInventoryNo">
+    <Key>
+      <PropertyRef Name="PK_LostInventoryNo_Id" />
+    </Key>
+    <Property Name="PK_LostInventoryNo_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LostInventoryNo" Type="int" />
+  </EntityType>
+  <EntityType Name="tblModel_Of_Inventory">
+    <Key>
+      <PropertyRef Name="PK_Model_Of_Inventory_Id" />
+    </Key>
+    <Property Name="PK_Model_Of_Inventory_Id" Type="int" Nullable="false" />
+    <Property Name="FK_Type_Of_Inventory_Id" Type="int" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Updae" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblNotification">
+    <Key>
+      <PropertyRef Name="PK_Notification_ID" />
+    </Key>
+    <Property Name="PK_Notification_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="Link" Type="nvarchar" MaxLength="500" />
+    <Property Name="Notification" Type="nvarchar" MaxLength="500" />
+    <Property Name="Notification_Pending" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Option_Key" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblOver_Time">
+    <Key>
+      <PropertyRef Name="PK_Over_Time_Id" />
+    </Key>
+    <Property Name="PK_Over_Time_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="OT_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="OT_From_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="OT_To_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount_Hour" Type="float" />
+    <Property Name="Unit_Price_Hour" Type="float" />
+    <Property Name="Total_Price" Type="float" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="User_Confirm" Type="int" />
+    <Property Name="Date_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblPermission">
+    <Key>
+      <PropertyRef Name="PK_Permission_Id" />
+    </Key>
+    <Property Name="PK_Permission_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="View_Profile" Type="bit" />
+    <Property Name="View_Measure" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="tblPosition">
+    <Key>
+      <PropertyRef Name="PK_Pos_Id" />
+    </Key>
+    <Property Name="PK_Pos_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Depart_Id" Type="int" />
+    <Property Name="Pos_Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProduction-Color">
+    <Key>
+      <PropertyRef Name="PK_Color_Id" />
+    </Key>
+    <Property Name="PK_Color_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Pro_Id" Type="bigint" />
+    <Property Name="BarCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="QR_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Color_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblProduction-Grade">
+    <Key>
+      <PropertyRef Name="PK_Grade_Id" />
+    </Key>
+    <Property Name="PK_Grade_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Product_Id" Type="bigint" />
+    <Property Name="QR_Code" Type="nvarchar" MaxLength="100" />
+    <Property Name="BarCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="Measu_Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Grade_Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Double_Whole_Price" Type="float" />
+    <Property Name="Whole_Price" Type="float" />
+    <Property Name="Unit_Price" Type="float" />
+    <Property Name="Cost" Type="float" />
+    <Property Name="Normal_Price" Type="float" />
+    <Property Name="Picture_Path" Type="nvarchar" MaxLength="100" />
+    <Property Name="Discount" Type="float" />
+    <Property Name="Start_Dis" Type="nvarchar" MaxLength="100" />
+    <Property Name="End_Dis" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status_Dis" Type="nvarchar" MaxLength="100" />
+    <Property Name="Pro_Status" Type="nvarchar" MaxLength="100" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="100" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="100" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+    <Property Name="Picture_Detail" Type="nvarchar" MaxLength="100" />
+    <Property Name="Color" Type="nvarchar" MaxLength="20" />
+    <Property Name="Size" Type="nvarchar" MaxLength="10" />
+    <Property Name="Code_Product" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProduction-Measur">
+    <Key>
+      <PropertyRef Name="Pk_Measu_Id" />
+    </Key>
+    <Property Name="Pk_Measu_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Boss_Id" Type="int" />
+    <Property Name="Measu_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblProduction-PK_Stock_In_Product_Cut">
+    <Key>
+      <PropertyRef Name="PK_Stock_In_Product_Cut_Id" />
+    </Key>
+    <Property Name="PK_Stock_In_Product_Cut_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="FK_Stock_In_Product_Cut_No_Id" Type="bigint" />
+    <Property Name="In_QTY" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Total_Price" Type="float" />
+    <Property Name="Stock_In_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="U_Update" Type="int" />
+    <Property Name="In_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="In_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_PK_U_Id" Type="int" />
+    <Property Name="Confirm_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblProduction-PK_Stock_In_Product_Import_Balance">
+    <Key>
+      <PropertyRef Name="PK_Stock_In_Product_Import_Bal_Id" />
+    </Key>
+    <Property Name="PK_Stock_In_Product_Import_Bal_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="Stock_In_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="QTY_Balance" Type="int" />
+  </EntityType>
+  <EntityType Name="tblProduction-Product">
+    <Key>
+      <PropertyRef Name="PK_Pro_Id" />
+    </Key>
+    <Property Name="PK_Pro_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_ProType_Id" Type="bigint" />
+    <Property Name="Pro_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Picture_Path" Type="nvarchar" MaxLength="150" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblProduction-ProductType">
+    <Key>
+      <PropertyRef Name="PK_ProType_Id" />
+    </Key>
+    <Property Name="PK_ProType_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Boss_Id" Type="int" />
+    <Property Name="Pro_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProType_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblProduction-Repair_Closth">
+    <Key>
+      <PropertyRef Name="PK_Repair_Closth_Id" />
+    </Key>
+    <Property Name="PK_Repair_Closth_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_From_Com_Id" Type="bigint" />
+    <Property Name="FK_To_Loc_Id" Type="bigint" />
+    <Property Name="Repair_Closth_No" Type="nvarchar" MaxLength="50" />
+    <Property Name="QTY" Type="int" />
+    <Property Name="Repaire_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Total" Type="float" />
+    <Property Name="Type_Repair" Type="nvarchar" MaxLength="50" />
+    <Property Name="U_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Updte" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_User" Type="int" />
+    <Property Name="Confirm_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_Time" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProduction-Repair_Closth_Balance">
+    <Key>
+      <PropertyRef Name="PK_Reepair_Closth_Balance_Id" />
+    </Key>
+    <Property Name="PK_Reepair_Closth_Balance_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="QTY" Type="int" />
+    <Property Name="FK_From_Com_Id" Type="bigint" />
+    <Property Name="FK_To_Loc_Id" Type="bigint" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Total" Type="float" />
+  </EntityType>
+  <EntityType Name="tblProduction-Repair_Closth_No">
+    <Key>
+      <PropertyRef Name="PK_Repair_Closth_No_Id" />
+    </Key>
+    <Property Name="PK_Repair_Closth_No_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Repair_Closth_No" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProduction-Size">
+    <Key>
+      <PropertyRef Name="PK_Size_Id" />
+    </Key>
+    <Property Name="PK_Size_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Color_Id" Type="bigint" />
+    <Property Name="Size_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblProduction-Stock_In_Product_Cut_No">
+    <Key>
+      <PropertyRef Name="PK_Stock_In_Product_Cut_No_Id" />
+    </Key>
+    <Property Name="PK_Stock_In_Product_Cut_No_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Stock_In_Product_Cut_No" Type="int" />
+  </EntityType>
+  <EntityType Name="tblProduction-Stock_In_Product_Import">
+    <Key>
+      <PropertyRef Name="PK_Stock_In_Product_Import_Id" />
+    </Key>
+    <Property Name="PK_Stock_In_Product_Import_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="Type_" Type="nvarchar" MaxLength="50" />
+    <Property Name="In_QTY" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Total_Price" Type="float" />
+    <Property Name="Stock_In_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="U_Update" Type="int" />
+    <Property Name="In_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="In_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="InVoicePicture" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_PK_U_Id" Type="int" />
+    <Property Name="Confirm_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_Status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProduction-StockIn_Complete_Balance">
+    <Key>
+      <PropertyRef Name="PK_StockIn_Complete_Product_Balance_Id" />
+    </Key>
+    <Property Name="PK_StockIn_Complete_Product_Balance_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="In_QTY" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Cost" Type="float" />
+    <Property Name="WH" Type="float" />
+    <Property Name="WW" Type="float" />
+    <Property Name="Discount" Type="float" />
+    <Property Name="Stock_In_Type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProduction-StockIn_Cut_On_Loc">
+    <Key>
+      <PropertyRef Name="PK_StockIn_Cut_On_Loc_Id" />
+    </Key>
+    <Property Name="PK_StockIn_Cut_On_Loc_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_Loc_Id" Type="int" />
+    <Property Name="In_QTY" Type="int" />
+    <Property Name="FK_Comp_From_Id" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code_Product" Type="nvarchar" MaxLength="50" />
+    <Property Name="StockIn_Cut_On_LocNo_Id" Type="bigint" />
+    <Property Name="Stock_In_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="U_Update" Type="int" />
+    <Property Name="In_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="In_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_PK_U_Id" Type="int" />
+    <Property Name="Confirm_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblProduction-StockIn_Cut_On_LocBalance">
+    <Key>
+      <PropertyRef Name="PK_StockIn_Cut_On_Loc_Balance_Id" />
+    </Key>
+    <Property Name="PK_StockIn_Cut_On_Loc_Balance_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_Loc_Id" Type="int" />
+    <Property Name="Stock_In_Product_Cut_No" Type="int" />
+    <Property Name="In_QTY" Type="int" />
+    <Property Name="Stock_In_Type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProduction-StockIn_Cut_On_LocNo">
+    <Key>
+      <PropertyRef Name="PK_StockIn_Cut_On_LocNo_Id" />
+    </Key>
+    <Property Name="PK_StockIn_Cut_On_LocNo_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StockIn_Cut_On_LocNo" Type="bigint" />
+  </EntityType>
+  <EntityType Name="tblProduction-StockIn_Product_Cut_Balance">
+    <Key>
+      <PropertyRef Name="PK_StockIn_Product_Cut_Balance_Id" />
+    </Key>
+    <Property Name="PK_StockIn_Product_Cut_Balance_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_Com_Id" Type="bigint" />
+    <Property Name="Stock_In_Product_Cut_No_Id" Type="nvarchar" MaxLength="50" />
+    <Property Name="Stock_In_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="QTY_Balance" Type="int" />
+  </EntityType>
+  <EntityType Name="tblProduction-Tranfer_From_LocTo_Comp">
+    <Key>
+      <PropertyRef Name="PK_Tranfer_From_LocTo_Comp_Id" />
+    </Key>
+    <Property Name="PK_Tranfer_From_LocTo_Comp_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="FK_Loc_From_Id" Type="int" />
+    <Property Name="Code_Product" Type="nvarchar" MaxLength="50" />
+    <Property Name="In_QTY" Type="int" />
+    <Property Name="Tranfer_In_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="U_Update" Type="int" />
+    <Property Name="Tranfer_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tranfer_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tranfer_Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_PK_U_Id" Type="int" />
+    <Property Name="Confirm_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_Time" Type="nchar" MaxLength="10" />
+    <Property Name="Desce" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblProduction-Use_Fabrik_On_Cut">
+    <Key>
+      <PropertyRef Name="PK_Use_Fabrik_On_Cut_Id" />
+    </Key>
+    <Property Name="PK_Use_Fabrik_On_Cut_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="Stock_In_Product_Cut_No" Type="bigint" />
+    <Property Name="In_QTY" Type="int" />
+    <Property Name="Stock_In_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="U_Update" Type="int" />
+    <Property Name="In_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="In_Time" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProduction-Use_Fabrik_On_Cut_Balance">
+    <Key>
+      <PropertyRef Name="PK_Use_Fabrik_On_Cut_Balance_Id" />
+    </Key>
+    <Property Name="PK_Use_Fabrik_On_Cut_Balance_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="Stock_In_Product_Cut_No" Type="int" />
+    <Property Name="In_QTY" Type="int" />
+    <Property Name="Stock_In_Type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProducttion-StockIn_Complete_Product">
+    <Key>
+      <PropertyRef Name="PK_StockIn_Complete_Product_Id" />
+    </Key>
+    <Property Name="PK_StockIn_Complete_Product_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Grade_Id" Type="bigint" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="FK_Loc_From_Id" Type="int" />
+    <Property Name="Code_Product" Type="nvarchar" MaxLength="50" />
+    <Property Name="In_QTY" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Cost" Type="float" />
+    <Property Name="WH" Type="float" />
+    <Property Name="WW" Type="float" />
+    <Property Name="Discount" Type="float" />
+    <Property Name="Stock_In_Product_Cut_No_Onlocation" Type="int" />
+    <Property Name="Stock_In_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="U_Update" Type="int" />
+    <Property Name="In_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="In_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_PK_U_Id" Type="int" />
+    <Property Name="Confirm_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblPuchase">
+    <Key>
+      <PropertyRef Name="PK_Puchase_Id" />
+    </Key>
+    <Property Name="PK_Puchase_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="FK_PuchaseNo_Id" Type="bigint" />
+    <Property Name="Date_Puchase" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Puchase" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name_Product" Type="nvarchar" MaxLength="500" />
+    <Property Name="Tax" Type="float" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Total_Price" Type="float" />
+    <Property Name="Picture_Product" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Confirm" Type="int" />
+    <Property Name="Date_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Confirm" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblPuchaseNo">
+    <Key>
+      <PropertyRef Name="PK_PuchaseNo_Id" />
+    </Key>
+    <Property Name="PK_PuchaseNo_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblRemain_Leave">
+    <Key>
+      <PropertyRef Name="PK_Remain_Leave_Id" />
+    </Key>
+    <Property Name="PK_Remain_Leave_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="OFF_Remain" Type="float" />
+    <Property Name="AL_Remain" Type="float" />
+    <Property Name="PH_Remain" Type="float" />
+    <Property Name="SIC_Remain" Type="float" />
+    <Property Name="UPL_Remain" Type="float" />
+    <Property Name="AB_Remain" Type="float" />
+    <Property Name="CM_Remain" Type="float" />
+    <Property Name="User_Updae" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblReturnInventory">
+    <Key>
+      <PropertyRef Name="PK_Return_Inventory_Id" />
+    </Key>
+    <Property Name="PK_Return_Inventory_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Return_InventoryNo_Id" Type="int" />
+    <Property Name="Return_Brokend_User_Update" Type="int" />
+    <Property Name="Return_Brokent_Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Return_Brokent_Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Return_Type" Type="nchar" MaxLength="10" />
+    <Property Name="Return_QTY" Type="int" />
+    <Property Name="Unit_Price" Type="float" />
+    <Property Name="Total_Price" Type="float" />
+    <Property Name="User_Confrim" Type="int" />
+    <Property Name="Date_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Return_Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblReturnInventoryNo">
+    <Key>
+      <PropertyRef Name="PK_Return_InventoryNo_Id" />
+    </Key>
+    <Property Name="PK_Return_InventoryNo_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Return_InventoryNo" Type="int" />
+  </EntityType>
+  <EntityType Name="tblRoster">
+    <Key>
+      <PropertyRef Name="PK_Ros_Id" />
+    </Key>
+    <Property Name="PK_Ros_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="Num_Year" Type="int" />
+    <Property Name="Num_Month" Type="int" />
+    <Property Name="DAY1" Type="varchar" MaxLength="20" />
+    <Property Name="DAY2" Type="varchar" MaxLength="20" />
+    <Property Name="DAY3" Type="varchar" MaxLength="20" />
+    <Property Name="DAY4" Type="varchar" MaxLength="20" />
+    <Property Name="DAY5" Type="varchar" MaxLength="20" />
+    <Property Name="DAY6" Type="varchar" MaxLength="20" />
+    <Property Name="DAY7" Type="varchar" MaxLength="20" />
+    <Property Name="DAY8" Type="varchar" MaxLength="20" />
+    <Property Name="DAY9" Type="varchar" MaxLength="20" />
+    <Property Name="DAY10" Type="varchar" MaxLength="20" />
+    <Property Name="DAY11" Type="varchar" MaxLength="20" />
+    <Property Name="DAY12" Type="varchar" MaxLength="20" />
+    <Property Name="DAY13" Type="varchar" MaxLength="20" />
+    <Property Name="DAY14" Type="varchar" MaxLength="20" />
+    <Property Name="DAY15" Type="varchar" MaxLength="20" />
+    <Property Name="DAY16" Type="varchar" MaxLength="20" />
+    <Property Name="DAY17" Type="varchar" MaxLength="20" />
+    <Property Name="DAY18" Type="varchar" MaxLength="20" />
+    <Property Name="DAY19" Type="varchar" MaxLength="20" />
+    <Property Name="DAY20" Type="varchar" MaxLength="20" />
+    <Property Name="DAY21" Type="varchar" MaxLength="20" />
+    <Property Name="DAY22" Type="varchar" MaxLength="20" />
+    <Property Name="DAY23" Type="varchar" MaxLength="20" />
+    <Property Name="DAY24" Type="varchar" MaxLength="20" />
+    <Property Name="DAY25" Type="varchar" MaxLength="20" />
+    <Property Name="DAY26" Type="varchar" MaxLength="20" />
+    <Property Name="DAY27" Type="varchar" MaxLength="20" />
+    <Property Name="DAY28" Type="varchar" MaxLength="20" />
+    <Property Name="DAY29" Type="varchar" MaxLength="20" />
+    <Property Name="DAY30" Type="varchar" MaxLength="20" />
+    <Property Name="DAY31" Type="varchar" MaxLength="20" />
+    <Property Name="OFF" Type="varchar" MaxLength="20" />
+    <Property Name="PH" Type="varchar" MaxLength="20" />
+    <Property Name="AL" Type="varchar" MaxLength="20" />
+    <Property Name="SIC" Type="varchar" MaxLength="20" />
+    <Property Name="UPL" Type="varchar" MaxLength="20" />
+    <Property Name="AB" Type="varchar" MaxLength="20" />
+    <Property Name="CM" Type="varchar" MaxLength="20" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblSalary_Type">
+    <Key>
+      <PropertyRef Name="PK_Sal_Type_Id" />
+    </Key>
+    <Property Name="PK_Sal_Type_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Sta_Id" Type="bigint" />
+    <Property Name="Sal_Type" Type="nchar" MaxLength="10" />
+    <Property Name="Salary" Type="float" />
+    <Property Name="Card_Phone" Type="float" />
+    <Property Name="Gym" Type="float" />
+    <Property Name="Accommodation" Type="float" />
+    <Property Name="Food" Type="float" />
+    <Property Name="insurance" Type="float" />
+    <Property Name="Money_Prim" Type="float" />
+    <Property Name="Travel" Type="float" />
+    <Property Name="Gasoline" Type="float" />
+    <Property Name="OT_Unit_Price" Type="float" />
+    <Property Name="Work_Hour_Taget" Type="float" />
+    <Property Name="Relax_Hour" Type="float" />
+    <Property Name="Off_Day" Type="float" />
+    <Property Name="AL_Day" Type="float" />
+    <Property Name="PH_Day" Type="float" />
+    <Property Name="Sick" Type="float" />
+    <Property Name="UPL" Type="float" />
+    <Property Name="AB" Type="float" />
+    <Property Name="CM" Type="float" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblShareHolder">
+    <Key>
+      <PropertyRef Name="PK_ShareHolder_Id" />
+    </Key>
+    <Property Name="PK_ShareHolder_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="Date_Input" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Input" Type="nvarchar" MaxLength="50" />
+    <Property Name="Increase_Money" Type="float" />
+    <Property Name="Note" Type="nvarchar" MaxLength="500" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblStaff">
+    <Key>
+      <PropertyRef Name="PK_Staff_Id" />
+    </Key>
+    <Property Name="PK_Staff_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Pos_Id" Type="int" />
+    <Property Name="Staff_Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+    <Property Name="Staff_DOB" Type="nvarchar" MaxLength="50" />
+    <Property Name="Marry_Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Nationality" Type="nvarchar" MaxLength="50" />
+    <Property Name="Wife" Type="int" />
+    <Property Name="Son" Type="int" />
+    <Property Name="Daughter" Type="int" />
+    <Property Name="Tell" Type="nvarchar" MaxLength="100" />
+    <Property Name="Account_Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Account_Number" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="Identity_Card" Type="nvarchar" MaxLength="100" />
+    <Property Name="Identify_Picture" Type="nvarchar" MaxLength="50" />
+    <Property Name="Staff_Id_Card" Type="nvarchar" MaxLength="500" />
+    <Property Name="Serail_Card" Type="nvarchar" MaxLength="500" />
+    <Property Name="Staff_Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Join_date" Type="nvarchar" MaxLength="50" />
+    <Property Name="End_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="500" />
+    <Property Name="No_Scan" Type="nchar" MaxLength="10" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="FingerPrintTemplate" Type="varbinary(max)" />
+    <Property Name="LoginCodeGeneration" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tblStock_In_Inventory_Id">
+    <Key>
+      <PropertyRef Name="PK_Stock_In_Inventory_Id" />
+    </Key>
+    <Property Name="PK_Stock_In_Inventory_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Inventory_Id" Type="int" />
+    <Property Name="FK_Supp_Id" Type="int" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="Stock_In" Type="image" />
+    <Property Name="Unit_Price" Type="float" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="User_Update" Type="image" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+    <Property Name="In_Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Confirm" Type="int" />
+    <Property Name="Date_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Confirm" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblStockBalance_Inventory">
+    <Key>
+      <PropertyRef Name="PK_StockBl_Id" />
+    </Key>
+    <Property Name="PK_StockBl_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Inventory_Id" Type="int" />
+    <Property Name="FK_Com_Id" Type="int" />
+    <Property Name="Stock_Bal_Qty" Type="int" />
+  </EntityType>
+  <EntityType Name="tblStockBalanceInventoryInDepartment">
+    <Key>
+      <PropertyRef Name="PK_StockBal_InDepartment_ID" />
+    </Key>
+    <Property Name="PK_StockBal_InDepartment_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Inventory_Id" Type="int" />
+    <Property Name="FK_Depart_Id" Type="int" />
+    <Property Name="QTY_Balance" Type="int" />
+  </EntityType>
+  <EntityType Name="tblStockinventoryOnDepartment">
+    <Key>
+      <PropertyRef Name="Pk_StockIN_Inventory_On_Department_Id" />
+    </Key>
+    <Property Name="Pk_StockIN_Inventory_On_Department_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Inventory_ID" Type="int" />
+    <Property Name="FK_Department_ID" Type="int" />
+    <Property Name="QTY" Type="int" />
+    <Property Name="Unit_Price" Type="float" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="Type_Inventory" Type="nvarchar" MaxLength="50" />
+    <Property Name="StockIn_By" Type="int" />
+    <Property Name="Date_StockIn" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_StockIn" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Confirm" Type="int" />
+    <Property Name="Date_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Confirm" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblSum_Sal">
+    <Key>
+      <PropertyRef Name="PK_Sum_sal_Id" />
+    </Key>
+    <Property Name="PK_Sum_sal_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="Num_Year" Type="int" />
+    <Property Name="Num_Month" Type="int" />
+    <Property Name="DAY1" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY2" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY3" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY4" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY5" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY6" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY7" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY8" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY9" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY10" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY11" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY12" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY13" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY14" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY15" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY16" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY17" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY18" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY19" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY20" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY21" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY22" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY23" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY24" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY25" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY26" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY27" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY28" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY29" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY30" Type="nvarchar" MaxLength="50" />
+    <Property Name="DAY31" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sal_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Salary" Type="float" />
+    <Property Name="Accommodation" Type="float" />
+    <Property Name="Food" Type="float" />
+    <Property Name="insurance" Type="float" />
+    <Property Name="Gym" Type="float" />
+    <Property Name="Money_Prim" Type="float" />
+    <Property Name="Money_LastYear" Type="float" />
+    <Property Name="Gasoline" Type="float" />
+    <Property Name="Money_Lo" Type="nchar" MaxLength="10" />
+    <Property Name="NetCash" Type="float" />
+    <Property Name="Card_Phone" Type="float" />
+    <Property Name="Travel" Type="float" />
+    <Property Name="Tax" Type="nchar" MaxLength="10" />
+    <Property Name="Sal_Total" Type="float" />
+    <Property Name="Leave_Total" Type="float" />
+    <Property Name="OT_Total" Type="float" />
+    <Property Name="Forget_Scan_Total" Type="float" />
+    <Property Name="Check_In_Late" Type="float" />
+    <Property Name="Bonus" Type="nchar" MaxLength="10" />
+    <Property Name="Company_Mission" Type="nchar" MaxLength="10" />
+    <Property Name="Input_Money" Type="nchar" MaxLength="10" />
+    <Property Name="Grand_Total" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tblSupplyer">
+    <Key>
+      <PropertyRef Name="PK_Supp_Id" />
+    </Key>
+    <Property Name="PK_Supp_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Loc_Id" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblTax">
+    <Key>
+      <PropertyRef Name="PK_Tax_Id" />
+    </Key>
+    <Property Name="PK_Tax_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Comp_Id" Type="int" />
+    <Property Name="Tax_Percent" Type="float" />
+    <Property Name="Start_Rank_Salary" Type="float" />
+    <Property Name="End_Rank_Salary" Type="float" />
+    <Property Name="Decrease_Tax" Type="float" />
+    <Property Name="Decrease_Tax_From_Fammily" Type="float" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Decrease_Tax_Foreign" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblTrack_User">
+    <Key>
+      <PropertyRef Name="PK_Track_User_Id" />
+    </Key>
+    <Property Name="PK_Track_User_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_Id" Type="bigint" />
+    <Property Name="Online" Type="nvarchar" MaxLength="50" />
+    <Property Name="IP" Type="nvarchar" MaxLength="50" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="POS_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Map" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblType_Of_Inventory">
+    <Key>
+      <PropertyRef Name="PK_Type_Inventory_Id" />
+    </Key>
+    <Property Name="PK_Type_Inventory_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Boss_Id" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblVoucher">
+    <Key>
+      <PropertyRef Name="PK_Voucher_Id" />
+    </Key>
+    <Property Name="PK_Voucher_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Voucher_Rent_Other_Id" Type="int" />
+    <Property Name="FK_Voucher_No_Id" Type="int" />
+    <Property Name="FK_Staff_Id" Type="bigint" />
+    <Property Name="Rec_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Rec_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Voucher_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Voucher_FK_Staff_Id" Type="int" />
+    <Property Name="Date_Voucher" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Voucher" Type="nvarchar" MaxLength="50" />
+    <Property Name="PCC" Type="float" />
+    <Property Name="QTY" Type="int" />
+    <Property Name="UoM" Type="float" />
+    <Property Name="Unit_Cost" Type="float" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="Total" Type="nchar" MaxLength="10" />
+    <Property Name="Discount" Type="float" />
+    <Property Name="Voucher_Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Voucher_Picure" Type="nvarchar" MaxLength="500" />
+    <Property Name="Confirm_PK_U_Id" Type="int" />
+    <Property Name="Confirm_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Confirm_time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblVoucher_No">
+    <Key>
+      <PropertyRef Name="PK_Voucher_No_Id" />
+    </Key>
+    <Property Name="PK_Voucher_No_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VoucherNo" Type="int" />
+    <Property Name="Aprove_PK_U_Id" Type="int" />
+    <Property Name="Aprove_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Aprove_Time" Type="nvarchar" MaxLength="50" />
+    <Property Name="Picture" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher">
+    <Key>
+      <PropertyRef Name="PK_Voucher_Rent_Other_Id" />
+    </Key>
+    <Property Name="PK_Voucher_Rent_Other_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_loc_id" Type="int" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="QTY_in_Month" Type="int" />
+    <Property Name="Unit_Price_in_Month" Type="float" />
+    <Property Name="Amount_In_Month" Type="float" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="50" />
+    <Property Name="Start_Rent" Type="nvarchar" MaxLength="50" />
+    <Property Name="End_Rent" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount_Month_Year_Rent" Type="nvarchar" MaxLength="50" />
+    <Property Name="Discount" Type="float" />
+    <Property Name="User_Update" Type="int" />
+    <Property Name="Date_Update" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time_Update" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__tblProduc__FK_Bo__174363E2">
+    <End Role="tblBoss" Type="Self.tblBoss" Multiplicity="0..1" />
+    <End Role="tblProduction-Measur" Type="Self.tblProduction-Measur" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBoss">
+        <PropertyRef Name="PK_Boss_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-Measur">
+        <PropertyRef Name="FK_Boss_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Co__164F3FA9">
+    <End Role="tblProduction-Color" Type="Self.tblProduction-Color" Multiplicity="0..1" />
+    <End Role="tblProduction-Size" Type="Self.tblProduction-Size" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Color">
+        <PropertyRef Name="PK_Color_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-Size">
+        <PropertyRef Name="FK_Color_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Gr__0EAE1DE1">
+    <End Role="tblProduction-Grade" Type="Self.tblProduction-Grade" Multiplicity="0..1" />
+    <End Role="tblProduction-StockIn_Cut_On_LocBalance" Type="Self.tblProduction-StockIn_Cut_On_LocBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Grade">
+        <PropertyRef Name="PK_Grade_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-StockIn_Cut_On_LocBalance">
+        <PropertyRef Name="FK_Grade_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Gr__0FA2421A">
+    <End Role="tblProduction-Grade" Type="Self.tblProduction-Grade" Multiplicity="0..1" />
+    <End Role="tblProduction-StockIn_Complete_Balance" Type="Self.tblProduction-StockIn_Complete_Balance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Grade">
+        <PropertyRef Name="PK_Grade_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-StockIn_Complete_Balance">
+        <PropertyRef Name="FK_Grade_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Gr__10966653">
+    <End Role="tblProduction-Grade" Type="Self.tblProduction-Grade" Multiplicity="0..1" />
+    <End Role="tblProducttion-StockIn_Complete_Product" Type="Self.tblProducttion-StockIn_Complete_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Grade">
+        <PropertyRef Name="PK_Grade_Id" />
+      </Principal>
+      <Dependent Role="tblProducttion-StockIn_Complete_Product">
+        <PropertyRef Name="FK_Grade_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Gr__118A8A8C">
+    <End Role="tblProduction-Grade" Type="Self.tblProduction-Grade" Multiplicity="0..1" />
+    <End Role="tblProduction-StockIn_Cut_On_Loc" Type="Self.tblProduction-StockIn_Cut_On_Loc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Grade">
+        <PropertyRef Name="PK_Grade_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-StockIn_Cut_On_Loc">
+        <PropertyRef Name="FK_Grade_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Gr__2A8B4280">
+    <End Role="tblProduction-Grade" Type="Self.tblProduction-Grade" Multiplicity="0..1" />
+    <End Role="tblProduction-Stock_In_Product_Import" Type="Self.tblProduction-Stock_In_Product_Import" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Grade">
+        <PropertyRef Name="PK_Grade_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-Stock_In_Product_Import">
+        <PropertyRef Name="FK_Grade_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Gr__2B7F66B9">
+    <End Role="tblProduction-Grade" Type="Self.tblProduction-Grade" Multiplicity="0..1" />
+    <End Role="tblProduction-PK_Stock_In_Product_Import_Balance" Type="Self.tblProduction-PK_Stock_In_Product_Import_Balance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Grade">
+        <PropertyRef Name="PK_Grade_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-PK_Stock_In_Product_Import_Balance">
+        <PropertyRef Name="FK_Grade_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Gr__61DB776A">
+    <End Role="tblProduction-Grade" Type="Self.tblProduction-Grade" Multiplicity="0..1" />
+    <End Role="tblProduction-PK_Stock_In_Product_Cut" Type="Self.tblProduction-PK_Stock_In_Product_Cut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Grade">
+        <PropertyRef Name="PK_Grade_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-PK_Stock_In_Product_Cut">
+        <PropertyRef Name="FK_Grade_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Gr__75E27017">
+    <End Role="tblProduction-Grade" Type="Self.tblProduction-Grade" Multiplicity="0..1" />
+    <End Role="tblProduction-Use_Fabrik_On_Cut" Type="Self.tblProduction-Use_Fabrik_On_Cut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Grade">
+        <PropertyRef Name="PK_Grade_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-Use_Fabrik_On_Cut">
+        <PropertyRef Name="FK_Grade_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Gr__76D69450">
+    <End Role="tblProduction-Grade" Type="Self.tblProduction-Grade" Multiplicity="0..1" />
+    <End Role="tblProduction-Use_Fabrik_On_Cut_Balance" Type="Self.tblProduction-Use_Fabrik_On_Cut_Balance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Grade">
+        <PropertyRef Name="PK_Grade_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-Use_Fabrik_On_Cut_Balance">
+        <PropertyRef Name="FK_Grade_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Lo__507BE13E">
+    <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="0..1" />
+    <End Role="tblProduction-StockIn_Cut_On_Loc" Type="Self.tblProduction-StockIn_Cut_On_Loc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLocation">
+        <PropertyRef Name="PK_Location_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-StockIn_Cut_On_Loc">
+        <PropertyRef Name="FK_Loc_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Pr__1372D2FE">
+    <End Role="tblProduction-Product" Type="Self.tblProduction-Product" Multiplicity="0..1" />
+    <End Role="tblProduction-Color" Type="Self.tblProduction-Color" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Product">
+        <PropertyRef Name="PK_Pro_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-Color">
+        <PropertyRef Name="FK_Pro_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Pr__27AED5D5">
+    <End Role="tblProduction-ProductType" Type="Self.tblProduction-ProductType" Multiplicity="0..1" />
+    <End Role="tblProduction-Product" Type="Self.tblProduction-Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-ProductType">
+        <PropertyRef Name="PK_ProType_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-Product">
+        <PropertyRef Name="FK_ProType_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_Pr__29971E47">
+    <End Role="tblProduction-Product" Type="Self.tblProduction-Product" Multiplicity="0..1" />
+    <End Role="tblProduction-Grade" Type="Self.tblProduction-Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Product">
+        <PropertyRef Name="PK_Pro_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-Grade">
+        <PropertyRef Name="FK_Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__FK_St__0DB9F9A8">
+    <End Role="tblProduction-Stock_In_Product_Cut_No" Type="Self.tblProduction-Stock_In_Product_Cut_No" Multiplicity="0..1" />
+    <End Role="tblProduction-PK_Stock_In_Product_Cut" Type="Self.tblProduction-PK_Stock_In_Product_Cut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-Stock_In_Product_Cut_No">
+        <PropertyRef Name="PK_Stock_In_Product_Cut_No_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-PK_Stock_In_Product_Cut">
+        <PropertyRef Name="FK_Stock_In_Product_Cut_No_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__Stock__51700577">
+    <End Role="tblProduction-StockIn_Cut_On_LocNo" Type="Self.tblProduction-StockIn_Cut_On_LocNo" Multiplicity="0..1" />
+    <End Role="tblProduction-StockIn_Cut_On_Loc" Type="Self.tblProduction-StockIn_Cut_On_Loc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduction-StockIn_Cut_On_LocNo">
+        <PropertyRef Name="PK_StockIn_Cut_On_LocNo_Id" />
+      </Principal>
+      <Dependent Role="tblProduction-StockIn_Cut_On_Loc">
+        <PropertyRef Name="StockIn_Cut_On_LocNo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAnnouncment_tblLocation">
+    <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="0..1" />
+    <End Role="tblAnnouncment" Type="Self.tblAnnouncment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLocation">
+        <PropertyRef Name="PK_Location_Id" />
+      </Principal>
+      <Dependent Role="tblAnnouncment">
+        <PropertyRef Name="FK_Loc_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokendBalance_tblReturnInventory">
+    <End Role="tblReturnInventory" Type="Self.tblReturnInventory" Multiplicity="0..1" />
+    <End Role="tblBrokendBalance" Type="Self.tblBrokendBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblReturnInventory">
+        <PropertyRef Name="PK_Return_Inventory_Id" />
+      </Principal>
+      <Dependent Role="tblBrokendBalance">
+        <PropertyRef Name="FK_Return_Inventory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCompany_tblBoss">
+    <End Role="tblBoss" Type="Self.tblBoss" Multiplicity="0..1" />
+    <End Role="tblCompany" Type="Self.tblCompany" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBoss">
+        <PropertyRef Name="PK_Boss_Id" />
+      </Principal>
+      <Dependent Role="tblCompany">
+        <PropertyRef Name="FK_Boss_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDepartment_tblLocation">
+    <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="0..1" />
+    <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLocation">
+        <PropertyRef Name="PK_Location_Id" />
+      </Principal>
+      <Dependent Role="tblDepartment">
+        <PropertyRef Name="FK_Loc_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblExchange_tblCompany">
+    <End Role="tblCompany" Type="Self.tblCompany" Multiplicity="0..1" />
+    <End Role="tblExchange" Type="Self.tblExchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCompany">
+        <PropertyRef Name="PK_Comp_Id" />
+      </Principal>
+      <Dependent Role="tblExchange">
+        <PropertyRef Name="FK_Com_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblForget_Scan_tblStaff">
+    <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+    <End Role="tblForget_Scan" Type="Self.tblForget_Scan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStaff">
+        <PropertyRef Name="PK_Staff_Id" />
+      </Principal>
+      <Dependent Role="tblForget_Scan">
+        <PropertyRef Name="FK_Staff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInputLastyear_tblStaff">
+    <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+    <End Role="tblInputLastyear" Type="Self.tblInputLastyear" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStaff">
+        <PropertyRef Name="PK_Staff_Id" />
+      </Principal>
+      <Dependent Role="tblInputLastyear">
+        <PropertyRef Name="FK_Staff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInventory_tblModel_Of_Inventory">
+    <End Role="tblModel_Of_Inventory" Type="Self.tblModel_Of_Inventory" Multiplicity="0..1" />
+    <End Role="tblInventory" Type="Self.tblInventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblModel_Of_Inventory">
+        <PropertyRef Name="PK_Model_Of_Inventory_Id" />
+      </Principal>
+      <Dependent Role="tblInventory">
+        <PropertyRef Name="FK_Model_Of_Inventory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLocation_tblCompany">
+    <End Role="tblCompany" Type="Self.tblCompany" Multiplicity="0..1" />
+    <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCompany">
+        <PropertyRef Name="PK_Comp_Id" />
+      </Principal>
+      <Dependent Role="tblLocation">
+        <PropertyRef Name="FK_Comp_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLost_Inventory_tblInventory">
+    <End Role="tblInventory" Type="Self.tblInventory" Multiplicity="0..1" />
+    <End Role="tblLost_Inventory" Type="Self.tblLost_Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInventory">
+        <PropertyRef Name="PK_Inventory_Id" />
+      </Principal>
+      <Dependent Role="tblLost_Inventory">
+        <PropertyRef Name="FK_Inventory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLost_Inventory_tblLostInventoryNo">
+    <End Role="tblLostInventoryNo" Type="Self.tblLostInventoryNo" Multiplicity="0..1" />
+    <End Role="tblLost_Inventory" Type="Self.tblLost_Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLostInventoryNo">
+        <PropertyRef Name="PK_LostInventoryNo_Id" />
+      </Principal>
+      <Dependent Role="tblLost_Inventory">
+        <PropertyRef Name="FK_LostInventoryNo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLostBalance_tblInventory">
+    <End Role="tblInventory" Type="Self.tblInventory" Multiplicity="0..1" />
+    <End Role="tblLostBalance" Type="Self.tblLostBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInventory">
+        <PropertyRef Name="PK_Inventory_Id" />
+      </Principal>
+      <Dependent Role="tblLostBalance">
+        <PropertyRef Name="FK_Inventory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblModel_Of_Inventory_tblType_Of_Inventory">
+    <End Role="tblType_Of_Inventory" Type="Self.tblType_Of_Inventory" Multiplicity="0..1" />
+    <End Role="tblModel_Of_Inventory" Type="Self.tblModel_Of_Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblType_Of_Inventory">
+        <PropertyRef Name="PK_Type_Inventory_Id" />
+      </Principal>
+      <Dependent Role="tblModel_Of_Inventory">
+        <PropertyRef Name="FK_Type_Of_Inventory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblNotification_tblStaff">
+    <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+    <End Role="tblNotification" Type="Self.tblNotification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStaff">
+        <PropertyRef Name="PK_Staff_Id" />
+      </Principal>
+      <Dependent Role="tblNotification">
+        <PropertyRef Name="FK_Staff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblOver_Time_tblStaff">
+    <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+    <End Role="tblOver_Time" Type="Self.tblOver_Time" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStaff">
+        <PropertyRef Name="PK_Staff_Id" />
+      </Principal>
+      <Dependent Role="tblOver_Time">
+        <PropertyRef Name="FK_Staff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPermission_tblStaff">
+    <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+    <End Role="tblPermission" Type="Self.tblPermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStaff">
+        <PropertyRef Name="PK_Staff_Id" />
+      </Principal>
+      <Dependent Role="tblPermission">
+        <PropertyRef Name="FK_Staff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPosition_tblDepartment">
+    <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="0..1" />
+    <End Role="tblPosition" Type="Self.tblPosition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepartment">
+        <PropertyRef Name="PK_Depart_Id" />
+      </Principal>
+      <Dependent Role="tblPosition">
+        <PropertyRef Name="FK_Depart_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPuchase_tblPuchaseNo">
+    <End Role="tblPuchaseNo" Type="Self.tblPuchaseNo" Multiplicity="0..1" />
+    <End Role="tblPuchase" Type="Self.tblPuchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPuchaseNo">
+        <PropertyRef Name="PK_PuchaseNo_Id" />
+      </Principal>
+      <Dependent Role="tblPuchase">
+        <PropertyRef Name="FK_PuchaseNo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPuchase_tblStaff">
+    <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+    <End Role="tblPuchase" Type="Self.tblPuchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStaff">
+        <PropertyRef Name="PK_Staff_Id" />
+      </Principal>
+      <Dependent Role="tblPuchase">
+        <PropertyRef Name="FK_Staff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblReturnInventory_tblReturnInventoryNo">
+    <End Role="tblReturnInventoryNo" Type="Self.tblReturnInventoryNo" Multiplicity="0..1" />
+    <End Role="tblReturnInventory" Type="Self.tblReturnInventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblReturnInventoryNo">
+        <PropertyRef Name="PK_Return_InventoryNo_Id" />
+      </Principal>
+      <Dependent Role="tblReturnInventory">
+        <PropertyRef Name="FK_Return_InventoryNo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRoster_tblStaff">
+    <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+    <End Role="tblRoster" Type="Self.tblRoster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStaff">
+        <PropertyRef Name="PK_Staff_Id" />
+      </Principal>
+      <Dependent Role="tblRoster">
+        <PropertyRef Name="FK_Staff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSalary_Type_tblStaff">
+    <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+    <End Role="tblSalary_Type" Type="Self.tblSalary_Type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStaff">
+        <PropertyRef Name="PK_Staff_Id" />
+      </Principal>
+      <Dependent Role="tblSalary_Type">
+        <PropertyRef Name="FK_Sta_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblShareHolder_tblStaff">
+    <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+    <End Role="tblShareHolder" Type="Self.tblShareHolder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStaff">
+        <PropertyRef Name="PK_Staff_Id" />
+      </Principal>
+      <Dependent Role="tblShareHolder">
+        <PropertyRef Name="FK_Staff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblStaff_tblPosition">
+    <End Role="tblPosition" Type="Self.tblPosition" Multiplicity="0..1" />
+    <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPosition">
+        <PropertyRef Name="PK_Pos_Id" />
+      </Principal>
+      <Dependent Role="tblStaff">
+        <PropertyRef Name="FK_Pos_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblStock_In_Inventory_Id_tblInventory">
+    <End Role="tblInventory" Type="Self.tblInventory" Multiplicity="0..1" />
+    <End Role="tblStock_In_Inventory_Id" Type="Self.tblStock_In_Inventory_Id" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInventory">
+        <PropertyRef Name="PK_Inventory_Id" />
+      </Principal>
+      <Dependent Role="tblStock_In_Inventory_Id">
+        <PropertyRef Name="FK_Inventory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblStockBalance_Inventory_tblInventory">
+    <End Role="tblInventory" Type="Self.tblInventory" Multiplicity="0..1" />
+    <End Role="tblStockBalance_Inventory" Type="Self.tblStockBalance_Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInventory">
+        <PropertyRef Name="PK_Inventory_Id" />
+      </Principal>
+      <Dependent Role="tblStockBalance_Inventory">
+        <PropertyRef Name="FK_Inventory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblStockBalanceInventoryInDepartment_tblDepartment">
+    <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="0..1" />
+    <End Role="tblStockBalanceInventoryInDepartment" Type="Self.tblStockBalanceInventoryInDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepartment">
+        <PropertyRef Name="PK_Depart_Id" />
+      </Principal>
+      <Dependent Role="tblStockBalanceInventoryInDepartment">
+        <PropertyRef Name="FK_Depart_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblStockBalanceInventoryInDepartment_tblInventory">
+    <End Role="tblInventory" Type="Self.tblInventory" Multiplicity="0..1" />
+    <End Role="tblStockBalanceInventoryInDepartment" Type="Self.tblStockBalanceInventoryInDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInventory">
+        <PropertyRef Name="PK_Inventory_Id" />
+      </Principal>
+      <Dependent Role="tblStockBalanceInventoryInDepartment">
+        <PropertyRef Name="FK_Inventory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblStockinventoryOnDepartment_tblDepartment">
+    <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="0..1" />
+    <End Role="tblStockinventoryOnDepartment" Type="Self.tblStockinventoryOnDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepartment">
+        <PropertyRef Name="PK_Depart_Id" />
+      </Principal>
+      <Dependent Role="tblStockinventoryOnDepartment">
+        <PropertyRef Name="FK_Department_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblStockinventoryOnDepartment_tblInventory">
+    <End Role="tblInventory" Type="Self.tblInventory" Multiplicity="0..1" />
+    <End Role="tblStockinventoryOnDepartment" Type="Self.tblStockinventoryOnDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInventory">
+        <PropertyRef Name="PK_Inventory_Id" />
+      </Principal>
+      <Dependent Role="tblStockinventoryOnDepartment">
+        <PropertyRef Name="FK_Inventory_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSum_Sal_tblStaff">
+    <End Role="tblStaff" Type="Self.tblStaff" Multiplicity="0..1" />
+    <End Role="tblSum_Sal" Type="Self.tblSum_Sal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStaff">
+        <PropertyRef Name="PK_Staff_Id" />
+      </Principal>
+      <Dependent Role="tblSum_Sal">
+        <PropertyRef Name="FK_Staff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSupplyer_tblLocation">
+    <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="0..1" />
+    <End Role="tblSupplyer" Type="Self.tblSupplyer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLocation">
+        <PropertyRef Name="PK_Location_Id" />
+      </Principal>
+      <Dependent Role="tblSupplyer">
+        <PropertyRef Name="FK_Loc_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTax_tblCompany">
+    <End Role="tblCompany" Type="Self.tblCompany" Multiplicity="0..1" />
+    <End Role="tblTax" Type="Self.tblTax" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCompany">
+        <PropertyRef Name="PK_Comp_Id" />
+      </Principal>
+      <Dependent Role="tblTax">
+        <PropertyRef Name="FK_Comp_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblType_Of_Inventory_tblBoss">
+    <End Role="tblBoss" Type="Self.tblBoss" Multiplicity="0..1" />
+    <End Role="tblType_Of_Inventory" Type="Self.tblType_Of_Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBoss">
+        <PropertyRef Name="PK_Boss_Id" />
+      </Principal>
+      <Dependent Role="tblType_Of_Inventory">
+        <PropertyRef Name="FK_Boss_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblVoucher_Rent_Invertory_Rent_And_Other_Voucher_tblLocation">
+    <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="0..1" />
+    <End Role="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" Type="Self.tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLocation">
+        <PropertyRef Name="PK_Location_Id" />
+      </Principal>
+      <Dependent Role="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher">
+        <PropertyRef Name="FK_loc_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblVoucher_tblVoucher_No">
+    <End Role="tblVoucher_No" Type="Self.tblVoucher_No" Multiplicity="0..1" />
+    <End Role="tblVoucher" Type="Self.tblVoucher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblVoucher_No">
+        <PropertyRef Name="PK_Voucher_No_Id" />
+      </Principal>
+      <Dependent Role="tblVoucher">
+        <PropertyRef Name="FK_Voucher_No_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblVoucher_tblVoucher_Rent_Invertory_Rent_And_Other_Voucher">
+    <End Role="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" Type="Self.tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" Multiplicity="0..1" />
+    <End Role="tblVoucher" Type="Self.tblVoucher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher">
+        <PropertyRef Name="PK_Voucher_Rent_Other_Id" />
+      </Principal>
+      <Dependent Role="tblVoucher">
+        <PropertyRef Name="FK_Voucher_Rent_Other_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddCheckIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SID" Type="varchar" Mode="In" />
+    <Parameter Name="DATE" Type="varchar" Mode="In" />
+    <Parameter Name="TIME" Type="varchar" Mode="In" />
+    <Parameter Name="TYPE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AddLoginCodeGeneration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PK_Staff_Id" Type="int" Mode="In" />
+    <Parameter Name="LoginCodeGeneration" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="AddNextRoster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="years" Type="int" Mode="In" />
+    <Parameter Name="months" Type="int" Mode="In" />
+    <Parameter Name="user_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AddPermission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FK_Staff_Id" Type="int" Mode="In" />
+    <Parameter Name="View_Profile" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="AddRoster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FK_Staff_Id" Type="int" Mode="In" />
+    <Parameter Name="Num_Year" Type="int" Mode="In" />
+    <Parameter Name="Num_Month" Type="int" Mode="In" />
+    <Parameter Name="User_Update" Type="int" Mode="In" />
+    <Parameter Name="Date_Update" Type="nvarchar" Mode="In" />
+    <Parameter Name="Time_Update" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="AddSalaryType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FK_Sta_Id" Type="int" Mode="In" />
+    <Parameter Name="Sal_Type" Type="nvarchar" Mode="In" />
+    <Parameter Name="Salary" Type="float" Mode="In" />
+    <Parameter Name="Card_Phone" Type="float" Mode="In" />
+    <Parameter Name="Gym" Type="float" Mode="In" />
+    <Parameter Name="Accommodation" Type="float" Mode="In" />
+    <Parameter Name="Food" Type="float" Mode="In" />
+    <Parameter Name="insurance" Type="float" Mode="In" />
+    <Parameter Name="Money_Prim" Type="float" Mode="In" />
+    <Parameter Name="Travel" Type="float" Mode="In" />
+    <Parameter Name="Gasoline" Type="float" Mode="In" />
+    <Parameter Name="OT_Unit_Price" Type="float" Mode="In" />
+    <Parameter Name="Work_Hour_Taget" Type="float" Mode="In" />
+    <Parameter Name="Relax_Hour" Type="float" Mode="In" />
+    <Parameter Name="Off_Day" Type="float" Mode="In" />
+    <Parameter Name="AL_Day" Type="float" Mode="In" />
+    <Parameter Name="PH_Day" Type="float" Mode="In" />
+    <Parameter Name="Sick" Type="float" Mode="In" />
+    <Parameter Name="UPL" Type="float" Mode="In" />
+    <Parameter Name="AB" Type="float" Mode="In" />
+    <Parameter Name="CM" Type="float" Mode="In" />
+    <Parameter Name="User_Update" Type="int" Mode="In" />
+    <Parameter Name="Date_Update" Type="nvarchar" Mode="In" />
+    <Parameter Name="Time_Update" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="GetALLAnnouncement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bossId" Type="int" Mode="In" />
+    <Parameter Name="comId" Type="int" Mode="In" />
+    <Parameter Name="locId" Type="int" Mode="In" />
+    <Parameter Name="annId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllBoss" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="phone" Type="varchar" Mode="In" />
+    <Parameter Name="code" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllCompanies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BossId" Type="int" Mode="In" />
+    <Parameter Name="TextSearch" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllCutMoney" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bossId" Type="int" Mode="In" />
+    <Parameter Name="comId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllDepartments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BossId" Type="int" Mode="In" />
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="LocationId" Type="int" Mode="In" />
+    <Parameter Name="TextSearch" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllExchange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="boss_id" Type="int" Mode="In" />
+    <Parameter Name="comp_id" Type="int" Mode="In" />
+    <Parameter Name="loc_id" Type="int" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllForgetScan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bossId" Type="int" Mode="In" />
+    <Parameter Name="comId" Type="int" Mode="In" />
+    <Parameter Name="locId" Type="int" Mode="In" />
+    <Parameter Name="deptId" Type="int" Mode="In" />
+    <Parameter Name="posId" Type="int" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="id" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllInputMoney" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="cid" Type="int" Mode="In" />
+    <Parameter Name="lid" Type="int" Mode="In" />
+    <Parameter Name="did" Type="int" Mode="In" />
+    <Parameter Name="pid" Type="int" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="id" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="boss_id" Type="int" Mode="In" />
+    <Parameter Name="com_id" Type="int" Mode="In" />
+    <Parameter Name="location" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllMeasure" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="measure" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllOT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bossId" Type="int" Mode="In" />
+    <Parameter Name="comId" Type="int" Mode="In" />
+    <Parameter Name="locId" Type="int" Mode="In" />
+    <Parameter Name="deptId" Type="int" Mode="In" />
+    <Parameter Name="posId" Type="int" Mode="In" />
+    <Parameter Name="staffId" Type="int" Mode="In" />
+    <Parameter Name="otId" Type="int" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllPositions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BossId" Type="int" Mode="In" />
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="LocationId" Type="int" Mode="In" />
+    <Parameter Name="DeptId" Type="int" Mode="In" />
+    <Parameter Name="TextSearch" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllProductGrade" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="product_type_Id" Type="int" Mode="In" />
+    <Parameter Name="pro_type" Type="varchar" Mode="In" />
+    <Parameter Name="product_id" Type="int" Mode="In" />
+    <Parameter Name="codeProduct" Type="varchar" Mode="In" />
+    <Parameter Name="barcode" Type="varchar" Mode="In" />
+    <Parameter Name="qrCode" Type="varchar" Mode="In" />
+    <Parameter Name="grade" Type="varchar" Mode="In" />
+    <Parameter Name="color" Type="varchar" Mode="In" />
+    <Parameter Name="sizes" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="typeName" Type="varchar" Mode="In" />
+    <Parameter Name="product" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllProductStockIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="companyId" Type="int" Mode="In" />
+    <Parameter Name="product_type_Id" Type="int" Mode="In" />
+    <Parameter Name="pro_type" Type="varchar" Mode="In" />
+    <Parameter Name="product_id" Type="int" Mode="In" />
+    <Parameter Name="codeProduct" Type="varchar" Mode="In" />
+    <Parameter Name="barcode" Type="varchar" Mode="In" />
+    <Parameter Name="qrCode" Type="varchar" Mode="In" />
+    <Parameter Name="grade" Type="varchar" Mode="In" />
+    <Parameter Name="color" Type="varchar" Mode="In" />
+    <Parameter Name="sizes" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="dates" Type="varchar" Mode="In" />
+    <Parameter Name="endDate" Type="varchar" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllProductType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="product" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllStaff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="cid" Type="int" Mode="In" />
+    <Parameter Name="lid" Type="int" Mode="In" />
+    <Parameter Name="did" Type="int" Mode="In" />
+    <Parameter Name="pid" Type="int" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="id_card" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllStaffOnlyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllStaffOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bossId" Type="int" Mode="In" />
+    <Parameter Name="comId" Type="int" Mode="In" />
+    <Parameter Name="locId" Type="int" Mode="In" />
+    <Parameter Name="deptId" Type="int" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="cardId" Type="varchar" Mode="In" />
+    <Parameter Name="salaryType" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllStaffs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BossId" Type="int" Mode="In" />
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="LocationId" Type="int" Mode="In" />
+    <Parameter Name="DeptId" Type="int" Mode="In" />
+    <Parameter Name="PositionId" Type="int" Mode="In" />
+    <Parameter Name="SalaryType" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="TextSearch" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllStaffVoucherByPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllStockBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="companyId" Type="int" Mode="In" />
+    <Parameter Name="product_type_Id" Type="int" Mode="In" />
+    <Parameter Name="pro_type" Type="varchar" Mode="In" />
+    <Parameter Name="pro_name" Type="varchar" Mode="In" />
+    <Parameter Name="product_id" Type="int" Mode="In" />
+    <Parameter Name="codeProduct" Type="varchar" Mode="In" />
+    <Parameter Name="barcode" Type="varchar" Mode="In" />
+    <Parameter Name="qrCode" Type="varchar" Mode="In" />
+    <Parameter Name="grade" Type="varchar" Mode="In" />
+    <Parameter Name="color" Type="varchar" Mode="In" />
+    <Parameter Name="sizes" Type="varchar" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllStockInProductCutBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="companyId" Type="int" Mode="In" />
+    <Parameter Name="product_type_Id" Type="int" Mode="In" />
+    <Parameter Name="pro_type" Type="varchar" Mode="In" />
+    <Parameter Name="product_id" Type="int" Mode="In" />
+    <Parameter Name="codeProduct" Type="varchar" Mode="In" />
+    <Parameter Name="barcode" Type="varchar" Mode="In" />
+    <Parameter Name="qrCode" Type="varchar" Mode="In" />
+    <Parameter Name="grade" Type="varchar" Mode="In" />
+    <Parameter Name="color" Type="varchar" Mode="In" />
+    <Parameter Name="sizes" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllStockProductCut" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="companyId" Type="int" Mode="In" />
+    <Parameter Name="product_type_Id" Type="int" Mode="In" />
+    <Parameter Name="pro_type" Type="varchar" Mode="In" />
+    <Parameter Name="product_id" Type="int" Mode="In" />
+    <Parameter Name="codeProduct" Type="varchar" Mode="In" />
+    <Parameter Name="barcode" Type="varchar" Mode="In" />
+    <Parameter Name="qrCode" Type="varchar" Mode="In" />
+    <Parameter Name="grade" Type="varchar" Mode="In" />
+    <Parameter Name="color" Type="varchar" Mode="In" />
+    <Parameter Name="sizes" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="dates" Type="varchar" Mode="In" />
+    <Parameter Name="endDate" Type="varchar" Mode="In" />
+    <Parameter Name="productCutNo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="boss_id" Type="int" Mode="In" />
+    <Parameter Name="com_id" Type="int" Mode="In" />
+    <Parameter Name="loc_id" Type="int" Mode="In" />
+    <Parameter Name="sup_name" Type="varchar" Mode="In" />
+    <Parameter Name="phone" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllTax" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="cid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllTransferBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="varchar" Mode="In" />
+    <Parameter Name="companyId" Type="varchar" Mode="In" />
+    <Parameter Name="locationId" Type="varchar" Mode="In" />
+    <Parameter Name="product_type_Id" Type="varchar" Mode="In" />
+    <Parameter Name="pro_type" Type="varchar" Mode="In" />
+    <Parameter Name="product_id" Type="varchar" Mode="In" />
+    <Parameter Name="barcode" Type="varchar" Mode="In" />
+    <Parameter Name="qrCode" Type="varchar" Mode="In" />
+    <Parameter Name="grade" Type="varchar" Mode="In" />
+    <Parameter Name="color" Type="varchar" Mode="In" />
+    <Parameter Name="sizes" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllTransferLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="varchar" Mode="In" />
+    <Parameter Name="companyId" Type="varchar" Mode="In" />
+    <Parameter Name="locationId" Type="varchar" Mode="In" />
+    <Parameter Name="product_type_Id" Type="varchar" Mode="In" />
+    <Parameter Name="pro_type" Type="varchar" Mode="In" />
+    <Parameter Name="product_id" Type="varchar" Mode="In" />
+    <Parameter Name="codeProduct" Type="varchar" Mode="In" />
+    <Parameter Name="barcode" Type="varchar" Mode="In" />
+    <Parameter Name="qrCode" Type="varchar" Mode="In" />
+    <Parameter Name="grade" Type="varchar" Mode="In" />
+    <Parameter Name="color" Type="varchar" Mode="In" />
+    <Parameter Name="sizes" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="dates" Type="varchar" Mode="In" />
+    <Parameter Name="endDate" Type="varchar" Mode="In" />
+    <Parameter Name="onCutLocationId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllUseFabric" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="companyId" Type="int" Mode="In" />
+    <Parameter Name="product_type_Id" Type="int" Mode="In" />
+    <Parameter Name="pro_type" Type="varchar" Mode="In" />
+    <Parameter Name="product_id" Type="int" Mode="In" />
+    <Parameter Name="codeProduct" Type="varchar" Mode="In" />
+    <Parameter Name="barcode" Type="varchar" Mode="In" />
+    <Parameter Name="qrCode" Type="varchar" Mode="In" />
+    <Parameter Name="grade" Type="varchar" Mode="In" />
+    <Parameter Name="color" Type="varchar" Mode="In" />
+    <Parameter Name="sizes" Type="varchar" Mode="In" />
+    <Parameter Name="dates" Type="varchar" Mode="In" />
+    <Parameter Name="endDate" Type="varchar" Mode="In" />
+    <Parameter Name="productCutNo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllUserFabircBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="companyId" Type="int" Mode="In" />
+    <Parameter Name="product_type_Id" Type="int" Mode="In" />
+    <Parameter Name="pro_type" Type="varchar" Mode="In" />
+    <Parameter Name="product_id" Type="int" Mode="In" />
+    <Parameter Name="codeProduct" Type="varchar" Mode="In" />
+    <Parameter Name="barcode" Type="varchar" Mode="In" />
+    <Parameter Name="qrCode" Type="varchar" Mode="In" />
+    <Parameter Name="grade" Type="varchar" Mode="In" />
+    <Parameter Name="color" Type="varchar" Mode="In" />
+    <Parameter Name="sizes" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bossId" Type="int" Mode="In" />
+    <Parameter Name="companyId" Type="int" Mode="In" />
+    <Parameter Name="locationId" Type="int" Mode="In" />
+    <Parameter Name="staffId" Type="int" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="starts" Type="varchar" Mode="In" />
+    <Parameter Name="ends" Type="varchar" Mode="In" />
+    <Parameter Name="vouchersNo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllVoucherNo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bossId" Type="int" Mode="In" />
+    <Parameter Name="comId" Type="int" Mode="In" />
+    <Parameter Name="locId" Type="int" Mode="In" />
+    <Parameter Name="sid" Type="int" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="start" Type="varchar" Mode="In" />
+    <Parameter Name="ends" Type="varchar" Mode="In" />
+    <Parameter Name="voucherNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllVoucherRent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bossId" Type="int" Mode="In" />
+    <Parameter Name="comId" Type="int" Mode="In" />
+    <Parameter Name="locId" Type="int" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="code" Type="varchar" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetBarcode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="values" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetBoss" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetCanLeave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="staff_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetCompany" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetCompanyByBossId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BossId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetCompanyInfoByStaffId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PK_Sta_Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetExchange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bossId" Type="int" Mode="In" />
+    <Parameter Name="comId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetLocationByCompanyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="boss_id" Type="int" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="phone" Type="varchar" Mode="In" />
+    <Parameter Name="code" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetQtCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="values" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetRoster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="boss_id" Type="int" Mode="In" />
+    <Parameter Name="company_id" Type="int" Mode="In" />
+    <Parameter Name="location_id" Type="int" Mode="In" />
+    <Parameter Name="dept_id" Type="int" Mode="In" />
+    <Parameter Name="post_id" Type="int" Mode="In" />
+    <Parameter Name="staff_name" Type="varchar" Mode="In" />
+    <Parameter Name="id_card" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="years" Type="int" Mode="In" />
+    <Parameter Name="months" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetStaffInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="staff_Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetStockBalanceByProductId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="productId" Type="int" Mode="In" />
+    <Parameter Name="productType" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetStockInProductCuts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bid" Type="int" Mode="In" />
+    <Parameter Name="companyId" Type="int" Mode="In" />
+    <Parameter Name="product_type_Id" Type="int" Mode="In" />
+    <Parameter Name="pro_type" Type="varchar" Mode="In" />
+    <Parameter Name="product_id" Type="int" Mode="In" />
+    <Parameter Name="codeProduct" Type="varchar" Mode="In" />
+    <Parameter Name="barcode" Type="varchar" Mode="In" />
+    <Parameter Name="qrCode" Type="varchar" Mode="In" />
+    <Parameter Name="grade" Type="varchar" Mode="In" />
+    <Parameter Name="color" Type="varchar" Mode="In" />
+    <Parameter Name="sizes" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="dates" Type="varchar" Mode="In" />
+    <Parameter Name="endDate" Type="varchar" Mode="In" />
+    <Parameter Name="productCutNo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetSumLeave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="staff_id" Type="int" Mode="In" />
+    <Parameter Name="years" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetSumTypeLeave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="staff_id" Type="int" Mode="In" />
+    <Parameter Name="years" Type="int" Mode="In" />
+    <Parameter Name="leaveType" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UpdateSalaryType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FK_Sta_Id" Type="int" Mode="In" />
+    <Parameter Name="Sal_Type" Type="nvarchar" Mode="In" />
+    <Parameter Name="Salary" Type="float" Mode="In" />
+    <Parameter Name="Card_Phone" Type="float" Mode="In" />
+    <Parameter Name="Gym" Type="float" Mode="In" />
+    <Parameter Name="Accommodation" Type="float" Mode="In" />
+    <Parameter Name="Food" Type="float" Mode="In" />
+    <Parameter Name="insurance" Type="float" Mode="In" />
+    <Parameter Name="Money_Prim" Type="float" Mode="In" />
+    <Parameter Name="Travel" Type="float" Mode="In" />
+    <Parameter Name="Gasoline" Type="float" Mode="In" />
+    <Parameter Name="OT_Unit_Price" Type="float" Mode="In" />
+    <Parameter Name="Work_Hour_Taget" Type="float" Mode="In" />
+    <Parameter Name="Relax_Hour" Type="float" Mode="In" />
+    <Parameter Name="Off_Day" Type="float" Mode="In" />
+    <Parameter Name="AL_Day" Type="float" Mode="In" />
+    <Parameter Name="PH_Day" Type="float" Mode="In" />
+    <Parameter Name="Sick" Type="float" Mode="In" />
+    <Parameter Name="UPL" Type="float" Mode="In" />
+    <Parameter Name="AB" Type="float" Mode="In" />
+    <Parameter Name="CM" Type="float" Mode="In" />
+    <Parameter Name="User_Update" Type="int" Mode="In" />
+    <Parameter Name="Date_Update" Type="nvarchar" Mode="In" />
+    <Parameter Name="Time_Update" Type="nvarchar" Mode="In" />
+    <Parameter Name="PK_Sal_Type_Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateStaff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FK_Pos_Id" Type="int" Mode="In" />
+    <Parameter Name="Staff_Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Sex" Type="nvarchar" Mode="In" />
+    <Parameter Name="Staff_DOB" Type="nvarchar" Mode="In" />
+    <Parameter Name="Marry_Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="Nationality" Type="nvarchar" Mode="In" />
+    <Parameter Name="Wife" Type="int" Mode="In" />
+    <Parameter Name="Son" Type="int" Mode="In" />
+    <Parameter Name="Daughter" Type="int" Mode="In" />
+    <Parameter Name="Tell" Type="nvarchar" Mode="In" />
+    <Parameter Name="Account_Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Account_Number" Type="nvarchar" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar" Mode="In" />
+    <Parameter Name="Identity_Card" Type="nvarchar" Mode="In" />
+    <Parameter Name="Identify_Picture" Type="nvarchar" Mode="In" />
+    <Parameter Name="Staff_Id_Card" Type="nvarchar" Mode="In" />
+    <Parameter Name="Serail_Card" Type="nvarchar" Mode="In" />
+    <Parameter Name="Staff_Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="Join_date" Type="nvarchar" Mode="In" />
+    <Parameter Name="End_Date" Type="nvarchar" Mode="In" />
+    <Parameter Name="Photo" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+    <Parameter Name="No_Scan" Type="nvarchar" Mode="In" />
+    <Parameter Name="User_Update" Type="int" Mode="In" />
+    <Parameter Name="Date_Update" Type="nvarchar" Mode="In" />
+    <Parameter Name="Time_Update" Type="nvarchar" Mode="In" />
+    <Parameter Name="PK_Staff_Id" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="PAYROLL_20211ModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAnnouncment" EntityType="Self.tblAnnouncment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBoss" EntityType="Self.tblBoss" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBrokendBalance" EntityType="Self.tblBrokendBalance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCompany" EntityType="Self.tblCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblConfig" EntityType="Self.tblConfig" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCut_Money" EntityType="Self.tblCut_Money" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDepartment" EntityType="Self.tblDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblExchange" EntityType="Self.tblExchange" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblForget_Scan" EntityType="Self.tblForget_Scan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInput_Money" EntityType="Self.tblInput_Money" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInputLastyear" EntityType="Self.tblInputLastyear" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInventory" EntityType="Self.tblInventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLocation" EntityType="Self.tblLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLost_Inventory" EntityType="Self.tblLost_Inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLostBalance" EntityType="Self.tblLostBalance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLostInventoryNo" EntityType="Self.tblLostInventoryNo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblModel_Of_Inventory" EntityType="Self.tblModel_Of_Inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblNotification" EntityType="Self.tblNotification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOver_Time" EntityType="Self.tblOver_Time" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPermission" EntityType="Self.tblPermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Color" EntityType="Self.tblProduction-Color" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Grade" EntityType="Self.tblProduction-Grade" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Measur" EntityType="Self.tblProduction-Measur" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-PK_Stock_In_Product_Cut" EntityType="Self.tblProduction-PK_Stock_In_Product_Cut" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-PK_Stock_In_Product_Import_Balance" EntityType="Self.tblProduction-PK_Stock_In_Product_Import_Balance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Product" EntityType="Self.tblProduction-Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-ProductType" EntityType="Self.tblProduction-ProductType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Repair_Closth" EntityType="Self.tblProduction-Repair_Closth" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Repair_Closth_Balance" EntityType="Self.tblProduction-Repair_Closth_Balance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Repair_Closth_No" EntityType="Self.tblProduction-Repair_Closth_No" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Size" EntityType="Self.tblProduction-Size" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Stock_In_Product_Cut_No" EntityType="Self.tblProduction-Stock_In_Product_Cut_No" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Stock_In_Product_Import" EntityType="Self.tblProduction-Stock_In_Product_Import" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-StockIn_Complete_Balance" EntityType="Self.tblProduction-StockIn_Complete_Balance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-StockIn_Cut_On_Loc" EntityType="Self.tblProduction-StockIn_Cut_On_Loc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-StockIn_Cut_On_LocBalance" EntityType="Self.tblProduction-StockIn_Cut_On_LocBalance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-StockIn_Cut_On_LocNo" EntityType="Self.tblProduction-StockIn_Cut_On_LocNo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-StockIn_Product_Cut_Balance" EntityType="Self.tblProduction-StockIn_Product_Cut_Balance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Tranfer_From_LocTo_Comp" EntityType="Self.tblProduction-Tranfer_From_LocTo_Comp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Use_Fabrik_On_Cut" EntityType="Self.tblProduction-Use_Fabrik_On_Cut" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduction-Use_Fabrik_On_Cut_Balance" EntityType="Self.tblProduction-Use_Fabrik_On_Cut_Balance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProducttion-StockIn_Complete_Product" EntityType="Self.tblProducttion-StockIn_Complete_Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPuchase" EntityType="Self.tblPuchase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPuchaseNo" EntityType="Self.tblPuchaseNo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRemain_Leave" EntityType="Self.tblRemain_Leave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReturnInventory" EntityType="Self.tblReturnInventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReturnInventoryNo" EntityType="Self.tblReturnInventoryNo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRoster" EntityType="Self.tblRoster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSalary_Type" EntityType="Self.tblSalary_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblShareHolder" EntityType="Self.tblShareHolder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblStaff" EntityType="Self.tblStaff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblStock_In_Inventory_Id" EntityType="Self.tblStock_In_Inventory_Id" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblStockBalance_Inventory" EntityType="Self.tblStockBalance_Inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblStockBalanceInventoryInDepartment" EntityType="Self.tblStockBalanceInventoryInDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblStockinventoryOnDepartment" EntityType="Self.tblStockinventoryOnDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSum_Sal" EntityType="Self.tblSum_Sal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSupplyer" EntityType="Self.tblSupplyer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTax" EntityType="Self.tblTax" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTrack_User" EntityType="Self.tblTrack_User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblType_Of_Inventory" EntityType="Self.tblType_Of_Inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblVoucher" EntityType="Self.tblVoucher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblVoucher_No" EntityType="Self.tblVoucher_No" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" EntityType="Self.tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tblProduc__FK_Bo__174363E2" Association="Self.FK__tblProduc__FK_Bo__174363E2">
+      <End Role="tblBoss" EntitySet="tblBoss" />
+      <End Role="tblProduction-Measur" EntitySet="tblProduction-Measur" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Co__164F3FA9" Association="Self.FK__tblProduc__FK_Co__164F3FA9">
+      <End Role="tblProduction-Color" EntitySet="tblProduction-Color" />
+      <End Role="tblProduction-Size" EntitySet="tblProduction-Size" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Gr__0EAE1DE1" Association="Self.FK__tblProduc__FK_Gr__0EAE1DE1">
+      <End Role="tblProduction-Grade" EntitySet="tblProduction-Grade" />
+      <End Role="tblProduction-StockIn_Cut_On_LocBalance" EntitySet="tblProduction-StockIn_Cut_On_LocBalance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Gr__0FA2421A" Association="Self.FK__tblProduc__FK_Gr__0FA2421A">
+      <End Role="tblProduction-Grade" EntitySet="tblProduction-Grade" />
+      <End Role="tblProduction-StockIn_Complete_Balance" EntitySet="tblProduction-StockIn_Complete_Balance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Gr__10966653" Association="Self.FK__tblProduc__FK_Gr__10966653">
+      <End Role="tblProduction-Grade" EntitySet="tblProduction-Grade" />
+      <End Role="tblProducttion-StockIn_Complete_Product" EntitySet="tblProducttion-StockIn_Complete_Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Gr__118A8A8C" Association="Self.FK__tblProduc__FK_Gr__118A8A8C">
+      <End Role="tblProduction-Grade" EntitySet="tblProduction-Grade" />
+      <End Role="tblProduction-StockIn_Cut_On_Loc" EntitySet="tblProduction-StockIn_Cut_On_Loc" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Gr__2A8B4280" Association="Self.FK__tblProduc__FK_Gr__2A8B4280">
+      <End Role="tblProduction-Grade" EntitySet="tblProduction-Grade" />
+      <End Role="tblProduction-Stock_In_Product_Import" EntitySet="tblProduction-Stock_In_Product_Import" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Gr__2B7F66B9" Association="Self.FK__tblProduc__FK_Gr__2B7F66B9">
+      <End Role="tblProduction-Grade" EntitySet="tblProduction-Grade" />
+      <End Role="tblProduction-PK_Stock_In_Product_Import_Balance" EntitySet="tblProduction-PK_Stock_In_Product_Import_Balance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Gr__61DB776A" Association="Self.FK__tblProduc__FK_Gr__61DB776A">
+      <End Role="tblProduction-Grade" EntitySet="tblProduction-Grade" />
+      <End Role="tblProduction-PK_Stock_In_Product_Cut" EntitySet="tblProduction-PK_Stock_In_Product_Cut" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Gr__75E27017" Association="Self.FK__tblProduc__FK_Gr__75E27017">
+      <End Role="tblProduction-Grade" EntitySet="tblProduction-Grade" />
+      <End Role="tblProduction-Use_Fabrik_On_Cut" EntitySet="tblProduction-Use_Fabrik_On_Cut" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Gr__76D69450" Association="Self.FK__tblProduc__FK_Gr__76D69450">
+      <End Role="tblProduction-Grade" EntitySet="tblProduction-Grade" />
+      <End Role="tblProduction-Use_Fabrik_On_Cut_Balance" EntitySet="tblProduction-Use_Fabrik_On_Cut_Balance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Lo__507BE13E" Association="Self.FK__tblProduc__FK_Lo__507BE13E">
+      <End Role="tblLocation" EntitySet="tblLocation" />
+      <End Role="tblProduction-StockIn_Cut_On_Loc" EntitySet="tblProduction-StockIn_Cut_On_Loc" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Pr__1372D2FE" Association="Self.FK__tblProduc__FK_Pr__1372D2FE">
+      <End Role="tblProduction-Product" EntitySet="tblProduction-Product" />
+      <End Role="tblProduction-Color" EntitySet="tblProduction-Color" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Pr__27AED5D5" Association="Self.FK__tblProduc__FK_Pr__27AED5D5">
+      <End Role="tblProduction-ProductType" EntitySet="tblProduction-ProductType" />
+      <End Role="tblProduction-Product" EntitySet="tblProduction-Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_Pr__29971E47" Association="Self.FK__tblProduc__FK_Pr__29971E47">
+      <End Role="tblProduction-Product" EntitySet="tblProduction-Product" />
+      <End Role="tblProduction-Grade" EntitySet="tblProduction-Grade" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__FK_St__0DB9F9A8" Association="Self.FK__tblProduc__FK_St__0DB9F9A8">
+      <End Role="tblProduction-Stock_In_Product_Cut_No" EntitySet="tblProduction-Stock_In_Product_Cut_No" />
+      <End Role="tblProduction-PK_Stock_In_Product_Cut" EntitySet="tblProduction-PK_Stock_In_Product_Cut" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__Stock__51700577" Association="Self.FK__tblProduc__Stock__51700577">
+      <End Role="tblProduction-StockIn_Cut_On_LocNo" EntitySet="tblProduction-StockIn_Cut_On_LocNo" />
+      <End Role="tblProduction-StockIn_Cut_On_Loc" EntitySet="tblProduction-StockIn_Cut_On_Loc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAnnouncment_tblLocation" Association="Self.FK_tblAnnouncment_tblLocation">
+      <End Role="tblLocation" EntitySet="tblLocation" />
+      <End Role="tblAnnouncment" EntitySet="tblAnnouncment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokendBalance_tblReturnInventory" Association="Self.FK_tblBrokendBalance_tblReturnInventory">
+      <End Role="tblReturnInventory" EntitySet="tblReturnInventory" />
+      <End Role="tblBrokendBalance" EntitySet="tblBrokendBalance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCompany_tblBoss" Association="Self.FK_tblCompany_tblBoss">
+      <End Role="tblBoss" EntitySet="tblBoss" />
+      <End Role="tblCompany" EntitySet="tblCompany" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDepartment_tblLocation" Association="Self.FK_tblDepartment_tblLocation">
+      <End Role="tblLocation" EntitySet="tblLocation" />
+      <End Role="tblDepartment" EntitySet="tblDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblExchange_tblCompany" Association="Self.FK_tblExchange_tblCompany">
+      <End Role="tblCompany" EntitySet="tblCompany" />
+      <End Role="tblExchange" EntitySet="tblExchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblForget_Scan_tblStaff" Association="Self.FK_tblForget_Scan_tblStaff">
+      <End Role="tblStaff" EntitySet="tblStaff" />
+      <End Role="tblForget_Scan" EntitySet="tblForget_Scan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInputLastyear_tblStaff" Association="Self.FK_tblInputLastyear_tblStaff">
+      <End Role="tblStaff" EntitySet="tblStaff" />
+      <End Role="tblInputLastyear" EntitySet="tblInputLastyear" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInventory_tblModel_Of_Inventory" Association="Self.FK_tblInventory_tblModel_Of_Inventory">
+      <End Role="tblModel_Of_Inventory" EntitySet="tblModel_Of_Inventory" />
+      <End Role="tblInventory" EntitySet="tblInventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLocation_tblCompany" Association="Self.FK_tblLocation_tblCompany">
+      <End Role="tblCompany" EntitySet="tblCompany" />
+      <End Role="tblLocation" EntitySet="tblLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLost_Inventory_tblInventory" Association="Self.FK_tblLost_Inventory_tblInventory">
+      <End Role="tblInventory" EntitySet="tblInventory" />
+      <End Role="tblLost_Inventory" EntitySet="tblLost_Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLost_Inventory_tblLostInventoryNo" Association="Self.FK_tblLost_Inventory_tblLostInventoryNo">
+      <End Role="tblLostInventoryNo" EntitySet="tblLostInventoryNo" />
+      <End Role="tblLost_Inventory" EntitySet="tblLost_Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLostBalance_tblInventory" Association="Self.FK_tblLostBalance_tblInventory">
+      <End Role="tblInventory" EntitySet="tblInventory" />
+      <End Role="tblLostBalance" EntitySet="tblLostBalance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblModel_Of_Inventory_tblType_Of_Inventory" Association="Self.FK_tblModel_Of_Inventory_tblType_Of_Inventory">
+      <End Role="tblType_Of_Inventory" EntitySet="tblType_Of_Inventory" />
+      <End Role="tblModel_Of_Inventory" EntitySet="tblModel_Of_Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblNotification_tblStaff" Association="Self.FK_tblNotification_tblStaff">
+      <End Role="tblStaff" EntitySet="tblStaff" />
+      <End Role="tblNotification" EntitySet="tblNotification" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblOver_Time_tblStaff" Association="Self.FK_tblOver_Time_tblStaff">
+      <End Role="tblStaff" EntitySet="tblStaff" />
+      <End Role="tblOver_Time" EntitySet="tblOver_Time" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPermission_tblStaff" Association="Self.FK_tblPermission_tblStaff">
+      <End Role="tblStaff" EntitySet="tblStaff" />
+      <End Role="tblPermission" EntitySet="tblPermission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPosition_tblDepartment" Association="Self.FK_tblPosition_tblDepartment">
+      <End Role="tblDepartment" EntitySet="tblDepartment" />
+      <End Role="tblPosition" EntitySet="tblPosition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPuchase_tblPuchaseNo" Association="Self.FK_tblPuchase_tblPuchaseNo">
+      <End Role="tblPuchaseNo" EntitySet="tblPuchaseNo" />
+      <End Role="tblPuchase" EntitySet="tblPuchase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPuchase_tblStaff" Association="Self.FK_tblPuchase_tblStaff">
+      <End Role="tblStaff" EntitySet="tblStaff" />
+      <End Role="tblPuchase" EntitySet="tblPuchase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblReturnInventory_tblReturnInventoryNo" Association="Self.FK_tblReturnInventory_tblReturnInventoryNo">
+      <End Role="tblReturnInventoryNo" EntitySet="tblReturnInventoryNo" />
+      <End Role="tblReturnInventory" EntitySet="tblReturnInventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRoster_tblStaff" Association="Self.FK_tblRoster_tblStaff">
+      <End Role="tblStaff" EntitySet="tblStaff" />
+      <End Role="tblRoster" EntitySet="tblRoster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSalary_Type_tblStaff" Association="Self.FK_tblSalary_Type_tblStaff">
+      <End Role="tblStaff" EntitySet="tblStaff" />
+      <End Role="tblSalary_Type" EntitySet="tblSalary_Type" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblShareHolder_tblStaff" Association="Self.FK_tblShareHolder_tblStaff">
+      <End Role="tblStaff" EntitySet="tblStaff" />
+      <End Role="tblShareHolder" EntitySet="tblShareHolder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblStaff_tblPosition" Association="Self.FK_tblStaff_tblPosition">
+      <End Role="tblPosition" EntitySet="tblPosition" />
+      <End Role="tblStaff" EntitySet="tblStaff" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblStock_In_Inventory_Id_tblInventory" Association="Self.FK_tblStock_In_Inventory_Id_tblInventory">
+      <End Role="tblInventory" EntitySet="tblInventory" />
+      <End Role="tblStock_In_Inventory_Id" EntitySet="tblStock_In_Inventory_Id" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblStockBalance_Inventory_tblInventory" Association="Self.FK_tblStockBalance_Inventory_tblInventory">
+      <End Role="tblInventory" EntitySet="tblInventory" />
+      <End Role="tblStockBalance_Inventory" EntitySet="tblStockBalance_Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblStockBalanceInventoryInDepartment_tblDepartment" Association="Self.FK_tblStockBalanceInventoryInDepartment_tblDepartment">
+      <End Role="tblDepartment" EntitySet="tblDepartment" />
+      <End Role="tblStockBalanceInventoryInDepartment" EntitySet="tblStockBalanceInventoryInDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblStockBalanceInventoryInDepartment_tblInventory" Association="Self.FK_tblStockBalanceInventoryInDepartment_tblInventory">
+      <End Role="tblInventory" EntitySet="tblInventory" />
+      <End Role="tblStockBalanceInventoryInDepartment" EntitySet="tblStockBalanceInventoryInDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblStockinventoryOnDepartment_tblDepartment" Association="Self.FK_tblStockinventoryOnDepartment_tblDepartment">
+      <End Role="tblDepartment" EntitySet="tblDepartment" />
+      <End Role="tblStockinventoryOnDepartment" EntitySet="tblStockinventoryOnDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblStockinventoryOnDepartment_tblInventory" Association="Self.FK_tblStockinventoryOnDepartment_tblInventory">
+      <End Role="tblInventory" EntitySet="tblInventory" />
+      <End Role="tblStockinventoryOnDepartment" EntitySet="tblStockinventoryOnDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSum_Sal_tblStaff" Association="Self.FK_tblSum_Sal_tblStaff">
+      <End Role="tblStaff" EntitySet="tblStaff" />
+      <End Role="tblSum_Sal" EntitySet="tblSum_Sal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSupplyer_tblLocation" Association="Self.FK_tblSupplyer_tblLocation">
+      <End Role="tblLocation" EntitySet="tblLocation" />
+      <End Role="tblSupplyer" EntitySet="tblSupplyer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTax_tblCompany" Association="Self.FK_tblTax_tblCompany">
+      <End Role="tblCompany" EntitySet="tblCompany" />
+      <End Role="tblTax" EntitySet="tblTax" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblType_Of_Inventory_tblBoss" Association="Self.FK_tblType_Of_Inventory_tblBoss">
+      <End Role="tblBoss" EntitySet="tblBoss" />
+      <End Role="tblType_Of_Inventory" EntitySet="tblType_Of_Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblVoucher_Rent_Invertory_Rent_And_Other_Voucher_tblLocation" Association="Self.FK_tblVoucher_Rent_Invertory_Rent_And_Other_Voucher_tblLocation">
+      <End Role="tblLocation" EntitySet="tblLocation" />
+      <End Role="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" EntitySet="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblVoucher_tblVoucher_No" Association="Self.FK_tblVoucher_tblVoucher_No">
+      <End Role="tblVoucher_No" EntitySet="tblVoucher_No" />
+      <End Role="tblVoucher" EntitySet="tblVoucher" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblVoucher_tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" Association="Self.FK_tblVoucher_tblVoucher_Rent_Invertory_Rent_And_Other_Voucher">
+      <End Role="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" EntitySet="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher" />
+      <End Role="tblVoucher" EntitySet="tblVoucher" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

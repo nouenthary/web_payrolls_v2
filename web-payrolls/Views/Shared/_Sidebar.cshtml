@@ -1,0 +1,100 @@
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li class="nav-small-cap text-uppercase">@Resources.Voucher.Personal</li>
+
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="ti-dashboard"></i><span class="hide-menu">@Resources.Voucher.Dashboard </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="@Url.Action("Index","Dashboard")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Dashboard</a></li>
+                        <li><a href="@Url.Action("Index","Announcement")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Announcement</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="ti-id-badge"></i><span class="hide-menu">@Resources.Voucher.DataEntry</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="@Url.Action("Index","Staff")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Employee</a></li>
+                        <li><a href="@Url.Action("Index","Roster")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Attendance</a></li>
+                        <li><a href="@Url.Action("Index","OverTime")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Overtime</a></li>
+                        <li><a href="@Url.Action("Index","ForgetScan")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Forget</a></li>
+                        <li><a href="@Url.Action("Index","InputMoney")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.InputMoney</a></li>
+                        <li><a href="@Url.Action("Index","CutMoney")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Wagededucts</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="ti-book"></i><span class="hide-menu">@Resources.Voucher.Account</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="@Url.Action("Index","Supplier")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Supplier</a></li>
+                        <li><a href="@Url.Action("Index", "VoucherType")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.VoucherRent</a></li>
+                        <li><a href="@Url.Action("Index", "Voucher")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Voucher_</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="ti-settings"></i><span class="hide-menu">@Resources.Voucher.SystemManager</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="@Url.Action("Index","Boss")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.HOD</a></li>
+                        <li><a href="@Url.Action("Index","Company")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Company</a></li>
+                        <li><a href="@Url.Action("Index","Location")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Location</a></li>
+                        <li><a href="@Url.Action("Index","Department")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Department</a></li>
+                        <li><a href="@Url.Action("Index","Position")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Position</a></li>
+                        <li><a href="@Url.Action("Index","Exchange")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Exchange</a></li>
+                        <li><a href="@Url.Action("Index","Tax")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Tax</a></li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Production</span></a>
+                    <ul aria-expanded="false" class="collapse" style="height: 10px;">
+
+                        <li>
+                            <a class="has-arrow" href="#" aria-expanded="false">Product</a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="@Url.Action("Index","Measure")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.ProductMeasure</a></li>
+                               <li><a href="@Url.Action("Index","ProductType")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.ProductType</a></li>
+                               <li><a href="@Url.Action("Index","Product")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Product Name</a></li>
+                               <li><a href="@Url.Action("Index","ProductGrade")"><i class="ti-control-record pr-2 text-inverse"></i>@Resources.Voucher.Product Grade</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a class="has-arrow" href="#" aria-expanded="false">Accessory and Fabric</a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="@Url.Action("Index","StockIn")"><i class="ti-control-record pr-2 text-inverse"></i>Stock In</a></li>
+                                <li><a href="@Url.Action("Index","StockBalance")"><i class="ti-control-record pr-2 text-inverse"></i>Stock Balance</a></li>
+                            </ul>
+                        </li>
+
+                      <li>
+                        <a class="has-arrow" href="#" aria-expanded="false">Processing</a>
+                        <ul aria-expanded="false" class="collapse">
+                          <li><a href="@Url.Action("Index","StockInProductCut")"><i class="ti-control-record pr-2 text-inverse"></i>Stock In</a></li>
+                          <li><a href="@Url.Action("Index","StockProductCutBalance")"><i class="ti-control-record pr-2 text-inverse"></i>Stock Balance</a></li>
+                          <li><a href="@Url.Action("Index","Fabric")"><i class="ti-control-record pr-2 text-inverse"></i>Fabric</a></li>
+                          <li><a href="@Url.Action("Index","FabricBalance")"><i class="ti-control-record pr-2 text-inverse"></i>Fabric Balance</a></li>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <a class="has-arrow" href="#" aria-expanded="false">Transfer</a>
+                        <ul aria-expanded="false" class="collapse">
+                          <li><a href="@Url.Action("Index","Transfer")"><i class="ti-control-record pr-2 text-inverse"></i>Transfer Location</a></li>
+                          <li><a href="/View/Transfer/Transfer.aspx"><i class="ti-control-record pr-2 text-inverse"></i>Transfer Location</a></li>
+
+                        </ul>
+                      </li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>

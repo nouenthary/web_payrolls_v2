@@ -1,0 +1,460 @@
+﻿@{
+    ViewBag.Title = Resources.Voucher.HOD;
+    ViewBag.Page = Resources.Voucher.HOD;
+}
+
+<div class="card" style="margin-bottom: 0">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse" id="boss-collaspe"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide </a>
+        </div>
+        <h4 class="card-title m-b-0 card-text"><i class="ti-filter"></i> @Resources.Voucher.HOD</h4>
+    </div>
+    <div class="card-body collapse show b-t" id="set-boss-collaspe">
+        <form>
+            <div class="row">
+
+                <div class="col-xlg-2 col-md-4 pb-2">
+                    <label>HOD</label>
+                    <div class="input-group">
+                        <input type="text" name="code_search" id="code_search" autocomplete="off" class="form-control form-control-sm" placeholder="@Resources.Voucher.Search @Resources.Voucher.Code ...">
+                    </div>
+                </div>
+
+                <div class="col-xlg-2 col-md-4 pb-2">
+                     <label>Name</label>
+                    <div class="input-group">
+                        <input type="text" name="name_search" id="name_search" autocomplete="off" class="form-control form-control-sm" placeholder="@Resources.Voucher.Search @Resources.Voucher.Name ...">
+                    </div>
+                </div>
+
+                <div class="col-xlg-2 col-md-4  pb-2">
+                     <label>Phone</label>
+                    <div class="input-group">
+                        <input type="text" name="phone_search" id="phone_search" autocomplete="off" class="form-control form-control-sm" placeholder="@Resources.Voucher.Search @Resources.Voucher.Phone ...">
+                    </div>
+                </div>
+
+                <div class="col-xlg-2 col-md-4 pb-2">
+                     <label>Status</label>
+                    <div class="input-group">
+                        <select name="status_search" id="status_search" class="form-control form-control-sm">
+                            <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Status--</option>
+                            <option value="Enable"> @Resources.Voucher.Enable</option>
+                            <option value="Disabled"> @Resources.Voucher.Disabled</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-3 col-sm-12">
+                    <label>.</label>
+                    <div class="input-group">
+                        <button type="button" class="btn btn-info btn-sm" id="btn-search-boss">
+                            <i class="ti-search pr-2"></i>@Resources.Voucher.Searchhere
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</div>
+   
+    @Html.Partial("ModalCreateBoss")
+
+    @Html.Partial("ModalEditBoss")
+    
+    @Html.AntiForgeryToken()       
+<div id="show-boss"></div>
+
+    <div class="modal fade" id="Modal-View" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="image-card-view"
+                         class="card-img-top"
+                         alt="Card image cap">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @section Javascript{
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    }
+
+    @section Scripts{
+        <script>
+
+        $(function () {
+            // new code           
+            $('#show-boss').load('/Boss/GetTable');
+
+            $(document).on('click', '#show-boss a', function (e) {
+                try {
+                    var link = $(this).attr("href").split('=');                    
+                    $('#show-boss').load('/Boss/GetTable', {
+                        code: $('#code_search').val(),
+                        name: $('#name_search').val(),
+                        phone: $('#phone_search').val(),
+                        status: $('#status_search').val(),
+                        page: link[1],
+                        pageSize: $('#pageSize').val()
+                    });
+                    e.preventDefault()
+                } catch (ex) { }
+            });
+
+            $('#btn-search-boss').click(function () {
+                $('#show-boss').load('/Boss/GetTable', {
+                    code: $('#code_search').val(),
+                    name: $('#name_search').val(),
+                    phone: $('#phone_search').val(),
+                    status: $('#status_search').val(),
+                    pageSize: $('#pageSize').val(),
+                });
+            });
+
+            $(document).on('change', '#show-boss #pageSize', function () {
+                $('#show-boss').load('/Boss/GetTable', {
+                    code: $('#code_search').val(),
+                    name: $('#name_search').val(),
+                    phone: $('#phone_search').val(),
+                    status: $('#status_search').val(),
+                    pageSize: $(this).val()
+                });
+            });
+
+            // new code
+
+            // view image modal
+            $(document).delegate('#show-boss #table-boss tbody tr img', 'click', function () {
+                $('#modal-boss-edit').modal("hide");
+
+                $('#Modal-View').modal("show");
+                $('#image-card-view').attr('src', $(this)[0]['src']);
+            });
+
+            $(document).on('click', '#show-boss #btn-export-boss', function () {
+                $('#table-boss').csvExport();
+            });           
+
+            var codeKey = 'SK';
+            function Generate() {
+                const rand = Math.random().toString().substr(2, 8);
+                $('#Code').val(codeKey + rand);
+            }
+
+            Generate();
+
+            $('#btn-generate').click(function () {
+                Generate();
+            });
+
+            $(document).on('click','#show-boss #btn-create-boss',function () {
+                $('#modal-boss-create').modal('show');
+                Generate();
+            });
+
+
+            //
+            function setClassError(id) {
+                $(id).attr('class', 'form-control is-invalid');
+            }
+
+            //
+            function setRemoveError(id) {
+                $(id).attr('class', 'form-control');
+            }
+
+            //
+            function onChange(id) {
+                $(id).change(function () {
+                    setRemoveError(id);
+                });
+            }
+
+            onChange('#photo-boss');           
+
+            // Create
+            $('#btn-save-boss').click(function () {
+
+                if ($('#Code').val() === "") {   
+                    setClassError('#Code');
+                    return false;
+                }
+                else if ($('#Phone').val() === "") {
+                    setClassError('#Phone');
+                    return false;
+                }
+                else if ($('#Picture').val() === '') {
+                    setClassError('#photo-boss');
+                    return false;
+                }
+                else if ($('#Name').val() === '') {
+                    setClassError('#Name');
+                    return false;
+                }
+
+                let formData = $('#form-boss').serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Boss/Store",
+                    data: formData,
+                    success: function (response) {
+
+                        if (response.Name) {
+                            setClassError('#Name');
+                            $('#error-Name').text(response.Name);
+                        }
+                        else if (response.Code) {
+                            setClassError('#Code');
+                            $('#error-Code').text(response.Code);
+                        }
+                        else if (response.Phone) {
+                            setClassError('#Phone');
+                            $('#error-Phone').text(response.Phone);
+                        }
+                        else {
+                            $('#modal-boss-create').modal("hide");
+                            swal("Success", response, "success")
+
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1500)
+                        }
+                    }
+                });
+            });
+
+
+            onChange('#Phone');
+            onChange('#Name');
+
+            $(document).delegate('#show-boss #table-boss tbody tr', 'dblclick', function () {
+                $('#modal-boss-edit').modal("show");
+
+                let photo = $(this).attr('data-picture');
+
+                $('#Code_Edit').val($(this).attr("data-code").trim());
+                $('#Name_Edit').val($(this).attr("data-name"));
+                $('#Phone_Edit').val($(this).attr("data-phone"));
+                $('#Address_Edit').val($(this).attr("data-address"));
+                $('#PK_Boss_Id').val($(this).attr("id"));
+                $('#Status_Edit').val($(this).attr("data-status").trim());
+
+                $('#Picture_Edit').val($(this).attr('data-picture'));
+                $('#photo-view-edit').attr('src', '@Url.Content("/Content/Uploads/Boss/")' + photo);
+            });
+
+            onChange('#Phone_Edit');
+            onChange('#Name_Edit');
+            // Update
+            $('#btn-update-boss').click(function () {
+
+                if ($('#Name_Edit').val() === "") {
+                    setClassError('#Name_Edit');
+                    return false;
+                }
+                else if ($('#Phone_Edit').val() === "") {
+                    setClassError('#Phone_Edit');
+                    return false;
+                }
+                else if ($('#Picture_Edit').val() === '') {
+                    setClassError('#photo-boss-edit');
+                    return false;
+                }
+                else if ($('#PK_Boss_Id').val() === '') {
+                    alert('Boss Id not found.');
+                    return false;
+                }
+
+                let formData = $('#form-boss-edit').serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Boss/Update",
+                    data: formData,
+                    success: function (response) {
+                        if (response.Name) {
+                            setClassError('#Name_Edit');
+                            $('#error-name-edit').text(response.Name);
+                        }
+                        else if (response.Code) {
+                            setClassError('#Code_Edit');
+                            $('#error-code-edit').text(response.Code);
+                        }
+                        else if (response.Phone) {
+                            setClassError('#Phone_Edit');
+                            $('#error-phone-edit').text(response.Phone);
+                        }
+                        else {
+                            $('#modal-boss-create').modal("hide");
+                            swal("Success", response, "success");
+
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        }
+                    }
+                });
+
+            });
+
+            function validateControl(control_id) {
+                $(control_id).keypress(function (event) {
+                    var ew = event.which;
+                    if (ew == 32)
+                        return true;
+                    if (48 <= ew && ew <= 57)
+                        return true;
+                    if (65 <= ew && ew <= 90)
+                        return true;
+                    if (97 <= ew && ew <= 122)
+                        return true;
+                    return false;
+                });
+            }
+
+            function protectdControl(control) {
+                $(control).bind("cut copy paste drag drop", function (e) {
+                    e.preventDefault();
+                });
+            }
+
+            function isNumberOnly(control) {
+                $(control).keypress(function (evt) {
+                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    if (charCode > 31 && (charCode < 48 || charCode > 57))
+                        return false;
+                    return true;
+                });
+            }
+
+            isNumberOnly('#Phone');
+            isNumberOnly('#Phone_Edit');
+
+            validateControl('#Name');
+            protectdControl('#Name');
+
+            function AutoComplete(control, url) {
+                $(control).typeahead({
+                    minLength: 1,
+                    name: control,
+                    highlight: false,
+                    source: function (request, response) {
+                        $.ajax({
+                            url: url,
+                            data: {
+                                value: request
+                            },
+                            type: "GET",
+                            contentType: "json",
+                            success: function (data) {
+                                response(data);
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            },
+                            failure: function (response) {
+                                alert(response.responseText);
+                            }
+                        });
+                    },
+                });
+            }
+
+            AutoComplete('#code_search', '/Boss/AutoCode');
+            AutoComplete('#name_search', '/Boss/AutoName');
+            AutoComplete('#phone_search', '/Boss/AutoPhone');
+
+            function isImage(icon) {
+                const ext = ['.jpg', '.jpeg', '.gif', '.png', '.PNG','.JPG','.JPEG'];
+                return ext.some(el => icon.endsWith(el));
+            }
+
+            // function Uplaod
+            function onUpload(control, imagePreview, imageForSave) {
+
+                $(control).change(function () {
+
+                    var fileUpload = $(control).get(0);
+
+                    var files = fileUpload.files;                   
+
+                    var fileSize = files[0].size / 1024 / 1024;
+
+                    var fileType = files[0].name; 
+
+                    if (!isImage(fileType)) {
+
+                        $(control).val("");
+
+                        swal({
+                            title: "Warning",
+                            text: "File must be file Image.",
+                            type: "warning",
+                        });
+                        return false;
+                    }
+
+                    if (fileSize > 5) {
+
+                        $(control).val("");
+
+                        swal({
+                            title: "Warning",
+                            text: "File size must under 5M",
+                            type: "warning",
+                        });
+                        return false;
+                    }
+                                   
+                    var fileData = new FormData();
+
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    }
+
+                    let token = $('input[name="__RequestVerificationToken"]').val();
+
+                    fileData.append('path', 'Boss/');
+                    fileData.append('__RequestVerificationToken', token);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Other/Upload",
+                        contentType: false,
+                        processData: false,
+                        data: fileData,
+                        success: function (response) {
+                            
+                            if (response.message) {
+                                $(imagePreview).attr('src', '/Content/Uploads/Boss/' + response.message);
+                                $(imageForSave).val(response.message);
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                });
+                
+            }
+
+            // call
+            onUpload('#photo-boss', '#photo-view-response', '#Picture');
+
+            onUpload('#photo-boss-edit', '#photo-view-edit', '#Picture_Edit');
+        });
+        </script>
+    }

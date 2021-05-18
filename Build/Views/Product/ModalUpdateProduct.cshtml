@@ -1,0 +1,121 @@
+@using Microsoft.Ajax.Utilities
+@using web_payrolls.Helpers
+@using web_payrolls.Models
+@{
+    // connection
+    var db = new DB_Connection();
+    // provider
+    var provider = new ContextProvider(new ClHelper(),new DB_Connection());
+    // list manager
+    var managers = db.tblBosses.ToList();
+    // manager id
+    var managerId = provider.ManagerId;
+    // product type
+    var productType = db
+        .tblProduction_ProductType
+        .Where(type => type.FK_Boss_Id == managerId)
+        .DistinctBy(type => type.Pro_Type)
+        .ToList();
+
+}
+<!--Form Update-->
+<div class="modal fade" id="modal-update-product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+                    <i class="ti-plus pr-2"></i>@Resources.Voucher.Edit Product Name
+                </h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <form method="post" action="" id="form-update-product">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("txtProductId")
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">@Resources.Voucher.HOD</label>
+                                <select id="txtHodId" name="txtHodId" class="form-control">
+                                    <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                                    @foreach (var item in managers)
+                                    {
+                                        if (item.PK_Boss_Id + "" == managerId + "")
+                                        {
+                                            <option value="@item.PK_Boss_Id" selected="selected">@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.PK_Boss_Id">@item.Name</option>   
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Product Type</label>
+                                <select id="txtProductType" name="txtProductType" class="form-control">
+                                    <option value="">-- Choose Product Type --</option>
+                                    @foreach (var item in productType)
+                                    {
+                                        <option value="@item.Pro_Type">@item.Pro_Type</option>
+                                    }
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="">Type Name</label>
+                                <select id="txtProductTypeId" name="txtProductTypeId" class="form-control">
+                                    <option value="">-- Choose Type Name --</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Product Name</label>
+                                <input class="form-control form-group-sm" id="txtProduct" name="txtProduct" placeholder="Enter Product Name" maxlength="50"/>
+                                <div class="invalid-feedback" id="error-product-name-edit"></div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group text-center">
+                                <img style="height: 270px"
+                                     src="~/Content/images/no-image.jpg"
+                                     alt="me" 
+                                     class="img-thumbnail"
+                                     onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'"
+                                     id="picture-response-edit">
+                            </div>
+
+                            <div class="form-group">
+                                <input accept="image/png, image/jpeg, image/gif" type="file" id="choose-picture-edit" style="display: none">
+                                <input type="hidden" id="txtPicture" name="txtPicture"/>
+                            </div>
+                        </div>
+                    </div>
+                    
+                     <div class="form-group">
+                        <label for="">Description </label>
+                        <textarea class="form-control form-group-sm" placeholder="Enter Description" id="txtDesc" name="txtDesc" rows="4"></textarea>
+                     </div> 
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-update-product" style="background: #28a745; color: #fff; font-size: 20px">
+                        <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Update Product Name
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--Form Update-->
+

@@ -1,0 +1,258 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetAllOT_Result>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+
+    .btn-green {
+        background: #28A745 !important;
+        color: white;
+    }
+
+    .label-green {
+        background: #28A745 !important;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }
+
+    thead, tbody tr {
+        display: table;
+        width: 2200px;
+        table-layout: fixed;
+    }
+
+    thead {
+        width: calc(2200px - 0.1em);
+    }
+
+    tbody {
+        height: 720px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2 pb-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSizeOT" name="pageSizeOT">
+                @foreach (var item in ViewBag.PageSizeOT)
+                {
+                    if (item.Value == @ViewBag.psizeOT + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row justify-content-end pr-3 pb-2">
+            <div class="float-right">
+
+                <div class="btn-group btn-sm" data-toggle="buttons">
+
+                    <label class="btn btn-sm bg-white" id="btn-export-ot">
+                        <input type="radio" name="options" id="option3" autocomplete="off">
+                        <span class="text-inverse">
+                            <i class="ti-printer"></i> @Resources.Voucher.Excel
+                        </span>
+                    </label>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-md table-hover" id="table-ot">
+        <thead>
+            <tr style="border: 1px solid #f3f1f1">
+                <th class="text-center" width="50px">#</th>
+                <th class="text-center">@Resources.Voucher.Confirm</th>
+                <th class="text-center">@Resources.Voucher.Employee</th>
+                <th class="text-center">@Resources.Voucher.OTDate</th>
+                <th class="text-center">@Resources.Voucher.StartTime </th>
+                <th class="text-center">@Resources.Voucher.EndTime</th>
+                <th class="text-center">@Resources.Voucher.Amount </th>
+                <th class="text-center">@Resources.Voucher.UnitPrice </th>
+                <th class="text-center">@Resources.Voucher.Total</th>
+                <th class="text-center">@Resources.Voucher.Status</th>
+                <th class="text-center">@Resources.Voucher.ConfirmBy</th>
+                <th class="text-center">@Resources.Voucher.DateConfirm</th>
+                <th class="text-center">@Resources.Voucher.TimeConfirm</th>
+                <th class="text-center">@Resources.Voucher.UpdateBy</th>
+                <th class="text-center">@Resources.Voucher.DateUpdate</th>
+                <th class="text-center">@Resources.Voucher.TimeUpdate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+                <tr id="@item.PK_Over_Time_Id"
+                    data-date="@item.OT_Date"
+                    data-start="@item.OT_From_Time"
+                    data-end="@item.OT_To_Time"
+                    data-desc="@item.Descr"
+                    data-unit-price="@item.Unit_Price_Hour">
+
+                    <td class="text-center" width="50px">@(rowNo += 1)</td>
+
+                    <td class="text-center">
+                        @if (item.Status == "Done" || item.Status == "Reject")
+                        {
+                            <button class="btn btn-instagram btn-sm" disabled><i class="ti-check"></i></button>
+                            <button class="btn btn-instagram btn-sm" disabled><i class="ti-close"></i></button>
+                            <button class="btn btn-instagram btn-sm" disabled><i class="ti-pencil"></i></button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-green btn-sm" data-id="@item.PK_Over_Time_Id" id="BTN_COMFIRM"><i class="ti-check"></i></button>
+                            <button class="btn btn-danger btn-sm" data-id="@item.PK_Over_Time_Id" id="BTN_NO"><i class="ti-close"></i></button>
+                            <button class="btn btn-dropbox btn-sm" data-id="@item.PK_Over_Time_Id" id="BTN_EDIT_OT"><i class="ti-pencil"></i></button>
+                        }
+                    </td>
+
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Staff_Name)
+                    </td>
+
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.OT_Date)
+                    </td>
+
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.OT_From_Time)
+                    </td>
+
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.OT_To_Time)
+                    </td>
+
+                    <td class="text-center text-primary">
+                        @Html.DisplayFor(modelItem => item.Amount_Hour) h
+                    </td>
+
+                    <td class="text-center text-primary">
+                      $  @Html.DisplayFor(modelItem => item.Unit_Price_Hour) 
+                    </td>
+
+                    <td class="text-center text-primary">
+                      $  @Html.DisplayFor(modelItem => item.Total_Price)
+                    </td>
+
+                    <td class="text-center">
+                        @if (item.Status == "Done")
+                        {
+                            <span class="label label-green">@item.Status</span>
+                        }
+                        else if (item.Status == "Reject")
+                        {
+                            <span class="label label-danger">@item.Status</span>
+                        }
+                        else
+                        {
+                            <span class="label label-success">@item.Status</span>
+                        }
+                    </td>
+                    
+                     <td class="text-center">
+                        @if (item.User_Confirm == null)
+                        {
+                            <span class="label label-light-info">No Confirm</span>
+                        }
+                        else
+                        {
+                            @item.User_Confirm
+                        }
+                    </td>
+                    <td class="text-center">
+                       @if (item.Date_Confirm == null)
+                       {
+                           <span><i class="ti-time"></i></span>
+                       }
+                       else
+                       {
+                           @item.Date_Confirm
+                       }
+                   </td>
+                   <td class="text-center">
+                       @if (item.Time_Confirm == null)
+                       {
+                           <span><i class="ti-time"></i></span>
+                       }
+                       else
+                       {
+                           @item.Time_Confirm
+                       }
+                   </td>
+                    
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.User_Update)
+                    </td>
+
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Date_Update)
+                    </td>
+
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Time_Update)
+                    </td>
+                </tr>
+            }
+
+            <tr>
+                <th class="text-center" width="50px"></th>
+                <th class="text-center"></th>
+                <th class="text-center"> </th>
+                <th class="text-center"> </th>
+                <th class="text-center"> </th>
+                <th class="text-center"> </th>
+                <th class="text-center"> </th>
+                <th class="text-center"> </th>
+                <th class="text-center font-weight-bold" >$ @ViewData["sum_ot"]</th>
+                <th class="text-center"></th>
+                <th class="text-center"> </th>
+                <th class="text-center"> </th>
+                <th class="text-center"> </th>
+                <th class="text-center"> </th>
+                <th class="text-center"> </th>
+                <th class="text-center"> </th>
+            </tr>
+          
+        </tbody>
+    </table>
+</div>
+
+<div class="float-left" style="padding: 20px 0px;">
+    @Resources.Voucher.Showing @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @Resources.Voucher.to @Model.PageCount @Resources.Voucher.of @ViewBag.Records @Resources.Voucher.Entries
+</div>
+
+<div class="float-right" id="Paginator"> @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+
+

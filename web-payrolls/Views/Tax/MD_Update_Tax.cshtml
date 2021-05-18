@@ -1,0 +1,70 @@
+﻿<!--Form Create-->
+<div class="modal fade" id="modal-update-tax" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+                    <i class="ti-pencil pr-2"></i>@Resources.Voucher.Edit @Resources.Voucher.Tax @Resources.Voucher.Salary
+                </h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post" action="" id="form-update-tax">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+
+                    @Html.Hidden("tax_id_edit")
+
+                    <div class="form-group">
+                        <label>@Resources.Voucher.Salary @Resources.Voucher.Start<span class="text-danger">*</span></label>
+                        <div class="input-daterange input-group">
+                            <input type="text" class="form-control" name="txt_start_edit" id="txt_start_edit" placeholder="@Resources.Voucher.Start" value="0" maxlength="20">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-info b-0 text-white">@Resources.Voucher.OTTo</span>
+                            </div>
+                            <input type="text" class="form-control" id="txt_end_edit" name="txt_end_edit" placeholder="@Resources.Voucher.End" value="0" maxlength="20">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>@Resources.Voucher.Tax @Resources.Voucher.Percent<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="txt_tax_edit" name="txt_tax_edit" placeholder="@Resources.Voucher.Tax @Resources.Voucher.Percent" required maxlength="20" value="0">
+                            <div class="invalid-feedback" id="error-tax"></div>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label>@Resources.Voucher.Tax @Resources.Voucher.Decrease<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="txt_decrease_edit" name="txt_decrease_edit" placeholder="@Resources.Voucher.Tax @Resources.Voucher.Decrease" required maxlength="20" value="0">
+                            <div class="invalid-feedback" id="error-decrease"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>@Resources.Voucher.Tax @Resources.Voucher.Family<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="txt_family_edit" name="txt_family_edit" placeholder="@Resources.Voucher.Tax @Resources.Voucher.Family" required maxlength="20" value="0">
+                            <div class="invalid-feedback" id="error-family"></div>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label>@Resources.Voucher.Tax @Resources.Voucher.Foreign<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="txt_foreign_edit" name="txt_foreign_edit" placeholder="@Resources.Voucher.Tax @Resources.Voucher.Foreign" required maxlength="20" value="0">
+                            <div class="invalid-feedback" id="error-foreign"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-update-tax" style="background: #28a745; color: #fff; font-size: 20px"><i class="ti-save-alt pr-2"></i>@Resources.Voucher.Update @Resources.Voucher.Tax @Resources.Voucher.Salary</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--Form Create-->

@@ -1,0 +1,102 @@
+﻿@model List<web_payrolls.Models.tblVoucher>
+
+<link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
+
+@{
+    ViewBag.Title = "Test";
+    ViewBag.Page = "Test";
+}
+
+<style>
+    .mvc-grid {
+        line-height: 1.25em;
+        position: relative;
+        overflow-x: auto;
+        font-size: 12px;
+    }
+</style>
+
+<div id="app">
+
+</div>
+
+<div class="card">
+
+    @(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            // columns.Add(model => Html.CheckBox("tblVoucher_" + model.PK_Voucher_Id));
+            columns.Add(model => "<button class='btn btn-default btn-sm' data-id=\"" + model.PK_Voucher_Id + "\"><i class='ti-plus'></i></button>").Encoded(false).Titled("Action");
+            columns.Add(model => model.Voucher_Name).Titled("Name");
+            columns.Add(model => model.Amount).Titled("Name");
+            columns.Add(model => model.Confirm_time).Titled("Name");
+            columns.Add(model => model.Discount).Titled("Name");
+            columns.Add(model => model.Confirm_Date).Titled("Name");
+            columns.Add(model => model.Date_Voucher).Titled("Name");
+            columns.Add(model => model.FK_Voucher_Rent_Other_Id).Titled("Name");
+            columns.Add(model => model.PK_Voucher_Id).Titled("Name");
+            columns.Add(model => model.QTY).Titled("Name");
+            columns.Add(model => model.Voucher_Name).Titled("Name");
+            columns.Add(model => model.Voucher_Name).Titled("Name");
+            columns.Add(model => model.Voucher_Name).Titled("Name");
+            columns.Add(model => model.Voucher_Name).Titled("Name");
+            columns.Add(model => model.Voucher_Name).Titled("Name");
+            columns.Add(model => model.Voucher_Name).Titled("Surname");
+            columns.Add(model => model.Voucher_Name).Titled("Marital status");
+            columns.Add(model => model.Descr).Titled("Marital status");
+        })
+        .Empty("No data found")
+        .Filterable()
+        .Sortable()
+        .Pageable(pager =>
+        {
+            pager.PageSizes = new Dictionary<int, string>
+            {
+                { 500, "All" },
+                { 10, "10" },
+                { 20, "20" },
+                { 50, "50" },
+                { 100, "100" },
+            };
+            pager.ShowPageSizes = true;
+            pager.RowsPerPage = 20;
+        })
+        )
+</div>
+
+@* <div class="card"> *@
+@*     @webGrid.GetHtml( *@
+@*             htmlAttributes: new { id = "WebGrid", @class = "Grid" }, *@
+@*             columns: webGrid.Columns( *@
+@*                      webGrid.Column("PK_Staff_Id", "Customer Id",null,"",false), *@
+@*                      webGrid.Column("Staff_Name", "Customer Name"), *@
+@*                      webGrid.Column("Staff_Name", "City"), *@
+@*                      webGrid.Column("Staff_Name", "Country"))) *@
+@* </div> *@
+
+
+<div>
+
+    <form method="post" action="@Url.Action("Generate", "Test")">
+        <input id="qrCode" name="qrCode"/>
+        <button type="submit" class="btn btn-default">save</button>
+    </form>
+
+    @if (TempData["QrCodeImage"] != null)
+    {
+        <img src="@TempData["QrCodeImage"]" height="300px" alt="">
+    }
+
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/bundle/main.js"></script>
+    <script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+   <script>
+        [].forEach.call(document.getElementsByClassName('mvc-grid'), function (element) {
+        new MvcGrid(element);
+        });
+
+   </script>
+}

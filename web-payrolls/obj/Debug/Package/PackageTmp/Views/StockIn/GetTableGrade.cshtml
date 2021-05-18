@@ -1,0 +1,311 @@
+@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetAllProductGrade_Result>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }   
+    
+    td {
+        vertical-align: middle !important; 
+    }
+    
+     .label-green {
+            background: #28A745 !important;
+     }
+     
+     .table-header-shadow { 
+         box-shadow: 0 .20rem 1rem rgba(0,0,0,.10);
+      }
+      
+      thead, tbody tr {
+          display: table;
+          width: 1600px;
+          table-layout: fixed;
+      }
+  
+      thead {
+          width: calc(1600px - 0.1em);
+      }
+  
+      tbody {
+          height: 720px;
+          overflow-y: scroll;
+          overflow-x: hidden;
+      }
+           
+</style>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize" name="pageSize">
+                @foreach (var item in ViewBag.PageSizeGrade)
+                {
+                    if (item.Value == ViewBag.psizeGrade + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row justify-content-end pr-3 pb-2">
+            <div class="float-right">
+
+                <div class="btn-group btn-sm" data-toggle="buttons">
+
+                    <label class="btn btn-sm bg-white" id="btn-export-grade">
+                        <input type="radio" name="options" id="option3" autocomplete="off">
+                        <span class="text-inverse">
+                            <i class="ti-printer"></i> @Resources.Voucher.Excel
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-hover table-md text-center" id="table-grade">
+        <thead class="text-capitalize table-header-shadow">
+            <tr style="border: 1px solid #f3f1f1">
+                <th style="width: 80px">#</th>
+                <th class="text-center">@Resources.Voucher.Action</th>
+                <th>HOD</th>
+                <th>Product Type</th>
+                <th>Type Name</th>
+                <th>Product Name</th>
+                <th class="text-center" style="width: 100px">@Resources.Voucher.Picture</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Grade</th>
+                <th>Measure</th>
+                <th>Product Code</th>
+                <th>Barcode</th>
+                <th>Qr Code</th>
+                <th style="width: 200px">Double Whole Price</th>
+                <th>Whole Price</th>
+                <th>Unit Price</th>
+                <th>Cost</th>
+                <th>Normal Price</th>
+                <th>Product Status</th>
+                <th>Status Discount</th>
+                <th>Discount</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>@Resources.Voucher.UpdateBy</th>
+                <th>@Resources.Voucher.DateUpdate</th>
+                <th>@Resources.Voucher.TimeUpdate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+                <tr
+                    id="@item.PK_Grade_Id"
+                    data-size="@item.Size"
+                    data-picture="@item.Picture_Path"
+                    data-barcode="@item.BarCode"
+                    data-qrCode="@item.QR_Code"
+                    data-measure="@item.Measu_Name"
+                    data-grade="@item.Grade_Name"
+                    data-double-whole="@item.Double_Whole_Price"
+                    data-whole="@item.Whole_Price"
+                    data-unit="@item.Unit_Price"
+                    data-cost="@item.Cost"
+                    data-normal="@item.Normal_Price"
+                    data-discount="@item.Discount"
+                    data-start-discount="@item.Start_Dis"
+                    data-end-discount="@item.End_Dis"
+                    data-status="@item.Status_Dis"
+                    data-product-status="@item.Pro_Status"
+                    data-desc="@item.Descr"
+                >
+                    <td style="width: 80px">@(rowNo += 1)</td>
+                    
+                    <td class="text-center">
+                                           
+                        <button class="btn btn-default btn-sm" id="btn-add-stock-in" data-id="@item.PK_Grade_Id">
+                            <i class="ti-plus"></i> Stock
+                        </button>
+                    
+                        <button class="btn btn-default btn-sm" onclick="window.location = '/ProductGrade/Edit/' + @item.PK_Grade_Id " style="display: none">
+                            <i class="ti-pencil"></i>
+                        </button>
+                                            
+                    </td>
+
+                    <td>
+                        @item.Name
+                    </td>
+                    
+                    <td>
+                        @{
+                            if (item.Pro_Type == "Fabric")
+                            {
+                                <span class="label label-success text-center" style="width: 70px">@item.Pro_Type</span>
+                            }
+                            else if (item.Pro_Type.Trim() == "Recycling")
+                            {
+                                <span class="label label-danger text-center" style="width: 70px">@item.Pro_Type</span>
+                            }
+                            else if (item.Pro_Type == "Accessory")
+                            {
+                                <span class="label label-info text-center" style="width: 70px">@item.Pro_Type</span>
+                            }
+                            else
+                            {
+                                <span class="label label-success text-center" style="width: 70px; background: #28a745">@item.Pro_Type</span>
+                            }
+                        }
+                    </td>
+
+                    <td>@item.ProType_Name</td>
+                    
+                    <td>@item.Pro_Name</td> 
+                    
+                    <td class="text-center" style="width: 100px">
+                        <img
+                            id="image_view_noaa"
+                            alt="attachment_grade"
+                            height="40"
+                            width="40"
+                            src="/Content/Uploads/Grade/@item.Picture_Path"
+                            onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'"
+                        >
+                    </td>
+
+                    <td>
+                        <span class="label label-default p-1" style="background: @item.Color.ToLower();color: grey"></span> @item.Color
+                    </td>
+                    
+                    <td>@item.Size</td>
+
+                    <td>
+                        @if (item.Grade_Name.Contains("A"))
+                        {
+                            <span class="text-green" style="color: limegreen">@item.Grade_Name</span>
+                        }
+                        else
+                        {
+                            <span class="text-success">@item.Grade_Name</span>
+                        }
+                    </td>
+
+                    <td>@item.Measu_Name</td>
+                    
+                    <td>@item.Code_Product</td>
+                                        
+                    <td>@item.BarCode</td>
+                    
+                    <td>@item.QR_Code</td>
+
+                    <td style="width: 200px">$ @item.Double_Whole_Price</td>
+                    
+                    <td>$ @item.Whole_Price</td>
+                    
+                    <td>$ @item.Unit_Price</td>
+                    
+                    <td>$ @item.Cost</td>
+                    
+                    <td>$ @item.Normal_Price</td>
+                    
+                    <td>
+                        @if (item.Pro_Status == "Enable")
+                        {
+                            <span class="label label-green">@item.Pro_Status</span>
+                        }
+                        else
+                        {
+                            <span class="label label-danger">Disabled</span>
+                        }
+                    </td>
+                    
+                    <td>
+                        @if (item.Status_Dis == "Enable")
+                        {
+                            <span class="label label-green">@item.Status_Dis</span>
+                        }
+                        else
+                        {
+                            <span class="label label-danger">Disabled</span>
+                        }
+                    </td>
+                    
+                    <td>@item.Discount %</td>
+                    
+                    <td>
+                        @if (String.IsNullOrEmpty(item.Start_Dis))
+                        {
+                            <i class="ti-time"></i>
+                        }
+                        else
+                        {
+                            <span>@item.Start_Dis</span>
+                        }
+                    </td>
+                    
+                    <td>
+                        @if (String.IsNullOrEmpty(item.End_Dis))
+                        {
+                            <i class="ti-time"></i>
+                        }
+                        else
+                        {
+                            <span>@item.End_Dis</span>
+                        }
+                    </td>
+
+                    <td>@item.User_Update</td>
+
+                    <td>@item.Date_Update</td>
+
+                    <td>@item.Time_Update</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div class="float-left" style="padding: 20px 0;">
+    @Resources.Voucher.Showing 
+    @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 
+    @Resources.Voucher.to 
+    @Model.PageCount 
+    @Resources.Voucher.of @ViewBag.Records 
+    @Resources.Voucher.Entries
+</div>
+
+<div class="float-right">
+     @Html.PagedListPager(Model, page => Url.Action("Index", new {page}))
+</div>

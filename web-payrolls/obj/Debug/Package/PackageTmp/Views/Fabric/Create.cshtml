@@ -1,0 +1,529 @@
+@using web_payrolls.Helpers
+@using web_payrolls.Models
+@{
+    ViewBag.Title = "Use Fabric";
+    ViewBag.Page = "Use Fabric";
+    
+    // connection
+    var db = new DB_Connection();
+    var provider = new ContextProvider(new ClHelper(), new DB_Connection());
+    // boss
+    var hod = db
+        .tblBosses
+        .Select(boss => new SelectListItem()
+        {
+          Value = boss.PK_Boss_Id + "",
+          Text  = boss.Name,
+          Selected =  boss.PK_Boss_Id == provider.ManagerId
+        })
+        .ToList();
+    
+    // company
+    var companies = db
+        .tblCompanies
+        .Where(company => company.FK_Boss_Id == provider.ManagerId)
+        .Select(company => new SelectListItem()
+        {
+            Value = company.PK_Comp_Id + "",
+            Text = company.Comp_Name,
+            Selected = company.PK_Comp_Id == provider.ManagerId
+        })
+        .ToList();
+
+    var baseUrl = Request.Url?.AbsoluteUri;
+
+    var url = baseUrl?.Split('/');
+
+    var id = int.Parse(url[5]);
+    
+    
+    // Console.WriteLine("url  ==== " + baseUrl + "");
+   // Console.WriteLine(" id ===" + id);
+
+    // var companyId = db
+    //     .tblProduction_StockIn_Product_Cut_Balance
+    //     .Single(balance => balance.Stock_In_Product_Cut_No_Id == id).FK_Com_Id;
+
+    Console.WriteLine("===================================");
+    // foreach (var item in productStockInBalance)
+    // {
+    //     companyId = Convert.ToInt32(item.FK_Com_Id);
+    //     Console.WriteLine("Company Id = " + item.FK_Com_Id);
+    //     Console.WriteLine("QTY = " + item.QTY_Balance);
+    // }
+
+    Console.WriteLine("===================================");
+
+
+    // var productStockImportBalance = db
+    //     .tblProduction_PK_Stock_In_Product_Import_Balance
+    //     .Where(balance => balance.FK_Com_Id == companyId)
+    //     .ToList();
+    //
+    // foreach (var row in productStockImportBalance)
+    // {
+    //     Console.WriteLine("Qty = " + row.QTY_Balance);
+    //     Console.WriteLine("Company ID = " + row.FK_Com_Id);
+    // }
+       
+}
+
+<h3 class="text-inverse">Add Fabric</h3>
+
+@* Master *@
+<div class="card" style="border-top: #428bca 3px solid;">
+    <div class="card-body">
+        <form method="post" id="form-add-details">
+   
+            @Html.AntiForgeryToken()
+   
+            <div class="row">
+   
+                <div class="col-md-12">
+   
+                    <div class="row">
+                           
+                        @* choose master *@
+                        <div class="form-group col-md-3">
+                            <label>@Resources.Voucher.HOD<span class="text-danger"> * </span></label>
+                            <div class="controls">
+                                @Html.DropDownList("txtManager", hod, "-- Choose Hod --", new {@class = "form-control"})
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-md-3">
+                            <label>@Resources.Voucher.Company<span class="text-danger"> *</span></label>
+                            <div class="controls">
+                                @Html.DropDownList("txtCompany", companies, "-- Choose Company --", new {@class = "form-control"})
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label>@Resources.Voucher.Date<span class="text-danger"> * </span></label>
+                            <div class="controls">
+                                <input type="date" name="date" id="date" class="form-control">
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+                           
+                        <div class="form-group col-md-3">
+                            <label>@Resources.Voucher.Time<span class="text-danger"> * </span></label>
+                            <div class="controls">
+                                <input type="text" name="time" id="time" class="form-control" placeholder="hh:mm" autocomplete="off">
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+                           
+                        @* choose master *@
+                    </div>
+                </div>
+   
+            </div>
+               
+        </form>
+    </div>
+</div>
+@* Master *@
+
+@* Input *@
+<div class="row">
+
+    <div class="form-group col-md-2">
+        <label for="">Product Type</label>
+        <select class="form-control" id="product_type"> 
+            <option value="">-- Choose Product Type -- </option>
+            <option value="Fabric">Fabric</option>
+        </select>
+    </div>
+
+    <div class="form-group col-md-2">
+        <label for="">Product</label>
+        <select class="form-control" id="product_name" name="product_name"> 
+            <option value="">-- Choose Product -- </option>
+        </select>
+    </div>
+
+    <div class="form-group col-md-4">
+        <label for="">Product Grade</label>
+        <select class="form-control" id="product_grade" name="product_grade"> 
+            <option value="">-- Choose Product Grade -- </option>
+        </select>
+    </div>
+    
+    <div class="form-group col-md-2">
+        <label for="">Qty</label>
+        <input class="form-control" id="product_qty" placeholder="Enter Qty"/>
+    </div>
+    
+    
+    <div class="form-group col-md-2">
+        <label for="" style="color: transparent">.</label>
+        <button class="form-control btn btn-default btn-sm mb-2" id="btn-add-more" style="background: #428bca; color: #fff">
+            <i class="ti-plus"></i> New
+        </button>
+    </div>
+
+</div>
+@* Input *@
+
+
+@* Sub *@
+<div class="card" style="border-top: #428bca 3px solid;">
+    <div class="card-body">
+        
+        <div>
+            <table class="table table-sm table-bordered" id="table-details">
+              <thead>
+                <tr class="text-center">
+                    @* <th>#</th> *@
+                    <th>Product Type</th>
+                    <th>Type Name</th>
+                    <th>Product</th>
+                    <th>Grade</th>
+                    <th>Qty</th>
+                    <th style="width: 50px"></th>
+                </tr>
+              </thead>
+              <tbody>
+              
+              @* @for (var i = 1; i < 10; i++) *@
+              @* { *@
+              @*     <tr class="text-center"> *@
+              @*         $1$ <td>@i</td> #1# *@
+              @*         <td id="td_type">Fabric</td> *@
+              @*         <td>Zara</td> *@
+              @*         <td>Shirt New</td> *@
+              @*         <td>A</td> *@
+              @*         <td id="td_qty"> *@
+              @*             100 *@
+              @*             $1$ <input class="form-control" value="100"> #1# *@
+              @*         </td> *@
+              @*         <td style="width: 50px"> *@
+              @*             <button class="btn btn-danger btn-sm"> *@
+              @*                 <i class="ti-minus"></i> *@
+              @*             </button> *@
+              @*         </td> *@
+              @*     </tr> *@
+              @* } *@
+              </tbody>
+            </table>
+        </div>
+        
+        <div>
+            <button class="btn btn-default btn-sm mb-2 float-right" style="background: #428bca; color: #fff" id="btn-save-close">
+                <i class="ti-save-alt"></i> Save Close
+            </button>
+        </div>
+
+    </div>
+</div>
+@* Sub *@
+
+@section Scripts
+{
+    <script>
+        $(function (){
+            let token = { __RequestVerificationToken : $('input[name="__RequestVerificationToken"]').val()};
+            
+             // set select 2
+            function Select2(ctn){
+                $(ctn).select2({ width: '100%', placeholder: "Select an Option", allowClear: true });
+            }
+            // use
+            Select2("#txtManager");
+            Select2("#txtCompany");
+            
+            $('#txtManager').change(function (){
+                let dataForSent = {
+                    id: $(this).val(),
+                    ...token
+                };
+                
+                let {data} = GetDataApi('/Other/GetCompany',dataForSent);
+                
+                $("#txtCompany").html(setToSelect({data: data, label: "Company"}));
+            });
+            
+            // details
+            Select2("#product_type"); 
+            Select2("#product_name"); 
+            Select2("#product_grade"); 
+            
+            // clock picker
+            function ClockPicker(ctx) {
+                $(ctx).clockpicker({
+                    donetext: 'Done',
+                    todayHighlight: true,
+                    todayBtn: "linked",
+                    format: "yyyy-m-d",
+                    autoclose: true,
+                    'default': 'now',
+                });
+
+            }
+            // call clock picker
+            ClockPicker('#time');
+
+            // check time format
+            function checkFormatTime(time) {
+                let regexp = /^\d\d:\d\d$/;
+                return regexp.test(time);
+            }
+            
+            // sweat alert
+              function SweatAlert(message, type) {
+                   swal({
+                       title: message,                       
+                       type: type,
+                       timer: 1500
+                   }); 
+              }
+              
+              let today = moment();
+                          
+              $('#date').val(today.format('YYYY-MM-DD'));
+  
+              $('#time').val(today.format('HH:mm'));             
+              
+               // get data from api
+                function GetDataApi(url, data) {
+                   let dataResponse = null;
+                   let error = false;
+                   $.ajax({
+                     url: url,
+                     async: false,
+                     type: "POST",
+                     global: false,
+                     dataType: 'json',             
+                     data: data,
+                     success: function(response) {                  
+                        dataResponse = response 
+                     },
+                     error: function() {
+                       error =  true 
+                     }
+                   });                           
+                   return {data: dataResponse, error};
+               }         
+                           
+               // get select option
+               function setToSelect({data : data, label : label}) {                               
+                     let option = '<option value="">-- ' + 'Choose ' +  label + ' --</option>';
+                     for(let item in data){
+                         option += '<option value="'+data[item].key+'">' + data[item].value + '</option>'; 
+                     }
+                     return option;
+               }
+                
+               // only number
+                function NumberQty(ctn){
+                       $(document).on('keypress', ctn , function (e){
+                         
+                         if(e.which === 46){
+                            return false;
+                         }
+        
+                         if (e.which !== 8 && e.which !== 0 && e.which !== 46 && (e.which < 48 || e.which > 57)) {
+                             return false;
+                         }
+        
+                         let text = $(this).val();
+        
+                         if (text[0] === '0') {
+                            $(this).val(text.substring(1, text.length))
+                         }
+                       });
+                 }
+                 
+              // click add more
+              
+              let productType = $('#product_type');
+              let product = $('#product_name');
+              let productGrade = $('#product_grade');
+              
+              // on change product type
+              productType.change(function (){
+                  let dataForSent = {
+                      productType : $(this).val(),
+                      ...token
+                  };
+                  
+                  let {data} = GetDataApi('/Fabric/GetProductByType',dataForSent);
+                  
+                  product.html(setToSelect({data: data, label : "Product"}));
+
+              });
+              
+              // product type
+              product.change(function (){
+                  let dataForSent = {
+                      id: $(this).val(),
+                      ...token
+                  };          
+                  
+                  let {data} = GetDataApi('/Fabric/GetProductGradeByProduct',dataForSent);
+                  
+                  let grade = [];
+                  
+                  for (let item in data){
+                      grade.push({
+                        key: data[item].PK_Grade_Id,
+                        value: data[item].Grade_Name
+                      });
+                  }
+                  // set to select
+
+                  let option = '';
+                  
+                  for (let item in data){             
+                      option += "<option value='"+ data[item].PK_Grade_Id +"' title='"+data[item].Picture_Path+"'>" + 'Grade : ' + data[item].Grade_Name + ' Color : ' + data[item].Color + ' Size : ' + data[item].Size + ' QTY : ' + data[item].QTY_Balance + "</option>"
+                  }
+                  
+                  productGrade.html(option);
+              });
+              
+              
+              // select list has image
+               $("#product_grade").select2({
+                templateResult: function (value) {    
+                        return $("<span><img width='20px' src='/Content/Uploads/Grade/"+ value.title +"' alt='no'/>" + value.text + "</span>");
+                  }
+               });
+              
+              // Create
+              $('#btn-save-close').click(function (){
+                    let bossId = $('#txtManager').val();
+                    let companyId = $('#txtCompany').val();
+                    let date = $('#date').val();
+                    let time = $('#time').val()                                        
+                    
+                    if (bossId === ""){
+                        SweatAlert('Please Choose HDO','warning');
+                        return false;
+                    }
+                    else if (companyId === ""){
+                        SweatAlert('Please Choose Company','warning')
+                         return false;
+                    }
+                    else if (date === ""){
+                        SweatAlert('Please Choose Date','warning')
+                         return false;
+                    }
+                    else if (time === ""){
+                        SweatAlert('Please Choose Time','warning')
+                        return false;
+                    }
+                    
+                    let table = document.querySelectorAll('#table-details tbody tr');
+                     
+                    if (table.length === 0){
+                        SweatAlert("Please Add Item","warning");
+                    }
+                    
+                    let fabrics = [];
+                    
+                    for (let i = 0 ; i < table.length ; i++){
+                          let row = table[i];
+                          
+                          let qty = row.querySelector("#td_qty").textContent;
+                          let gradeId = row.getAttribute('data-id');
+                          //console.log(qty.trim());
+                          fabrics.push({
+                            Id: 0,
+                            GradeId: gradeId !== '' ? gradeId : 0,
+                            Qty: qty.trim(),
+                            Date: date,
+                            Time: time                          
+                          });
+                    }
+                   // console.log(fabrics);return;
+                    let data = {fabrics, ...token , stockInProductCutNoId : '@id'};
+                    
+                    if (fabrics.length === 0){
+                        SweatAlert('Please Insert Item...','warning');
+                    }
+                    
+                    $.ajax({
+                      type: "POST",
+                      url: "@Url.Action("Save", "Fabric")",
+                      dataType: 'json',
+                      data: data,
+                      success: function (response){                                              
+                          if (response.error){
+                               swal({
+                                  title: "Success",
+                                  text: response.message,
+                                  type: "success",
+                                  timer: 2000
+                              });                            
+                          }
+                          
+                          SweatAlert(response.message,'success');
+                          //window.location.reload();
+                      }
+                  });  
+                    
+              });   
+              
+              let table = $('table tbody');  
+                
+              NumberQty('#product_qty');
+                
+              $('#btn-add-more').click(function (){
+                                  
+                  let type = $('#product_type');
+                  let product = $('#product_name option:selected').text();
+                  let grade = $('#product_grade');
+                  
+                  let productGrade = $('#product_grade option:selected').text();
+                  
+                  let split = productGrade.split(' ');
+                  console.log(split);
+                  
+                  let qty = $('#product_qty');
+                  
+                  if (qty.val() === ""){
+                      SweatAlert('Please Input Qty','warning');
+                      return false;
+                  }
+                                  
+                  if (parseInt(qty.val()) > parseInt(split[11])){
+                       SweatAlert('Stock Balance available ' + split[11], 'warning');
+                       return false;
+                  }
+                  
+                  table.append(AddRow(12, type.val(),'Zara',product ,grade.val() ,split[2] ,qty.val()));
+                  
+                  qty.val('');
+                  
+              });  
+                
+                // remove table row
+              $(document).delegate('#table-details tbody button','click',function (){                              
+                  $(this).closest('tr').remove();
+                  //SumTotal();
+              });
+              
+                                       
+              function AddRow(no, type, typeName, product, gradeId, grade, qty){
+                  return  '<tr class="text-center" data-id="'+gradeId+'">' + 
+                              // '<td>'+no+'</td>' +
+                              '<td id="td_type">'+type+'</td>'+
+                              '<td>'+typeName+'</td>'+
+                              '<td>'+product+'</td>'+
+                              '<td>'+grade+'</td>'+
+                              '<td id="td_qty">'+
+                                  qty +
+                              '</td>'+
+                              '<td style="width: 50px">'+
+                                  '<button class="btn btn-danger btn-sm">'+
+                                      '<i class="ti-minus"></i>'+
+                                  '</button>'+
+                              '</td>'+
+                          '</tr>';  
+              }
+        });
+    </script>
+}

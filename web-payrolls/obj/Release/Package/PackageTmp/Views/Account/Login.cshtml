@@ -1,0 +1,112 @@
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    @* @Styles.Render("~/Content/assets") *@
+    @* @Styles.Render("~/Content/css") *@
+    <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/spinners.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/colors/blue.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/animate.css")" rel="stylesheet" type="text/css" />
+
+    @Scripts.Render("~/Content/scripts/login.js")
+    <style>
+        .form-login {
+            background-image: url('/Content/images/payroll.jpg');
+            height: 100vh;
+            width: auto;
+            display: flex;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .item {
+            margin: auto;
+            width: 450px;
+        }
+
+        .form-control {
+            font-size: 12px;
+        }
+
+        #btnLogin{
+          border-radius: 2px;
+        }
+
+        input{
+          border-radius: 2px !important;
+        }
+
+        .input-group-text{
+          border-radius: 2px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-login">
+        <div class="item">
+
+            <div style="display: flex ; justify-content: center; padding-bottom : 10px">
+                <img src="~/Content/images/sk.jpg" alt="sk" with="80px" height="100px" />
+            </div>
+
+            <div class="card card-outline-info">
+                <div class="card-header">
+                    <h5 class="card-title text-center text-white text-uppercase">Sign in to start your session</h5>
+                </div>
+                <div class="card-body">
+
+                    <div style="padding: 10px 20px">
+                        <form action="/Account/Login" method="post">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-user"></i></span>
+                                </div>
+                                <input type="text" name="username" class="form-control" required="" data-validation-required-message="This field is required" aria-invalid="false" placeholder="Username">
+                            </div>
+                            <br />
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-lock"></i></span>
+                                </div>
+                                <input type="password" name="password" class="form-control" required="" data-validation-required-message="This field is required" aria-invalid="false" placeholder="Password">
+                            </div>
+                            <br />
+
+
+                            @* <div class="form-group"> *@
+                            @*     <h5></h5> *@
+                            @*     <fieldset class="controls"> *@
+                            @*         <label class="custom-control custom-radio"> *@
+                            @*             <input type="radio" value="true" name="remember_me" class="custom-control-input"><span class="custom-control-label">Remember me</span> *@
+                            @*         </label> *@
+                            @*     </fieldset> *@
+                            @* </div> *@
+                            @Html.AntiForgeryToken()
+                            <div class="text-xs-right">
+                              <button type="submit" class="btn btn-info btn-block" id="btnLogin"><i class="ti-power-off"></i> Sign In</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                @* <div class="card-footer text-center text-muted"> *@
+                @*     <a href="#">Forgot Password</a> *@
+                @* </div> *@
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+
+

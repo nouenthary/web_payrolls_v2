@@ -1,0 +1,196 @@
+@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetALLAnnouncement_Result>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    thead, tbody tr {
+        display: table;
+        width: 2000px;
+        table-layout: fixed;
+    }
+
+    thead {
+        width: calc(2000px - 0.1em);
+    }
+
+    tbody {
+        height: 720px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }
+    
+     .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+      
+</style>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize" name="pageSize">
+                @foreach (var item in ViewBag.PageSize)
+                {
+                    if (item.Value == @ViewBag.psize + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row justify-content-end pr-3 pb-2">
+            <div class="float-right">
+
+                <div class="btn-group  btn-sm" data-toggle="buttons">
+                    <label class="btn bg-white btn-sm" id="btn-export-announcement">
+                        <input type="radio" name="options" id="option3" autocomplete="off">
+                        <span class="text-inverse">
+                            <i class="ti-printer"></i> @Resources.Voucher.Excel
+                        </span>
+                    </label>
+                </div>
+
+                <button type="button" class="btn btn-sm" style="background: #28a745; color: white" id="btn-add-announcement" onclick="location.href='/Announcement/Create';">
+                    <i class="ti-plus"></i> @Resources.Voucher.AddNew
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-hover table-md" id="table-announcement">
+        <thead class="text-uppercase">
+            <tr style="border: 1px solid #f3f1f1">
+                <th width="80px">#</th>
+                <th >@Resources.Voucher.Location</th>
+
+                <th >@Resources.Voucher.Title</th>
+                <th >@Resources.Voucher.Picture </th>
+                <th>@Resources.Voucher.Booster</th>
+
+                <th>@Resources.Voucher.Title 1</th>
+                <th >@Resources.Voucher.Picture 1</th>
+                <th >@Resources.Voucher.Booster 1</th>
+
+                <th >@Resources.Voucher.Title 2</th>
+                <th>@Resources.Voucher.Picture 2</th>
+                <th>@Resources.Voucher.Booster 2</th>
+
+                <th>@Resources.Voucher.UpdateBy</th>
+                <th>@Resources.Voucher.DateUpdate</th>
+                <th>@Resources.Voucher.TimeUpdate</th>
+                <th>@Resources.Voucher.Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+                <tr 
+                    id="@item.PK_Announment_Id" 
+                    data-title="@item.Title" 
+                    data-photo="@item.Picture" 
+                    data-booster="@item.Title_Booter" 
+                    data-desc="@item.Descr" 
+                    data-loc-id="@item.FK_Loc_Id" 
+                    data-number="1">
+
+                <td width="80px">@(rowNo += 1)</td>
+
+                <td>@item.Loc_Name</td>
+
+                @*COl*@
+                <td>@item.Title</td>
+
+                <td>
+                   <img id="image_view_no_ann"
+                    alt="attachment"
+                    height="20"
+                    width="20"
+                    src="~/Content/Uploads/Announcement/@item.Picture"
+                    onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'"
+                    >
+                </td>
+
+                <td>
+                    @item.Title_Booter
+                </td>
+                @*COl*@
+
+
+                @*COl 1*@
+                <td>@item.Title1</td>
+
+                <td>
+                   <img id="image_view_no_ann"
+                       class=""
+                       alt="attachment"
+                       height="20"
+                       width="20"
+                       src="~/Content/Uploads/Announcement/@item.Picture1"
+                       onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'"
+                       >
+                </td>
+
+                <td>@item.Title_Booter1</td>
+                @*COl 1*@
+
+                @*COl 2*@
+                <td>@item.Title2</td>
+
+                <td>
+                    <img id="image_view_no_ann"
+                        class=""
+                        alt="attachment"
+                        height="20"
+                        width="20"
+                        src="~/Content/Uploads/Announcement/@item.Picture2"
+                        onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'"
+                        >
+                </td>
+
+                <td>@item.Title_Booter2</td>
+                @*COl 2*@
+
+                <td>@item.User_Update</td>
+                <td>@item.Date_Update</td>
+                <td>@item.Time_Update</td>
+                
+                <td> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="location.href='/Announcement/Edit/@item.PK_Announment_Id'">
+                        <i class="ti-pencil"></i>
+                    </button>
+                </td>
+            </tr>
+            }                 
+        </tbody>
+    </table>
+
+</div>
+
+<div class="float-left" style="padding: 20px 0;">
+    @Resources.Voucher.Showing @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @Resources.Voucher.to @Model.PageCount @Resources.Voucher.of @ViewBag.Records @Resources.Voucher.Entries
+</div>
+
+<div class="float-right"> @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>

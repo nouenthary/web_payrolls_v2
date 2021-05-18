@@ -1,0 +1,728 @@
+@using web_payrolls.Helpers
+@using web_payrolls.Models
+@{
+    ViewBag.Title = "Add Stock In Product Cut";
+    ViewBag.Page = "Add Stock In Product Cut";
+    // // hod
+    // var hod = Hod.GetListHod();
+    // // company
+    // var company = Company.GetListHod();
+    
+    // connection
+    var db = new DB_Connection();
+    var provider = new ContextProvider(new ClHelper(), new DB_Connection());
+    // boss
+    var hod = db
+        .tblBosses
+        .Select(boss => new SelectListItem()
+        {
+            Value = boss.PK_Boss_Id + "",
+            Text  = boss.Name,
+            Selected =  boss.PK_Boss_Id == provider.ManagerId
+        })
+        .ToList();
+    
+    // company
+    var companies = db
+        .tblCompanies
+        .Where(company => company.FK_Boss_Id == provider.ManagerId)
+        .Select(company => new SelectListItem()
+        {
+            Value = company.PK_Comp_Id + "",
+            Text = company.Comp_Name,
+            Selected = company.PK_Comp_Id == provider.ManagerId
+        })
+        .ToList();
+}
+
+<style>
+    .clockpicker-popover {
+        z-index: 999999 !important;
+    }
+    
+    label{
+        font-size: 13px;     
+    }
+    
+    .btn-green {
+         background: #428bca !important;
+         color: white;
+    }
+     
+    
+</style>
+
+<h3 class="text-inverse">Add Product Stock</h3>
+
+<div class="card" style="border-top: #428bca 3px solid;">
+   
+    <div class="card-body">
+        <form method="post" id="form-add-details">
+
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="row">
+                        
+                        @* choose master *@
+                        <div class="form-group col-md-3">
+                            <label>@Resources.Voucher.HOD<span class="text-danger"> * </span></label>
+                            <div class="controls">
+                                @Html.DropDownList("txtManager", hod, "-- Choose Hod --", new {@class = "form-control"})
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label>@Resources.Voucher.Company<span class="text-danger"> *</span></label>
+                            <div class="controls">
+                                @Html.DropDownList("txtCompany", companies, "-- Choose Company --", new {@class = "form-control"})
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label>@Resources.Voucher.Date<span class="text-danger"> * </span></label>
+                            <div class="controls">
+                                <input type="date" name="date" id="date" class="form-control">
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-md-3">
+                            <label>@Resources.Voucher.Time<span class="text-danger"> * </span></label>
+                            <div class="controls">
+                                <input type="text" name="time" id="time" class="form-control" placeholder="hh:mm" autocomplete="off">
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+                        
+                        @* choose master *@
+                    </div>
+                </div>
+
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<button type="button" class="btn btn-default btn-sm mb-2" id="btn-add-more" >
+   <i class="ti-plus"></i> @Resources.Voucher.AddNew
+</button>
+
+@Html.Partial("ModalAddMore")
+
+<div class="card" style="border-top: #428bca 3px solid;">
+    <div class="card-body">
+        <table class="table table-sm" id="table-details">
+            <thead style="background: #428bca">
+            <tr>
+                <th class="text-center" style="width: 100px; color: white; font-size: 14px">@Resources.Voucher.ProductType</th>
+                <th class="text-center" style="width: 100px ; color: white; font-size: 14px">@Resources.Voucher.Product</th>
+                <th class="text-center" style="width: 100px; color: white; font-size: 14px">Color</th>
+                <th class="text-center" style="width: 100px; color: white; font-size: 14px">Size</th>
+                <th class="text-center" style="width: 100px; color: white; font-size: 14px">Grade</th>
+                <th class="text-center" style="width: 100px ; color: white; font-size: 14px">@Resources.Voucher.Quantity</th>
+                <th class="text-center" style="width: 100px; color: white ; font-size: 14px">@Resources.Voucher.Price</th>
+                <th class="text-center" style="width: 100px ; color: white ; font-size: 14px">@Resources.Voucher.Subtotal</th>
+            </tr>
+            </thead>
+            <tbody>
+            @* <tr> *@
+            @*     <td class="text-center"> *@
+            @*         <input id="type" name="type" class="form-control form-control-sm text-center" autocomplete="true" value="Item" disabled style="color: black; background: #fff"/> *@
+            @*     </td> *@
+            @*     <td class="text-center"> *@
+            @*         <input id="product" name="product" class="form-control form-control-sm text-center" autocomplete="true" value="Item" disabled style="color: black; background: #fff"/> *@
+            @*     </td> *@
+            @*     <td class="text-center"> *@
+            @*         <input id="color" name="color" class="form-control form-control-sm text-center" autocomplete="true" value="Item" disabled style="color: black; background: #fff"/> *@
+            @*     </td> *@
+            @*     <td class="text-center"> *@
+            @*         <input id="size" name="size" class="form-control form-control-sm text-center" autocomplete="true" value="Item" disabled style="color: black; background: #fff"/> *@
+            @*     </td> *@
+            @*      *@
+            @*     <td class="text-center"> *@
+            @*         <input id="grade" name="grade" class="form-control form-control-sm text-center" autocomplete="true" value="Item" disabled style="color: black; background: #fff"/> *@
+            @*     </td> *@
+            @*      *@
+            @*     <td class="text-center"> *@
+            @*         <input id="qty" name="qty" class="form-control form-control-sm text-center" autocomplete="true" value="0"/> *@
+            @*     </td> *@
+            @*     <td class="text-center"> *@
+            @*         <input id="price" name="price" class="form-control form-control-sm text-center" autocomplete="true" value="1"/> *@
+            @*     </td> *@
+            @* *@
+            @*     <td class="text-center" id="row_total"> *@
+            @*         $ <span>0</span> *@
+            @*         <label class="float-right pr-1"> *@
+            @*             <button type="button" class="btn btn-danger btn-sm"> *@
+            @*                 <i class="ti-minus"></i> *@
+            @*             </button> *@
+            @*         </label> *@
+            @*     </td> *@
+            @* </tr> *@
+            </tbody>
+            <tfoot>
+            <tr>
+                <th class="text-center">@Resources.Voucher.Total</th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+                <th class="text-center">
+                    $ <span class="pr-4" id="total">0</span>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div class="card" style="border-top: #428bca 3px solid;">
+    <div class="card-body">
+        <div class="form-group">
+            <label>@Resources.Voucher.Description</label>
+            <textarea class="form-control" name="desc" id="desc" rows="15" placeholder="@Resources.Voucher.Enter @Resources.Voucher.Description"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <div class="text-xs-right">
+                <button type="button" class="btn btn-green btn-sm float-right" id="btn-add-product-cut">
+                    <i class="ti-save-alt"></i> @Resources.Voucher.SaveNew
+                </button>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+@section JavaScript
+{
+    <link href="~/Content/assets/plugins/html5-editor/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" />
+    <!-- wysuhtml5 Plugin JavaScript -->
+    <script src="~/Content/assets/plugins/html5-editor/wysihtml5-0.3.0.js"></script>
+    <script src="~/Content/assets/plugins/html5-editor/bootstrap-wysihtml5.js"></script>
+}
+
+@section Scripts
+{
+    <script>
+        $(function (){                       
+           let token = { __RequestVerificationToken : $('input[name="__RequestVerificationToken"]').val()};
+            
+           $('#desc').wysihtml5();
+           
+           let table = $('table');
+            //
+            function DropDownList
+            (
+                mainSelect, // main
+                supSelect, // sup,
+                subLabel  // sub label             
+            )
+            {
+                $(mainSelect).change(function (){
+                    let id = $(this).val();               
+                    let dataForSent = {
+                        id,
+                        ...token 
+                    };
+                    let {data} = GetDataApi('/Other/GetCompany', dataForSent);
+                    //console.log(data , supSelect , mainSelect);
+                    
+                    $(supSelect).html(setToSelect({data:data , label: subLabel}));
+                });
+            }
+            // call
+            DropDownList('#txtManager','#txtCompany', 'Company');
+            
+             // get data from api
+              function GetDataApi(url, data) {
+                 let dataResponse = null;
+                 let error = false;
+                 $.ajax({
+                   url: url,
+                   async: false,
+                   type: "POST",
+                   global: false,
+                   dataType: 'json',             
+                   data: data,
+                   success: function(response) {                  
+                      dataResponse = response 
+                   },
+                   error: function() {
+                     error =  true 
+                   }
+                 });                           
+                 return {data: dataResponse, error};
+             }         
+                         
+             // get select option
+             function setToSelect({data : data, label : label}) {                               
+                   let option = '<option value="">-- ' + 'Choose ' +  label + ' --</option>';
+                   for(let item in data){
+                       option += '<option value="'+data[item].key+'">' + data[item].value + '</option>'; 
+                   }
+                   return option;
+             }
+            
+                    
+            // clock picker
+            function ClockPicker(ctx) {
+                $(ctx).clockpicker({
+                    donetext: 'Done',
+                    todayHighlight: true,
+                    todayBtn: "linked",
+                    format: "yyyy-m-d",
+                    autoclose: true,
+                    'default': 'now',
+                });
+
+            }
+            // call clock picker
+            ClockPicker('#time');
+
+            // check time format
+            function checkFormatTime(time) {
+                let regexp = /^\d\d:\d\d$/;
+                return regexp.test(time);
+            }
+            
+            // btn add more
+            $('#btn-add-more').click(function (){
+                $('#modal-add-more').modal("show");
+            });
+            
+            
+            // set select 2
+            function Select2(ctn){
+                $(ctn).select2({ width: '100%', placeholder: "Select an Option", allowClear: true });
+            }
+            // call
+            Select2('#txtManager');
+            Select2('#txtCompany');
+            
+            // for modal
+            function Select2ForModal(ctn){
+                $(ctn).select2({
+                    width: '100%',
+                    placeholder: "Select an Option",
+                    allowClear: true,
+                    dropdownParent: $('#modal-add-more .modal-content')
+                });
+            }    
+            // call
+            Select2ForModal('#txtManager_add_more');
+            Select2ForModal('#product_type');
+            Select2ForModal('#product_name');           
+            Select2ForModal('#product_grade');
+            
+            let today = moment();
+            
+            $('#date').val(today.format('YYYY-MM-DD'));
+
+            $('#time').val(today.format('HH:mm'));
+            
+            //
+           function setClassError(id) {
+               $(id).attr('class', 'form-control is-invalid');
+           }
+   
+           //
+           function setRemoveError(id) {
+               $(id).attr('class', 'form-control');
+           }
+   
+           //
+           function onChange(id) {
+               $(id).change(function () {
+                   setRemoveError(id);
+               });
+           }
+           
+            function protectedControl(control) {
+               $(control).bind("cut copy paste drag drop", function (e) {
+                   e.preventDefault();
+               });
+           }
+           
+            function OnlyNumber(control) {
+               protectedControl(control);
+
+               $(control).keypress(function (event) {
+                   let value = event.target.value;                                      
+                   
+                   if (value[0] === '.') {
+                       return false;
+                   }
+
+                   if ((event.which !== 46 || $(this).val().indexOf('.') !== -1) && (event.which < 48 || event.which > 57)) {
+                       event.preventDefault();
+                   }
+               });
+           } 
+       
+            // modal add more submit
+            $('#btn-save-more-grade').click(function (){
+                let forms = $('#form-add-more-grade');
+                
+                let form = forms.serializeArray();
+                
+                let type = $("#product_type option:selected").text();
+                
+                let product = $('#product_name option:selected').text();
+                
+                let grade = $('#product_grade option:selected').text();
+                
+                let grades = grade.split(' ');
+                
+                let qty = $('#qty_txt').val();
+                
+                let price = $('#txt_price').val();
+                
+                let gradeId = $('#product_grade').val();
+                
+                for (let item in form){
+                    if (form[item].value === ''){
+                       SweatAlert('please select option', 'warning');
+                       return false;
+                    }        
+                }         
+                
+                let tables = document.querySelectorAll('#table-details tbody tr');
+                for (let i= 0 ; i < tables.length; i ++){
+                    if (tables[i].getAttribute('id') === gradeId){
+                        console.log(tables[i]);
+                        
+                        let qtys = tables[i].querySelector('#qty').value;
+                        
+                        tables[i].querySelector('#qty').value = parseInt(qtys) + parseInt(qty);
+                        tables[i].querySelector('#price').value = parseFloat(price).toFixed(2);
+                        
+                        let newQty = parseInt(qtys) + parseInt(qty);
+                        
+                        tables[i].querySelector('span').textContent = parseFloat(newQty).toFixed(2) * parseFloat(price).toFixed(2);
+                        
+                    } else {
+                        table.append(AddRow(type, product, grades[5], grades[8], gradeId, grades[2], qty , price));    
+                    }                    
+                }
+                
+                if (tables.length === 0){
+                    table.append(AddRow(type, product, grades[5], grades[8], gradeId, grades[2], qty , price));
+                }
+                
+                $('#modal-add-more').modal("hide");                                
+                
+                //$("#product_type").val('Processings');
+                $('select#product_type').val(0).select2();
+                //
+                $('#product_name').empty();
+                $('#product_grade').empty();
+                //
+                $('#qty_txt').val('0');
+                $('#txt_price').val('0');
+                
+                SumTotal();
+            });
+            
+            // click save
+            $('#btn-add-product-cut').click(function (){
+                let form = $('#form-add-details').serializeArray();
+                
+                let managerId = $('#txtManager').val()
+                let companyId = $('#txtCompany').val();
+                let date = $('#date').val();
+                let time = $('#time').val();
+                let desc = $('#desc').val();
+                
+                if (managerId === ''){
+                    SweatAlert("Please select HOD","warning");
+                    return false;
+                }
+                else if (companyId === ''){
+                    SweatAlert("Please select Company","warning");
+                    return false;
+                }else if (date === ''){
+                    SweatAlert("Please select Date","warning");
+                    return false;
+                }else if (time === ''){
+                    SweatAlert("Please select Time","warning");
+                    return false;
+                }              
+                
+                if (checkFormatTime(time) === false){
+                    SweatAlert("Please Input Time is not correct.","warning");
+                    return false;
+                }              
+                
+                let table = document.querySelectorAll('#table-details tbody tr');
+                let lists = [];
+                for(let i= 0 ; i < table.length; i ++){
+                    let row = table[i];
+                    lists.push({
+                         CompanyId : companyId,
+                         Date : date, 
+                         Time : time,  
+                         ProductType: row.querySelector('#type').value,
+                         GradeId: row.getAttribute('id'),
+                         Qty : row.querySelector('#qty').value,
+                         Price: row.querySelector('#price').value,
+                         Total: row.querySelector('span').textContent,
+                         Desc : desc,
+                         StockInProductCutId : 0                       
+                    });
+                }
+                
+                if(lists.length === 0){
+                    SweatAlert("Please add product grade","warning");
+                    return false;
+                }
+                
+                 $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Save", "StockInProductCut")",
+                    dataType: 'json',
+                    traditional:true,
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(lists),
+                    success: function (response){
+                        if (response.message){
+                             swal({
+                                title: "Success",
+                                text: response.message,
+                                type: "success",
+                                timer: 2000
+                            });                            
+                            SetAlert('/StockInProductCut/Index', 'Add Stock In Product Cut', 'SIC_'+ response.id);
+                        }
+                        window.location.reload();
+                    }
+                });
+                
+                console.log(lists);
+            });
+            
+            
+            // set alert
+            function SetAlert(link, note, optionKey) {
+            
+                let data = {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    link,
+                    note,
+                    optionKey:optionKey
+                };
+
+                $.ajax({
+                    url: '@Url.Action("SetAlert", "Notification")',
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+            // set alert
+           
+            // onchange product type
+            $("#product_type").change(function (){
+                let dataForSent = {
+                    ...token,
+                    bossId : $("#txtManager_add_more").val(),
+                    productType : $(this).val()
+                };                
+                let {data} = GetDataApi('/StockInProductCut/GetProduct', dataForSent);
+                
+                $('#product_name').html(setToSelect({data : data , label : 'Product Name'}))                
+            });          
+           
+            // product name change
+            $('#product_name').change(function (){
+                let dataForSent = {
+                    ...token,
+                    id : $(this).val()
+                };
+                
+                let {data} = GetDataApi('/StockInProductCut/GetProductGrade', dataForSent);
+                
+                let option = ''
+                
+                for (let item in data){             
+                    option += "<option value='"+ data[item].key +"' title='"+data[item].Picture_Path+"'>" + 'Grade : ' + data[item].value + ' Color : ' + data[item].color + ' Size : ' + data[item].size +"</option>"
+                }
+                
+                $('#product_grade').html(option);
+            });                      
+                        
+            // select list has image
+             $("#product_grade").select2({
+             	templateResult: function (value) {    
+               	    return $("<span><img width='20px' src='/Content/Uploads/Grade/"+ value.title +"' alt='no'/>" + value.text + "</span>");
+                }
+             });
+             
+             // add more row
+             function GetTd(id, value){
+                 return '<td class="text-center">' + 
+                            '<input id="'+id+'" name="'+id+'" class="form-control form-control-sm text-center" autocomplete="true" value="'+value+'" style="color: black; background: #fff"/>' +
+                        '</td>';
+             }
+             
+             function GetTdDisable(id, value){
+                  return '<td class="text-center">' + 
+                             '<input id="'+id+'" name="'+id+'" class="form-control form-control-sm text-center" autocomplete="true" disabled="disabled" value="'+value+'" style="color: black; background: #fff"/>' +
+                         '</td>';
+              }
+             
+             
+             // button remove
+             function GetButtonRemove(total){
+                 return  '<td class="text-center" id="row_total">' +
+                            '$ <span>'+ (total ? total : 0) +'</span>' +
+                            '<label class="float-right pr-1">' +
+                                '<button type="button" class="btn btn-danger btn-sm">' +
+                                    '<i class="ti-minus"></i>' +
+                                '</button>' +
+                            '</label>' + 
+                        '</td>';
+             }
+             // add row
+             function AddRow(type, product, color, size, gradeId , grade, qty, price ){
+                 let total = qty * price;
+                 return '<tr id="'+gradeId+'">' +
+                            GetTdDisable('type', type)+   
+                            GetTdDisable('product',product)+   
+                            GetTdDisable('color',color)+  
+                            GetTdDisable('size',size)+  
+                            GetTdDisable('grade',grade)+   
+                            GetTd('qty',qty)+   
+                            GetTd('price',price)+    
+                            GetButtonRemove(total) +
+                        '</tr>';
+             }
+             
+             // sweat alert
+              function SweatAlert(message, type) {
+                   swal({
+                       title: message,                       
+                       type: type,
+                       timer: 1500
+                   }); 
+              }
+             
+              // Sum Total
+              function SumTotal(){
+                   let sum = 0;
+                   $('tr').find('#row_total span').each(function () {
+                       let combat = $(this).text();
+                       if (!isNaN(combat) && combat.length !== 0) {
+                           sum += parseFloat(combat);
+                       }
+                   });
+                   $('#total').text(parseFloat(sum).toFixed(2));
+              }
+              
+              function CalculateTableRow(ctn){
+                   $(document).delegate('#table-details tbody input'+ctn,'change',function (){                       
+                       
+                      let row = $(this).closest('tr');
+  
+                      let cost = row.find('#price').val() !== '' ?  row.find('#price').val() : 0;
+                      let qty = row.find('#qty').val() !== '' ? row.find('#qty').val() : 0;
+                      let amount = row.find('span');
+  
+                      let sum = parseFloat(cost) * parseFloat(qty) ;
+                      
+                      amount.text(sum);
+                      SumTotal();
+                  });
+              }
+              
+              CalculateTableRow('#price');
+              CalculateTableRow('#qty');
+              
+              // protected all control qty only number
+              function IsPriceOnTableRow(ctn){
+                  $(document).on('keypress','#table-details tbody input'+ctn,function (e) {
+                      protectedControl(ctn);            
+                      $(ctn).on('input', function(e) {
+                          if (/^(\d+(\.\d{0,3})?)?$/.test($(this).val())) {
+                              $(this).data('prevValue', $(this).val());
+                          } else {
+                              $(this).val($(this).data('prevValue') || '');
+                          }
+                      }).trigger('input');
+                      
+                  });
+              }
+              IsPriceOnTableRow('#price');             
+              
+              // input qty
+              function InputQtyOnTableRow(ctn){
+                   
+                  $(document).on('keypress' , '#table-details tbody input' + ctn , function (e){                       
+                      if(e.which === 46){
+                         return false;
+                      }
+  
+                      if (e.which !== 8 && e.which !== 0 && e.which !== 46 && (e.which < 48 || e.which > 57)) {
+                          return false;
+                      }
+  
+                      let text = $(this).val();
+  
+                      if (text[0] === '0') {
+                         $(this).val(text.substring(1, text.length))
+                      }
+                  });
+              }
+              InputQtyOnTableRow('#qty');
+              
+              // remove table row
+              $(document).delegate('#table-details tbody button','click',function (){                              
+                  $(this).closest('tr').remove();
+                  SumTotal();
+              });
+              
+              // Only number
+              OnlyNumber('#txt_price');            
+              
+              function NumberQty(ctn){
+                    $(document).on('keypress', ctn , function (e){
+                      
+                      if(e.which === 46){
+                         return false;
+                      }
+  
+                      if (e.which !== 8 && e.which !== 0 && e.which !== 46 && (e.which < 48 || e.which > 57)) {
+                          return false;
+                      }
+  
+                      let text = $(this).val();
+  
+                      if (text[0] === '0') {
+                         $(this).val(text.substring(1, text.length))
+                      }
+                    });
+              }
+              // call
+              NumberQty('#qty_txt');
+              
+             //console.log(AddRow());
+             
+            // table.append(AddRow('','','','','','',''));
+        });
+    </script>
+}

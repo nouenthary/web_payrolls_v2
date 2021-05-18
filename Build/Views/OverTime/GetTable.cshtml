@@ -1,0 +1,132 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetAllStaffOverTime_Result>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2 pb-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize" name="pageSize">
+                @foreach (var item in ViewBag.PageSize)
+                {
+                    if (item.Value == @ViewBag.psize + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-hover table-md" id="table-staff-ot">
+        <thead>
+            <tr style="border: 1px solid #f3f1f1">
+                <th class="text-center" width="50px">#</th>
+                <th class="text-center" width="300px">@Resources.Voucher.AddMore</th>
+                <th class="text-center">@Resources.Voucher.Picture</th>
+                <th class="text-center">@Resources.Voucher.idcard</th>
+                <th class="text-center">@Resources.Voucher.Employee</th>
+                <th class="text-center">@Resources.Voucher.Position</th>
+                <th class="text-center">@Resources.Voucher.SalaryType</th>
+                @*<th class="text-center">Gender</th>*@
+                <th class="text-center">@Resources.Voucher.Phone</th>
+                <th class="text-center">@Resources.Voucher.Status</th>
+                <th class="text-center">@Resources.Voucher.UpdateBy</th>
+                <th class="text-center">@Resources.Voucher.DateUpdate</th>
+                <th class="text-center">@Resources.Voucher.TimeUpdate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+            <tr id="@item.PK_Staff_Id"
+                data-name="@item.Staff_Name"
+                data-ot="@item.OT_Unit_Price"
+                data-salary-type="@item.Sal_Type">
+
+                <td class="text-center" width="50px">@(rowNo += 1)</td>
+
+                <td class="text-center" width="300px">
+                    <button class="btn btn-sm btn-green" id="button-add-ot" data-id="@item.PK_Staff_Id" data-ot="@item.OT_Unit_Price"><i class="ti-plus"></i> @Resources.Voucher.ot</button>
+                    <button class="btn btn-sm btn-danger" id="btn-add-input-money" data-id="@item.PK_Staff_Id" data-salary-type="@item.Sal_Type"><i class="ti-plus"></i> @Resources.Voucher.InputMoney</button>
+                    <button class="btn btn-sm btn-success" id="btn-add-forget" data-id="@item.PK_Staff_Id" data-salary-type="@item.Sal_Type" data-name="@item.Staff_Name"><i class="ti-plus"></i> @Resources.Voucher.Forget</button>
+                </td>
+
+                <td class="text-center">
+                    <img src="~/Content/images/users/@item.Photo" height="30"  onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'" alt="Home"/>
+                </td>
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Staff_Id_Card)
+                </td>
+
+                <td class="text-center">
+                    <span class="text-primary"> @Html.DisplayFor(modelItem => item.Staff_Name)</span>
+                </td>
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Pos_Name)
+                </td>
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Sal_Type)
+                </td>
+
+                @*<td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>*@
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Tell)
+                </td>
+
+                <td class="text-center">
+                    @if (item.Staff_Status == "E")
+                    {
+                        <span class="label label-green">Enable</span>
+                    }
+                </td>
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.User_Update)
+                </td>
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Date_Update)
+                </td>
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Time_Update)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="float-left" style="padding: 20px 0px;">
+    @Resources.Voucher.Showing @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @Resources.Voucher.to @Model.PageCount @Resources.Voucher.of @ViewBag.Records @Resources.Voucher.Entries
+</div>
+
+<div class="float-right" id="Paginator"> @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>

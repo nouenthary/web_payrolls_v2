@@ -1,0 +1,83 @@
+﻿<!--Form Create-->
+<div class="modal fade" id="modal-update-ot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 style="font-weight: 600" class="modal-title text-primary card-text" id="exampleModalLabel">
+                    <i class="ti-pencil pr-2"></i>@Resources.Voucher.Edit @Resources.Voucher.Overtime
+                </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="#" id="form-update-ot">
+
+                <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            @Html.TextBox("over_time_id", null, new { @class = "form-control", disabled = "true", type = "hidden" })
+
+                            <div class="form-group">
+                                @Html.Label(@Resources.Voucher.Date) <span class="text-danger">*</span>
+                                @Html.TextBox("date_ot_edit", null, new { @class = "form-control", type = "date" })
+                                <div class="invalid-feedback" id="error-date-edit"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txt_start">@Resources.Voucher.Time<span class="text-danger">*</span></label>
+                                <div class="input-daterange input-group">
+
+                                    @Html.TextBox("start_ot_edit", null, new { @class = "form-control", placeholder = "HH:mm" })
+
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-info b-0 text-white">TO</span>
+                                    </div>
+
+                                    @Html.TextBox("end_ot_edit", null, new { @class = "form-control", placeholder = "HH:mm" })
+
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                @Html.Label(@Resources.Voucher.Price + " "+ @Resources.Voucher.ot) <span class="text-danger">*</span>
+                                @Html.TextBox("unit_price_ot_edit", null, new { @class = "form-control", disabled = "true" })
+                                <div class="invalid-feedback" id="error-price-ot"></div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label(@Resources.Voucher.Description)
+                                @Html.TextArea("desc_edit", null, new { @class = "form-control", placeholder = @Resources.Voucher.Description, rows = "4" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                          
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="unit_price_edit" name="unit_price_edit" readonly="readonly">
+                                <div class="invalid-feedback" id="error-unit-price"></div>
+                            </div>                          
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block" id="btn-udpate-ot" style="background: #28a745; color: #fff; font-size: 20px">
+                        <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Update @Resources.Voucher.Overtime
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--Form Create-->

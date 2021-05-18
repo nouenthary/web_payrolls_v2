@@ -1,0 +1,283 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetRoster_Result>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    // methods GenerateColor
+    string GenerateColor(string value)
+    {
+        switch (value)
+        {
+            case "OFF" :
+                return "bg-danger text-white";
+            case "AB" : 
+                return "bg-success text-white"; 
+            case  "PH" : 
+                return "bg-warning text-white";
+            case "CM": 
+                return "bg-primary text-white";
+            case "SIC" :  
+                return "bg-salmon text-white";
+            case "UPL" :    
+                return "bg-gray text-white";
+            case "AL" :    
+                return "bg-green text-white";
+            default:
+                return "";
+        }
+    }
+    
+    string SetStyleHeader()
+    {
+        return "bg-info text-white text-center";
+    }
+
+    string SetHeaderDanger()
+    {
+        return "bg-danger text-white text-center";
+    }
+
+    // variable
+    string[] week = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+
+    var column = new Dictionary<string, string>
+    {
+        {"no", "60px"},
+        {"gender", "60px"}, 
+        {"year", "60px"},
+        {"month", "60px"}, 
+        {"week", "60px"},
+        {"leave", "90px"},
+        {"sid", "80px"},
+        {"name", "160px"},
+        {"position", "160px"}
+    };
+
+    var month = DateTime.Now.Month.ToString();
+
+    var year = DateTime.Now.Year.ToString();
+
+    var days = DateTime.DaysInMonth(Convert.ToInt32(year), Convert.ToInt32(month));
+}
+
+<!-- Show Page Size -->
+<div class="row">
+
+    <div class="col-md-6">
+        <div id="Paging" class="pt-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize" name="pageSize">
+                @foreach (var item in ViewBag.PageSize)
+                {
+                    if (item.Value == ViewBag.psize + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+   
+    <div class="col-md-6">
+        <div class="btn-group btn-sm float-right" data-toggle="buttons">
+            <label class="btn btn-sm bg-white" id="btn-export-roster">
+                <input type="radio" name="options" id="option3" autocomplete="off">
+                <span class="text-inverse">
+                    <i class="ti-printer"></i> @Resources.Voucher.Excel
+                </span>
+            </label>
+        </div>
+    </div>
+
+</div>
+<!-- Show Page Size -->
+<!-- Table Roster-->
+<div class="table-responsive m-t-10 bg-white">
+    <table class="table table-hover table-bordered table-sm table-striped" id="table-roster">
+        <thead>
+            <tr>
+                <th class="@SetStyleHeader()" style="width: @column["no"]; border: 1px solid #fff;">#</th>
+                <th class="@SetStyleHeader()" style="width: 150px ; border: 1px solid #fff;">@Resources.Voucher.idcard</th>
+                <th class="@SetStyleHeader()" style="width: @column["name"]; border: 1px solid #fff;">@Resources.Voucher.Name</th>
+                <th class="@SetStyleHeader()" style="width: @column["gender"]; border: 1px solid #fff;">@Resources.Voucher.Gender</th>
+                <th class="@SetStyleHeader()" style="width: @column["position"]; border: 1px solid #fff;">@Resources.Voucher.Position</th>
+                <th class="@SetStyleHeader()" style="width: @column["year"]; border: 1px solid #fff;">@Resources.Voucher.Year</th>
+                <th class="@SetStyleHeader()" style="width: @column["month"]; border: 1px solid #fff;">@Resources.Voucher.Month</th>
+
+                @{
+                    var range = 0;
+                }
+
+                @for (var i = 1; i <= days; i++)
+                {
+                    if (i <= 7)
+                    {
+                        <th class="@(week[range] == week[0] ? SetHeaderDanger() : SetStyleHeader() )" style="width: @column["week"]; border: 1px solid #fff;">@week[range] @i</th>
+                        range += 1;
+                        if (range == 7)
+                        {
+                            range = 0;
+                        }
+                    }
+                    else if (i <= 16)
+                    {
+                        <th class="@(week[range] == week[0] ? SetHeaderDanger() : SetStyleHeader() )" style="width: @column["week"]; border: 1px solid #fff;">@week[range] @i</th>
+                        range += 1;
+                        if (range == 7)
+                        {
+                            range = 0;
+                        }
+                    }
+
+                    else if (i <= 22)
+                    {
+                        <th class="@(week[range] == week[0] ? SetHeaderDanger() : SetStyleHeader())" style="width: @column["week"]; border: 1px solid #fff;">@week[range] @i</th>
+                        range += 1;
+                        if (range == 7)
+                        {
+                            range = 0;
+                        }
+                    }
+
+                    else if (i <= 29)
+                    {
+                        <th class="@(week[range] == week[0] ? SetHeaderDanger() : SetStyleHeader())" style="width: @column["week"]; border: 1px solid #fff;">@week[range] @i</th>
+                        range += 1;
+                        if (range == 7)
+                        {
+                            range = 0;
+                        }
+                    }
+
+                    else if (i <= days)
+                    {
+                        <th class="@(week[range] == week[0] ? SetHeaderDanger() : SetStyleHeader())" style="width: @column["week"]; border: 1px solid #fff;">@week[range] @i</th>
+                        range += 1;
+                        if (range == 7)
+                        {
+                            range = 0;
+                        }
+                    }
+                }
+
+                <th class="bg-info text-center text-white" style="width: @column["leave"]; border: 1px solid #fff;">OFF_REMAIN</th>
+                <th class="bg-info text-center text-white" style="width: @column["leave"]; border: 1px solid #fff;">PH_REMAIN</th>
+                <th class="bg-info text-center text-white" style="width: @column["leave"]; border: 1px solid #fff;">AL_REMAIN</th>
+                <th class="bg-info text-center text-white" style="width: @column["leave"]; border: 1px solid #fff;">SIC_REMAIN</th>
+                <th class="bg-info text-center text-white" style="width: @column["leave"]; border: 1px solid #fff;">UPL_REMAIN</th>
+                <th class="bg-info text-center text-white" style="width: @column["leave"]; border: 1px solid #fff;">AB_REMAIN</th>
+                <th class="bg-info text-center text-white" style="width: @column["leave"]; border: 1px solid #fff;">CM_REMAIN</th>
+                <th class="bg-info text-center text-white" style="width: 150px; border: 1px solid #fff;">@Resources.Voucher.UpdateBy</th>
+                <th class="bg-info text-center text-white" style="width: @column["leave"]; border: 1px solid #fff;">@Resources.Voucher.DateUpdate</th>
+                <th class="bg-info text-center text-white" style="width: @column["leave"]; border: 1px solid #fff;">@Resources.Voucher.TimeUpdate</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{ var rowNo = 0; }
+
+            @foreach (var item in Model)
+            {
+                <tr 
+                    id="@item.PK_Ros_Id"
+                    data-staff-id="@item.PK_Staff_Id"
+                    data-staff-name="@item.Staff_Name"
+                    data-year="@item.Num_Year"
+                    data-month="@item.Num_Month"
+                    >
+                    
+                    <td class="text-center" style="width: @column["no"]">@(rowNo += 1)</td>
+
+                    <td class="text-center" style="width: 150px">@item.Staff_Id_Card</td>
+
+                    <td class="text-center" style="width: @column["name"]">@item.Staff_Name</td>
+
+                    <td class="text-center" style="width: @column["gender"]">@item.Sex</td>
+
+                    <td class="text-center" style="width: @column["position"]">@item.Pos_Name</td>
+
+                    <td class="text-center" style="width: @column["year"]">@item.Num_Year</td>
+
+                    <td class="text-center" style="width: @column["month"]">@item.Num_Month</td>
+
+                    <td class="text-center @GenerateColor(item.DAY1)" style="width: @column["week"]">@item.DAY1</td>
+                    <td class="text-center @GenerateColor(item.DAY2)" style="width: @column["week"]">@item.DAY2</td>
+                    <td class="text-center @GenerateColor(item.DAY3)" style="width: @column["week"]">@item.DAY3</td>
+                    <td class="text-center @GenerateColor(item.DAY4)" style="width: @column["week"]">@item.DAY4</td>
+                    <td class="text-center @GenerateColor(item.DAY5)" style="width: @column["week"]">@item.DAY5</td>
+                    <td class="text-center @GenerateColor(item.DAY6)" style="width: @column["week"]">@item.DAY6</td>
+                    <td class="text-center @GenerateColor(item.DAY7)" style="width: @column["week"]">@item.DAY7</td>
+                    <td class="text-center @GenerateColor(item.DAY8)" style="width: @column["week"]">@item.DAY8</td>
+                    <td class="text-center @GenerateColor(item.DAY9)" style="width: @column["week"]">@item.DAY9</td>
+                    <td class="text-center @GenerateColor(item.DAY10)" style="width: @column["week"]">@item.DAY10</td>
+                    <td class="text-center @GenerateColor(item.DAY11)" style="width: @column["week"]">@item.DAY11</td>
+                    <td class="text-center @GenerateColor(item.DAY12)" style="width: @column["week"]">@item.DAY12</td>
+                    <td class="text-center @GenerateColor(item.DAY13)" style="width: @column["week"]">@item.DAY13</td>
+                    <td class="text-center @GenerateColor(item.DAY14)" style="width: @column["week"]">@item.DAY14</td>
+                    <td class="text-center @GenerateColor(item.DAY15)" style="width: @column["week"]">@item.DAY15</td>
+                    <td class="text-center @GenerateColor(item.DAY16)" style="width: @column["week"]">@item.DAY16</td>
+                    <td class="text-center @GenerateColor(item.DAY17)" style="width: @column["week"]">@item.DAY17</td>
+                    <td class="text-center @GenerateColor(item.DAY18)" style="width: @column["week"]">@item.DAY18</td>
+                    <td class="text-center @GenerateColor(item.DAY19)" style="width: @column["week"]">@item.DAY19</td>
+                    <td class="text-center @GenerateColor(item.DAY20)" style="width: @column["week"]">@item.DAY20</td>
+                    <td class="text-center @GenerateColor(item.DAY21)" style="width: @column["week"]">@item.DAY21</td>
+                    <td class="text-center @GenerateColor(item.DAY22)" style="width: @column["week"]">@item.DAY22</td>
+                    <td class="text-center @GenerateColor(item.DAY23)" style="width: @column["week"]">@item.DAY23</td>
+                    <td class="text-center @GenerateColor(item.DAY24)" style="width: @column["week"]">@item.DAY24</td>
+                    <td class="text-center @GenerateColor(item.DAY25)" style="width: @column["week"]">@item.DAY25</td>
+                    <td class="text-center @GenerateColor(item.DAY26)" style="width: @column["week"]">@item.DAY26</td>
+                    <td class="text-center @GenerateColor(item.DAY27)" style="width: @column["week"]">@item.DAY27</td>
+
+                    @for (var i = 1; i <= days; i++)
+                    {
+                        if (i == 28)
+                        {
+                            <td class="text-center @GenerateColor(item.DAY28)" style="width: @column["week"]">@item.DAY28</td>
+                        }
+                        else if (i == 29)
+                        {
+                            <td class="text-center @GenerateColor(item.DAY29)" style="width: @column["week"]">@item.DAY29</td>
+                        }
+                        else if (i == 30)
+                        {
+                            <td class="text-center @GenerateColor(item.DAY30)" style="width: @column["week"]">@item.DAY30</td>
+                        }
+                        else if (i == 31)
+                        {
+                            <td class="text-center @GenerateColor(item.DAY31)" style="width: @column["week"]">@item.DAY31</td>
+                        }
+                    }
+
+                    <td class="text-center" style="width: @column["leave"]">@item.OFF</td>
+
+                    <td class="text-center" style="width: @column["leave"]">@item.PH</td>
+
+                    <td class="text-center" style="width: @column["leave"]">@item.AL</td>
+
+                    <td class="text-center" style="width: @column["leave"]">@item.SIC</td>
+
+                    <td class="text-center" style="width: @column["leave"]">@item.UPL</td>
+
+                    <td class="text-center" style="width: @column["leave"]">@item.AB</td>
+
+                    <td class="text-center" style="width: @column["leave"]">@item.CM</td>
+
+                    <td class="text-center" style="width: 150px">@item.User_Update</td>
+
+                    <td class="text-center" style="width: @column["leave"]">@item.Date_Update</td>
+
+                    <td class="text-center" style="width: @column["leave"]">@item.Time_Update</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!-- Table Footer-->
+<div class="float-right"> @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+<!-- Table Footer-->

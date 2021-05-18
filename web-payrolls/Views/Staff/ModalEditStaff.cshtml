@@ -1,0 +1,754 @@
+﻿<!--Form Create-->
+<div class="modal fade" id="modal_staff_Edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width: 90% !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="ti-user pr-2"></i>Update Staff Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="">
+                <div class="modal-body">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="card card-outline-info">
+                                        <div class="card-header">
+                                            <h4 class="m-b-0 text-white">
+                                                <i class="ti-user mr-3"></i>Personal Information
+                                            </h4>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="modal-body">
+
+                                                <div class="row">
+                                                    <!-- column 1 -->
+
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="boss">HOD:</label>
+                                                                    <select name="ddlEditBoss" id="ddlEditBoss" class="form-control" aria-invalid="false">
+                                                                        <option value="0">-- All HODs --</option>
+                                                                        @foreach (var boss in ViewBag.Manager)
+                                                                        {
+                                                                            <option value="@boss.PK_Boss_Id">@boss.Name</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="staff_transaction">Company:</label>
+                                                                    <select id="ddlEditCompany" name="ddlEditCompany" class="form-control">
+                                                                        <option value="0">-- All Companies --</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="comp_name">Location:</label>
+                                                                    <select id="ddlEditLocation" name="ddlEditLocation" class="form-control">
+                                                                        <option value="0">-- All Locations --</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="comp_name">Department: </label>
+                                                                    <select id="ddlEditDepartment" name="ddlEditDepartment" class="form-control">
+                                                                        <option value="0">-- All Departments --</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="comp_name">Position:</label>
+                                                            <select id="ddlEditPosition" name="ddlEditPosition" class="form-control">
+                                                                <option value="0">-- All Positions --</option>
+                                                            </select>
+                                                            <div class="invalid-feedback" id="msg_position"></div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Emp. Name: <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" id="txbEditStaffName" name="txbEditStaffName" placeholder="Staff name..." required maxlength="150">
+                                                                    <div class="invalid-feedback" id="msg_staff_name"></div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">DOB: <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control datetimepicker" id="ddlEditDOB" name="ddlEditDOB" placeholder="YYYY-MM-DD" required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_DOB"></div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Sex: <span class="text-danger">*</span></label>
+                                                                    <select id="ddlEditSex" name="ddlEditSex" class="form-control">
+                                                                        <option value="0">-- Select --</option>
+                                                                        <option value="Male">Male</option>
+                                                                        <option value="Female">Female</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback" id="msg_sex"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Marital Status: <span class="text-danger">*</span></label>
+                                                                    <select id="ddlEditMarryStatus" name="ddlEditMarryStatus" class="form-control">
+                                                                        <option value="0">-- Select --</option>
+                                                                        <option value="Single">Single</option>
+                                                                        <option value="Married">Married</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback" id="msg_sex"></div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label for="comp_name">Wife: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" onkeypress="return AcceptOnlyNumeric(event)" class="form-control" id="txbEditWife" name="txbEditWife" placeholder="Wife..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_wife"></div>
+                                                                </div>
+
+                                                                <div class="col-md-4">
+                                                                    <label for="comp_name">Son: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" onkeypress="return AcceptOnlyNumeric(event)" class="form-control" id="txbEditSon" name="txbEditSon" placeholder="Son..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_son"></div>
+                                                                </div>
+
+                                                                <div class="col-md-4">
+                                                                    <label for="comp_name">Daughter: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" onkeypress="return AcceptOnlyNumeric(event)" class="form-control" id="txbEditDaughter" name="txbEditDaughter" placeholder="Daughter..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_daughter"></div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12">
+
+                                    <div class="card card-outline-info">
+                                        <div class="card-header">
+                                            <h4 class="m-b-0 text-white">
+                                                <i class="ti-user mr-3"></i>Contact Details
+                                            </h4>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="modal-body">
+
+                                                <div class="row">
+                                                    <!-- column 1 -->
+
+                                                    <div class="col-md-12">
+
+                                                        
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Phone: <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" id="txbEditPhone" name="txbEditPhone" placeholder="Phone..." required maxlength="100">
+                                                                    <div class="invalid-feedback" id="msg_phone"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Nationality: <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" id="txbEditNationality" name="txbEditNationality" placeholder="Nationality..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_nationality"></div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="comp_name">Address: <span class="text-danger">*</span></label>
+                                                            <textarea id="txbEditAddress" name="txbEditAddress" class="form-control" rows="7" cols="40" placeholder="Address..."></textarea>
+                                                            @*<input type="text" class="form-control" id="txbAddress" name="txbAddress" placeholder="Address..." required maxlength="100">*@
+                                                            <div class="invalid-feedback" id="msg_address"></div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12">
+
+                                    <div class="card card-outline-info">
+                                        <div class="card-header">
+                                            <h4 class="m-b-0 text-white">
+                                                <i class="ti-user mr-3"></i>Bank Details
+                                            </h4>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="modal-body">
+
+                                                <div class="row">
+                                                    <!-- column 1 -->
+
+                                                    <div class="col-md-12">
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Account Name: <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" id="txbEditBankName" name="txbEditBankName" placeholder="Account name..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_bank_name"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Account Number: <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" maxLength="10" id="txbEditBankNumber" name="txbEditBankNumber" placeholder="Account number..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_bank_number"></div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12">
+
+                                    <div class="card card-outline-info">
+                                        <div class="card-header">
+                                            <h4 class="m-b-0 text-white">
+                                                <i class="ti-user mr-3"></i>Employee Details
+                                            </h4>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="modal-body">
+
+                                                <div class="row">
+                                                    <!-- column 1 -->
+
+                                                    <div class="col-md-12">
+                                                        
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="comp_name">Identification Card: <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" id="txbEditIdentificationCard" name="txbEditIdentificationCard" placeholder="ID card..." required maxlength="200">
+                                                                    <div class="invalid-feedback" id="msg_identification_card"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="comp_name">Staff ID Card: <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" id="txbEditStaffIDCard" name="txbEditStaffIDCard" placeholder="Staff ID card..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_staff_id_card"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="comp_name">Serial Card: <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" id="txbEditSerialCard" name="txbEditSerialCard" placeholder="Serial card..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_serial_card"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="comp_name">Join Date: <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control datetimepicker" id="txbEditJoinDate" name="txbEditJoinDate" placeholder="YYYY-MM-DD" required maxlength="50">
+                                                                            <div class="invalid-feedback" id="msg_join_date"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="comp_name">End Date: <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control datetimepicker" id="txbEditEndDate" name="txbEditEndDate" placeholder="YYYY-MM-DD" required maxlength="50">
+                                                                            <div class="invalid-feedback" id="msg_join_date"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Status:</label>
+                                                                    <select id="ddlEditStatus" name="ddlEditStatus" class="form-control">
+                                                                        <option value="Enable">Enable</option>
+                                                                        <option value="Disable">Disable</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">No.Scan:</label>
+                                                                    <select id="ddlEditNoScan" name="ddlEditNoScan" class="form-control">
+                                                                        <option value="Scan">Scan</option>
+                                                                        <option value="No">No</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="comp_name">Username: <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" id="txbEditUsername" name="txbEditUsername" placeholder="Username..." required maxlength="50">
+                                                            <div class="invalid-feedback" id="msg_username"></div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+                        <!-- Part 2 -->
+                        <div class="col-md-6">
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+                                    <div class="card card-outline-info">
+                                        <div class="card-header">
+                                            <h4 class="m-b-0 text-white">
+                                                <i class="ti-user mr-3"></i>Employee Photo
+                                            </h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="comp_name">Staff Photo: </label>
+                                                            <div class="form-group text-center">
+                                                                <img style="height: 170px"
+                                                                     src="~/Content/images/no-image.jpg"
+                                                                     alt="me" class="img-thumbnail"
+                                                                     id="photo-view-response-Edit"
+                                                                     onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'">
+                                                            </div>
+                                                            <input type="hidden" id="hdPreviewPhoto" name="hdPreviewPhoto" />
+                                                            <div class="form-group">
+                                                                <input accept="image/png, image/jpeg, image/gif" type="file" class="form-control" id="photo-Edit" required>
+                                                                <div class="invalid-feedback" id="error-file-edit"></div>
+                                                                <input type="hidden" id="name-photo-Edit" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="comp_name">Staff Photo ID Card: </label>
+                                                            <div class="form-group text-center">
+                                                                <img style="height: 170px"
+                                                                     src="~/Content/images/no-image.jpg"
+                                                                     alt="me" class="img-thumbnail"
+                                                                     id="photo-id-card-view-response-Edit"
+                                                                     onerror="this.src=src='@Url.Content("~/Content/images/no-image.jpg")'">
+                                                            </div>
+                                                            <input type="hidden" id="hdPreviewIDCardPhoto" name="hdPreviewIDCardPhoto" />
+                                                            <div class="form-group">
+                                                                <input accept="image/png, image/jpeg, image/gif" type="file" class="form-control" id="photo-id-card-Edit" required>
+                                                                <div class="invalid-feedback" id="error-file-edit"></div>
+                                                                <input type="hidden" id="name-photo-id-card-Edit" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="row text-center">
+                                                        <div class="col-md-4">
+                                                            <button type="button" class="btn" id="btnWebCam" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>WebCam</button>
+                                                        </div>
+
+                                                        <div class="col-md-4">
+                                                            <button type="button" class="btn" id="btnCapture" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>Capture</button>
+                                                        </div>
+
+                                                        <div class="col-md-4">
+                                                            <button type="button" class="btn" id="btnScanFinger" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>Finger</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12">
+
+                                    <div class="card card-outline-info">
+                                        <div class="card-header">
+                                            <h4 class="m-b-0 text-white">
+                                                <i class="ti-user mr-3"></i>Salary Information
+                                            </h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="modal-body">
+
+                                                <div class="row">
+
+                                                    <!-- column 2 -->
+                                                    <div class="col-md-12">
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Sal.Type: <span class="text-danger">*</span></label>
+                                                                    <select id="ddlEditSalaryType" name="ddlEditSalaryType" class="form-control">
+                                                                        <option value="Daily">Daily</option>
+                                                                        <option value="Monthly">Monthly</option>
+                                                                        <option value="Sibong">Bills</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Salary: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditSalary" onkeypress="return isDecimalNumber(event)" name="txbEditSalary" placeholder="Salary..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_salary"></div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Card Phone: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditCardPhone" name="txbEditCardPhone" onkeypress="return isDecimalNumber(event)" placeholder="Card phone..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_card_phone"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Gym: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditGym" name="txbEditGym" onkeypress="return isDecimalNumber(event)" placeholder="Gym..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_gym"></div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Accommodation: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditAccommodation" onkeypress="return isDecimalNumber(event)" name="txbEditAccommodation" placeholder="Accommodation..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_accommodation"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Food: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditFood" name="txbEditFood" onkeypress="return isDecimalNumber(event)" placeholder="Food..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_food"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Insurance: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditInsurance" name="txbEditInsurance" onkeypress="return isDecimalNumber(event)" placeholder="Insurance..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_insurance"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Money Prim: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditMoneyPrim" onkeypress="return isDecimalNumber(event)" name="txbEditMoneyPrim" placeholder="Money prim..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_money_prim"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Travel: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditTravel" onkeypress="return isDecimalNumber(event)" name="txbEditTravel" placeholder="Travel..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_travel"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Gasoline: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditGasoline" onkeypress="return isDecimalNumber(event)" name="txbEditGasoline" placeholder="Gasoline..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_gasoline"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">OT Unit Price: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditOTUnitPrice" onkeypress="return isDecimalNumber(event)" name="txbEditOTUnitPrice" placeholder="OT unit price..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_ot_unit_price"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Work Hour Target: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditWorkHourTarget" onkeypress="return isDecimalNumber(event)" name="txbEditWorkHourTarget" placeholder="Work hour target..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_work_hour_target"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Relax Hour: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditRelaxHour" onkeypress="return isDecimalNumber(event)" name="txbEditRelaxHour" placeholder="Relax hour..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_relax_hour"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Day Off: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditDayOff" onkeypress="return isDecimalNumber(event)" name="txbEditDayOff" placeholder="Day off..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_day_off"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <input type="hidden" id="hdSalTypeId" name="hdSalTypeId" />
+                                                        <input type="hidden" id="hdStaffId" name="hdStaffId" />
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12">
+
+                                    <div class="card card-outline-info">
+                                        <div class="card-header">
+                                            <h4 class="m-b-0 text-white">
+                                                <i class="ti-user mr-3"></i>Holiday Details
+                                            </h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="modal-body">
+
+                                                <div class="row">
+
+                                                    <!-- column 2 -->
+                                                    <div class="col-md-12">
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Annaul Leave: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditAnnaulLeave" onkeypress="return isDecimalNumber(event)" name="txbEditAnnaulLeave" placeholder="AL..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_annual_leave"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Public Holiday: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditPublicHoliday" onkeypress="return isDecimalNumber(event)" name="txbEditPublicHoliday" placeholder="PH..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_public_holiday"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">Sick: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditSick" onkeypress="return isDecimalNumber(event)" name="txbEditSick" placeholder="Sick..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_sick"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">UPL: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditUPL" onkeypress="return isDecimalNumber(event)" name="txbEditUPL" placeholder="UPL..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_upl"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">AB: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditAB" onkeypress="return isDecimalNumber(event)" name="txbEditAB" placeholder="AB..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_ab"></div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <label for="comp_name">CM: <span class="text-danger">*</span></label>
+                                                                    <input type="text" value="0" class="form-control" id="txbEditCM" onkeypress="return isDecimalNumber(event)" name="txbEditCM" placeholder="CM..." required maxlength="50">
+                                                                    <div class="invalid-feedback" id="msg_cm"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <!--</form>-->
+                    </div>
+
+
+                </div>
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="ti-close pr-2"></i>Close</button>
+                    <button type="button" class="btn" id="btn_update_staff" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function isDecimalNumber(key) {
+        var keycode = (key.which) ? key.which : key.keycode;
+        var parts = key.srcElement.value.split('.');
+
+        if (parts.length > 1 && keycode == 46) {
+            return false;
+        }
+        else {
+            if (keycode == 46 || keycode >= 48 && keycode <= 57)
+                return true;
+            return false;
+        }
+    }
+
+    function AcceptOnlyNumeric(event) {
+        var theEvent = event || window.event;
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            //handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+
+        var regex = /[0-9]/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+
+    function checkStrengthPassword() {
+        var number = /([0-9])/;
+        var alphabets = /([a-zA-Z])/;
+        var special_characters = /([~,!,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+
+        if ($('#txbPassword').val().length < 8) {
+
+            if ($('#txbPassword').val().length == 0) {
+
+                $('#password_strenght_status').removeClass();
+                $('#password_strenght_status').html("");
+            } else {
+
+                $('#password_strenght_status').removeClass();
+                $('#password_strenght_status').addClass('weak_password');
+                $('#password_strenght_status').html("Weak (should be at least 8 characters.)");
+            }
+
+        } else {
+            if ($('#txbPassword').val().match(number) && $('#txbPassword').val().match(alphabets)
+                && $('#txbPassword').val().match(special_characters)) {
+
+                $('#password_strenght_status').removeClass();
+                $('#password_strenght_status').addClass('strong_password');
+                $('#password_strenght_status').html('Strong');
+            } else {
+
+                $('#password_strenght_status').removeClass();
+                $('#password_strenght_status').addClass('medium_password');
+                $('#password_strenght_status').html('Medium (should include alphabets, numbers and special characters.)');
+            }
+        }
+    }
+
+</script>

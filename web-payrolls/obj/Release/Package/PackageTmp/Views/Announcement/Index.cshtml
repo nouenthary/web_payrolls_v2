@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.Title = Resources.Voucher.Announcement;
+    ViewBag.Page = Resources.Voucher.Announcement;
+}
+
+<div class="card" style="margin-bottom: 0">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide</a>
+        </div>
+        <h4 class="card-title m-b-0 card-text"><i class="ti-filter"></i> @Resources.Voucher.Announcement</h4>
+    </div>
+    <div class="card-body collapse show b-t">
+        <div>
+            <div class="row">
+
+                <div class="input-group col-xlg-2 col-md-4 pb-2">
+                   
+                    <select id="boss_id" name="boss_id" class="form-control form-control-sm">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+
+                        @foreach (var item in ViewBag.Manager)
+                        {
+                            <option value="@item.PK_Boss_Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="input-group col-xlg-2 col-md-4 pb-2">
+                  
+                    <select id="comp_id" name="comp_id" class="form-control form-control-sm">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>
+                    </select>
+                </div>
+
+                 <div class="input-group col-xlg-2 col-md-4 pb-2">
+                  
+                    <select id="loc_id" name="loc_id" class="form-control form-control-sm">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>
+                    </select>
+                </div>
+                
+                <div class="input-group col-xlg-2 col-md-4 pb-2">
+                    <button class="btn btn-info btn-sm" id="btn-search-tax">
+                        <i class="ti-search"></i> @Resources.Voucher.Searchhere
+                    </button>
+                </div>
+
+                @Html.AntiForgeryToken()
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="show-announcement"></div>
+
+@* view photo *@
+<div class="modal fade" id="Modal-View-Photo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="image-card-view"
+                     class="card-img-top"
+                     alt="Card image cap"
+                     src="">
+            </div>
+            
+        </div>
+    </div>
+</div>
+@* view photo *@
+
+@section Scripts{
+    <script>
+        $(function () {
+            // new code
+            let bossId = $('#boss_id')
+            let comId = $('#comp_id')
+            let locId = $('#loc_id')
+             
+            $('#show-announcement').load('@Url.Action("GetTable", "Announcement")',{
+                bid: bossId.val(),
+                cid: comId.val(),
+                lid: locId.val(),
+                pageSize: $('#pageSize').val(),
+            });
+            
+            $(document).on('click', '#show-announcement a', function (e) {
+                try {
+                    let link = $(this).attr("href").split('=');
+                    $('#show-announcement').load('@Url.Action("GetTable", "Announcement")', {
+                        bid: bossId.val(),
+                        cid: comId.val(),
+                        lid: locId.val(),
+                        pageSize: $('#pageSize').val(),
+                        page: link[1]
+                    });
+                    e.preventDefault()
+                } catch (ex) { }
+            });
+
+            $('#btn-search-tax').click(function () {
+                $('#show-announcement').load('/Announcement/GetTable', {
+                    bid: bossId.val(),
+                    cid: comId.val(),
+                    lid: locId.val(),
+                    pageSize: $('#pageSize').val(),
+                });
+            });
+
+            $(document).on('change', '#show-announcement #pageSize', function () {
+                $('#show-announcement').load('/Announcement/GetTable', {
+                   bid: bossId.val(),
+                   cid: comId.val(),
+                   lid: locId.val(),
+                   pageSize: $('#pageSize').val(),
+                });
+            });
+            // new code
+            
+            // Export
+            $(document).on('click', '#show-announcement #btn-export-announcement', function () {
+                $('#table-announcement').csvExport();
+            });
+            
+            // Searching
+            // on change boss
+            bossId.change(function () {
+                
+                locId.html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                
+                let data = {
+                    boss_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+                
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetCompany",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company -- </option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                        }
+                        $('#comp_id').html(option);
+                    },
+                    error: function () {
+                        $('#comp_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>');
+                    }
+                });
+            });
+            
+            // on change company search
+            comId.change(function () {
+                let data = {
+                    com_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetLocation",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Location_Id + '">' + response[i].Loc_Name + '</option>';
+                        }
+                        $('#loc_id').html(option);
+                    },
+                    error: function () {
+                        $('#loc_id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Location --</option>');
+                    }
+                });
+            });
+            
+            // Searching
+            
+            // Preview Image        
+             $(document).on('click','#table-announcement tbody img',function (){
+                 $('#Modal-View-Photo').modal('show');
+                 $('#image-card-view').attr('src',$(this).attr('src'));
+             }); 
+        });
+    </script>
+}

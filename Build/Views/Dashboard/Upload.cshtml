@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+}
+
+<style>
+    .list-padding {
+        padding: 10px;
+    }
+</style>
+
+<div>
+    <input id="code" class="form-control" />
+</div>
+
+@section Javascript{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
+}
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $('#code').typeahead({
+                minLength: 1,
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Boss/FilterCode",
+                        data: {
+                            "code": request
+                        },
+                        type: "GET",
+                        contentType: "json",
+                        success: function (data) {
+                            console.log(data);                            
+                            response(data);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+            });           
+        });
+
+
+        //Webcam.set({
+        //    width: 320,
+        //    height: 240,
+        //    image_format: 'jpeg',
+        //    jpeg_quality: 90,
+
+        //});
+        //Webcam.attach('#my_camera');
+
+        //function take_snapshot() {
+        //    Webcam.snap(function (data_uri) {
+        //        document.getElementById('results').innerHTML =
+        //            '<img src="' + data_uri + '"/>';
+        //    });
+        //}
+    </script>
+}
+
+<div id="my_camera"></div>
+<input type=button value="Take Snapshot" onClick="take_snapshot()">
+
+<div id="results"></div>
+
+<ul class="list-unstyled bg-white">
+    <li class="media" style="margin-bottom: 0px; background: #efefef">
+        <div class="media-body row">
+            <div class="pl-4">
+                <label class="float-right pt-1 h5">
+                    <i class="ti-list"></i>
+                </label>
+            </div>
+            <div class="pl-4">
+                <label class="float-right pt-1 h5">
+                    Add New Product
+                </label>
+            </div>
+        </div>
+    </li>
+
+    <li class="media list-padding" style="margin-bottom: 0px;">
+        <div class="media-body row">
+            <div class="col-md-1 offset-md-1">
+                <label class="pt-1">
+                    Username
+                </label>
+            </div>
+            <div class="col-md-5">
+                <input class="form-control form-control-sm" placeholder="Input Name" />
+            </div>
+        </div>
+    </li>
+    <li class="media list-padding" style="margin-bottom: 0px">
+        <div class="media-body row">
+            <div class="col-md-1 offset-md-1">
+                <label class=" pt-1">
+                    Phone
+                </label>
+            </div>
+            <div class="col-md-5">
+                <input class="form-control form-control-sm" placeholder="Phone" />
+            </div>
+        </div>
+    </li>
+    <li class="media list-padding" style="margin-bottom: 0px">
+        <div class="media-body row">
+            <div class="col-md-1 offset-md-1">
+                <label class="pt-1">
+                    Password
+                </label>
+            </div>
+            <div class="col-md-5">
+                <input class="form-control form-control-sm" placeholder="Phone" />
+            </div>
+        </div>
+    </li>
+    <li class="media" style="margin-bottom: 0px">
+        <div class="media-body row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-5">
+                <input type="button" class="btn btn-info btn-sm" value="Add New Product" />
+            </div>
+        </div>
+    </li>
+</ul>

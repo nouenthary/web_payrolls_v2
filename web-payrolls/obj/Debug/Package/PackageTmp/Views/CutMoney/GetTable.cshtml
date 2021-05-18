@@ -1,0 +1,146 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<web_payrolls.Models.GetAllCutMoney_Result>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+<style>
+    .custom-select-form {
+        padding: 2px;
+        border: #dddddd 1px solid;
+    }
+
+    .list-group-item {
+        padding: 0.2rem 1rem;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }
+</style>
+
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div id="Paging" class="pt-2">
+            @Resources.Voucher.Show :
+            <select class="custom-select-form" id="pageSize" name="pageSize">
+                @foreach (var item in ViewBag.PageSize)
+                {
+                    if (item.Value == @ViewBag.psize + "")
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+            @Resources.Voucher.Entries
+        </div>
+    </div>
+
+   
+    <div class="col-md-9">
+        <div class="row justify-content-end pr-3 pb-2">
+            <div class="float-right">
+
+                <div class="btn-group btn-sm" data-toggle="buttons">
+
+                    <label class="btn btn-sm bg-white" id="btn-export-money-cut">
+                        <input type="radio" name="options" id="option3" autocomplete="off">
+                        <span class="text-inverse">
+                            <i class="ti-printer"></i> @Resources.Voucher.Excel
+                        </span>
+                    </label>
+                </div>
+                <button type="button" class="btn btn-sm" style="background: #28a745; color: white" id="btn-add-cut-money">
+                    <i class="ti-plus"></i> @Resources.Voucher.Add @Resources.Voucher.Wagededucts
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="table-responsive m-t-0 bg-white">
+    <table class="table table-hover table-md" id="table-cut-money">
+        <thead class="text-uppercase">
+            <tr style="border: 1px solid #f3f1f1">
+                <th>#</th>
+                <th>@Resources.Voucher.Company</th>
+                <th>@Resources.Voucher.LeaveType</th>
+                <th width="180">@Resources.Voucher.Description</th>
+                <th>@Resources.Voucher.Percent</th>
+                <th>@Resources.Voucher.UpdateBy</th>
+                <th>@Resources.Voucher.DateUpdate</th>
+                <th>@Resources.Voucher.TimeUpdate</th>
+            </tr>
+        </thead>
+        <tbody>
+        @{ int rowNo = 0; }
+
+        @foreach (var item in Model)
+            {
+                <tr 
+                    id="@item.PK_Cut_Id" 
+                    data-name="@item.Lev_Name" 
+                    data-desc="@item.Descr" 
+                    data-percent="@item.Cut_Percent"
+                    data-com-id="@item.PK_Comp_Id"
+                    >
+
+                    <td >@(rowNo += 1)</td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comp_Name)
+                    </td>
+
+                    <td >                      
+                        <span class="text-danger">
+                            @Html.DisplayFor(modelItem => item.Lev_Name)
+                        </span>
+                    </td>
+
+                    <td width="180">
+                        @Html.DisplayFor(modelItem => item.Descr)
+                    </td>
+
+                    <td >
+                        <span class="text-danger">
+                            @Html.DisplayFor(modelItem => item.Cut_Percent) %
+                        </span>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User_Update)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date_Update)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time_Update)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div class="float-left" style="padding: 20px 0;">
+    @Resources.Voucher.Showing @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @Resources.Voucher.to @Model.PageCount @Resources.Voucher.of @ViewBag.Records @Resources.Voucher.Entries
+</div>
+
+<div class="float-right">
+     @Html.PagedListPager(Model, page => Url.Action("Index", new {page}))
+</div>

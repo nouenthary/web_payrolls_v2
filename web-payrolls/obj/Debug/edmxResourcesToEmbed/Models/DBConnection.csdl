@@ -1,0 +1,572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="payroll_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DB_Connection" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="Pro_Get_Department" ReturnType="Collection(payroll_dbModel.Pro_Get_Department_Result)" />
+    <FunctionImport Name="Pro_Get_Staff" ReturnType="Collection(payroll_dbModel.Pro_Get_Staff_Result)" />
+    <FunctionImport Name="getAllEmployee" ReturnType="Collection(payroll_dbModel.getAllEmployee_Result)" />
+    <FunctionImport Name="Validate_User" ReturnType="Collection(payroll_dbModel.Validate_User_Result)">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Pro_Get_Roster" ReturnType="Collection(payroll_dbModel.Pro_Get_Roster_Result)" />
+    <FunctionImport Name="Pro_Set_Roster" ReturnType="Collection(Int32)">
+      <Parameter Name="start_date" Mode="In" Type="Int32" />
+      <Parameter Name="end_date" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pro_Get_Position_By_Dept" ReturnType="Collection(payroll_dbModel.Pro_Get_Position_By_Dept_Result)">
+      <Parameter Name="did" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pro_Get_District_By_Pro" ReturnType="Collection(payroll_dbModel.Pro_Get_District_By_Pro_Result)">
+      <Parameter Name="pro_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pro_Get_Commune_By_Dis" ReturnType="Collection(payroll_dbModel.Pro_Get_Commune_By_Dis_Result)">
+      <Parameter Name="com_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Bosses" EntityType="payroll_dbModel.Boss" />
+    <EntitySet Name="Departments" EntityType="payroll_dbModel.Department" />
+    <EntitySet Name="Districts" EntityType="payroll_dbModel.District" />
+    <EntitySet Name="LeaveRemains" EntityType="payroll_dbModel.LeaveRemain" />
+    <EntitySet Name="Positions" EntityType="payroll_dbModel.Position" />
+    <EntitySet Name="Provinces" EntityType="payroll_dbModel.Province" />
+    <EntitySet Name="Roles" EntityType="payroll_dbModel.Role" />
+    <EntitySet Name="Rosters" EntityType="payroll_dbModel.Roster" />
+    <EntitySet Name="SalaryTypes" EntityType="payroll_dbModel.SalaryType" />
+    <EntitySet Name="Staffs" EntityType="payroll_dbModel.Staff" />
+    <EntitySet Name="sysdiagrams" EntityType="payroll_dbModel.sysdiagram" />
+    <EntitySet Name="UserMasters" EntityType="payroll_dbModel.UserMaster" />
+    <EntitySet Name="Users" EntityType="payroll_dbModel.User" />
+    <EntitySet Name="Villages" EntityType="payroll_dbModel.Village" />
+    <EntitySet Name="Employees" EntityType="payroll_dbModel.Employee" />
+    <AssociationSet Name="FK__Departmen__boss___681373AD" Association="payroll_dbModel.FK__Departmen__boss___681373AD">
+      <End Role="Boss" EntitySet="Bosses" />
+      <End Role="Department" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Province__boss_i__690797E6" Association="payroll_dbModel.FK__Province__boss_i__690797E6">
+      <End Role="Boss" EntitySet="Bosses" />
+      <End Role="Province" EntitySet="Provinces" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Position__did__08B54D69" Association="payroll_dbModel.FK__Position__did__08B54D69">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Position" EntitySet="Positions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__District__pro_id__3493CFA7" Association="payroll_dbModel.FK__District__pro_id__3493CFA7">
+      <End Role="Province" EntitySet="Provinces" />
+      <End Role="District" EntitySet="Districts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Village__did__339FAB6E" Association="payroll_dbModel.FK__Village__did__339FAB6E">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="Village" EntitySet="Villages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LeaveRemain__sid__6BE40491" Association="payroll_dbModel.FK__LeaveRemain__sid__6BE40491">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="LeaveRemain" EntitySet="LeaveRemains" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__pid__3C34F16F" Association="payroll_dbModel.FK__Staff__pid__3C34F16F">
+      <End Role="Position" EntitySet="Positions" />
+      <End Role="Staff" EntitySet="Staffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Roster__FK_STA_I__44CA3770" Association="payroll_dbModel.FK__Roster__FK_STA_I__44CA3770">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="Roster" EntitySet="Rosters" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalaryTyp__pk_sa__3A4CA8FD" Association="payroll_dbModel.FK__SalaryTyp__pk_sa__3A4CA8FD">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="SalaryType" EntitySet="SalaryTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__sid__3B40CD36" Association="payroll_dbModel.FK__Users__sid__3B40CD36">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="Pro_Get_Department_Result">
+    <Property Type="Int32" Name="did" Nullable="false" />
+    <Property Type="Int32" Name="boss_id" Nullable="true" />
+    <Property Type="String" Name="dept_name" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="dept_desc" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="user_udpate" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="date_update" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="time_update" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="pid" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Pro_Get_Staff_Result">
+    <Property Type="Int32" Name="sid" Nullable="false" />
+    <Property Type="Int32" Name="site_id" Nullable="false" />
+    <Property Type="Int32" Name="pid" Nullable="false" />
+    <Property Type="String" Name="sname" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="gender" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="dob" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="tel" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="bank_account" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="address" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="id_card" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="scard" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="serial_card" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="status" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="join_date" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="end_date" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="photo" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="user_update" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="date_udpate" Nullable="true" MaxLength="20" />
+    <Property Type="Binary" Name="finger_print" Nullable="true" />
+    <Property Type="Int32" Name="pid1" Nullable="false" />
+    <Property Type="Double" Name="salary" Nullable="true" />
+    <Property Type="Int32" Name="did" Nullable="false" />
+    <Property Type="String" Name="dept_name" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="getAllEmployee_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="first_name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="last_name" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="data_of_bird" Nullable="true" />
+    <Property Type="String" Name="contact" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="address" Nullable="false" MaxLength="50" />
+    <Property Type="Byte" Name="status" Nullable="true" />
+    <Property Type="Int32" Name="position_id" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Validate_User_Result">
+    <Property Type="Int32" Name="UID" Nullable="false" />
+    <Property Type="Int32" Name="SID" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="Pro_Get_Roster_Result">
+    <Property Type="Int32" Name="sid" Nullable="false" />
+    <Property Type="String" Name="sname" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="gender" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="position" Nullable="false" MaxLength="50" />
+    <Property Type="Int64" Name="PK_ROS_ID" Nullable="false" />
+    <Property Type="Int32" Name="NUM_YEAR" Nullable="true" />
+    <Property Type="Int32" Name="NUM_MONTH" Nullable="true" />
+    <Property Type="String" Name="DAY1" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY2" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY3" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY4" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY5" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY6" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY7" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY8" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY9" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY10" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY11" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY12" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY13" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY14" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY15" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY16" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY17" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY18" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY19" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY20" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY21" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY22" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY23" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY24" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY25" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY26" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY27" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY28" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY29" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY30" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DAY31" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="OFF" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="PH" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="UPL" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="SIC" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="AL" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="AB" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="Pro_Get_Position_By_Dept_Result">
+    <Property Type="Int32" Name="pid" Nullable="false" />
+    <Property Type="String" Name="position" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="did" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Pro_Get_District_By_Pro_Result">
+    <Property Type="Int32" Name="did" Nullable="false" />
+    <Property Type="String" Name="dis_name" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="pro_id" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Pro_Get_Commune_By_Dis_Result">
+    <Property Type="Int32" Name="vid" Nullable="false" />
+    <Property Type="String" Name="vil_name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="did" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Boss">
+    <Key>
+      <PropertyRef Name="bid" />
+    </Key>
+    <Property Name="bid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="boss_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="boss_tel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="boss_address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Departments" Relationship="payroll_dbModel.FK__Departmen__boss___681373AD" FromRole="Boss" ToRole="Department" />
+    <NavigationProperty Name="Provinces" Relationship="payroll_dbModel.FK__Province__boss_i__690797E6" FromRole="Boss" ToRole="Province" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="did" />
+    </Key>
+    <Property Name="did" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="boss_id" Type="Int32" />
+    <Property Name="dept_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="dept_desc" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="user_udpate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date_update" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="time_update" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Boss" Relationship="payroll_dbModel.FK__Departmen__boss___681373AD" FromRole="Department" ToRole="Boss" />
+    <NavigationProperty Name="Positions" Relationship="payroll_dbModel.FK__Position__did__08B54D69" FromRole="Department" ToRole="Position" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="did" />
+    </Key>
+    <Property Name="did" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="dis_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dis_desc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="user_update" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_update" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_id" Type="Int32" />
+    <NavigationProperty Name="Province" Relationship="payroll_dbModel.FK__District__pro_id__3493CFA7" FromRole="District" ToRole="Province" />
+    <NavigationProperty Name="Villages" Relationship="payroll_dbModel.FK__Village__did__339FAB6E" FromRole="District" ToRole="Village" />
+  </EntityType>
+  <EntityType Name="LeaveRemain">
+    <Key>
+      <PropertyRef Name="lid" />
+    </Key>
+    <Property Name="lid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sid" Type="Int32" Nullable="false" />
+    <Property Name="off_remain" Type="Int32" Nullable="false" />
+    <Property Name="al_remain" Type="Int32" Nullable="false" />
+    <Property Name="ph_remain" Type="Int32" Nullable="false" />
+    <Property Name="sic_remain" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Staff" Relationship="payroll_dbModel.FK__LeaveRemain__sid__6BE40491" FromRole="LeaveRemain" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="pid" />
+    </Key>
+    <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="did" Type="Int32" />
+    <Property Name="position1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="salary" Type="Double" />
+    <Property Name="accommodation" Type="Double" />
+    <Property Name="food" Type="Double" />
+    <Property Name="gasoline" Type="Double" />
+    <Property Name="ot_unit_price" Type="Double" Nullable="false" />
+    <Property Name="work_hour_target" Type="Int32" />
+    <Property Name="relex_hour" Type="Int32" />
+    <Property Name="off_day" Type="Double" />
+    <Property Name="al_day" Type="Double" />
+    <Property Name="ph_day" Type="Double" />
+    <Property Name="sic" Type="Double" />
+    <Property Name="user_update" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="date_update" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="time_update" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Department" Relationship="payroll_dbModel.FK__Position__did__08B54D69" FromRole="Position" ToRole="Department" />
+    <NavigationProperty Name="Staffs" Relationship="payroll_dbModel.FK__Staff__pid__3C34F16F" FromRole="Position" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="pro_id" />
+    </Key>
+    <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="pro_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pro_desc" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="user_update" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_update" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Byte" />
+    <Property Name="boss_id" Type="Int32" />
+    <NavigationProperty Name="Boss" Relationship="payroll_dbModel.FK__Province__boss_i__690797E6" FromRole="Province" ToRole="Boss" />
+    <NavigationProperty Name="Districts" Relationship="payroll_dbModel.FK__District__pro_id__3493CFA7" FromRole="Province" ToRole="District" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="role1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Byte" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Roster">
+    <Key>
+      <PropertyRef Name="PK_ROS_ID" />
+    </Key>
+    <Property Name="PK_ROS_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_STA_ID" Type="Int32" />
+    <Property Name="NUM_YEAR" Type="Int32" />
+    <Property Name="NUM_MONTH" Type="Int32" />
+    <Property Name="DAY1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY5" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY6" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY7" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY8" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY9" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY10" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY11" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY12" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY13" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY14" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY15" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY16" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY17" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY18" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY19" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY20" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY21" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY22" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY23" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY24" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY25" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY26" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY27" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY28" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY29" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY30" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DAY31" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="OFF" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PH" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SIC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UPL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AB" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Staff" Relationship="payroll_dbModel.FK__Roster__FK_STA_I__44CA3770" FromRole="Roster" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="SalaryType">
+    <Key>
+      <PropertyRef Name="pk_salary_id" />
+    </Key>
+    <Property Name="pk_salary_id" Type="Int32" Nullable="false" />
+    <Property Name="fk_staff_id" Type="Int32" Nullable="false" />
+    <Property Name="salary_type" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="salary" Type="Double" Nullable="false" />
+    <Property Name="accommodation" Type="Double" />
+    <Property Name="food" Type="Double" />
+    <Property Name="gasoline" Type="Double" />
+    <Property Name="ot_unit_price" Type="Double" />
+    <NavigationProperty Name="Staff" Relationship="payroll_dbModel.FK__SalaryTyp__pk_sa__3A4CA8FD" FromRole="SalaryType" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="site_id" Type="Int32" />
+    <Property Name="pid" Type="Int32" Nullable="false" />
+    <Property Name="sname" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bank_account" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="id_card" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="scard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="serial_card" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="join_date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="end_date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="photo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="user_update" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="date_udpate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="finger_print" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="LeaveRemains" Relationship="payroll_dbModel.FK__LeaveRemain__sid__6BE40491" FromRole="Staff" ToRole="LeaveRemain" />
+    <NavigationProperty Name="Position" Relationship="payroll_dbModel.FK__Staff__pid__3C34F16F" FromRole="Staff" ToRole="Position" />
+    <NavigationProperty Name="Rosters" Relationship="payroll_dbModel.FK__Roster__FK_STA_I__44CA3770" FromRole="Staff" ToRole="Roster" />
+    <NavigationProperty Name="SalaryType" Relationship="payroll_dbModel.FK__SalaryTyp__pk_sa__3A4CA8FD" FromRole="Staff" ToRole="SalaryType" />
+    <NavigationProperty Name="Users" Relationship="payroll_dbModel.FK__Users__sid__3B40CD36" FromRole="Staff" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserRoles" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Photo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UserEmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="uid" />
+    </Key>
+    <Property Name="uid" Type="Int32" Nullable="false" />
+    <Property Name="sid" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="user_update" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_udpate" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Staff" Relationship="payroll_dbModel.FK__Users__sid__3B40CD36" FromRole="User" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Village">
+    <Key>
+      <PropertyRef Name="vid" />
+    </Key>
+    <Property Name="vid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="vil_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="vil_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="user_update" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_update" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="did" Type="Int32" />
+    <NavigationProperty Name="District" Relationship="payroll_dbModel.FK__Village__did__339FAB6E" FromRole="Village" ToRole="District" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="code" />
+      <PropertyRef Name="first_name" />
+      <PropertyRef Name="last_name" />
+      <PropertyRef Name="address" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="data_of_bird" Type="DateTime" Precision="0" />
+    <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Byte" />
+    <Property Name="position_id" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__Departmen__boss___681373AD">
+    <End Type="payroll_dbModel.Boss" Role="Boss" Multiplicity="0..1" />
+    <End Type="payroll_dbModel.Department" Role="Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Boss">
+        <PropertyRef Name="bid" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="boss_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Province__boss_i__690797E6">
+    <End Type="payroll_dbModel.Boss" Role="Boss" Multiplicity="0..1" />
+    <End Type="payroll_dbModel.Province" Role="Province" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Boss">
+        <PropertyRef Name="bid" />
+      </Principal>
+      <Dependent Role="Province">
+        <PropertyRef Name="boss_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Position__did__08B54D69">
+    <End Type="payroll_dbModel.Department" Role="Department" Multiplicity="0..1" />
+    <End Type="payroll_dbModel.Position" Role="Position" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="did" />
+      </Principal>
+      <Dependent Role="Position">
+        <PropertyRef Name="did" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__District__pro_id__3493CFA7">
+    <End Type="payroll_dbModel.Province" Role="Province" Multiplicity="0..1" />
+    <End Type="payroll_dbModel.District" Role="District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="pro_id" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="pro_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Village__did__339FAB6E">
+    <End Type="payroll_dbModel.District" Role="District" Multiplicity="0..1" />
+    <End Type="payroll_dbModel.Village" Role="Village" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="did" />
+      </Principal>
+      <Dependent Role="Village">
+        <PropertyRef Name="did" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LeaveRemain__sid__6BE40491">
+    <End Type="payroll_dbModel.Staff" Role="Staff" Multiplicity="1" />
+    <End Type="payroll_dbModel.LeaveRemain" Role="LeaveRemain" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="LeaveRemain">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__pid__3C34F16F">
+    <End Type="payroll_dbModel.Position" Role="Position" Multiplicity="1" />
+    <End Type="payroll_dbModel.Staff" Role="Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="pid" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Roster__FK_STA_I__44CA3770">
+    <End Type="payroll_dbModel.Staff" Role="Staff" Multiplicity="0..1" />
+    <End Type="payroll_dbModel.Roster" Role="Roster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="Roster">
+        <PropertyRef Name="FK_STA_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalaryTyp__pk_sa__3A4CA8FD">
+    <End Type="payroll_dbModel.Staff" Role="Staff" Multiplicity="1" />
+    <End Type="payroll_dbModel.SalaryType" Role="SalaryType" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="SalaryType">
+        <PropertyRef Name="pk_salary_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__sid__3B40CD36">
+    <End Type="payroll_dbModel.Staff" Role="Staff" Multiplicity="1" />
+    <End Type="payroll_dbModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

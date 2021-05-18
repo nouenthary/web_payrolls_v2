@@ -1,0 +1,285 @@
+﻿@{
+    ViewBag.Title = Resources.Voucher.Location;
+    ViewBag.Page = Resources.Voucher.Location;
+}
+
+<div class="card" style="margin-bottom: 0px">
+    <div class="card-header">
+        <div class="card-actions">
+            <a class="" data-action="collapse"><i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide</a>
+        </div>
+        <h4 class="card-title m-b-0 card-text"><i class="ti-filter"></i> @Resources.Voucher.Location</h4>
+    </div>
+    <div class="card-body collapse show b-t">
+        <div>
+            <div class="row">
+
+                <div class="input-group col-xlg-2 col-md-4 pb-2">
+                    <select id="bossid_search" name="bossid_search" class="form-control form-control-sm">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.HOD --</option>
+                        @foreach (var item in ViewBag.Manager)
+                        {
+                            <option value="@item.PK_Boss_Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="input-group col-xlg-2 col-md-4 pb-2">
+                    <select id="comid_search" name="comid_search" class="form-control form-control-sm">
+                        <option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>                       
+                    </select>
+                </div>
+
+                <div class="form-group col-xlg-3 col-md-3 col-sm-12">
+                        <button type="button" class="btn btn-info btn-sm" id="btn-search-location">
+                            <i class="ti-search pr-2"></i>@Resources.Voucher.Searchhere
+                        </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!---->
+<div id="show-location"></div>
+<!---->
+
+@Html.Partial("ModalEditLocation")
+
+@Html.Partial("ModelCreateLocation")
+
+@section Scripts{
+    <script>
+        
+        $(function () {
+            // New Code            
+            $('#show-location').load('/Location/GetTable', {
+                bid: $('#bossid_search').val(),
+                cid: $('#comid_search').val(),
+                pageSize: $('#pageSize').val()
+            });
+
+            $(document).on('click', '#show-location a', function (e) {
+                try {
+                    var link = $(this).attr("href").split('=');
+                    $('#show-location').load('/Location/GetTable', {
+                        bid: $('#bossid_search').val(),
+                        cid: $('#comid_search').val(),
+                        page: link[1],
+                        pageSize: $('#pageSize').val()
+                    });
+                    e.preventDefault()
+                } catch (ex) { }
+            });
+
+            $('#btn-search-location').click(function () {               
+                $('#show-location').load('/Location/GetTable', {
+                    bid: $('#bossid_search').val(),
+                    cid: $('#comid_search').val(),                  
+                    pageSize: $('#pageSize').val()
+                });
+            });
+
+            $(document).on('change', '#show-location #pageSize', function () {                
+                $('#show-location').load('/Location/GetTable', {
+                    bid: $('#bossid_search').val(),
+                    cid: $('#comid_search').val(),  
+                    pageSize: $(this).val()
+                });
+            });    
+            // New Code
+
+            $(document).on('click', '#show-location #btn-export-location', function () {
+                $('#table-location').csvExport();
+            });
+
+            // onchange page size
+            $("#pageSize").change(function () {
+                $("#form1").submit();
+            });
+
+            function validateControl(control_id) {
+                $(control_id).keypress(function (event) {
+                    var ew = event.which;
+                    if (ew == 32)
+                        return true;
+                    if (48 <= ew && ew <= 57)
+                        return true;
+                    if (65 <= ew && ew <= 90)
+                        return true;
+                    if (97 <= ew && ew <= 122)
+                        return true;
+                    return false;
+                });
+            }
+
+            function protectdControl(control) {
+                $(control).bind("cut copy paste drag drop", function (e) {
+                    e.preventDefault();
+                });
+            }
+
+            protectdControl('#Loc_Name');
+            validateControl('#Loc_Name');
+            protectdControl('#Loc_Name_Edit');
+            validateControl('#Loc_Name_Edit');
+            //
+            $(document).on('click', '#show-location #btn-create-location', function () {
+                $('#modal-location-create').modal("show");
+            });
+
+            //
+            $('#btn-save-location').click(function () {                          
+                let formData = $('#form-location').serialize();
+
+                if ($('#FK_Comp_Id').val() == '') {
+                    $('#FK_Comp_Id').attr('class', 'form-control is-invalid');
+                    return false;
+                }
+
+                if ($('#Loc_Name').val() == '') {
+                    $('#Loc_Name').attr('class', 'form-control is-invalid');
+                    return false;
+                }
+              
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/StoreOrEdit",
+                    data: formData,
+                    success: function (response) {                        
+                        if (response.Loc_Name) {
+                            $('#Loc_Name').attr('class', 'form-control is-invalid');
+                            $('#error-Loc_Name').text(response.Loc_Name);
+                        }
+                        else {
+                            swal("Success", response.message, "success")
+                            $('#modal-location-create').modal("hide");
+
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1500)
+                        }
+                    }
+                });
+            });
+
+            //
+            $('#Loc_Name').keypress(function () {
+                $('#Loc_Name').attr('class', 'form-control');
+            });
+
+            //            
+            $('#FK_Comp_Id').change(function () {
+                $('#FK_Comp_Id').attr('class', 'form-control');
+            });
+
+            //
+            $(document).delegate('#table-location tbody tr', 'dblclick', function () {
+                let id = $(this).attr("id");
+                $('#modal-location-edit').modal("show");
+
+                let location = $(this).attr("data-content");
+                let desc = $(this).attr("resource");
+
+                $('#Loc_Name_Edit').val(location.trim());
+                $('#Descr_Edit').val(desc.trim());
+                $('#PK_Location_Id').val(id.trim());
+
+                $('#FK_Comp_ID_Edit').html('<option value="' + $(this).attr('data-id')+'">' + $(this).attr('data-com-name') + '</option>');
+
+            });
+
+            //
+            $('#Loc_Name_Edit').change(function () {
+                $('#Loc_Name_Edit').attr('class', 'form-control');
+            });
+
+            //
+            $("#btn-update-location").click(function () {
+
+                if ($('#Loc_Name_Edit').val() == '') {
+                    $('#Loc_Name_Edit').attr('class', 'form-control is-invalid');
+                    return false;
+                }
+                else if ($('#PK_Location_Id').val() == '') {                    
+                    return false;
+                }
+                else if ($('#FK_Comp_ID_Edit').val() == '') {
+                    $('#FK_Comp_ID_Edit').attr('class', 'form-control is-invalid');
+                    return false;
+                }
+
+                var formData = $('#form-edit-location').serialize();
+               
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/Update",
+                    data: formData,
+                    success: function (response) {
+                       
+                        if (response.Loc_Name) {
+                            $('#Loc_Name_Edit').attr('class', 'form-control is-invalid');
+                            $('#error_Loc_Name_Edit').text(response.Loc_Name);
+                        }
+                        else {
+                            $('#modal-location-edit').modal("hide");
+                            swal("Success", response.message, "success")
+
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1500)
+                        }
+                    }
+                });
+            });
+
+            // on change boss
+            $('#bossid_search').change(function () {
+                let data = {
+                    boss_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetCompany",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company -- </option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                        }
+                        $('#comid_search').html(option);
+                    },
+                    error: function () {
+                        $('#comid_search').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>');
+                    }
+                });
+            });
+
+            // create Location
+            $('#PK_Boss_Id').change(function () {
+                let data = {
+                    boss_id: $(this).val(),
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                };
+                
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetCompany",
+                    data: data,
+                    success: function (response) {
+                        let option = '<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company -- </option>';
+                        for (let i = 0; i < response.length; i++) {
+                            option += '<option value="' + response[i].PK_Comp_Id + '">' + response[i].Comp_Name + '</option>';
+                        }
+                        $('#FK_Comp_Id').html(option);
+                    },
+                    error: function () {
+                        $('#FK_Comp_Id').html('<option value="">-- @Resources.Voucher.Choose @Resources.Voucher.Company --</option>');
+                    }
+                });
+            });
+        });
+    </script>
+}
