@@ -1,8 +1,11 @@
 @using web_payrolls.Helpers
 @using web_payrolls.Models
+
 @{
   ViewBag.Title = "Transfer Balance";
 }
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
 
 @{
   // connection
@@ -52,6 +55,14 @@
       padding: 2px;
       border: #dddddd 1px solid;
   }
+
+  .table {
+       margin-bottom: 0;
+  }
+
+  .table td, .table th {
+      border-color: #1890ff;
+  }
 </style>
 
 @* Card Filter *@
@@ -67,7 +78,8 @@
     </h4>
   </div>
   <div class="card-body collapse show b-t">
-    <form method="get" action="@Url.Action("TransferBalance", "Transfer")" id="form-search">
+    @using (Html.BeginForm(null, null, FormMethod.Get, new {name = "form-search", id = "form-search"}))
+    {
       <div class="row">
 
         @Html.Partial("~/Views/Components/Controls/HOD.cshtml")
@@ -98,98 +110,26 @@
           </div>
         </div>
 
-        <div class="form-group col-xlg-3 col-md-4 ">
-          <label for="type_name">Type Name</label>
-          <div class="input-group">
-            <select id="type_name" name="type_name" class="form-control">
-              <option value="">-- @Resources.Voucher.Choose Type Name --</option>
-            </select>
-          </div>
-        </div>
+        @Html.Partial("~/Views/Components/Controls/ProductGroup.cshtml")
 
-        <div class="form-group col-xlg-3 col-md-4 ">
-          <label for="product_name">Product Name</label>
-          <div class="input-group">
-            <select id="product_name" name="product_name" class="form-control">
-              <option value="">-- @Resources.Voucher.Choose Product Name --</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group col-xlg-3 col-md-4 ">
-          <label for="color">Color</label>
-          <div class="input-group">
-            <select id="color" name="color" class="form-control">
-              <option value="">-- @Resources.Voucher.Choose Color --</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group col-xlg-3 col-md-4 ">
-          <label for="size">Size</label>
-          <div class="input-group">
-            <select id="size" name="size" class="form-control">
-              <option value="">-- @Resources.Voucher.Choose Size --</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group col-xlg-3 col-md-4 ">
-          <label for="grade">Grade</label>
-          <div class="input-group">
-            <select id="grade" name="grade" class="form-control">
-              <option value="">-- @Resources.Voucher.Choose Grade --</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group col-xlg-3 col-md-4 ">
-          <label for="barcode">Barcode</label>
-          <div class="input-group">
-            <input class="form-control" id="barcode" name="barcode" placeholder="Search barcode" autocomplete="off"/>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="ti-layout-column4"></i>
-              </span>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="form-group col-xlg-3 col-md-4 ">
-          <label for="qrCode">Qr Code</label>
-          <div class="input-group">
-            <input class="form-control" id="qrCode" name="qrCode" placeholder="Search Qr code" autocomplete="off"/>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="ti-layout-grid4"></i>
-              </span>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="form-group col-xlg-3 col-md-4 ">
-          <label for="status">Status</label>
-          <div class="input-group">
-            <select id="status" name="status" class="form-control">
-              <option value="">-- Choose Status --</option>
-              <option value="Enable">Enable</option>
-              <option value="Disable">Disable</option>
-            </select>
-          </div>
-        </div>
+        @Html.Partial("~/Views/Components/Controls/Status.cshtml")
 
         <input type="hidden" id="pageSize" name="pageSize" value="20"/>
 
       </div>
       <button class="btn btn-info btn-sm"><i class="ti-search"></i> Searching</button>
-    </form>
+    }
   </div>
 
 </div>
 @* Card Filter *@
 
+<div style="padding: 5px 0 ; float: right">
+  <a href="@Url.Action("Index", "Transfer")" class="btn btn-dropbox btn-sm text-white"><i class="ti-shopping-cart"></i> Transfer</a>
+  <a class="btn btn-default btn-sm" id="btn-export"><i class="ti-export"></i> Export</a>
+</div>
+
+@Html.Partial("~/Views/Components/Controls/PageSize.cshtml")
 
 <div id="show"></div>
 
@@ -197,8 +137,6 @@
 {
   <script>
     let token = { __RequestVerificationToken : $('input[name="__RequestVerificationToken"]').val()};
-
-    let searchParams = new URLSearchParams(window.location.search);
 
     function getFormData($form){
         let unindexed_array = $form.serializeArray();
@@ -211,21 +149,79 @@
         return indexed_array;
     }
 
-    let $form = $("#form-search");
-    let data = getFormData($form);
-    $('#show').load('/Transfer/GetTableBalance',{
-        ...data
+    function GetObject(){
+       let $form = $("#form-search");
+       let data = getFormData($form);
+       console.log(data);
+       return data;
+    }
+
+    // load table
+    function Load(){
+        let data = GetObject();
+        $('#show').load('/Transfer/GetTableBalance',data);
+    }
+
+    Load();
+
+    // form submit
+    $(document).on('submit','#form-search',function(e) {
+      e.preventDefault();
+      Load();
     });
 
-    function setParams(ctn){
-      if(searchParams.has(ctn)){
-         $('#'+ctn).val(searchParams.get(ctn));
-      }
-    }
+    // page Size
+    $('#pageSize_').change(function(e) {
+      e.preventDefault();
+      $('#pageSize').val($(this).val());
+      $('#form-search').submit();
+    });
+
+     $(document).on('click', '#show-page a', function (e) {
+         try {
+             let link = $(this).attr("href").split('=');
+             let data = GetObject();
+             $('#show').load('/Transfer/GetTableBalance', {
+                 page: link[1],
+                 ...data
+             });
+             e.preventDefault()
+         } catch (ex) { }
+     });
+
+
      // select 2
      function Select2(ctn){
         $(ctn).select2({ width: '100%', placeholder: "Select an Option", allowClear: true });
      }
+
+
+     //
+      function SetValueToSelect(control, value, url) {
+          $.ajax({
+           type: 'post',
+           url: url,
+           data: {
+              ...value,
+              ...token
+           },
+           success: function(r) {
+             $(control).empty();
+
+             $(control).append($('<option>', {
+                  value: "",
+                  text : "Select Option"
+              }));
+
+             $.each(r, function (i, item) {
+                 $(control).append($('<option>', {
+                     value: item.key,
+                     text : item.value
+                 }));
+             });
+           }
+          });
+       }
 
     Select2('#bid');
     Select2('#grade');
@@ -237,46 +233,12 @@
     Select2('#type');
     Select2('#location');
     Select2('#company');
-
-    setParams('barcode');
-    setParams('qrCode');
-    setParams('status');
-    setParams('grade');
-    setParams('size');
-    setParams('color');
-    setParams('product_name');
-    setParams('type_name');
-    setParams('type');
-    setParams('company');
-    setParams('location');
-    setParams('bid');
-    setParams('pageSize');
+    Select2('#barcode');
+    Select2('#qrCode');
 
      // Export
     $(document).on('click', '#btn-export', function () {
         $('#table-transfer-balance').csvExport();
-    });
-
-
-    $('#pageSize_').val(searchParams.get('pageSize') ? searchParams.get('pageSize') : 20);
-
-    $(document).on('click','#pagination ul li a',function(e) {
-      e.preventDefault();
-      alert("Home");
-      let page = $(this).attr('href').split('=')[1];
-
-      let form = $('#form-search').serialize();
-      console.log(form);
-     // location.href = '/Transfer/TransferBalance?page='+ page + '&' + form;
-    });
-
-    $(document).on('change','#pageSize_',function(e) {
-       e.preventDefault();
-       let pageSize = $(this).val();
-
-       $('#pageSize').val(pageSize);
-
-       $('#form-search').submit();
     });
 
 
@@ -323,80 +285,59 @@
 
        // bid
       $('#bid').change(function (){
-          $('select#company').val(0).select2();
+          $('select#location').empty();
           $('select#type').val(0).select2();
-          $('select#type_name').val(0).select2();
-          $('select#product_name').val(0).select2();
-          $('select#color').val(0).select2();
-          $('select#size').val(0).select2();
-          $('select#grade').val(0).select2();
+          $('select#type_name').empty();
+          $('select#product_name').empty();
+          $('select#color').empty();
+          $('select#size').empty();
+          $('select#grade').empty();
 
-          let dataForSent = {
-              id: $(this).val(),
-              ...token
-          };
-
-          let {data} = GetDataApi('/Other/GetCompany',dataForSent);
-
-          $('#company').html(setToSelect({data: data, label: '@Resources.Voucher.Company'}));
-
-          //$('#form-search').submit();
+          SetValueToSelect('#company',{id:$(this).val() },'/Other/GetCompany');
       });
 
         // cid
         $('#company').change(function (){
-            $('select#type').val(0).select2();
-             $('select#type_name').val(0).select2();
-             $('select#product_name').val(0).select2();
-             $('select#color').val(0).select2();
-             $('select#size').val(0).select2();
-             $('select#grade').val(0).select2();
+           $('select#type').val(0).select2();
+            $('select#type_name').empty();
+            $('select#product_name').empty();
+            $('select#color').empty();
+            $('select#size').empty();
+            $('select#grade').empty();
 
-            let dataForSent = {
-                id: $(this).val(),
-                ...token
-            };
-
-            let {data} = GetDataApi('/Other/GetLocation',dataForSent);
-
-            $('#location').html(setToSelect({data: data, label: '@Resources.Voucher.Location'}));
-
+            SetValueToSelect('#location',{id:$(this).val() },'/Other/GetLocation');
         });
 
         // product type
            $('#type').change(function (){
-              $('select#type_name').val(0).select2();
-               $('select#product_name').val(0).select2();
-               $('select#color').val(0).select2();
-               $('select#size').val(0).select2();
-               $('select#grade').val(0).select2();
+              $('select#type_name').empty();
+               $('select#product_name').empty();
+               $('select#color').empty();
+               $('select#size').empty();
+               $('select#grade').empty();
 
                let dataForSent = {
                    bossId : $('#bid').val(),
                    productType: $(this).val(),
-                   ...token
                };
 
-               let {data} = GetDataApi('/StockInProductCut/GetProductTypeByBoss', dataForSent);
-
-               $('#type_name').html(setToSelect({data: data, label: 'Type Name'}));
+               SetValueToSelect('#type_name',dataForSent,'/StockInProductCut/GetProductTypeByBoss');
            });
 
 
            //type name
             $('#type_name').change(function (){
 
-
-                 $('select#product_name').val(0).select2();
-                  $('select#color').val(0).select2();
-                  $('select#size').val(0).select2();
-                  $('select#grade').val(0).select2();
+                $('select#product_name').empty();
+                $('select#color').empty();
+                $('select#size').empty();
+                $('select#grade').empty();
 
                 let dataForSent = {
                    id: $(this).val(),
                    ...token
                 };
-
+                console.log(dataForSent);
                 let {data} = GetDataApi('/Other/GetProductByProductType', dataForSent);
 
                 $('#product_name').html(setToSelect({data: data, label : "Product"}));
@@ -406,9 +347,9 @@
             // product name
             $('#product_name').change(function (){
 
-               $('select#color').val(0).select2();
-               $('select#size').val(0).select2();
-               $('select#grade').val(0).select2();
+              $('select#color').empty();
+              $('select#size').empty();
+              $('select#grade').empty();
 
                 let dataForSent = {
                     id: $(this).val(),
@@ -429,13 +370,13 @@
 
             // color
             $('#color').change(function (){
-                $('select#size').val(0).select2();
-                $('select#grade').val(0).select2();
+                $('select#size').empty();
+                $('select#grade').empty();
             });
 
             // size
             $('#size').change(function (){
-                $('select#grade').val(0).select2();
+                $('select#grade').empty();
             });
 
   </script>

@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
     // load data to gridview
     $('#show_staff').load('/Staff/GetTable', {
         pageSize: $('#pageSize').val(),
@@ -645,7 +645,7 @@
 
     // Save Staff
     $('#btn_save_staff').click(function () {
-        
+      
         var date = new Date();
         // varialable for tblStaff
         var FK_Pos_Id = $('#ddlAddPosition').val();
@@ -757,13 +757,13 @@
                 AB: AB,
                 CM: CM
             };
-
+          
             var url = "/Staff/AddStaff";
             $.post(url, data, function (respone) {
-                swal(respone);
-                setTimeout(function () {
-                    window.location.reload();
-                }, 1000)
+              swal(respone);
+              setTimeout(function () {
+                window.location.reload();
+              }, 1000);
             });
         }
     });

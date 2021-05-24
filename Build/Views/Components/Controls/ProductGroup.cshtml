@@ -1,0 +1,80 @@
+@using web_payrolls.Models
+@{
+  var db = new DB_Connection();
+  // barcode
+  var barcode = db.tblProduction_Grade
+    .Select(x => new SelectListItem()
+    {
+      Value = x.BarCode,
+      Text = x.BarCode
+    })
+    .ToList();
+
+  //
+  var qrCode = db.tblProduction_Grade
+    .Select(x => new SelectListItem()
+    {
+      Value = x.QR_Code,
+      Text = x.QR_Code
+    })
+    .ToList();
+}
+
+<div class="form-group col-xlg-3 col-md-4 pb-2">
+  <label>Type Name</label>
+  <div class="input-group">
+    <select id="type_name" name="type_name" class="form-control">
+      <option value="">-- @Resources.Voucher.Choose Type Name --</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group col-xlg-3 col-md-4 pb-2">
+  <label>Product Name</label>
+  <div class="input-group">
+    <select id="product_name" name="product_name" class="form-control">
+      <option value="">-- @Resources.Voucher.Choose Product Name --</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group col-xlg-3 col-md-4 pb-2">
+  <label>Color</label>
+  <div class="input-group">
+    <select id="color" name="color" class="form-control">
+      <option value="">-- @Resources.Voucher.Choose Color --</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group col-xlg-3 col-md-4 pb-2">
+  <label>Size</label>
+  <div class="input-group">
+    <select id="size" name="size" class="form-control">
+      <option value="">-- @Resources.Voucher.Choose Size --</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group col-xlg-3 col-md-4 pb-2">
+  <label>Grade</label>
+  <div class="input-group">
+    <select id="grade" name="grade" class="form-control">
+      <option value="">-- @Resources.Voucher.Choose Grade --</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group col-xlg-3 col-md-4">
+  <label>Barcode</label>
+  <div class="input-group">
+    @Html.DropDownList("barcode", barcode, "-- Search Barcode --", new {@class = "form-control"})
+  </div>
+</div>
+
+<div class="form-group col-xlg-3 col-md-4">
+  <label>Qr Code</label>
+  <div class="input-group">
+    @Html.DropDownList("qrCode", qrCode, "-- Search Qr code --", new {@class = "form-control"})
+  </div>
+</div>

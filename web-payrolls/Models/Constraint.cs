@@ -31,5 +31,18 @@ namespace web_payrolls.Models
         {
             return DateTime.Now.ToString("yyyy-MM-dd");
         }
+
+        public static string StatusColor(string status)
+        {
+          switch (status)
+          {
+            case "Pending":
+              return "info";
+            case "Done":
+              return "success";
+            default:
+              return "danger";
+          }
+        }
     }
 }

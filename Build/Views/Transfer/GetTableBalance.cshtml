@@ -1,28 +1,10 @@
 @using PagedList.Mvc
 @model  PagedList.IPagedList<web_payrolls.Models.GetAllTransferBalance_Result>
 
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
-
-<div style="padding: 5px 0 ; float: right">
-  <a href="@Url.Action("Index", "Transfer")" class="btn btn-dropbox btn-sm text-white"><i class="ti-shopping-cart"></i> Transfer</a>
-  <a class="btn btn-default btn-sm" id="btn-export"><i class="ti-export"></i> Export</a>
-</div>
-
-Show :
-<label for="pageSize_"></label>
-<select class="custom-select-form" id="pageSize_" name="pageSize_" style="margin-top: 3px">
-  <option value="10">10</option>
-  <option value="20">20</option>
-  <option value="30">30</option>
-  <option value="50">50</option>
-  <option value="100">100</option>
-  <option value="500">ALL</option>
-</select> Entries
-
 <div class="table-responsive m-t-0 bg-white">
-  <table class="table table-sm text-center table-bordered" id="table-transfer-balance">
+  <table class="table table-sm text-center table-striped table-bordered" id="table-transfer-balance">
     <thead class="text-capitalize font-weight-bold table-header-shadow">
-    <tr style="border: 1px solid #f3f1f1">
+    <tr class="" style="border: 1px solid #f3f1f1">
       <td>No.</td>
       <td>HOD</td>
       <td>Location</td>
@@ -70,11 +52,9 @@ Show :
 </div>
 
 <div class="pagination">
-  <div class="">
-    <span> Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
+  <div id="show-page">
     <span>
-      @Html.PagedListPager(Model, page => Url.Action("TransferBalance", "Transfer", new {page}))
+       Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("TransferBalance", "Transfer", new {page}))
     </span>
-
   </div>
 </div>

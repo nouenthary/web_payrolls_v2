@@ -1,739 +1,801 @@
-﻿<!--Form Create-->
 <div class="modal fade" id="modal_staff_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="max-width: 90% !important;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="ti-user pr-2"></i>Add Staff Form</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post" action="">
-                <div class="modal-body">
+  <div class="modal-dialog" role="document" style="max-width: 90% !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="ti-user pr-2"></i>Add Staff Form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="post" action="">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 mb-60 col_border">
+              <div class="tab">
+                <button class="tablinks staff" onclick="openTab(event, 'Staff')" id="defaultOpen">Staff Info</button>
+                <button class="tablinks salary" onclick="openTab(event, 'Salary')">Salary</button>
+                <button class="tablinks holiday" onclick="openTab(event, 'Holiday')" >Holiday</button>
+              </div>
 
-                    <div class="row">
+              <div id="Staff" class="tabcontent">
+                
+                <div class="row">
 
-                        <div class="col-md-6">
+                  <!-- Row 1-->
 
-                            <div class="row">
+                  <div class="col-md-6">
+                    <div class="card card-outline-info" style="border: none; margin-bottom: 10px;">
+                      <div class="card-header" style="padding: 0.15rem 1.25rem !important;">
+                        <h4 class="m-b-0 text-white">
+                          <i class="ti-user mr-3"></i>Personal Information
+                        </h4>
+                      </div>
+                      <div class="card-body" style="padding: 0;">
 
-                                <div class="col-md-12">
+                        <div class="modal-body">
 
-                                    <div class="card card-outline-info">
-                                        <div class="card-header">
-                                            <h4 class="m-b-0 text-white">
-                                                <i class="ti-user mr-3"></i>Personal Information
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
+                          <div class="row">
+                            <!-- column 1 -->
 
-                                            <div class="modal-body">
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="boss">HOD:</label>
+                                    <select name="ddlAddBoss" id="ddlAddBoss" class="form-control" aria-invalid="false">
+                                      <option value="0">-- All HODs --</option>
+                                      @foreach (var boss in ViewBag.Manager)
+                                      {
+                                <option value="@boss.PK_Boss_Id">@boss.Name</option>}
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="staff_transaction">Company:</label>
+                                    <select id="ddlAddCompany" name="ddlAddCompany" class="form-control">
+                                      <option value="0">-- All Companies --</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
 
-                                                <div class="row">
-                                                    <!-- column 1 -->
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="comp_name">Location:</label>
+                                    <select id="ddlAddLocation" name="ddlAddLocation" class="form-control">
+                                      <option value="0">-- All Locations --</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="comp_name">Department: </label>
+                                    <select id="ddlAddDepartment" name="ddlAddDepartment" class="form-control">
+                                      <option value="0">-- All Departments --</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
 
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="boss">HOD:</label>
-                                                                    <select name="ddlAddBoss" id="ddlAddBoss" class="form-control" aria-invalid="false">
-                                                                        <option value="0">-- All HODs --</option>
-                                                                        @foreach (var boss in ViewBag.Manager)
-                                                                        {
-                                                                            <option value="@boss.PK_Boss_Id">@boss.Name</option>
-                                                                        }
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="staff_transaction">Company:</label>
-                                                                    <select id="ddlAddCompany" name="ddlAddCompany" class="form-control">
-                                                                        <option value="0">-- All Companies --</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                              <div class="form-group">
+                                <label for="comp_name">Position:</label>
+                                <select id="ddlAddPosition" name="ddlAddPosition" class="form-control">
+                                  <option value="0">-- All Positions --</option>
+                                </select>
+                                <div class="invalid-feedback" id="msg_position"></div>
+                              </div>
 
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="comp_name">Location:</label>
-                                                                    <select id="ddlAddLocation" name="ddlAddLocation" class="form-control">
-                                                                        <option value="0">-- All Locations --</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="comp_name">Department: </label>
-                                                                    <select id="ddlAddDepartment" name="ddlAddDepartment" class="form-control">
-                                                                        <option value="0">-- All Departments --</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="comp_name">Position:</label>
-                                                            <select id="ddlAddPosition" name="ddlAddPosition" class="form-control">
-                                                                <option value="0">-- All Positions --</option>
-                                                            </select>
-                                                            <div class="invalid-feedback" id="msg_position"></div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="comp_name">Emp. Name: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control" id="txbStaffName" name="txbStaffName" placeholder="Staff name..." required maxlength="150">
-                                                                    <div class="invalid-feedback" id="msg_staff_name"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="comp_name">DOB: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control datetimepicker" id="ddlDOB" name="ddlDOB" placeholder="YYYY-MM-DD" required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_DOB"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Sex: <span class="text-danger">*</span></label>
-                                                                    <select id="ddlSex" name="ddlSex" class="form-control">
-                                                                        <option value="0">-- Select --</option>
-                                                                        <option value="Male">Male</option>
-                                                                        <option value="Female">Female</option>
-                                                                    </select>
-                                                                    <div class="invalid-feedback" id="msg_sex"></div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Marital Status: <span class="text-danger">*</span></label>
-                                                                    <select id="ddlMarryStatus" name="ddlMarryStatus" class="form-control">
-                                                                        <option value="0">-- Select --</option>
-                                                                        <option value="Single">Single</option>
-                                                                        <option value="Married">Married</option>
-                                                                    </select>
-                                                                    <div class="invalid-feedback" id="msg_sex"></div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <label for="comp_name">Wife: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" onkeypress="return AcceptOnlyNumeric(event)" class="form-control" id="txbWife" name="txbWife" placeholder="Wife..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_wife"></div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <label for="comp_name">Son: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" onkeypress="return AcceptOnlyNumeric(event)" class="form-control" id="txbSon" name="txbSon" placeholder="Son..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_son"></div>
-                                                                </div>
-
-                                                                <div class="col-md-4">
-                                                                    <label for="comp_name">Daughter: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" onkeypress="return AcceptOnlyNumeric(event)" class="form-control" id="txbDaughter" name="txbDaughter" placeholder="Daughter..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_daughter"></div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="comp_name">Emp. Name: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txbStaffName" name="txbStaffName" placeholder="Staff name..." required maxlength="150">
+                                    <div class="invalid-feedback" id="msg_staff_name"></div>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="comp_name">DOB: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control datetimepicker" id="ddlDOB" name="ddlDOB" placeholder="YYYY-MM-DD" required maxlength="50">
+                                    <div class="invalid-feedback" id="msg_DOB"></div>
+                                  </div>
+                                </div>
+                              </div>
 
 
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <label for="comp_name">Sex: <span class="text-danger">*</span></label>
+                                    <select id="ddlSex" name="ddlSex" class="form-control">
+                                      <option value="0">-- Select --</option>
+                                      <option value="Male">Male</option>
+                                      <option value="Female">Female</option>
+                                    </select>
+                                    <div class="invalid-feedback" id="msg_sex"></div>
+                                  </div>
 
-
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                  <div class="col-md-6">
+                                    <label for="comp_name">Marital Status: <span class="text-danger">*</span></label>
+                                    <select id="ddlMarryStatus" name="ddlMarryStatus" class="form-control">
+                                      <option value="0">-- Select --</option>
+                                      <option value="Single">Single</option>
+                                      <option value="Married">Married</option>
+                                    </select>
+                                    <div class="invalid-feedback" id="msg_sex"></div>
+                                  </div>
                                 </div>
 
-                                <div class="col-md-12">
+                              </div>
 
-                                    <div class="card card-outline-info">
-                                        <div class="card-header">
-                                            <h4 class="m-b-0 text-white">
-                                                <i class="ti-user mr-3"></i>Contact Details
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <label for="comp_name">Wife: <span class="text-danger">*</span></label>
+                                    <input type="text" value="0" onkeypress="return AcceptOnlyNumeric(event)" class="form-control" id="txbWife" name="txbWife" placeholder="Wife..." required maxlength="50">
+                                    <div class="invalid-feedback" id="msg_wife"></div>
+                                  </div>
 
-                                            <div class="modal-body">
+                                  <div class="col-md-4">
+                                    <label for="comp_name">Son: <span class="text-danger">*</span></label>
+                                    <input type="text" value="0" onkeypress="return AcceptOnlyNumeric(event)" class="form-control" id="txbSon" name="txbSon" placeholder="Son..." required maxlength="50">
+                                    <div class="invalid-feedback" id="msg_son"></div>
+                                  </div>
 
-                                                <div class="row">
-                                                    <!-- column 1 -->
-
-                                                    <div class="col-md-12">
-
-
-
-                                                        <div class="row">
-
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="comp_name">Phone: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control" id="txbPhone" name="txbPhone" placeholder="Phone..." required maxlength="100">
-                                                                    <div class="invalid-feedback" id="msg_phone"></div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-6">
-                                                                <label for="comp_name">Nationality: <span class="text-danger">*</span></label>
-                                                                <input type="text" class="form-control" id="txbNationality" name="txbNationality" placeholder="Nationality..." required maxlength="50">
-                                                                <div class="invalid-feedback" id="msg_nationality"></div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="comp_name">Address: <span class="text-danger">*</span></label>
-                                                            <textarea id="txbAddress" name="txbAddress" class="form-control" rows="7" cols="40" placeholder="Address..."></textarea>
-                                                            @*<input type="text" class="form-control" id="txbAddress" name="txbAddress" placeholder="Address..." required maxlength="100">*@
-                                                            <div class="invalid-feedback" id="msg_address"></div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                  <div class="col-md-4">
+                                    <label for="comp_name">Daughter: <span class="text-danger">*</span></label>
+                                    <input type="text" value="0" onkeypress="return AcceptOnlyNumeric(event)" class="form-control" id="txbDaughter" name="txbDaughter" placeholder="Daughter..." required maxlength="50">
+                                    <div class="invalid-feedback" id="msg_daughter"></div>
+                                  </div>
                                 </div>
 
-                                <div class="col-md-12">
-
-                                    <div class="card card-outline-info">
-                                        <div class="card-header">
-                                            <h4 class="m-b-0 text-white">
-                                                <i class="ti-user mr-3"></i>Bank Details
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
-
-                                            <div class="modal-body">
-
-                                                <div class="row">
-                                                    <!-- column 1 -->
-
-                                                    <div class="col-md-12">
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Account Name: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control" id="txbBankName" name="txbBankName" placeholder="Account name..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_bank_name"></div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Account Number: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control" maxLength="10" id="txbBankNumber" name="txbBankNumber" placeholder="Account number..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_bank_number"></div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="card card-outline-info">
-                                        <div class="card-header">
-                                            <h4 class="m-b-0 text-white">
-                                                <i class="ti-user mr-3"></i>Employee Details
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
-
-                                            <div class="modal-body">
-
-                                                <div class="row">
-                                                    <!-- column 1 -->
-
-                                                    <div class="col-md-12">
-
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="comp_name">Identification Card: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control" id="txbIdentificationCard" name="txbIdentificationCard" placeholder="ID card..." required maxlength="200">
-                                                                    <div class="invalid-feedback" id="msg_identification_card"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="comp_name">Staff ID Card: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control" id="txbStaffIDCard" name="txbStaffIDCard" placeholder="Staff ID card..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_staff_id_card"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="comp_name">Serial Card: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control" id="txbSerialCard" name="txbSerialCard" placeholder="Serial card..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_serial_card"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="comp_name">Join Date: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control datetimepicker" id="txbJoinDate" name="txbJoinDate" placeholder="YYYY-MM-DD" required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_join_date"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Status:</label>
-                                                                    <select id="ddlStatus" name="ddlStatus" class="form-control">
-                                                                        <option value="Enable">Enable</option>
-                                                                        <option value="Disable">Disable</option>
-                                                                    </select>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">No.Scan:</label>
-                                                                    <select id="ddlNoScan" name="ddlNoScan" class="form-control">
-                                                                        <option value="Scan">Scan</option>
-                                                                        <option value="No">No</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="comp_name">Username: <span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control" id="txbUsername" name="txbUsername" placeholder="Username..." required maxlength="50">
-                                                            <div class="invalid-feedback" id="msg_username"></div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="comp_name">Password: <span class="text-danger">* </span><span id="password_strenght_status"></span></label>
-                                                            <input type="password" onkeyup="checkStrengthPassword();" class="form-control" id="txbPassword" name="txbPassword" placeholder="Password..." required maxlength="50">
-
-                                                        </div>
-
-                                                    </div>
-
-
-
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                              </div>
 
                             </div>
 
+
+
+
+
+                          </div>
+
                         </div>
+                      </div>
+                    </div>
+
+                    <div class="card card-outline-info" style="margin-bottom: 10px;">
+                      <div class="card-header" style="padding: 0.15rem 1.25rem !important;">
+                        <h4 class="m-b-0 text-white">
+                          <i class="ti-user mr-3"></i>Contact Details
+                        </h4>
+                      </div>
+                      <div class="card-body" style="padding: 0;">
+
+                        <div class="modal-body">
+
+                          <div class="row">
+                            <!-- column 1 -->
+
+                            <div class="col-md-12">
 
 
-                        <!-- Part 2 -->
-                        <div class="col-md-6">
 
-                            <div class="row">
+                              <div class="row">
 
-                                <div class="col-md-12">
-
-                                    <div class="card card-outline-info">
-                                        <div class="card-header">
-                                            <h4 class="m-b-0 text-white">
-                                                <i class="ti-user mr-3"></i>Employee Photo
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <div class="form-group text-center">
-                                                                <img style="height: 270px"
-                                                                     src="~/Content/images/no-image.jpg"
-                                                                     alt="me" class="img-thumbnail"
-                                                                     id="photo-view-response">
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <input accept="image/png, image/jpeg, image/gif" type="file" class="form-control" id="photo" required>
-                                                                <div class="invalid-feedback" id="error-file-edit"></div>
-                                                                <input type="hidden" id="name-photo" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <div class="form-group text-center">
-                                                                <img style="height: 270px"
-                                                                     src="~/Content/images/no-image.jpg"
-                                                                     alt="me" class="img-thumbnail"
-                                                                     id="photo-id-card-view-response">
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <input accept="image/png, image/jpeg, image/gif" type="file" class="form-control" id="photo-id-card" required>
-                                                                <div class="invalid-feedback" id="error-file-edit"></div>
-                                                                <input type="hidden" id="name-photo-id-card" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="row text-center">
-                                                        <div class="col-md-4">
-                                                            <button type="button" class="btn" id="btnWebCam" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>WebCam</button>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <button type="button" class="btn" id="btnCapture" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>Capture</button>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <button type="button" class="btn" id="btnScanFinger" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>Finger</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="comp_name">Phone: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txbPhone" name="txbPhone" placeholder="Phone..." required maxlength="100">
+                                    <div class="invalid-feedback" id="msg_phone"></div>
+                                  </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                  <label for="comp_name">Nationality: <span class="text-danger">*</span></label>
+                                  <input type="text" class="form-control" id="txbNationality" name="txbNationality" placeholder="Nationality..." required maxlength="50">
+                                  <div class="invalid-feedback" id="msg_nationality"></div>
+                                </div>
+                              </div>
 
-                                    <div class="card card-outline-info">
-                                        <div class="card-header">
-                                            <h4 class="m-b-0 text-white">
-                                                <i class="ti-user mr-3"></i>Salary Information
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="modal-body">
+                              <div class="form-group">
+                                <label for="comp_name">Address: <span class="text-danger">*</span></label>
+                                <textarea id="txbAddress" name="txbAddress" class="form-control" rows="3" cols="40" placeholder="Address..."></textarea>
+                                @*<input type="text" class="form-control" id="txbAddress" name="txbAddress" placeholder="Address..." required maxlength="100">*@
+                                <div class="invalid-feedback" id="msg_address"></div>
+                              </div>
 
-                                                <div class="row">
+                            </div>
+                          </div>
 
-                                                    <!-- column 2 -->
-                                                    <div class="col-md-12">
+                        </div>
+                      </div>
+                    </div>
 
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Sal.Type: <span class="text-danger">*</span></label>
-                                                                    <select id="ddlSalaryType" name="ddlSalaryType" class="form-control">
-                                                                        <option value="Monthly">Monthly</option>
-                                                                        <option value="Daily">Daily</option>
-                                                                        <option value="Sibong">Bills</option>
-                                                                    </select>
-                                                                </div>
+                    <div class="card card-outline-info" style="margin-bottom: 10px;">
+                      <div class="card-header" style="padding: 0.15rem 1.25rem !important;">
+                        <h4 class="m-b-0 text-white">
+                          <i class="ti-user mr-3"></i>Bank Details
+                        </h4>
+                      </div>
+                      <div class="card-body" style="padding: 0;">
 
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Salary: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbSalary" onkeypress="return isDecimalNumber(event)" name="txbSalary" placeholder="Salary..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_salary"></div>
-                                                                </div>
-                                                            </div>
+                        <div class="modal-body">
 
-                                                        </div>
+                          <div class="row">
+                            <!-- column 1 -->
 
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Card Phone: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbCardPhone" name="txbCardPhone" onkeypress="return isDecimalNumber(event)" placeholder="Card phone..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_card_phone"></div>
-                                                                </div>
+                            <div class="col-md-12">
 
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Gym: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbGym" name="txbGym" onkeypress="return isDecimalNumber(event)" placeholder="Gym..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_gym"></div>
-                                                                </div>
-                                                            </div>
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <label for="comp_name">Account Name: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txbBankName" name="txbBankName" placeholder="Account name..." required maxlength="50">
+                                    <div class="invalid-feedback" id="msg_bank_name"></div>
+                                  </div>
 
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Accommodation: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbAccommodation" onkeypress="return isDecimalNumber(event)" name="txbAccommodation" placeholder="Accommodation..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_accommodation"></div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Food: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbFood" name="txbFood" onkeypress="return isDecimalNumber(event)" placeholder="Food..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_food"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Insurance: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbInsurance" name="txbInsurance" onkeypress="return isDecimalNumber(event)" placeholder="Insurance..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_insurance"></div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Money Prim: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbMoneyPrim" onkeypress="return isDecimalNumber(event)" name="txbMoneyPrim" placeholder="Money prim..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_money_prim"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Travel: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbTravel" onkeypress="return isDecimalNumber(event)" name="txbTravel" placeholder="Travel..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_travel"></div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Gasoline: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbGasoline" onkeypress="return isDecimalNumber(event)" name="txbGasoline" placeholder="Gasoline..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_gasoline"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">OT Unit Price: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbOTUnitPrice" onkeypress="return isDecimalNumber(event)" name="txbOTUnitPrice" placeholder="OT unit price..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_ot_unit_price"></div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Work Hour Target: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbWorkHourTarget" onkeypress="return isDecimalNumber(event)" name="txbWorkHourTarget" placeholder="Work hour target..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_work_hour_target"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Relax Hour: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbRelaxHour" onkeypress="return isDecimalNumber(event)" name="txbRelaxHour" placeholder="Relax hour..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_relax_hour"></div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Day Off: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbDayOff" onkeypress="return isDecimalNumber(event)" name="txbDayOff" placeholder="Day off..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_day_off"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
+                                  <div class="col-md-6">
+                                    <label for="comp_name">Account Number: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" maxLength="10" id="txbBankNumber" name="txbBankNumber" placeholder="Account number..." required maxlength="50">
+                                    <div class="invalid-feedback" id="msg_bank_number"></div>
+                                  </div>
                                 </div>
 
-                                <div class="col-md-12">
-
-                                    <div class="card card-outline-info">
-                                        <div class="card-header">
-                                            <h4 class="m-b-0 text-white">
-                                                <i class="ti-user mr-3"></i>Holiday Details
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="modal-body">
-
-                                                <div class="row">
-
-                                                    <!-- column 2 -->
-                                                    <div class="col-md-12">
-
-
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Annaul Leave: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbAnnaulLeave" onkeypress="return isDecimalNumber(event)" name="txbAnnaulLeave" placeholder="AL..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_annual_leave"></div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Public Holiday: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbPublicHoliday" onkeypress="return isDecimalNumber(event)" name="txbPublicHoliday" placeholder="PH..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_public_holiday"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">Sick: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbSick" onkeypress="return isDecimalNumber(event)" name="txbSick" placeholder="Sick..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_sick"></div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">UPL: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbUPL" onkeypress="return isDecimalNumber(event)" name="txbUPL" placeholder="UPL..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_upl"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">AB: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbAB" onkeypress="return isDecimalNumber(event)" name="txbAB" placeholder="AB..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_ab"></div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <label for="comp_name">CM: <span class="text-danger">*</span></label>
-                                                                    <input type="text" value="0" class="form-control" id="txbCM" onkeypress="return isDecimalNumber(event)" name="txbCM" placeholder="CM..." required maxlength="50">
-                                                                    <div class="invalid-feedback" id="msg_cm"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
+                              </div>
 
                             </div>
 
-                        </div>
+                          </div>
 
+                        </div>
+                      </div>
                     </div>
 
 
+
+                  </div>
+
+                  <!-- End row 1-->
+                  <!-- Row 2-->
+                  <div class="col-md-6">
+
+                    <div class="card card-outline-info" style="margin-bottom: 10px;">
+                      <div class="card-header" style="padding: 0.15rem 1.25rem !important;">
+                        <h4 class="m-b-0 text-white">
+                          <i class="ti-user mr-3"></i>Employee Photo
+                        </h4>
+                      </div>
+                      <div class="card-body" style="padding: 0;">
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <div class="form-group text-center">
+                                  <img style="height: 270px"
+                                       src="~/Content/images/no-image.jpg"
+                                       alt="me" class="img-thumbnail"
+                                       id="photo-view-response">
+                                </div>
+
+                                <div class="form-group">
+                                  <input accept="image/png, image/jpeg, image/gif" type="file" class="form-control" id="photo" required>
+                                  <div class="invalid-feedback" id="error-file-edit"></div>
+                                  <input type="hidden" id="name-photo" />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <div class="form-group text-center">
+                                  <img style="height: 270px"
+                                       src="~/Content/images/no-image.jpg"
+                                       alt="me" class="img-thumbnail"
+                                       id="photo-id-card-view-response">
+                                </div>
+
+                                <div class="form-group">
+                                  <input accept="image/png, image/jpeg, image/gif" type="file" class="form-control" id="photo-id-card" required>
+                                  <div class="invalid-feedback" id="error-file-edit"></div>
+                                  <input type="hidden" id="name-photo-id-card" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="row text-center">
+                              <div class="col-md-4">
+                                <button type="button" class="btn" id="btnWebCam" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>WebCam</button>
+                              </div>
+
+                              <div class="col-md-4">
+                                <button type="button" class="btn" id="btnCapture" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>Capture</button>
+                              </div>
+
+                              <div class="col-md-4">
+                                <button type="button" class="btn" id="btnScanFinger" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>Finger</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card card-outline-info" style="margin-bottom: 10px;">
+                      <div class="card-header" style="padding: 0.15rem 1.25rem !important;">
+                        <h4 class="m-b-0 text-white">
+                          <i class="ti-user mr-3"></i>Employee Details
+                        </h4>
+                      </div>
+                      <div class="card-body" style="padding: 0;">
+
+                        <div class="modal-body">
+
+                          <div class="row">
+                            <!-- column 1 -->
+
+                            <div class="col-md-12">
+
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="comp_name">Identification Card: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txbIdentificationCard" name="txbIdentificationCard" placeholder="ID card..." required maxlength="200">
+                                    <div class="invalid-feedback" id="msg_identification_card"></div>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="comp_name">Staff ID Card: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txbStaffIDCard" name="txbStaffIDCard" placeholder="Staff ID card..." required maxlength="50">
+                                    <div class="invalid-feedback" id="msg_staff_id_card"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="comp_name">Serial Card: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txbSerialCard" name="txbSerialCard" placeholder="Serial card..." required maxlength="50">
+                                    <div class="invalid-feedback" id="msg_serial_card"></div>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="comp_name">Join Date: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control datetimepicker" id="txbJoinDate" name="txbJoinDate" placeholder="YYYY-MM-DD" required maxlength="50">
+                                    <div class="invalid-feedback" id="msg_join_date"></div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <label for="comp_name">Status:</label>
+                                    <select id="ddlStatus" name="ddlStatus" class="form-control">
+                                      <option value="Enable">Enable</option>
+                                      <option value="Disable">Disable</option>
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-6">
+                                    <label for="comp_name">No.Scan:</label>
+                                    <select id="ddlNoScan" name="ddlNoScan" class="form-control">
+                                      <option value="Scan">Scan</option>
+                                      <option value="No">No</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                              </div>
+
+                              <div class="form-group">
+                                <label for="comp_name">Username: <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="txbUsername" name="txbUsername" placeholder="Username..." required maxlength="50">
+                                <div class="invalid-feedback" id="msg_username"></div>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="comp_name">Password: <span class="text-danger">* </span><span id="password_strenght_status"></span></label>
+                                <input type="password" onkeyup="checkStrengthPassword();" class="form-control" id="txbPassword" name="txbPassword" placeholder="Password..." required maxlength="50">
+
+                              </div>
+
+                            </div>
+
+
+
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="float: right;">
+                      <button class="btn btn-dark ml-2 Salary" id="btnSalaryTab" onclick="openNextTab(event, 'Salary', 'salary')">
+                        Next <i class="ti-arrow-circle-right"></i>
+                      </button>
+                    </div>
+
+                  </div>
+
+                  <!-- End row 2-->
+
                 </div>
-                @Html.AntiForgeryToken()
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="ti-close pr-2"></i>Close</button>
-                    <button type="button" class="btn" id="btn_save_staff" style="background: #28a745; color: #fff"><i class="ti-plus pr-2"></i>Save</button>
+              </div>
+
+              <div id="Salary" class="tabcontent">
+
+                <div class="row">
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Sal.Type: <span class="text-danger">*</span></label>
+                      <select id="ddlSalaryType" name="ddlSalaryType" class="form-control">
+                        <option value="Monthly">Monthly</option>
+                        <option value="Daily">Daily</option>
+                        <option value="Sibong">Bills</option>
+                      </select>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Salary: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbSalary" onkeypress="return isDecimalNumber(event)" name="txbSalary" placeholder="Salary..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_salary"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Card Phone: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbCardPhone" name="txbCardPhone" onkeypress="return isDecimalNumber(event)" placeholder="Card phone..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_card_phone"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Gym: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbGym" name="txbGym" onkeypress="return isDecimalNumber(event)" placeholder="Gym..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_gym"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Accommodation: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbAccommodation" onkeypress="return isDecimalNumber(event)" name="txbAccommodation" placeholder="Accommodation..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_accommodation"></div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Food: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbFood" name="txbFood" onkeypress="return isDecimalNumber(event)" placeholder="Food..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_food"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Insurance: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbInsurance" name="txbInsurance" onkeypress="return isDecimalNumber(event)" placeholder="Insurance..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_insurance"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Money Prim: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbMoneyPrim" onkeypress="return isDecimalNumber(event)" name="txbMoneyPrim" placeholder="Money prim..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_money_prim"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Travel: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbTravel" onkeypress="return isDecimalNumber(event)" name="txbTravel" placeholder="Travel..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_travel"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Gasoline: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbGasoline" onkeypress="return isDecimalNumber(event)" name="txbGasoline" placeholder="Gasoline..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_gasoline"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">OT Unit Price: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbOTUnitPrice" onkeypress="return isDecimalNumber(event)" name="txbOTUnitPrice" placeholder="OT unit price..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_ot_unit_price"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Work Hour Target: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbWorkHourTarget" onkeypress="return isDecimalNumber(event)" name="txbWorkHourTarget" placeholder="Work hour target..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_work_hour_target"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Relax Hour: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbRelaxHour" onkeypress="return isDecimalNumber(event)" name="txbRelaxHour" placeholder="Relax hour..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_relax_hour"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="comp_name">Day Off: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbDayOff" onkeypress="return isDecimalNumber(event)" name="txbDayOff" placeholder="Day off..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_day_off"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-right">
+                      <label for="comp_name">&nbsp;</label>
+                      <button class="btn btn-warning ml-2" onclick="openBackTab(event, 'Staff', 'salary', 'staff')">
+                        <i class="ti-arrow-circle-left"></i> Back
+                      </button>
+                      <button class="btn btn-dark ml-2 Holiday" onclick="openNextTab(event, 'Holiday', 'holiday')">
+                        Next <i class="ti-arrow-circle-right"></i>
+                      </button>
+                    </div>
+                  </div>
+
                 </div>
-            </form>
+
+              </div>
+
+              <div id="Holiday" class="tabcontent">
+                
+                <div class="row">
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="comp_name">Annaul Leave: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbAnnaulLeave" onkeypress="return isDecimalNumber(event)" name="txbAnnaulLeave" placeholder="AL..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_annual_leave"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="comp_name">Public Holiday: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbPublicHoliday" onkeypress="return isDecimalNumber(event)" name="txbPublicHoliday" placeholder="PH..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_public_holiday"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="comp_name">Sick: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbSick" onkeypress="return isDecimalNumber(event)" name="txbSick" placeholder="Sick..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_sick"></div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="comp_name">UPL: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbUPL" onkeypress="return isDecimalNumber(event)" name="txbUPL" placeholder="UPL..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_upl"></div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="comp_name">AB: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbAB" onkeypress="return isDecimalNumber(event)" name="txbAB" placeholder="AB..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_ab"></div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="comp_name">CM: <span class="text-danger">*</span></label>
+                      <input type="text" value="0" class="form-control" id="txbCM" onkeypress="return isDecimalNumber(event)" name="txbCM" placeholder="CM..." required maxlength="50">
+                      <div class="invalid-feedback" id="msg_cm"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-12">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group text-right">
+                      <label for="comp_name"></label>
+                      <button type="button" class="btn btn-warning ml-2" onclick="openBackTab(event, 'Salary', 'holiday', 'salary')">
+                        <i class="ti-arrow-circle-left"></i> Back
+                      </button>
+                      <button type="button" class="btn btn-dark" id="btn_save_staff"><i class="ti-save pr-2"></i>Save</button>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+              
+            </div>
+          </div>
         </div>
+      </form>
     </div>
+  </div>
 </div>
 
 <script type="text/javascript">
 
-    function isDecimalNumber(key) {
-        var keycode = (key.which) ? key.which : key.keycode;
-        var parts = key.srcElement.value.split('.');
+  function isDecimalNumber(key) {
+    var keycode = (key.which) ? key.which : key.keycode;
+    var parts = key.srcElement.value.split('.');
 
-        if (parts.length > 1 && keycode == 46) {
-            return false;
-        }
-        else {
-            if (keycode == 46 || keycode >= 48 && keycode <= 57)
-                return true;
-            return false;
-        }
+    if (parts.length > 1 && keycode == 46) {
+      return false;
+    }
+    else {
+      if (keycode == 46 || keycode >= 48 && keycode <= 57)
+        return true;
+      return false;
+    }
+  }
+
+  function AcceptOnlyNumeric(event) {
+    var theEvent = event || window.event;
+    // Handle paste
+    if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      //handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
     }
 
-    function AcceptOnlyNumeric(event) {
-        var theEvent = event || window.event;
-        // Handle paste
-        if (theEvent.type === 'paste') {
-            key = event.clipboardData.getData('text/plain');
-        } else {
-            //handle key press
-            var key = theEvent.keyCode || theEvent.which;
-            key = String.fromCharCode(key);
-        }
+    var regex = /[0-9]/;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
 
-        var regex = /[0-9]/;
-        if (!regex.test(key)) {
-            theEvent.returnValue = false;
-            if (theEvent.preventDefault) theEvent.preventDefault();
-        }
+  function checkStrengthPassword() {
+    var number = /([0-9])/;
+    var alphabets = /([a-zA-Z])/;
+    var special_characters = /([~,!,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+
+    if ($('#txbPassword').val().length < 8) {
+
+      if ($('#txbPassword').val().length == 0) {
+
+        $('#password_strenght_status').removeClass();
+        $('#password_strenght_status').html("");
+      } else {
+
+        $('#password_strenght_status').removeClass();
+        $('#password_strenght_status').addClass('weak_password');
+        $('#password_strenght_status').html("Weak (should be at least 8 characters.)");
+      }
+
+    } else {
+      if ($('#txbPassword').val().match(number) && $('#txbPassword').val().match(alphabets)
+        && $('#txbPassword').val().match(special_characters)) {
+
+        $('#password_strenght_status').removeClass();
+        $('#password_strenght_status').addClass('strong_password');
+        $('#password_strenght_status').html('Strong');
+      } else {
+
+        $('#password_strenght_status').removeClass();
+        $('#password_strenght_status').addClass('medium_password');
+        $('#password_strenght_status').html('Medium (should include alphabets, numbers and special characters.)');
+      }
+    }
+  }
+</script>
+<script>
+  function openTab(evt, cityName) {
+
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
     }
 
-    function checkStrengthPassword() {
-        var number = /([0-9])/;
-        var alphabets = /([a-zA-Z])/;
-        var special_characters = /([~,!,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
-
-        if ($('#txbPassword').val().length < 8) {
-
-            if ($('#txbPassword').val().length == 0) {
-                
-                $('#password_strenght_status').removeClass();
-                $('#password_strenght_status').html("");
-            } else {
-
-                $('#password_strenght_status').removeClass();
-                $('#password_strenght_status').addClass('weak_password');
-                $('#password_strenght_status').html("Weak (should be at least 8 characters.)");
-            }
-            
-        } else {
-            if ($('#txbPassword').val().match(number) && $('#txbPassword').val().match(alphabets)
-                && $('#txbPassword').val().match(special_characters)) {
-                
-                $('#password_strenght_status').removeClass();
-                $('#password_strenght_status').addClass('strong_password');
-                $('#password_strenght_status').html('Strong');
-            } else {
-                
-                $('#password_strenght_status').removeClass();
-                $('#password_strenght_status').addClass('medium_password');
-                $('#password_strenght_status').html('Medium (should include alphabets, numbers and special characters.)');
-            }
-        }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
+
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+    
+  }
+  
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+</script>
+
+<script>
+  function openNextTab(evt, cityName, className) {
+
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+
+    var menu = $("div.tab");
+    var current = menu.find('button.' + className).addClass("active");
+
+  }
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+</script>
+
+<script>
+  function openBackTab(evt, cityName, classNameToRemove, classNameToAdd) {
+
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+
+    var menu = $("div.tab");
+    menu.find('button.' + classNameToRemove).removeClass("active");
+    menu.find('button.' + classNameToAdd).addClass("active");
+
+  }
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
 </script>

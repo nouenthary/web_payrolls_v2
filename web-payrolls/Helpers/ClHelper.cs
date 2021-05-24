@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -201,23 +201,30 @@ namespace web_payrolls.Helpers
         public int GetUserLoginId()
         {
             int PK_U_ID_UserLoginID = 0;
-            string LoginCode = HttpContext.Current.Request.Cookies["opLCx"]["kdBkLi"].ToString();
-
-            if (LoginCode != null)
+            string LoginCode = "";
+            if (HttpContext.Current.Request.Cookies["opLCx"] == null)
             {
+                HttpContext.Current.Response.Redirect("~/Account/Login");
+            }
+            else
+            {
+              LoginCode = HttpContext.Current.Request.Cookies["opLCx"]["kdBkLi"].ToString();
+              if (LoginCode != null)
+              {
                 bool isTrue = db.tblStaffs.Any(x => x.LoginCodeGeneration == LoginCode);
                 if (isTrue)
                 {
-                    var userId = db.tblStaffs.Where(x => x.LoginCodeGeneration == LoginCode).Select(x => x.PK_Staff_Id).FirstOrDefault();
-                    PK_U_ID_UserLoginID = Convert.ToInt32(userId);
+                  var userId = db.tblStaffs.Where(x => x.LoginCodeGeneration == LoginCode).Select(x => x.PK_Staff_Id).FirstOrDefault();
+                  PK_U_ID_UserLoginID = Convert.ToInt32(userId);
                 }
                 else
                 {
-                    var userId = DecryptCookies(LoginCode);
-                    userId = userId.Remove(userId.Length - 8); // remove the last 2 string
+                  var userId = DecryptCookies(LoginCode);
+                  userId = userId.Remove(userId.Length - 8); // remove the last 2 string
 
-                    PK_U_ID_UserLoginID = int.Parse(userId);
+                  PK_U_ID_UserLoginID = int.Parse(userId);
                 }
+              }
             }
 
             return PK_U_ID_UserLoginID;

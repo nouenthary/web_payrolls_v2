@@ -1,10 +1,5 @@
 @using web_payrolls.Models
-@using PagedList.Mvc
 @using web_payrolls.Helpers
-@model  PagedList.IPagedList<web_payrolls.Models.GetAllTransferLocation_Result>
-
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
-
 
 @{
   ViewBag.Title = "Transfer";
@@ -24,7 +19,7 @@
     })
     .ToList();
 
-  // company
+  // CompanyId
   var company = db
     .tblCompanies
     .Select(com => new SelectListItem()
@@ -38,7 +33,7 @@
 
 <style>
   .table td, .table th {
-      border-color: #ced4da;
+      border-Color: #ced4da;
   }
 
   .custom-select-form {
@@ -60,36 +55,36 @@
     </h4>
   </div>
   <div class="card-body collapse show b-t">
-    <form method="get" action="/Transfer/Index" id="form-search">
+    <form method="get" id="form-search">
       <div class="row">
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
           <label>HOD</label>
           <div class="input-group">
-            @Html.DropDownList("bid", hod, "-- Choose Hod --", new {@class = "form-control"})
+            @Html.DropDownList("BossId", hod, "-- Choose Hod --", new {@class = "form-control"})
           </div>
         </div>
 
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label>Company</label>
+          <label>CompanyId</label>
           <div class="input-group">
-            @Html.DropDownList("company", company, "-- Choose Company --", new {@class = "form-control"})
+            @Html.DropDownList("CompanyId", company, "-- Choose CompanyId --", new {@class = "form-control"})
           </div>
         </div>
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label>Location</label>
+          <label>LocationId</label>
           <div class="input-group">
-            @Html.DropDownList("location", new List<SelectListItem>(), "-- Choose Location --", new {@class = "form-control"})
+            @Html.DropDownList("LocationId", new List<SelectListItem>(), "-- Choose LocationId --", new {@class = "form-control"})
           </div>
         </div>
 
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label>Product Type</label>
+          <label for="ProductTypeId">Product Type</label>
           <div class="input-group">
-            <select id="type" name="type" class="form-control">
+            <select id="ProductTypeId" name="ProductTypeId" class="form-control">
               @* <option value="">-- Choose Product Type --</option> *@
               <option value="Processing">Processing</option>
             </select>
@@ -97,80 +92,70 @@
         </div>
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label>Type Name</label>
+          <label for="TypeName">Type Name</label>
           <div class="input-group">
-            <select id="type_name" name="type_name" class="form-control">
+            <select id="TypeName" name="TypeName" class="form-control">
               <option value="">-- @Resources.Voucher.Choose Type Name --</option>
             </select>
           </div>
         </div>
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label>Product Name</label>
+          <label for="ProductId">Product Name</label>
           <div class="input-group">
-            <select id="product_name" name="product_name" class="form-control">
+            <select id="ProductId" name="ProductId" class="form-control">
               <option value="">-- @Resources.Voucher.Choose Product Name --</option>
             </select>
           </div>
         </div>
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label>Color</label>
+          <label for="Color">Color</label>
           <div class="input-group">
-            <select id="color" name="color" class="form-control">
+            <select id="Color" name="Color" class="form-control">
               <option value="">-- @Resources.Voucher.Choose Color --</option>
             </select>
           </div>
         </div>
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label>Size</label>
+          <label for="Size">Size</label>
           <div class="input-group">
-            <select id="size" name="size" class="form-control">
+            <select id="Size" name="Size" class="form-control">
               <option value="">-- @Resources.Voucher.Choose Size --</option>
             </select>
           </div>
         </div>
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label>Grade</label>
+          <label for="Grade">Grade</label>
           <div class="input-group">
-            <select id="grade" name="grade" class="form-control">
+            <select id="Grade" name="Grade" class="form-control">
               <option value="">-- @Resources.Voucher.Choose Grade --</option>
             </select>
           </div>
         </div>
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label>Barcode</label>
+          <label for="Barcode">Barcode</label>
           <div class="input-group">
-            <input class="form-control" id="barcode" name="barcode" placeholder="Search barcode" autocomplete="off"/>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="ti-layout-column4"></i>
-              </span>
-            </div>
+            <input class="form-control" id="Barcode" name="Barcode" placeholder="Search Barcode" autocomplete="off"/>
 
           </div>
         </div>
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label>Qr Code</label>
+          <label for="QrCode">Qr Code</label>
           <div class="input-group">
-            <input class="form-control" id="qrCode" name="qrCode" placeholder="Search Qr code" autocomplete="off"/>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="ti-layout-grid4"></i>
-              </span>
-            </div>
+            <input class="form-control" id="QrCode" name="QrCode" placeholder="Search Qr code" autocomplete="off"/>
 
           </div>
         </div>
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label>Status</label>
+          <label for="Status">Status</label>
           <div class="input-group">
-            <select id="status" name="status" class="form-control">
+            <select id="Status" name="Status" class="form-control">
               <option value="">-- Choose Status --</option>
               <option value="Enable">Enable</option>
               <option value="Disable">Disable</option>
@@ -179,48 +164,27 @@
         </div>
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label for="no">Invoice No</label>
+          <label for="No">No</label>
           <div class="input-group">
-            <input class="form-control" id="invoice" name="invoice" placeholder="Search No" autocomplete="off"/>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="ti-notepad"></i>
-              </span>
-            </div>
-
+            <input class="form-control" id="No" name="No" placeholder="Search No" autocomplete="off"/>
           </div>
         </div>
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label for="no">Start Date</label>
+          <label for="StartDate">Start Date</label>
           <div class="input-group">
-            <input type="date" class="form-control" id="start" name="start" autocomplete="off"/>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="ti-notepad"></i>
-              </span>
-            </div>
-
+            <input type="date" class="form-control" id="StartDate" name="StartDate" autocomplete="off"/>
           </div>
         </div>
-
 
         <div class="form-group col-xlg-3 col-md-4 pb-2">
-          <label for="no">End Date</label>
+          <label for="EndDate">End Date</label>
           <div class="input-group">
-            <input type="date" class="form-control" id="end" name="end" autocomplete="off"/>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="ti-notepad"></i>
-              </span>
-            </div>
-
+            <input type="date" class="form-control" id="EndDate" name="EndDate" autocomplete="off"/>
           </div>
         </div>
 
-
-        <input type="hidden" id="pageSize" name="pageSize" value="20"/>
-
+        <input type="hidden" id="PageSize" name="PageSize" value="20"/>
 
       </div>
       <button class="btn btn-info btn-sm"><i class="ti-search"></i> Searching</button>
@@ -231,199 +195,105 @@
 @* Card Filter *@
 
 <div style="padding: 5px 0 ; float: right">
-  <a href="@Url.Action("TransferBalance","Transfer")" class="btn btn-dropbox btn-sm text-white"><i class="ti-shopping-cart"></i> Transfer Balance</a>
+  <a href="@Url.Action("TransferBalance", "Transfer")" class="btn btn-dropbox btn-sm text-white"><i class="ti-shopping-cart"></i> Transfer Balance</a>
   <a class="btn btn-default btn-sm" id="btn-add-new"><i class="ti-plus"></i> Transfer</a>
   <a class="btn btn-default btn-sm" id="btn-export"><i class="ti-export"></i> Export</a>
 </div>
 
-Show :
-<select class="custom-select-form" id="pageSize_" name="pageSize_" style="margin-top: 3px">
-  <option value="10">10</option>
-  <option value="20">20</option>
-  <option value="30">30</option>
-  <option value="50">50</option>
-  <option value="100">100</option>
-  <option value="500">ALL</option>
-</select> Entries
+<div style="padding-top: 5px"></div>
+@Html.Partial("~/Views/Components/Controls/PageSize.cshtml")
 
-<div class="table-responsive m-t-0 bg-white">
-  <table class="table table-sm text-center table-bordered" id="table-transfer">
-    <thead class="text-capitalize font-weight-bold table-header-shadow">
-    <tr style="border: 1px solid #f3f1f1">
-      <td>No.</td>
-      <td>HOD</td>
-      <td>Location</td>
-      <td>Type</td>
-      <td>Type_Name</td>
-      <td>Product</td>
-      <td>Color</td>
-      <td>Size</td>
-      <td>Grade</td>
-      <td>Measure</td>
-      <td>Code</td>
-      <td>Barcode</td>
-      <td>Qr_Code</td>
-      <td>Invoice</td>
-      <td>QTY</td>
-      <td>Date </td>
-      <td>Time </td>
-      <td>Status</td>
-      <td>User_Update</td>
-      <td>User_Confirm</td>
-      <td>Date_Confirm</td>
-      <td>Time_Confirm</td>
-
-    </tr>
-    </thead>
-    <tbody>
-    @{ var rowNo = 0; }
-    @foreach (var row in Model)
-    {
-      <tr data-id="@row.No" data-status="@row.Status">
-        <td style="width: 80px">@(rowNo += 1)</td>
-        <td>@row.Boss</td>
-        <td>@row.Location</td>
-        <td>
-          <span class="label label-success">@row.Type</span>
-        </td>
-        <td>
-          <span class="">@row.TypeName</span>
-        </td>
-        <td>@row.Product</td>
-        <td>@row.Color</td>
-        <td>@row.Size</td>
-        <td>@row.Grade</td>
-        <td>@row.Measure</td>
-        <td>@row.Code</td>
-        <td>@row.QrCode</td>
-        <td>@row.Bacode</td>
-        <td>
-          <span class="label label-light-danger"># @row.No</span>
-        </td>
-        <td>@row.Qty</td>
-        <td>@row.Date</td>
-        <td>@row.Time</td>
-        <td>
-          @if (@row.Status == "Pending")
-          {
-            <span class="label label-info">@row.Status</span>
-          }
-          else if (@row.Status == "Done")
-          {
-            <span class="label label-custom">@row.Status</span>
-          }
-          else
-          {
-            <span class="label label-danger">@row.Status</span>
-          }
-
-        </td>
-        <td>@row.UserUpdate</td>
-        <td>@row.UserConfirm</td>
-        <td>@row.ConfirmDate</td>
-        <td>@row.ConfirmTime</td>
-      </tr>
-    }
-    </tbody>
-  </table>
-
-</div>
-
-<div class="pagination">
-  <div class="">
-    <span> Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
-    <span>
-      @Html.PagedListPager(Model, page => Url.Action("Index", new {page}))
-    </span>
-
-  </div>
-</div>
-
+<div id="show"></div>
 
 @section Scripts
 {
   <script>
 
     let token = { __RequestVerificationToken : $('input[name="__RequestVerificationToken"]').val()};
-
-    let searchParams = new URLSearchParams(window.location.search);
-
-    function setParams(ctn){
-      if(searchParams.has(ctn)){
-         $('#'+ctn).val(searchParams.get(ctn));
-      }
-    }
      // select 2
      function Select2(ctn){
         $(ctn).select2({ width: '100%', placeholder: "Select an Option", allowClear: true });
      }
 
-    Select2('#bid');
-    Select2('#grade');
-    Select2('#size');
-    Select2('#status');
-    Select2('#color');
-    Select2('#product_name');
-    Select2('#type_name');
-    Select2('#type');
-    Select2('#location');
-    Select2('#company');
+      function getFormData($form){
+         let unindexed_array = $form.serializeArray();
+         let indexed_array = {};
 
-    setParams('invoice');
-    setParams('barcode');
-    setParams('qrCode');
-    setParams('status');
-    setParams('grade');
-    setParams('size');
-    setParams('color');
-    setParams('product_name');
-    setParams('type_name');
-    setParams('type');
-    setParams('company');
-    setParams('location');
-    setParams('bid');
-    setParams('pageSize');
-    setParams('start');
-    setParams('end');
+         $.map(unindexed_array, function(n, i){
+             indexed_array[n['name']] = n['value'];
+         });
+
+         return indexed_array;
+     }
+
+     function GetObject(){
+        let $form = $("#form-search");
+        let data = getFormData($form);
+        console.log(data);
+        return data;
+     }
+
+     // load table
+     function Load(){
+         let data = GetObject();
+         $('#show').load('/Transfer/GetTable',data);
+     }
+
+     Load();
+
+     // form submit
+     $(document).on('submit','#form-search',function(e) {
+       e.preventDefault();
+       Load();
+     });
+
+     // page Size
+     $('#pageSize_').change(function(e) {
+       e.preventDefault();
+       $('#PageSize').val($(this).val());
+       $('#form-search').submit();
+     });
+
+    $(document).on('click', '#show-page a', function (e) {
+        try {
+            let link = $(this).attr("href").split('=');
+            let data = GetObject();
+            $('#show').load('/Transfer/GetTable', {
+                page: link[1],
+                ...data
+            });
+            e.preventDefault()
+        } catch (ex) { }
+    });
+
+    Select2('#BossId');
+    Select2('#Grade');
+    Select2('#Size');
+    Select2('#Status');
+    Select2('#Color');
+    Select2('#ProductId');
+    Select2('#TypeName');
+    Select2('#type');
+    Select2('#LocationId');
+    Select2('#CompanyId');
 
      // Export
     $(document).on('click', '#btn-export', function () {
         $('#table-transfer').csvExport();
     });
 
-
-    $('#pageSize_').val(searchParams.get('pageSize') ? searchParams.get('pageSize') : 20);
-
-    $(document).on('click','#pagination ul li a',function(e) {
-      e.preventDefault();
-      let page = $(this).attr('href').split('=')[1];
-
-      let form = $('#form-search').serialize();
-      //console.log(form);
-      location.href = '?page='+ page + '&' + form;
-    });
-
-    $(document).on('change','#pageSize_',function(e) {
-       e.preventDefault();
-       let pageSize = $(this).val();
-
-       $('#pageSize').val(pageSize);
-
-       $('#form-search').submit();
-    });
-
-    //  get invoice
+    //  get No
     $(document).on('click','#btn-add-new',function() {
       $.ajax({
         type: 'post',
-        url: '/Transfer/GenerateInvoice',
+        url: '/Transfer/GenerateNo',
         data: {
           ...token
         },
         success: function(r) {
           let url_token = token.__RequestVerificationToken;
           if(r.id){
-            location.href = `/Transfer/Create?token=${url_token}&stockInCutNoLocationId=${r.id}&transfer=${url_token}`;
+            location.href = `/Transfer/Create?token=${url_token}&stockInCutNoLocationIdId=${r.id}&transfer=${url_token}`;
           }
         }
       });
@@ -431,22 +301,25 @@ Show :
 
 
      // edit
-      $(document).on('click','#table-transfer tbody tr',function() {
-        let id = $(this).closest('tr').attr('data-id');
+      $(document).on('click','#btn-edit',function() {
+        alert();
+        //let id = $(this).closest('tr').attr('data-id');
+        //alert(id);
+        //return;
 
-        let status = $(this).closest('tr').attr('data-status');
+        // let Status = $(this).closest('tr').attr('data-Status');
+        //
+        // if(Status === "Reject"){
+        //   SweatAlert('No is reject ready.','warning');
+        //   return;
+        // }
+        //
+        // if(Status === "Done"){
+        //   SweatAlert('No is confirm ready.','warning');
+        //   return;
+        // }
 
-        if(status === "Reject"){
-          SweatAlert('invoice is reject ready.','warning');
-          return;
-        }
-
-        if(status === "Done"){
-          SweatAlert('invoice is confirm ready.','warning');
-          return;
-        }
-
-        location.href = `/Transfer/Create?token=${token.__RequestVerificationToken}&stockInCutNoLocationId=${id}&edit=true&Transfer${token.__RequestVerificationToken}`;
+      //  location.href = `/Transfer/Create?token=${token.__RequestVerificationToken}&stockInCutNoLocationIdId=${id}&edit=true&Transfer${token.__RequestVerificationToken}`;
 
       });
 
@@ -491,76 +364,76 @@ Show :
              return option;
        }
 
-       // bid
-      $('#bid').change(function (){
-          $('select#company').val(0).select2();
+       // BossId
+      $('#BossId').change(function (){
+          $('select#CompanyId').val(0).select2();
           $('select#type').val(0).select2();
-          $('select#type_name').val(0).select2();
-          $('select#product_name').val(0).select2();
-          $('select#color').val(0).select2();
-          $('select#size').val(0).select2();
-          $('select#grade').val(0).select2();
+          $('select#TypeName').val(0).select2();
+          $('select#ProductId').val(0).select2();
+          $('select#Color').val(0).select2();
+          $('select#Size').val(0).select2();
+          $('select#Grade').val(0).select2();
 
           let dataForSent = {
               id: $(this).val(),
               ...token
           };
 
-          let {data} = GetDataApi('/Other/GetCompany',dataForSent);
+          let {data} = GetDataApi('/Other/GetCompanyId',dataForSent);
 
-          $('#company').html(setToSelect({data: data, label: '@Resources.Voucher.Company'}));
+          $('#CompanyId').html(setToSelect({data: data, label: '@Resources.Voucher.Company'}));
 
           //$('#form-search').submit();
       });
 
         // cid
-        $('#company').change(function (){
+        $('#CompanyId').change(function (){
             $('select#type').val(0).select2();
-             $('select#type_name').val(0).select2();
-             $('select#product_name').val(0).select2();
-             $('select#color').val(0).select2();
-             $('select#size').val(0).select2();
-             $('select#grade').val(0).select2();
+             $('select#TypeName').val(0).select2();
+             $('select#ProductId').val(0).select2();
+             $('select#Color').val(0).select2();
+             $('select#Size').val(0).select2();
+             $('select#Grade').val(0).select2();
 
             let dataForSent = {
                 id: $(this).val(),
                 ...token
             };
 
-            let {data} = GetDataApi('/Other/GetLocation',dataForSent);
+            let {data} = GetDataApi('/Other/GetLocationId',dataForSent);
 
-            $('#location').html(setToSelect({data: data, label: '@Resources.Voucher.Location'}));
+            $('#LocationId').html(setToSelect({data: data, label: '@Resources.Voucher.Location'}));
 
         });
 
         // product type
            $('#type').change(function (){
-              $('select#type_name').val(0).select2();
-               $('select#product_name').val(0).select2();
-               $('select#color').val(0).select2();
-               $('select#size').val(0).select2();
-               $('select#grade').val(0).select2();
+              $('select#TypeName').val(0).select2();
+               $('select#ProductId').val(0).select2();
+               $('select#Color').val(0).select2();
+               $('select#Size').val(0).select2();
+               $('select#Grade').val(0).select2();
 
                let dataForSent = {
-                   bossId : $('#bid').val(),
+                   bossId : $('#BossId').val(),
                    productType: $(this).val(),
                    ...token
                };
 
                let {data} = GetDataApi('/StockInProductCut/GetProductTypeByBoss', dataForSent);
 
-               $('#type_name').html(setToSelect({data: data, label: 'Type Name'}));
+               $('#TypeName').html(setToSelect({data: data, label: 'Type Name'}));
            });
 
 
            //type name
-            $('#type_name').change(function (){
+            $('#TypeName').change(function (){
 
 
-                 $('select#product_name').val(0).select2();
-                  $('select#color').val(0).select2();
-                  $('select#size').val(0).select2();
-                  $('select#grade').val(0).select2();
+                 $('select#ProductId').val(0).select2();
+                  $('select#Color').val(0).select2();
+                  $('select#Size').val(0).select2();
+                  $('select#Grade').val(0).select2();
 
                 let dataForSent = {
                    id: $(this).val(),
@@ -569,16 +442,16 @@ Show :
 
                 let {data} = GetDataApi('/Other/GetProductByProductType', dataForSent);
 
-                $('#product_name').html(setToSelect({data: data, label : "Product"}));
+                $('#ProductId').html(setToSelect({data: data, label : "Product"}));
 
             });
 
             // product name
-            $('#product_name').change(function (){
+            $('#ProductId').change(function (){
 
-               $('select#color').val(0).select2();
-               $('select#size').val(0).select2();
-               $('select#grade').val(0).select2();
+               $('select#Color').val(0).select2();
+               $('select#Size').val(0).select2();
+               $('select#Grade').val(0).select2();
 
                 let dataForSent = {
                     id: $(this).val(),
@@ -587,25 +460,25 @@ Show :
 
                 let {data} = GetDataApi('/Other/GetProductGradeByProductId',dataForSent);
                 //
-                let {colors, sizes, grades} = data;
-                // set color
-                $('#color').html(setToSelect({data: colors, label : "Color"}));
-                // set size
-                $('#size').html(setToSelect({data: sizes, label : "Size"}));
-                // set grade
-                $('#grade').html(setToSelect({data: grades, label : "Grade"}));
+                let {Colors, Sizes, Grades} = data;
+                // set Color
+                $('#Color').html(setToSelect({data: Colors, label : "Color"}));
+                // set Size
+                $('#Size').html(setToSelect({data: Sizes, label : "Size"}));
+                // set Grade
+                $('#Grade').html(setToSelect({data: Grades, label : "Grade"}));
 
             });
 
-            // color
-            $('#color').change(function (){
-                $('select#size').val(0).select2();
-                $('select#grade').val(0).select2();
+            // Color
+            $('#Color').change(function (){
+                $('select#Size').val(0).select2();
+                $('select#Grade').val(0).select2();
             });
 
-            // size
-            $('#size').change(function (){
-                $('select#grade').val(0).select2();
+            // Size
+            $('#Size').change(function (){
+                $('select#Grade').val(0).select2();
             });
 
   </script>

@@ -1,18 +1,36 @@
 namespace web_payrolls.Models.DTO
 {
-    public class ProductModel
-    {
-        public int PK_Boss_Id { get; set; }
-        public string Name { get; set; }
-        public long PK_ProType_Id { get; set; }
-        public string Pro_Type { get; set; }
-        public string ProType_Name { get; set; }
-        public long PK_Pro_Id { get; set; }
-        public string Pro_Name { get; set; }
-        public string Picture_Path { get; set; }
-        public string User_Update { get; set; }
-        public string Date_Update { get; set; }
-        public string Time_Update { get; set; }
-        public string Descr { get; set; }
-    }
+  public class ProductModel : CompanyModel
+  {
+    public string ProductTypeId { get; set; }
+    public string ProductType { get; set; }
+    public string TypeName { get; set; }
+
+    public string ProductId { get; set; }
+    public string Product { get; set; }
+
+    public string GradeId { get; set; }
+    public string Grade { get; set; }
+    public string Color { get; set; }
+    public string Size { get; set; }
+    public string Barcode { get; set; }
+    public string QrCode { get; set; }
+    public string Measure { get; set; }
+    public string Code { get; set; }
+
+    public string DoubleWhole { get; set; }
+    public string Whole { get; set; }
+    public string UnitPrice { get; set; }
+    public string Cost { get; set; }
+    public string Normal { get; set; }
+    public string Picture { get; set; }
+    public string Discount { get; set; }
+    public string StartDate { get; set; }
+    public string EndDate { get; set; }
+    public string DiscountStatus { get; set; }
+    public string Status { get; set; }
+    public string UserUpdate { get; set; }
+    public string DateUpdate { get; set; }
+    public string TimeUpdate { get; set; }
+  }
 }

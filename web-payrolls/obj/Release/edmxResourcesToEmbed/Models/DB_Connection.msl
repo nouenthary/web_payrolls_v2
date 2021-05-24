@@ -1,1136 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="PAYROLL_20211ModelStoreContainer" CdmEntityContainer="DB_Connection">
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblAnnouncments">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblAnnouncment">
-        <MappingFragment StoreEntitySet="tblAnnouncment">
-          <ScalarProperty Name="PK_Announment_Id" ColumnName="PK_Announment_Id" />
-          <ScalarProperty Name="FK_Loc_Id" ColumnName="FK_Loc_Id" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="Title_Booter" ColumnName="Title_Booter" />
-          <ScalarProperty Name="Title1" ColumnName="Title1" />
-          <ScalarProperty Name="Picture1" ColumnName="Picture1" />
-          <ScalarProperty Name="Descr1" ColumnName="Descr1" />
-          <ScalarProperty Name="Title_Booter1" ColumnName="Title_Booter1" />
-          <ScalarProperty Name="Title2" ColumnName="Title2" />
-          <ScalarProperty Name="Picture2" ColumnName="Picture2" />
-          <ScalarProperty Name="Descr2" ColumnName="Descr2" />
-          <ScalarProperty Name="Title_Booter2" ColumnName="Title_Booter2" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblBosses">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblBoss">
-        <MappingFragment StoreEntitySet="tblBoss">
-          <ScalarProperty Name="PK_Boss_Id" ColumnName="PK_Boss_Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblBrokendBalances">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblBrokendBalance">
-        <MappingFragment StoreEntitySet="tblBrokendBalance">
-          <ScalarProperty Name="PK_Brokend_Bal_Id" ColumnName="PK_Brokend_Bal_Id" />
-          <ScalarProperty Name="FK_Return_Inventory_Id" ColumnName="FK_Return_Inventory_Id" />
-          <ScalarProperty Name="FK_Dep_Id" ColumnName="FK_Dep_Id" />
-          <ScalarProperty Name="Brokend_QTY" ColumnName="Brokend_QTY" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblCompanies">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblCompany">
-        <MappingFragment StoreEntitySet="tblCompany">
-          <ScalarProperty Name="PK_Comp_Id" ColumnName="PK_Comp_Id" />
-          <ScalarProperty Name="FK_Boss_Id" ColumnName="FK_Boss_Id" />
-          <ScalarProperty Name="Comp_Name" ColumnName="Comp_Name" />
-          <ScalarProperty Name="Picture_Company" ColumnName="Picture_Company" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="Number_Staff_Transaction" ColumnName="Number_Staff_Transaction" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblConfigs">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblConfig">
-        <MappingFragment StoreEntitySet="tblConfig">
-          <ScalarProperty Name="key" ColumnName="key" />
-          <ScalarProperty Name="value" ColumnName="value" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblCut_Money">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblCut_Money">
-        <MappingFragment StoreEntitySet="tblCut_Money">
-          <ScalarProperty Name="PK_Cut_Id" ColumnName="PK_Cut_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="Lev_Name" ColumnName="Lev_Name" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="Cut_Percent" ColumnName="Cut_Percent" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblDepartments">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblDepartment">
-        <MappingFragment StoreEntitySet="tblDepartment">
-          <ScalarProperty Name="PK_Depart_Id" ColumnName="PK_Depart_Id" />
-          <ScalarProperty Name="FK_Loc_Id" ColumnName="FK_Loc_Id" />
-          <ScalarProperty Name="Deppart_Name" ColumnName="Deppart_Name" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="Number_Staff_Transaction" ColumnName="Number_Staff_Transaction" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblExchanges">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblExchange">
-        <MappingFragment StoreEntitySet="tblExchange">
-          <ScalarProperty Name="PK_Exchang_Id" ColumnName="PK_Exchang_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblForget_Scan">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblForget_Scan">
-        <MappingFragment StoreEntitySet="tblForget_Scan">
-          <ScalarProperty Name="PK_Forget_Scan_Id" ColumnName="PK_Forget_Scan_Id" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="Forget_Date" ColumnName="Forget_Date" />
-          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
-          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
-          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblInput_Money">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblInput_Money">
-        <MappingFragment StoreEntitySet="tblInput_Money">
-          <ScalarProperty Name="PK_Input_Money_Id" ColumnName="PK_Input_Money_Id" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
-          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
-          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblInputLastyears">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblInputLastyear">
-        <MappingFragment StoreEntitySet="tblInputLastyear">
-          <ScalarProperty Name="PK_LastY_Money_Id" ColumnName="PK_LastY_Money_Id" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="Num_Year" ColumnName="Num_Year" />
-          <ScalarProperty Name="Num_month" ColumnName="Num_month" />
-          <ScalarProperty Name="Salary" ColumnName="Salary" />
-          <ScalarProperty Name="Multiply" ColumnName="Multiply" />
-          <ScalarProperty Name="Input_LastY_Money" ColumnName="Input_LastY_Money" />
-          <ScalarProperty Name="Total_LastYear" ColumnName="Total_LastYear" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblInventories">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblInventory">
-        <MappingFragment StoreEntitySet="tblInventory">
-          <ScalarProperty Name="PK_Inventory_Id" ColumnName="PK_Inventory_Id" />
-          <ScalarProperty Name="FK_Model_Of_Inventory_Id" ColumnName="FK_Model_Of_Inventory_Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblLocations">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblLocation">
-        <MappingFragment StoreEntitySet="tblLocation">
-          <ScalarProperty Name="PK_Location_Id" ColumnName="PK_Location_Id" />
-          <ScalarProperty Name="FK_Comp_Id" ColumnName="FK_Comp_Id" />
-          <ScalarProperty Name="Loc_Name" ColumnName="Loc_Name" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblLost_Inventory">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblLost_Inventory">
-        <MappingFragment StoreEntitySet="tblLost_Inventory">
-          <ScalarProperty Name="PK_Lost_Inventor_Id" ColumnName="PK_Lost_Inventor_Id" />
-          <ScalarProperty Name="FK_Inventory_Id" ColumnName="FK_Inventory_Id" />
-          <ScalarProperty Name="FK_LostInventoryNo_Id" ColumnName="FK_LostInventoryNo_Id" />
-          <ScalarProperty Name="Add_Lost_User_Update" ColumnName="Add_Lost_User_Update" />
-          <ScalarProperty Name="Add_Lost_Date_Update" ColumnName="Add_Lost_Date_Update" />
-          <ScalarProperty Name="Add_Lost_Time_Update" ColumnName="Add_Lost_Time_Update" />
-          <ScalarProperty Name="Lost_By_U" ColumnName="Lost_By_U" />
-          <ScalarProperty Name="Lost_QTY" ColumnName="Lost_QTY" />
-          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
-          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
-          <ScalarProperty Name="User_Confrim" ColumnName="User_Confrim" />
-          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
-          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
-          <ScalarProperty Name="Lost_Status" ColumnName="Lost_Status" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblLostBalances">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblLostBalance">
-        <MappingFragment StoreEntitySet="tblLostBalance">
-          <ScalarProperty Name="PK_Lost_Balance_Id" ColumnName="PK_Lost_Balance_Id" />
-          <ScalarProperty Name="FK_Inventory_Id" ColumnName="FK_Inventory_Id" />
-          <ScalarProperty Name="FK_Dep_Id" ColumnName="FK_Dep_Id" />
-          <ScalarProperty Name="Lost_Balance_QTY" ColumnName="Lost_Balance_QTY" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblLostInventoryNoes">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblLostInventoryNo">
-        <MappingFragment StoreEntitySet="tblLostInventoryNo">
-          <ScalarProperty Name="PK_LostInventoryNo_Id" ColumnName="PK_LostInventoryNo_Id" />
-          <ScalarProperty Name="LostInventoryNo" ColumnName="LostInventoryNo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblModel_Of_Inventory">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblModel_Of_Inventory">
-        <MappingFragment StoreEntitySet="tblModel_Of_Inventory">
-          <ScalarProperty Name="PK_Model_Of_Inventory_Id" ColumnName="PK_Model_Of_Inventory_Id" />
-          <ScalarProperty Name="FK_Type_Of_Inventory_Id" ColumnName="FK_Type_Of_Inventory_Id" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Updae" ColumnName="Time_Updae" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblNotifications">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblNotification">
-        <MappingFragment StoreEntitySet="tblNotification">
-          <ScalarProperty Name="PK_Notification_ID" ColumnName="PK_Notification_ID" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="Link" ColumnName="Link" />
-          <ScalarProperty Name="Notification" ColumnName="Notification" />
-          <ScalarProperty Name="Notification_Pending" ColumnName="Notification_Pending" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="Option_Key" ColumnName="Option_Key" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblOver_Time">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblOver_Time">
-        <MappingFragment StoreEntitySet="tblOver_Time">
-          <ScalarProperty Name="PK_Over_Time_Id" ColumnName="PK_Over_Time_Id" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="OT_Date" ColumnName="OT_Date" />
-          <ScalarProperty Name="OT_From_Time" ColumnName="OT_From_Time" />
-          <ScalarProperty Name="OT_To_Time" ColumnName="OT_To_Time" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
-          <ScalarProperty Name="Amount_Hour" ColumnName="Amount_Hour" />
-          <ScalarProperty Name="Unit_Price_Hour" ColumnName="Unit_Price_Hour" />
-          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
-          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
-          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblPermissions">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblPermission">
-        <MappingFragment StoreEntitySet="tblPermission">
-          <ScalarProperty Name="PK_Permission_Id" ColumnName="PK_Permission_Id" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="View_Profile" ColumnName="View_Profile" />
-          <ScalarProperty Name="View_Measure" ColumnName="View_Measure" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblPositions">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblPosition">
-        <MappingFragment StoreEntitySet="tblPosition">
-          <ScalarProperty Name="PK_Pos_Id" ColumnName="PK_Pos_Id" />
-          <ScalarProperty Name="FK_Depart_Id" ColumnName="FK_Depart_Id" />
-          <ScalarProperty Name="Pos_Name" ColumnName="Pos_Name" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Color">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Color">
-        <MappingFragment StoreEntitySet="tblProduction-Color">
-          <ScalarProperty Name="PK_Color_Id" ColumnName="PK_Color_Id" />
-          <ScalarProperty Name="FK_Pro_Id" ColumnName="FK_Pro_Id" />
-          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
-          <ScalarProperty Name="QR_Code" ColumnName="QR_Code" />
-          <ScalarProperty Name="Color_Name" ColumnName="Color_Name" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Grade">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Grade">
-        <MappingFragment StoreEntitySet="tblProduction-Grade">
-          <ScalarProperty Name="PK_Grade_Id" ColumnName="PK_Grade_Id" />
-          <ScalarProperty Name="FK_Product_Id" ColumnName="FK_Product_Id" />
-          <ScalarProperty Name="QR_Code" ColumnName="QR_Code" />
-          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
-          <ScalarProperty Name="Measu_Name" ColumnName="Measu_Name" />
-          <ScalarProperty Name="Grade_Name" ColumnName="Grade_Name" />
-          <ScalarProperty Name="Double_Whole_Price" ColumnName="Double_Whole_Price" />
-          <ScalarProperty Name="Whole_Price" ColumnName="Whole_Price" />
-          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
-          <ScalarProperty Name="Cost" ColumnName="Cost" />
-          <ScalarProperty Name="Normal_Price" ColumnName="Normal_Price" />
-          <ScalarProperty Name="Picture_Path" ColumnName="Picture_Path" />
-          <ScalarProperty Name="Discount" ColumnName="Discount" />
-          <ScalarProperty Name="Start_Dis" ColumnName="Start_Dis" />
-          <ScalarProperty Name="End_Dis" ColumnName="End_Dis" />
-          <ScalarProperty Name="Status_Dis" ColumnName="Status_Dis" />
-          <ScalarProperty Name="Pro_Status" ColumnName="Pro_Status" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="Picture_Detail" ColumnName="Picture_Detail" />
-          <ScalarProperty Name="Color" ColumnName="Color" />
-          <ScalarProperty Name="Size" ColumnName="Size" />
-          <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Measur">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Measur">
-        <MappingFragment StoreEntitySet="tblProduction-Measur">
-          <ScalarProperty Name="Pk_Measu_Id" ColumnName="Pk_Measu_Id" />
-          <ScalarProperty Name="FK_Boss_Id" ColumnName="FK_Boss_Id" />
-          <ScalarProperty Name="Measu_Name" ColumnName="Measu_Name" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_PK_Stock_In_Product_Cut">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_PK_Stock_In_Product_Cut">
-        <MappingFragment StoreEntitySet="tblProduction-PK_Stock_In_Product_Cut">
-          <ScalarProperty Name="PK_Stock_In_Product_Cut_Id" ColumnName="PK_Stock_In_Product_Cut_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="FK_Stock_In_Product_Cut_No_Id" ColumnName="FK_Stock_In_Product_Cut_No_Id" />
-          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
-          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
-          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
-          <ScalarProperty Name="In_Date" ColumnName="In_Date" />
-          <ScalarProperty Name="In_Time" ColumnName="In_Time" />
-          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
-          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
-          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
-          <ScalarProperty Name="Confirm_Status" ColumnName="Confirm_Status" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_PK_Stock_In_Product_Import_Balance">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_PK_Stock_In_Product_Import_Balance">
-        <MappingFragment StoreEntitySet="tblProduction-PK_Stock_In_Product_Import_Balance">
-          <ScalarProperty Name="PK_Stock_In_Product_Import_Bal_Id" ColumnName="PK_Stock_In_Product_Import_Bal_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="QTY_Balance" ColumnName="QTY_Balance" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Product">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Product">
-        <MappingFragment StoreEntitySet="tblProduction-Product">
-          <ScalarProperty Name="PK_Pro_Id" ColumnName="PK_Pro_Id" />
-          <ScalarProperty Name="FK_ProType_Id" ColumnName="FK_ProType_Id" />
-          <ScalarProperty Name="Pro_Name" ColumnName="Pro_Name" />
-          <ScalarProperty Name="Picture_Path" ColumnName="Picture_Path" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_ProductType">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_ProductType">
-        <MappingFragment StoreEntitySet="tblProduction-ProductType">
-          <ScalarProperty Name="PK_ProType_Id" ColumnName="PK_ProType_Id" />
-          <ScalarProperty Name="FK_Boss_Id" ColumnName="FK_Boss_Id" />
-          <ScalarProperty Name="Pro_Type" ColumnName="Pro_Type" />
-          <ScalarProperty Name="ProType_Name" ColumnName="ProType_Name" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Repair_Closth">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Repair_Closth">
-        <MappingFragment StoreEntitySet="tblProduction-Repair_Closth">
-          <ScalarProperty Name="PK_Repair_Closth_Id" ColumnName="PK_Repair_Closth_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_From_Com_Id" ColumnName="FK_From_Com_Id" />
-          <ScalarProperty Name="FK_To_Loc_Id" ColumnName="FK_To_Loc_Id" />
-          <ScalarProperty Name="Repair_Closth_No" ColumnName="Repair_Closth_No" />
-          <ScalarProperty Name="QTY" ColumnName="QTY" />
-          <ScalarProperty Name="Repaire_Type" ColumnName="Repaire_Type" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="Type_Repair" ColumnName="Type_Repair" />
-          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Updte" ColumnName="Time_Updte" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Confirm_User" ColumnName="Confirm_User" />
-          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
-          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Repair_Closth_Balance">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Repair_Closth_Balance">
-        <MappingFragment StoreEntitySet="tblProduction-Repair_Closth_Balance">
-          <ScalarProperty Name="PK_Reepair_Closth_Balance_Id" ColumnName="PK_Reepair_Closth_Balance_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="QTY" ColumnName="QTY" />
-          <ScalarProperty Name="FK_From_Com_Id" ColumnName="FK_From_Com_Id" />
-          <ScalarProperty Name="FK_To_Loc_Id" ColumnName="FK_To_Loc_Id" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Repair_Closth_No">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Repair_Closth_No">
-        <MappingFragment StoreEntitySet="tblProduction-Repair_Closth_No">
-          <ScalarProperty Name="PK_Repair_Closth_No_Id" ColumnName="PK_Repair_Closth_No_Id" />
-          <ScalarProperty Name="Repair_Closth_No" ColumnName="Repair_Closth_No" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Size">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Size">
-        <MappingFragment StoreEntitySet="tblProduction-Size">
-          <ScalarProperty Name="PK_Size_Id" ColumnName="PK_Size_Id" />
-          <ScalarProperty Name="FK_Color_Id" ColumnName="FK_Color_Id" />
-          <ScalarProperty Name="Size_Name" ColumnName="Size_Name" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Stock_In_Product_Cut_No">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Stock_In_Product_Cut_No">
-        <MappingFragment StoreEntitySet="tblProduction-Stock_In_Product_Cut_No">
-          <ScalarProperty Name="PK_Stock_In_Product_Cut_No_Id" ColumnName="PK_Stock_In_Product_Cut_No_Id" />
-          <ScalarProperty Name="Stock_In_Product_Cut_No" ColumnName="Stock_In_Product_Cut_No" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Stock_In_Product_Import">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Stock_In_Product_Import">
-        <MappingFragment StoreEntitySet="tblProduction-Stock_In_Product_Import">
-          <ScalarProperty Name="PK_Stock_In_Product_Import_Id" ColumnName="PK_Stock_In_Product_Import_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="Type_" ColumnName="Type_" />
-          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
-          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
-          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
-          <ScalarProperty Name="In_Date" ColumnName="In_Date" />
-          <ScalarProperty Name="In_Time" ColumnName="In_Time" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="InVoicePicture" ColumnName="InVoicePicture" />
-          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
-          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
-          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
-          <ScalarProperty Name="Confirm_Status" ColumnName="Confirm_Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_StockIn_Complete_Balance">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_StockIn_Complete_Balance">
-        <MappingFragment StoreEntitySet="tblProduction-StockIn_Complete_Balance">
-          <ScalarProperty Name="PK_StockIn_Complete_Product_Balance_Id" ColumnName="PK_StockIn_Complete_Product_Balance_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Cost" ColumnName="Cost" />
-          <ScalarProperty Name="WH" ColumnName="WH" />
-          <ScalarProperty Name="WW" ColumnName="WW" />
-          <ScalarProperty Name="Discount" ColumnName="Discount" />
-          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_StockIn_Cut_On_Loc">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_StockIn_Cut_On_Loc">
-        <MappingFragment StoreEntitySet="tblProduction-StockIn_Cut_On_Loc">
-          <ScalarProperty Name="PK_StockIn_Cut_On_Loc_Id" ColumnName="PK_StockIn_Cut_On_Loc_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_Loc_Id" ColumnName="FK_Loc_Id" />
-          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
-          <ScalarProperty Name="FK_Comp_From_Id" ColumnName="FK_Comp_From_Id" />
-          <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
-          <ScalarProperty Name="StockIn_Cut_On_LocNo_Id" ColumnName="StockIn_Cut_On_LocNo_Id" />
-          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
-          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
-          <ScalarProperty Name="In_Date" ColumnName="In_Date" />
-          <ScalarProperty Name="In_Time" ColumnName="In_Time" />
-          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
-          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
-          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
-          <ScalarProperty Name="Confirm_Status" ColumnName="Confirm_Status" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_StockIn_Cut_On_LocBalance">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_StockIn_Cut_On_LocBalance">
-        <MappingFragment StoreEntitySet="tblProduction-StockIn_Cut_On_LocBalance">
-          <ScalarProperty Name="PK_StockIn_Cut_On_Loc_Balance_Id" ColumnName="PK_StockIn_Cut_On_Loc_Balance_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_Loc_Id" ColumnName="FK_Loc_Id" />
-          <ScalarProperty Name="Stock_In_Product_Cut_No" ColumnName="Stock_In_Product_Cut_No" />
-          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
-          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_StockIn_Cut_On_LocNo">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_StockIn_Cut_On_LocNo">
-        <MappingFragment StoreEntitySet="tblProduction-StockIn_Cut_On_LocNo">
-          <ScalarProperty Name="PK_StockIn_Cut_On_LocNo_Id" ColumnName="PK_StockIn_Cut_On_LocNo_Id" />
-          <ScalarProperty Name="StockIn_Cut_On_LocNo" ColumnName="StockIn_Cut_On_LocNo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_StockIn_Product_Cut_Balance">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_StockIn_Product_Cut_Balance">
-        <MappingFragment StoreEntitySet="tblProduction-StockIn_Product_Cut_Balance">
-          <ScalarProperty Name="PK_StockIn_Product_Cut_Balance_Id" ColumnName="PK_StockIn_Product_Cut_Balance_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="Stock_In_Product_Cut_No_Id" ColumnName="Stock_In_Product_Cut_No_Id" />
-          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
-          <ScalarProperty Name="QTY_Balance" ColumnName="QTY_Balance" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Tranfer_From_LocTo_Comp">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Tranfer_From_LocTo_Comp">
-        <MappingFragment StoreEntitySet="tblProduction-Tranfer_From_LocTo_Comp">
-          <ScalarProperty Name="PK_Tranfer_From_LocTo_Comp_Id" ColumnName="PK_Tranfer_From_LocTo_Comp_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="FK_Loc_From_Id" ColumnName="FK_Loc_From_Id" />
-          <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
-          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
-          <ScalarProperty Name="Tranfer_In_Type" ColumnName="Tranfer_In_Type" />
-          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
-          <ScalarProperty Name="Tranfer_Date" ColumnName="Tranfer_Date" />
-          <ScalarProperty Name="Tranfer_Time" ColumnName="Tranfer_Time" />
-          <ScalarProperty Name="Tranfer_Status" ColumnName="Tranfer_Status" />
-          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
-          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
-          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
-          <ScalarProperty Name="Desce" ColumnName="Desce" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Use_Fabrik_On_Cut">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Use_Fabrik_On_Cut">
-        <MappingFragment StoreEntitySet="tblProduction-Use_Fabrik_On_Cut">
-          <ScalarProperty Name="PK_Use_Fabrik_On_Cut_Id" ColumnName="PK_Use_Fabrik_On_Cut_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="Stock_In_Product_Cut_No" ColumnName="Stock_In_Product_Cut_No" />
-          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
-          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
-          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
-          <ScalarProperty Name="In_Date" ColumnName="In_Date" />
-          <ScalarProperty Name="In_Time" ColumnName="In_Time" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProduction_Use_Fabrik_On_Cut_Balance">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Use_Fabrik_On_Cut_Balance">
-        <MappingFragment StoreEntitySet="tblProduction-Use_Fabrik_On_Cut_Balance">
-          <ScalarProperty Name="PK_Use_Fabrik_On_Cut_Balance_Id" ColumnName="PK_Use_Fabrik_On_Cut_Balance_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="Stock_In_Product_Cut_No" ColumnName="Stock_In_Product_Cut_No" />
-          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
-          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblProducttion_StockIn_Complete_Product">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProducttion_StockIn_Complete_Product">
-        <MappingFragment StoreEntitySet="tblProducttion-StockIn_Complete_Product">
-          <ScalarProperty Name="PK_StockIn_Complete_Product_Id" ColumnName="PK_StockIn_Complete_Product_Id" />
-          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="FK_Loc_From_Id" ColumnName="FK_Loc_From_Id" />
-          <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
-          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Cost" ColumnName="Cost" />
-          <ScalarProperty Name="WH" ColumnName="WH" />
-          <ScalarProperty Name="WW" ColumnName="WW" />
-          <ScalarProperty Name="Discount" ColumnName="Discount" />
-          <ScalarProperty Name="Stock_In_Product_Cut_No_Onlocation" ColumnName="Stock_In_Product_Cut_No_Onlocation" />
-          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
-          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
-          <ScalarProperty Name="In_Date" ColumnName="In_Date" />
-          <ScalarProperty Name="In_Time" ColumnName="In_Time" />
-          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
-          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
-          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
-          <ScalarProperty Name="Confirm_Status" ColumnName="Confirm_Status" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblPuchases">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblPuchase">
-        <MappingFragment StoreEntitySet="tblPuchase">
-          <ScalarProperty Name="PK_Puchase_Id" ColumnName="PK_Puchase_Id" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="FK_PuchaseNo_Id" ColumnName="FK_PuchaseNo_Id" />
-          <ScalarProperty Name="Date_Puchase" ColumnName="Date_Puchase" />
-          <ScalarProperty Name="Time_Puchase" ColumnName="Time_Puchase" />
-          <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
-          <ScalarProperty Name="Tax" ColumnName="Tax" />
-          <ScalarProperty Name="Qty" ColumnName="Qty" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
-          <ScalarProperty Name="Picture_Product" ColumnName="Picture_Product" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
-          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
-          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblPuchaseNoes">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblPuchaseNo">
-        <MappingFragment StoreEntitySet="tblPuchaseNo">
-          <ScalarProperty Name="PK_PuchaseNo_Id" ColumnName="PK_PuchaseNo_Id" />
-          <ScalarProperty Name="No" ColumnName="No" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblRemain_Leave">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblRemain_Leave">
-        <MappingFragment StoreEntitySet="tblRemain_Leave">
-          <ScalarProperty Name="PK_Remain_Leave_Id" ColumnName="PK_Remain_Leave_Id" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="OFF_Remain" ColumnName="OFF_Remain" />
-          <ScalarProperty Name="AL_Remain" ColumnName="AL_Remain" />
-          <ScalarProperty Name="PH_Remain" ColumnName="PH_Remain" />
-          <ScalarProperty Name="SIC_Remain" ColumnName="SIC_Remain" />
-          <ScalarProperty Name="UPL_Remain" ColumnName="UPL_Remain" />
-          <ScalarProperty Name="AB_Remain" ColumnName="AB_Remain" />
-          <ScalarProperty Name="CM_Remain" ColumnName="CM_Remain" />
-          <ScalarProperty Name="User_Updae" ColumnName="User_Updae" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblReturnInventories">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblReturnInventory">
-        <MappingFragment StoreEntitySet="tblReturnInventory">
-          <ScalarProperty Name="PK_Return_Inventory_Id" ColumnName="PK_Return_Inventory_Id" />
-          <ScalarProperty Name="FK_Return_InventoryNo_Id" ColumnName="FK_Return_InventoryNo_Id" />
-          <ScalarProperty Name="Return_Brokend_User_Update" ColumnName="Return_Brokend_User_Update" />
-          <ScalarProperty Name="Return_Brokent_Date_Update" ColumnName="Return_Brokent_Date_Update" />
-          <ScalarProperty Name="Return_Brokent_Time_Update" ColumnName="Return_Brokent_Time_Update" />
-          <ScalarProperty Name="Return_Type" ColumnName="Return_Type" />
-          <ScalarProperty Name="Return_QTY" ColumnName="Return_QTY" />
-          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
-          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
-          <ScalarProperty Name="User_Confrim" ColumnName="User_Confrim" />
-          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
-          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
-          <ScalarProperty Name="Return_Status" ColumnName="Return_Status" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblReturnInventoryNoes">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblReturnInventoryNo">
-        <MappingFragment StoreEntitySet="tblReturnInventoryNo">
-          <ScalarProperty Name="PK_Return_InventoryNo_Id" ColumnName="PK_Return_InventoryNo_Id" />
-          <ScalarProperty Name="Return_InventoryNo" ColumnName="Return_InventoryNo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblRosters">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblRoster">
-        <MappingFragment StoreEntitySet="tblRoster">
-          <ScalarProperty Name="PK_Ros_Id" ColumnName="PK_Ros_Id" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="Num_Year" ColumnName="Num_Year" />
-          <ScalarProperty Name="Num_Month" ColumnName="Num_Month" />
-          <ScalarProperty Name="DAY1" ColumnName="DAY1" />
-          <ScalarProperty Name="DAY2" ColumnName="DAY2" />
-          <ScalarProperty Name="DAY3" ColumnName="DAY3" />
-          <ScalarProperty Name="DAY4" ColumnName="DAY4" />
-          <ScalarProperty Name="DAY5" ColumnName="DAY5" />
-          <ScalarProperty Name="DAY6" ColumnName="DAY6" />
-          <ScalarProperty Name="DAY7" ColumnName="DAY7" />
-          <ScalarProperty Name="DAY8" ColumnName="DAY8" />
-          <ScalarProperty Name="DAY9" ColumnName="DAY9" />
-          <ScalarProperty Name="DAY10" ColumnName="DAY10" />
-          <ScalarProperty Name="DAY11" ColumnName="DAY11" />
-          <ScalarProperty Name="DAY12" ColumnName="DAY12" />
-          <ScalarProperty Name="DAY13" ColumnName="DAY13" />
-          <ScalarProperty Name="DAY14" ColumnName="DAY14" />
-          <ScalarProperty Name="DAY15" ColumnName="DAY15" />
-          <ScalarProperty Name="DAY16" ColumnName="DAY16" />
-          <ScalarProperty Name="DAY17" ColumnName="DAY17" />
-          <ScalarProperty Name="DAY18" ColumnName="DAY18" />
-          <ScalarProperty Name="DAY19" ColumnName="DAY19" />
-          <ScalarProperty Name="DAY20" ColumnName="DAY20" />
-          <ScalarProperty Name="DAY21" ColumnName="DAY21" />
-          <ScalarProperty Name="DAY22" ColumnName="DAY22" />
-          <ScalarProperty Name="DAY23" ColumnName="DAY23" />
-          <ScalarProperty Name="DAY24" ColumnName="DAY24" />
-          <ScalarProperty Name="DAY25" ColumnName="DAY25" />
-          <ScalarProperty Name="DAY26" ColumnName="DAY26" />
-          <ScalarProperty Name="DAY27" ColumnName="DAY27" />
-          <ScalarProperty Name="DAY28" ColumnName="DAY28" />
-          <ScalarProperty Name="DAY29" ColumnName="DAY29" />
-          <ScalarProperty Name="DAY30" ColumnName="DAY30" />
-          <ScalarProperty Name="DAY31" ColumnName="DAY31" />
-          <ScalarProperty Name="OFF" ColumnName="OFF" />
-          <ScalarProperty Name="PH" ColumnName="PH" />
-          <ScalarProperty Name="AL" ColumnName="AL" />
-          <ScalarProperty Name="SIC" ColumnName="SIC" />
-          <ScalarProperty Name="UPL" ColumnName="UPL" />
-          <ScalarProperty Name="AB" ColumnName="AB" />
-          <ScalarProperty Name="CM" ColumnName="CM" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblSalary_Type">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblSalary_Type">
-        <MappingFragment StoreEntitySet="tblSalary_Type">
-          <ScalarProperty Name="PK_Sal_Type_Id" ColumnName="PK_Sal_Type_Id" />
-          <ScalarProperty Name="FK_Sta_Id" ColumnName="FK_Sta_Id" />
-          <ScalarProperty Name="Sal_Type" ColumnName="Sal_Type" />
-          <ScalarProperty Name="Salary" ColumnName="Salary" />
-          <ScalarProperty Name="Card_Phone" ColumnName="Card_Phone" />
-          <ScalarProperty Name="Gym" ColumnName="Gym" />
-          <ScalarProperty Name="Accommodation" ColumnName="Accommodation" />
-          <ScalarProperty Name="Food" ColumnName="Food" />
-          <ScalarProperty Name="insurance" ColumnName="insurance" />
-          <ScalarProperty Name="Money_Prim" ColumnName="Money_Prim" />
-          <ScalarProperty Name="Travel" ColumnName="Travel" />
-          <ScalarProperty Name="Gasoline" ColumnName="Gasoline" />
-          <ScalarProperty Name="OT_Unit_Price" ColumnName="OT_Unit_Price" />
-          <ScalarProperty Name="Work_Hour_Taget" ColumnName="Work_Hour_Taget" />
-          <ScalarProperty Name="Relax_Hour" ColumnName="Relax_Hour" />
-          <ScalarProperty Name="Off_Day" ColumnName="Off_Day" />
-          <ScalarProperty Name="AL_Day" ColumnName="AL_Day" />
-          <ScalarProperty Name="PH_Day" ColumnName="PH_Day" />
-          <ScalarProperty Name="Sick" ColumnName="Sick" />
-          <ScalarProperty Name="UPL" ColumnName="UPL" />
-          <ScalarProperty Name="AB" ColumnName="AB" />
-          <ScalarProperty Name="CM" ColumnName="CM" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblShareHolders">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblShareHolder">
-        <MappingFragment StoreEntitySet="tblShareHolder">
-          <ScalarProperty Name="PK_ShareHolder_Id" ColumnName="PK_ShareHolder_Id" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="Date_Input" ColumnName="Date_Input" />
-          <ScalarProperty Name="Time_Input" ColumnName="Time_Input" />
-          <ScalarProperty Name="Increase_Money" ColumnName="Increase_Money" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblStaffs">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblStaff">
-        <MappingFragment StoreEntitySet="tblStaff">
-          <ScalarProperty Name="PK_Staff_Id" ColumnName="PK_Staff_Id" />
-          <ScalarProperty Name="FK_Pos_Id" ColumnName="FK_Pos_Id" />
-          <ScalarProperty Name="Staff_Name" ColumnName="Staff_Name" />
-          <ScalarProperty Name="Sex" ColumnName="Sex" />
-          <ScalarProperty Name="Staff_DOB" ColumnName="Staff_DOB" />
-          <ScalarProperty Name="Marry_Status" ColumnName="Marry_Status" />
-          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
-          <ScalarProperty Name="Wife" ColumnName="Wife" />
-          <ScalarProperty Name="Son" ColumnName="Son" />
-          <ScalarProperty Name="Daughter" ColumnName="Daughter" />
-          <ScalarProperty Name="Tell" ColumnName="Tell" />
-          <ScalarProperty Name="Account_Name" ColumnName="Account_Name" />
-          <ScalarProperty Name="Account_Number" ColumnName="Account_Number" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Identity_Card" ColumnName="Identity_Card" />
-          <ScalarProperty Name="Identify_Picture" ColumnName="Identify_Picture" />
-          <ScalarProperty Name="Staff_Id_Card" ColumnName="Staff_Id_Card" />
-          <ScalarProperty Name="Serail_Card" ColumnName="Serail_Card" />
-          <ScalarProperty Name="Staff_Status" ColumnName="Staff_Status" />
-          <ScalarProperty Name="Join_date" ColumnName="Join_date" />
-          <ScalarProperty Name="End_Date" ColumnName="End_Date" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="No_Scan" ColumnName="No_Scan" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="FingerPrintTemplate" ColumnName="FingerPrintTemplate" />
-          <ScalarProperty Name="LoginCodeGeneration" ColumnName="LoginCodeGeneration" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblStock_In_Inventory_Id">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblStock_In_Inventory_Id">
-        <MappingFragment StoreEntitySet="tblStock_In_Inventory_Id">
-          <ScalarProperty Name="PK_Stock_In_Inventory_Id" ColumnName="PK_Stock_In_Inventory_Id" />
-          <ScalarProperty Name="FK_Inventory_Id" ColumnName="FK_Inventory_Id" />
-          <ScalarProperty Name="FK_Supp_Id" ColumnName="FK_Supp_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="Stock_In" ColumnName="Stock_In" />
-          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="In_Status" ColumnName="In_Status" />
-          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
-          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
-          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblStockBalance_Inventory">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblStockBalance_Inventory">
-        <MappingFragment StoreEntitySet="tblStockBalance_Inventory">
-          <ScalarProperty Name="PK_StockBl_Id" ColumnName="PK_StockBl_Id" />
-          <ScalarProperty Name="FK_Inventory_Id" ColumnName="FK_Inventory_Id" />
-          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
-          <ScalarProperty Name="Stock_Bal_Qty" ColumnName="Stock_Bal_Qty" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblStockBalanceInventoryInDepartments">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblStockBalanceInventoryInDepartment">
-        <MappingFragment StoreEntitySet="tblStockBalanceInventoryInDepartment">
-          <ScalarProperty Name="PK_StockBal_InDepartment_ID" ColumnName="PK_StockBal_InDepartment_ID" />
-          <ScalarProperty Name="FK_Inventory_Id" ColumnName="FK_Inventory_Id" />
-          <ScalarProperty Name="FK_Depart_Id" ColumnName="FK_Depart_Id" />
-          <ScalarProperty Name="QTY_Balance" ColumnName="QTY_Balance" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblStockinventoryOnDepartments">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblStockinventoryOnDepartment">
-        <MappingFragment StoreEntitySet="tblStockinventoryOnDepartment">
-          <ScalarProperty Name="Pk_StockIN_Inventory_On_Department_Id" ColumnName="Pk_StockIN_Inventory_On_Department_Id" />
-          <ScalarProperty Name="FK_Inventory_ID" ColumnName="FK_Inventory_ID" />
-          <ScalarProperty Name="FK_Department_ID" ColumnName="FK_Department_ID" />
-          <ScalarProperty Name="QTY" ColumnName="QTY" />
-          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="Type_Inventory" ColumnName="Type_Inventory" />
-          <ScalarProperty Name="StockIn_By" ColumnName="StockIn_By" />
-          <ScalarProperty Name="Date_StockIn" ColumnName="Date_StockIn" />
-          <ScalarProperty Name="Time_StockIn" ColumnName="Time_StockIn" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
-          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
-          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblSum_Sal">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblSum_Sal">
-        <MappingFragment StoreEntitySet="tblSum_Sal">
-          <ScalarProperty Name="PK_Sum_sal_Id" ColumnName="PK_Sum_sal_Id" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="Num_Year" ColumnName="Num_Year" />
-          <ScalarProperty Name="Num_Month" ColumnName="Num_Month" />
-          <ScalarProperty Name="DAY1" ColumnName="DAY1" />
-          <ScalarProperty Name="DAY2" ColumnName="DAY2" />
-          <ScalarProperty Name="DAY3" ColumnName="DAY3" />
-          <ScalarProperty Name="DAY4" ColumnName="DAY4" />
-          <ScalarProperty Name="DAY5" ColumnName="DAY5" />
-          <ScalarProperty Name="DAY6" ColumnName="DAY6" />
-          <ScalarProperty Name="DAY7" ColumnName="DAY7" />
-          <ScalarProperty Name="DAY8" ColumnName="DAY8" />
-          <ScalarProperty Name="DAY9" ColumnName="DAY9" />
-          <ScalarProperty Name="DAY10" ColumnName="DAY10" />
-          <ScalarProperty Name="DAY11" ColumnName="DAY11" />
-          <ScalarProperty Name="DAY12" ColumnName="DAY12" />
-          <ScalarProperty Name="DAY13" ColumnName="DAY13" />
-          <ScalarProperty Name="DAY14" ColumnName="DAY14" />
-          <ScalarProperty Name="DAY15" ColumnName="DAY15" />
-          <ScalarProperty Name="DAY16" ColumnName="DAY16" />
-          <ScalarProperty Name="DAY17" ColumnName="DAY17" />
-          <ScalarProperty Name="DAY18" ColumnName="DAY18" />
-          <ScalarProperty Name="DAY19" ColumnName="DAY19" />
-          <ScalarProperty Name="DAY20" ColumnName="DAY20" />
-          <ScalarProperty Name="DAY21" ColumnName="DAY21" />
-          <ScalarProperty Name="DAY22" ColumnName="DAY22" />
-          <ScalarProperty Name="DAY23" ColumnName="DAY23" />
-          <ScalarProperty Name="DAY24" ColumnName="DAY24" />
-          <ScalarProperty Name="DAY25" ColumnName="DAY25" />
-          <ScalarProperty Name="DAY26" ColumnName="DAY26" />
-          <ScalarProperty Name="DAY27" ColumnName="DAY27" />
-          <ScalarProperty Name="DAY28" ColumnName="DAY28" />
-          <ScalarProperty Name="DAY29" ColumnName="DAY29" />
-          <ScalarProperty Name="DAY30" ColumnName="DAY30" />
-          <ScalarProperty Name="DAY31" ColumnName="DAY31" />
-          <ScalarProperty Name="Sal_Type" ColumnName="Sal_Type" />
-          <ScalarProperty Name="Salary" ColumnName="Salary" />
-          <ScalarProperty Name="Accommodation" ColumnName="Accommodation" />
-          <ScalarProperty Name="Food" ColumnName="Food" />
-          <ScalarProperty Name="insurance" ColumnName="insurance" />
-          <ScalarProperty Name="Gym" ColumnName="Gym" />
-          <ScalarProperty Name="Money_Prim" ColumnName="Money_Prim" />
-          <ScalarProperty Name="Money_LastYear" ColumnName="Money_LastYear" />
-          <ScalarProperty Name="Gasoline" ColumnName="Gasoline" />
-          <ScalarProperty Name="Money_Lo" ColumnName="Money_Lo" />
-          <ScalarProperty Name="NetCash" ColumnName="NetCash" />
-          <ScalarProperty Name="Card_Phone" ColumnName="Card_Phone" />
-          <ScalarProperty Name="Travel" ColumnName="Travel" />
-          <ScalarProperty Name="Tax" ColumnName="Tax" />
-          <ScalarProperty Name="Sal_Total" ColumnName="Sal_Total" />
-          <ScalarProperty Name="Leave_Total" ColumnName="Leave_Total" />
-          <ScalarProperty Name="OT_Total" ColumnName="OT_Total" />
-          <ScalarProperty Name="Forget_Scan_Total" ColumnName="Forget_Scan_Total" />
-          <ScalarProperty Name="Check_In_Late" ColumnName="Check_In_Late" />
-          <ScalarProperty Name="Bonus" ColumnName="Bonus" />
-          <ScalarProperty Name="Company_Mission" ColumnName="Company_Mission" />
-          <ScalarProperty Name="Input_Money" ColumnName="Input_Money" />
-          <ScalarProperty Name="Grand_Total" ColumnName="Grand_Total" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblSupplyers">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblSupplyer">
-        <MappingFragment StoreEntitySet="tblSupplyer">
-          <ScalarProperty Name="PK_Supp_Id" ColumnName="PK_Supp_Id" />
-          <ScalarProperty Name="FK_Loc_Id" ColumnName="FK_Loc_Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblTaxes">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblTax">
-        <MappingFragment StoreEntitySet="tblTax">
-          <ScalarProperty Name="PK_Tax_Id" ColumnName="PK_Tax_Id" />
-          <ScalarProperty Name="FK_Comp_Id" ColumnName="FK_Comp_Id" />
-          <ScalarProperty Name="Tax_Percent" ColumnName="Tax_Percent" />
-          <ScalarProperty Name="Start_Rank_Salary" ColumnName="Start_Rank_Salary" />
-          <ScalarProperty Name="End_Rank_Salary" ColumnName="End_Rank_Salary" />
-          <ScalarProperty Name="Decrease_Tax" ColumnName="Decrease_Tax" />
-          <ScalarProperty Name="Decrease_Tax_From_Fammily" ColumnName="Decrease_Tax_From_Fammily" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Decrease_Tax_Foreign" ColumnName="Decrease_Tax_Foreign" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblTrack_User">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblTrack_User">
-        <MappingFragment StoreEntitySet="tblTrack_User">
-          <ScalarProperty Name="PK_Track_User_Id" ColumnName="PK_Track_User_Id" />
-          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-          <ScalarProperty Name="Online" ColumnName="Online" />
-          <ScalarProperty Name="IP" ColumnName="IP" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="POS_Code" ColumnName="POS_Code" />
-          <ScalarProperty Name="Map" ColumnName="Map" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Time" ColumnName="Time" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblType_Of_Inventory">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblType_Of_Inventory">
-        <MappingFragment StoreEntitySet="tblType_Of_Inventory">
-          <ScalarProperty Name="PK_Type_Inventory_Id" ColumnName="PK_Type_Inventory_Id" />
-          <ScalarProperty Name="FK_Boss_Id" ColumnName="FK_Boss_Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblVouchers">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblVoucher">
-        <MappingFragment StoreEntitySet="tblVoucher">
-          <ScalarProperty Name="PK_Voucher_Id" ColumnName="PK_Voucher_Id" />
-          <ScalarProperty Name="FK_Voucher_Rent_Other_Id" ColumnName="FK_Voucher_Rent_Other_Id" />
-          <ScalarProperty Name="FK_Voucher_No_Id" ColumnName="FK_Voucher_No_Id" />
-          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
-          <ScalarProperty Name="Rec_Date" ColumnName="Rec_Date" />
-          <ScalarProperty Name="Rec_Time" ColumnName="Rec_Time" />
-          <ScalarProperty Name="Voucher_Name" ColumnName="Voucher_Name" />
-          <ScalarProperty Name="Voucher_FK_Staff_Id" ColumnName="Voucher_FK_Staff_Id" />
-          <ScalarProperty Name="Date_Voucher" ColumnName="Date_Voucher" />
-          <ScalarProperty Name="Time_Voucher" ColumnName="Time_Voucher" />
-          <ScalarProperty Name="PCC" ColumnName="PCC" />
-          <ScalarProperty Name="QTY" ColumnName="QTY" />
-          <ScalarProperty Name="UoM" ColumnName="UoM" />
-          <ScalarProperty Name="Unit_Cost" ColumnName="Unit_Cost" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="Discount" ColumnName="Discount" />
-          <ScalarProperty Name="Voucher_Status" ColumnName="Voucher_Status" />
-          <ScalarProperty Name="Voucher_Picure" ColumnName="Voucher_Picure" />
-          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
-          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
-          <ScalarProperty Name="Confirm_time" ColumnName="Confirm_time" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblVoucher_No">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblVoucher_No">
-        <MappingFragment StoreEntitySet="tblVoucher_No">
-          <ScalarProperty Name="PK_Voucher_No_Id" ColumnName="PK_Voucher_No_Id" />
-          <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
-          <ScalarProperty Name="Aprove_PK_U_Id" ColumnName="Aprove_PK_U_Id" />
-          <ScalarProperty Name="Aprove_Date" ColumnName="Aprove_Date" />
-          <ScalarProperty Name="Aprove_Time" ColumnName="Aprove_Time" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher">
-      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblVoucher_Rent_Invertory_Rent_And_Other_Voucher">
-        <MappingFragment StoreEntitySet="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher">
-          <ScalarProperty Name="PK_Voucher_Rent_Other_Id" ColumnName="PK_Voucher_Rent_Other_Id" />
-          <ScalarProperty Name="FK_loc_id" ColumnName="FK_loc_id" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="QTY_in_Month" ColumnName="QTY_in_Month" />
-          <ScalarProperty Name="Unit_Price_in_Month" ColumnName="Unit_Price_in_Month" />
-          <ScalarProperty Name="Amount_In_Month" ColumnName="Amount_In_Month" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
-          <ScalarProperty Name="Start_Rent" ColumnName="Start_Rent" />
-          <ScalarProperty Name="End_Rent" ColumnName="End_Rent" />
-          <ScalarProperty Name="Amount_Month_Year_Rent" ColumnName="Amount_Month_Year_Rent" />
-          <ScalarProperty Name="Discount" ColumnName="Discount" />
-          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
-          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
-          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="AddCheckIn" FunctionName="PAYROLL_20211Model.Store.AddCheckIn" />
     <FunctionImportMapping FunctionImportName="AddLoginCodeGeneration" FunctionName="PAYROLL_20211Model.Store.AddLoginCodeGeneration" />
     <FunctionImportMapping FunctionImportName="AddNextRoster" FunctionName="PAYROLL_20211Model.Store.AddNextRoster" />
@@ -2202,5 +1072,1158 @@
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="PAYROLL_20211Model.Store.sp_upgraddiagrams" />
     <FunctionImportMapping FunctionImportName="UpdateSalaryType" FunctionName="PAYROLL_20211Model.Store.UpdateSalaryType" />
     <FunctionImportMapping FunctionImportName="UpdateStaff" FunctionName="PAYROLL_20211Model.Store.UpdateStaff" />
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAnnouncments">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblAnnouncment">
+        <MappingFragment StoreEntitySet="tblAnnouncment">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Title_Booter2" ColumnName="Title_Booter2" />
+          <ScalarProperty Name="Descr2" ColumnName="Descr2" />
+          <ScalarProperty Name="Picture2" ColumnName="Picture2" />
+          <ScalarProperty Name="Title2" ColumnName="Title2" />
+          <ScalarProperty Name="Title_Booter1" ColumnName="Title_Booter1" />
+          <ScalarProperty Name="Descr1" ColumnName="Descr1" />
+          <ScalarProperty Name="Picture1" ColumnName="Picture1" />
+          <ScalarProperty Name="Title1" ColumnName="Title1" />
+          <ScalarProperty Name="Title_Booter" ColumnName="Title_Booter" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="FK_Loc_Id" ColumnName="FK_Loc_Id" />
+          <ScalarProperty Name="PK_Announment_Id" ColumnName="PK_Announment_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBosses">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblBoss">
+        <MappingFragment StoreEntitySet="tblBoss">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PK_Boss_Id" ColumnName="PK_Boss_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBrokendBalances">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblBrokendBalance">
+        <MappingFragment StoreEntitySet="tblBrokendBalance">
+          <ScalarProperty Name="Brokend_QTY" ColumnName="Brokend_QTY" />
+          <ScalarProperty Name="FK_Dep_Id" ColumnName="FK_Dep_Id" />
+          <ScalarProperty Name="FK_Return_Inventory_Id" ColumnName="FK_Return_Inventory_Id" />
+          <ScalarProperty Name="PK_Brokend_Bal_Id" ColumnName="PK_Brokend_Bal_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCompanies">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblCompany">
+        <MappingFragment StoreEntitySet="tblCompany">
+          <ScalarProperty Name="Number_Staff_Transaction" ColumnName="Number_Staff_Transaction" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Picture_Company" ColumnName="Picture_Company" />
+          <ScalarProperty Name="Comp_Name" ColumnName="Comp_Name" />
+          <ScalarProperty Name="FK_Boss_Id" ColumnName="FK_Boss_Id" />
+          <ScalarProperty Name="PK_Comp_Id" ColumnName="PK_Comp_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblConfigs">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblConfig">
+        <MappingFragment StoreEntitySet="tblConfig">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="key" ColumnName="key" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCut_Money">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblCut_Money">
+        <MappingFragment StoreEntitySet="tblCut_Money">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Cut_Percent" ColumnName="Cut_Percent" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Lev_Name" ColumnName="Lev_Name" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="PK_Cut_Id" ColumnName="PK_Cut_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDepartments">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblDepartment">
+        <MappingFragment StoreEntitySet="tblDepartment">
+          <ScalarProperty Name="Number_Staff_Transaction" ColumnName="Number_Staff_Transaction" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Deppart_Name" ColumnName="Deppart_Name" />
+          <ScalarProperty Name="FK_Loc_Id" ColumnName="FK_Loc_Id" />
+          <ScalarProperty Name="PK_Depart_Id" ColumnName="PK_Depart_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblExchanges">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblExchange">
+        <MappingFragment StoreEntitySet="tblExchange">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="PK_Exchang_Id" ColumnName="PK_Exchang_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblForget_Scan">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblForget_Scan">
+        <MappingFragment StoreEntitySet="tblForget_Scan">
+          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
+          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
+          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+          <ScalarProperty Name="Forget_Date" ColumnName="Forget_Date" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="PK_Forget_Scan_Id" ColumnName="PK_Forget_Scan_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInput_Money">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblInput_Money">
+        <MappingFragment StoreEntitySet="tblInput_Money">
+          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
+          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
+          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="PK_Input_Money_Id" ColumnName="PK_Input_Money_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInputLastyears">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblInputLastyear">
+        <MappingFragment StoreEntitySet="tblInputLastyear">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Total_LastYear" ColumnName="Total_LastYear" />
+          <ScalarProperty Name="Input_LastY_Money" ColumnName="Input_LastY_Money" />
+          <ScalarProperty Name="Multiply" ColumnName="Multiply" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Num_month" ColumnName="Num_month" />
+          <ScalarProperty Name="Num_Year" ColumnName="Num_Year" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="PK_LastY_Money_Id" ColumnName="PK_LastY_Money_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInventories">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblInventory">
+        <MappingFragment StoreEntitySet="tblInventory">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="FK_Model_Of_Inventory_Id" ColumnName="FK_Model_Of_Inventory_Id" />
+          <ScalarProperty Name="PK_Inventory_Id" ColumnName="PK_Inventory_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLocations">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblLocation">
+        <MappingFragment StoreEntitySet="tblLocation">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Loc_Name" ColumnName="Loc_Name" />
+          <ScalarProperty Name="FK_Comp_Id" ColumnName="FK_Comp_Id" />
+          <ScalarProperty Name="PK_Location_Id" ColumnName="PK_Location_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLost_Inventory">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblLost_Inventory">
+        <MappingFragment StoreEntitySet="tblLost_Inventory">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Lost_Status" ColumnName="Lost_Status" />
+          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
+          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
+          <ScalarProperty Name="User_Confrim" ColumnName="User_Confrim" />
+          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+          <ScalarProperty Name="Lost_QTY" ColumnName="Lost_QTY" />
+          <ScalarProperty Name="Lost_By_U" ColumnName="Lost_By_U" />
+          <ScalarProperty Name="Add_Lost_Time_Update" ColumnName="Add_Lost_Time_Update" />
+          <ScalarProperty Name="Add_Lost_Date_Update" ColumnName="Add_Lost_Date_Update" />
+          <ScalarProperty Name="Add_Lost_User_Update" ColumnName="Add_Lost_User_Update" />
+          <ScalarProperty Name="FK_LostInventoryNo_Id" ColumnName="FK_LostInventoryNo_Id" />
+          <ScalarProperty Name="FK_Inventory_Id" ColumnName="FK_Inventory_Id" />
+          <ScalarProperty Name="PK_Lost_Inventor_Id" ColumnName="PK_Lost_Inventor_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLostBalances">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblLostBalance">
+        <MappingFragment StoreEntitySet="tblLostBalance">
+          <ScalarProperty Name="Lost_Balance_QTY" ColumnName="Lost_Balance_QTY" />
+          <ScalarProperty Name="FK_Dep_Id" ColumnName="FK_Dep_Id" />
+          <ScalarProperty Name="FK_Inventory_Id" ColumnName="FK_Inventory_Id" />
+          <ScalarProperty Name="PK_Lost_Balance_Id" ColumnName="PK_Lost_Balance_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLostInventoryNoes">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblLostInventoryNo">
+        <MappingFragment StoreEntitySet="tblLostInventoryNo">
+          <ScalarProperty Name="LostInventoryNo" ColumnName="LostInventoryNo" />
+          <ScalarProperty Name="PK_LostInventoryNo_Id" ColumnName="PK_LostInventoryNo_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblModel_Of_Inventory">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblModel_Of_Inventory">
+        <MappingFragment StoreEntitySet="tblModel_Of_Inventory">
+          <ScalarProperty Name="Time_Updae" ColumnName="Time_Updae" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="FK_Type_Of_Inventory_Id" ColumnName="FK_Type_Of_Inventory_Id" />
+          <ScalarProperty Name="PK_Model_Of_Inventory_Id" ColumnName="PK_Model_Of_Inventory_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblNotifications">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblNotification">
+        <MappingFragment StoreEntitySet="tblNotification">
+          <ScalarProperty Name="Option_Key" ColumnName="Option_Key" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="Notification_Pending" ColumnName="Notification_Pending" />
+          <ScalarProperty Name="Notification" ColumnName="Notification" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="PK_Notification_ID" ColumnName="PK_Notification_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOver_Time">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblOver_Time">
+        <MappingFragment StoreEntitySet="tblOver_Time">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
+          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
+          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+          <ScalarProperty Name="Unit_Price_Hour" ColumnName="Unit_Price_Hour" />
+          <ScalarProperty Name="Amount_Hour" ColumnName="Amount_Hour" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="OT_To_Time" ColumnName="OT_To_Time" />
+          <ScalarProperty Name="OT_From_Time" ColumnName="OT_From_Time" />
+          <ScalarProperty Name="OT_Date" ColumnName="OT_Date" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="PK_Over_Time_Id" ColumnName="PK_Over_Time_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPermissions">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblPermission">
+        <MappingFragment StoreEntitySet="tblPermission">
+          <ScalarProperty Name="View_Measure" ColumnName="View_Measure" />
+          <ScalarProperty Name="View_Profile" ColumnName="View_Profile" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="PK_Permission_Id" ColumnName="PK_Permission_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPositions">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblPosition">
+        <MappingFragment StoreEntitySet="tblPosition">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Pos_Name" ColumnName="Pos_Name" />
+          <ScalarProperty Name="FK_Depart_Id" ColumnName="FK_Depart_Id" />
+          <ScalarProperty Name="PK_Pos_Id" ColumnName="PK_Pos_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Color">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Color">
+        <MappingFragment StoreEntitySet="tblProduction-Color">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Color_Name" ColumnName="Color_Name" />
+          <ScalarProperty Name="QR_Code" ColumnName="QR_Code" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="FK_Pro_Id" ColumnName="FK_Pro_Id" />
+          <ScalarProperty Name="PK_Color_Id" ColumnName="PK_Color_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Grade">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Grade">
+        <MappingFragment StoreEntitySet="tblProduction-Grade">
+          <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Picture_Detail" ColumnName="Picture_Detail" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Pro_Status" ColumnName="Pro_Status" />
+          <ScalarProperty Name="Status_Dis" ColumnName="Status_Dis" />
+          <ScalarProperty Name="End_Dis" ColumnName="End_Dis" />
+          <ScalarProperty Name="Start_Dis" ColumnName="Start_Dis" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Picture_Path" ColumnName="Picture_Path" />
+          <ScalarProperty Name="Normal_Price" ColumnName="Normal_Price" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+          <ScalarProperty Name="Whole_Price" ColumnName="Whole_Price" />
+          <ScalarProperty Name="Double_Whole_Price" ColumnName="Double_Whole_Price" />
+          <ScalarProperty Name="Grade_Name" ColumnName="Grade_Name" />
+          <ScalarProperty Name="Measu_Name" ColumnName="Measu_Name" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="QR_Code" ColumnName="QR_Code" />
+          <ScalarProperty Name="FK_Product_Id" ColumnName="FK_Product_Id" />
+          <ScalarProperty Name="PK_Grade_Id" ColumnName="PK_Grade_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Measur">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Measur">
+        <MappingFragment StoreEntitySet="tblProduction-Measur">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Measu_Name" ColumnName="Measu_Name" />
+          <ScalarProperty Name="FK_Boss_Id" ColumnName="FK_Boss_Id" />
+          <ScalarProperty Name="Pk_Measu_Id" ColumnName="Pk_Measu_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_PK_Stock_In_Product_Cut">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_PK_Stock_In_Product_Cut">
+        <MappingFragment StoreEntitySet="tblProduction-PK_Stock_In_Product_Cut">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Confirm_Status" ColumnName="Confirm_Status" />
+          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
+          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
+          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
+          <ScalarProperty Name="In_Time" ColumnName="In_Time" />
+          <ScalarProperty Name="In_Date" ColumnName="In_Date" />
+          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
+          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
+          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
+          <ScalarProperty Name="FK_Stock_In_Product_Cut_No_Id" ColumnName="FK_Stock_In_Product_Cut_No_Id" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_Stock_In_Product_Cut_Id" ColumnName="PK_Stock_In_Product_Cut_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_PK_Stock_In_Product_Import_Balance">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_PK_Stock_In_Product_Import_Balance">
+        <MappingFragment StoreEntitySet="tblProduction-PK_Stock_In_Product_Import_Balance">
+          <ScalarProperty Name="QTY_Balance" ColumnName="QTY_Balance" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_Stock_In_Product_Import_Bal_Id" ColumnName="PK_Stock_In_Product_Import_Bal_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Product">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Product">
+        <MappingFragment StoreEntitySet="tblProduction-Product">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Picture_Path" ColumnName="Picture_Path" />
+          <ScalarProperty Name="Pro_Name" ColumnName="Pro_Name" />
+          <ScalarProperty Name="FK_ProType_Id" ColumnName="FK_ProType_Id" />
+          <ScalarProperty Name="PK_Pro_Id" ColumnName="PK_Pro_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_ProductType">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_ProductType">
+        <MappingFragment StoreEntitySet="tblProduction-ProductType">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="ProType_Name" ColumnName="ProType_Name" />
+          <ScalarProperty Name="Pro_Type" ColumnName="Pro_Type" />
+          <ScalarProperty Name="FK_Boss_Id" ColumnName="FK_Boss_Id" />
+          <ScalarProperty Name="PK_ProType_Id" ColumnName="PK_ProType_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Repair_Closth">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Repair_Closth">
+        <MappingFragment StoreEntitySet="tblProduction-Repair_Closth">
+          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
+          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
+          <ScalarProperty Name="Confirm_User" ColumnName="Confirm_User" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Time_Updte" ColumnName="Time_Updte" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
+          <ScalarProperty Name="Type_Repair" ColumnName="Type_Repair" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Repaire_Type" ColumnName="Repaire_Type" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="Repair_Closth_No" ColumnName="Repair_Closth_No" />
+          <ScalarProperty Name="FK_To_Loc_Id" ColumnName="FK_To_Loc_Id" />
+          <ScalarProperty Name="FK_From_Com_Id" ColumnName="FK_From_Com_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_Repair_Closth_Id" ColumnName="PK_Repair_Closth_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Repair_Closth_Balance">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Repair_Closth_Balance">
+        <MappingFragment StoreEntitySet="tblProduction-Repair_Closth_Balance">
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="FK_To_Loc_Id" ColumnName="FK_To_Loc_Id" />
+          <ScalarProperty Name="FK_From_Com_Id" ColumnName="FK_From_Com_Id" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_Reepair_Closth_Balance_Id" ColumnName="PK_Reepair_Closth_Balance_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Repair_Closth_No">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Repair_Closth_No">
+        <MappingFragment StoreEntitySet="tblProduction-Repair_Closth_No">
+          <ScalarProperty Name="Repair_Closth_No" ColumnName="Repair_Closth_No" />
+          <ScalarProperty Name="PK_Repair_Closth_No_Id" ColumnName="PK_Repair_Closth_No_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Size">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Size">
+        <MappingFragment StoreEntitySet="tblProduction-Size">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Size_Name" ColumnName="Size_Name" />
+          <ScalarProperty Name="FK_Color_Id" ColumnName="FK_Color_Id" />
+          <ScalarProperty Name="PK_Size_Id" ColumnName="PK_Size_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Stock_In_Product_Cut_No">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Stock_In_Product_Cut_No">
+        <MappingFragment StoreEntitySet="tblProduction-Stock_In_Product_Cut_No">
+          <ScalarProperty Name="Stock_In_Product_Cut_No" ColumnName="Stock_In_Product_Cut_No" />
+          <ScalarProperty Name="PK_Stock_In_Product_Cut_No_Id" ColumnName="PK_Stock_In_Product_Cut_No_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Stock_In_Product_Import">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Stock_In_Product_Import">
+        <MappingFragment StoreEntitySet="tblProduction-Stock_In_Product_Import">
+          <ScalarProperty Name="Confirm_Status" ColumnName="Confirm_Status" />
+          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
+          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
+          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
+          <ScalarProperty Name="InVoicePicture" ColumnName="InVoicePicture" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="In_Time" ColumnName="In_Time" />
+          <ScalarProperty Name="In_Date" ColumnName="In_Date" />
+          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
+          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
+          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
+          <ScalarProperty Name="Type_" ColumnName="Type_" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_Stock_In_Product_Import_Id" ColumnName="PK_Stock_In_Product_Import_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_StockIn_Complete_Balance">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_StockIn_Complete_Balance">
+        <MappingFragment StoreEntitySet="tblProduction-StockIn_Complete_Balance">
+          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="WW" ColumnName="WW" />
+          <ScalarProperty Name="WH" ColumnName="WH" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_StockIn_Complete_Product_Balance_Id" ColumnName="PK_StockIn_Complete_Product_Balance_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_StockIn_Cut_On_Loc">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_StockIn_Cut_On_Loc">
+        <MappingFragment StoreEntitySet="tblProduction-StockIn_Cut_On_Loc">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Confirm_Status" ColumnName="Confirm_Status" />
+          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
+          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
+          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
+          <ScalarProperty Name="In_Time" ColumnName="In_Time" />
+          <ScalarProperty Name="In_Date" ColumnName="In_Date" />
+          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
+          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
+          <ScalarProperty Name="StockIn_Cut_On_LocNo_Id" ColumnName="StockIn_Cut_On_LocNo_Id" />
+          <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
+          <ScalarProperty Name="FK_Comp_From_Id" ColumnName="FK_Comp_From_Id" />
+          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
+          <ScalarProperty Name="FK_Loc_Id" ColumnName="FK_Loc_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_StockIn_Cut_On_Loc_Id" ColumnName="PK_StockIn_Cut_On_Loc_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_StockIn_Cut_On_LocBalance">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_StockIn_Cut_On_LocBalance">
+        <MappingFragment StoreEntitySet="tblProduction-StockIn_Cut_On_LocBalance">
+          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
+          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
+          <ScalarProperty Name="Stock_In_Product_Cut_No" ColumnName="Stock_In_Product_Cut_No" />
+          <ScalarProperty Name="FK_Loc_Id" ColumnName="FK_Loc_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_StockIn_Cut_On_Loc_Balance_Id" ColumnName="PK_StockIn_Cut_On_Loc_Balance_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_StockIn_Cut_On_LocNo">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_StockIn_Cut_On_LocNo">
+        <MappingFragment StoreEntitySet="tblProduction-StockIn_Cut_On_LocNo">
+          <ScalarProperty Name="StockIn_Cut_On_LocNo" ColumnName="StockIn_Cut_On_LocNo" />
+          <ScalarProperty Name="PK_StockIn_Cut_On_LocNo_Id" ColumnName="PK_StockIn_Cut_On_LocNo_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_StockIn_Product_Cut_Balance">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_StockIn_Product_Cut_Balance">
+        <MappingFragment StoreEntitySet="tblProduction-StockIn_Product_Cut_Balance">
+          <ScalarProperty Name="QTY_Balance" ColumnName="QTY_Balance" />
+          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
+          <ScalarProperty Name="Stock_In_Product_Cut_No_Id" ColumnName="Stock_In_Product_Cut_No_Id" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_StockIn_Product_Cut_Balance_Id" ColumnName="PK_StockIn_Product_Cut_Balance_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Tranfer_From_LocTo_Comp">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Tranfer_From_LocTo_Comp">
+        <MappingFragment StoreEntitySet="tblProduction-Tranfer_From_LocTo_Comp">
+          <ScalarProperty Name="Desce" ColumnName="Desce" />
+          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
+          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
+          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
+          <ScalarProperty Name="Tranfer_Status" ColumnName="Tranfer_Status" />
+          <ScalarProperty Name="Tranfer_Time" ColumnName="Tranfer_Time" />
+          <ScalarProperty Name="Tranfer_Date" ColumnName="Tranfer_Date" />
+          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
+          <ScalarProperty Name="Tranfer_In_Type" ColumnName="Tranfer_In_Type" />
+          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
+          <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
+          <ScalarProperty Name="FK_Loc_From_Id" ColumnName="FK_Loc_From_Id" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_Tranfer_From_LocTo_Comp_Id" ColumnName="PK_Tranfer_From_LocTo_Comp_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Use_Fabrik_On_Cut">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Use_Fabrik_On_Cut">
+        <MappingFragment StoreEntitySet="tblProduction-Use_Fabrik_On_Cut">
+          <ScalarProperty Name="In_Time" ColumnName="In_Time" />
+          <ScalarProperty Name="In_Date" ColumnName="In_Date" />
+          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
+          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
+          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
+          <ScalarProperty Name="Stock_In_Product_Cut_No" ColumnName="Stock_In_Product_Cut_No" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_Use_Fabrik_On_Cut_Id" ColumnName="PK_Use_Fabrik_On_Cut_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProduction_Use_Fabrik_On_Cut_Balance">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProduction_Use_Fabrik_On_Cut_Balance">
+        <MappingFragment StoreEntitySet="tblProduction-Use_Fabrik_On_Cut_Balance">
+          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
+          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
+          <ScalarProperty Name="Stock_In_Product_Cut_No" ColumnName="Stock_In_Product_Cut_No" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_Use_Fabrik_On_Cut_Balance_Id" ColumnName="PK_Use_Fabrik_On_Cut_Balance_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProducttion_StockIn_Complete_Product">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblProducttion_StockIn_Complete_Product">
+        <MappingFragment StoreEntitySet="tblProducttion-StockIn_Complete_Product">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Confirm_Status" ColumnName="Confirm_Status" />
+          <ScalarProperty Name="Confirm_Time" ColumnName="Confirm_Time" />
+          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
+          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
+          <ScalarProperty Name="In_Time" ColumnName="In_Time" />
+          <ScalarProperty Name="In_Date" ColumnName="In_Date" />
+          <ScalarProperty Name="U_Update" ColumnName="U_Update" />
+          <ScalarProperty Name="Stock_In_Type" ColumnName="Stock_In_Type" />
+          <ScalarProperty Name="Stock_In_Product_Cut_No_Onlocation" ColumnName="Stock_In_Product_Cut_No_Onlocation" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="WW" ColumnName="WW" />
+          <ScalarProperty Name="WH" ColumnName="WH" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="In_QTY" ColumnName="In_QTY" />
+          <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
+          <ScalarProperty Name="FK_Loc_From_Id" ColumnName="FK_Loc_From_Id" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Grade_Id" ColumnName="FK_Grade_Id" />
+          <ScalarProperty Name="PK_StockIn_Complete_Product_Id" ColumnName="PK_StockIn_Complete_Product_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPuchases">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblPuchase">
+        <MappingFragment StoreEntitySet="tblPuchase">
+          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
+          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
+          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Picture_Product" ColumnName="Picture_Product" />
+          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
+          <ScalarProperty Name="Time_Puchase" ColumnName="Time_Puchase" />
+          <ScalarProperty Name="Date_Puchase" ColumnName="Date_Puchase" />
+          <ScalarProperty Name="FK_PuchaseNo_Id" ColumnName="FK_PuchaseNo_Id" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="PK_Puchase_Id" ColumnName="PK_Puchase_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPuchaseNoes">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblPuchaseNo">
+        <MappingFragment StoreEntitySet="tblPuchaseNo">
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="PK_PuchaseNo_Id" ColumnName="PK_PuchaseNo_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRemain_Leave">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblRemain_Leave">
+        <MappingFragment StoreEntitySet="tblRemain_Leave">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Updae" ColumnName="User_Updae" />
+          <ScalarProperty Name="CM_Remain" ColumnName="CM_Remain" />
+          <ScalarProperty Name="AB_Remain" ColumnName="AB_Remain" />
+          <ScalarProperty Name="UPL_Remain" ColumnName="UPL_Remain" />
+          <ScalarProperty Name="SIC_Remain" ColumnName="SIC_Remain" />
+          <ScalarProperty Name="PH_Remain" ColumnName="PH_Remain" />
+          <ScalarProperty Name="AL_Remain" ColumnName="AL_Remain" />
+          <ScalarProperty Name="OFF_Remain" ColumnName="OFF_Remain" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="PK_Remain_Leave_Id" ColumnName="PK_Remain_Leave_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblReturnInventories">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblReturnInventory">
+        <MappingFragment StoreEntitySet="tblReturnInventory">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Return_Status" ColumnName="Return_Status" />
+          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
+          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
+          <ScalarProperty Name="User_Confrim" ColumnName="User_Confrim" />
+          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+          <ScalarProperty Name="Return_QTY" ColumnName="Return_QTY" />
+          <ScalarProperty Name="Return_Type" ColumnName="Return_Type" />
+          <ScalarProperty Name="Return_Brokent_Time_Update" ColumnName="Return_Brokent_Time_Update" />
+          <ScalarProperty Name="Return_Brokent_Date_Update" ColumnName="Return_Brokent_Date_Update" />
+          <ScalarProperty Name="Return_Brokend_User_Update" ColumnName="Return_Brokend_User_Update" />
+          <ScalarProperty Name="FK_Return_InventoryNo_Id" ColumnName="FK_Return_InventoryNo_Id" />
+          <ScalarProperty Name="PK_Return_Inventory_Id" ColumnName="PK_Return_Inventory_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblReturnInventoryNoes">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblReturnInventoryNo">
+        <MappingFragment StoreEntitySet="tblReturnInventoryNo">
+          <ScalarProperty Name="Return_InventoryNo" ColumnName="Return_InventoryNo" />
+          <ScalarProperty Name="PK_Return_InventoryNo_Id" ColumnName="PK_Return_InventoryNo_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRosters">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblRoster">
+        <MappingFragment StoreEntitySet="tblRoster">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="CM" ColumnName="CM" />
+          <ScalarProperty Name="AB" ColumnName="AB" />
+          <ScalarProperty Name="UPL" ColumnName="UPL" />
+          <ScalarProperty Name="SIC" ColumnName="SIC" />
+          <ScalarProperty Name="AL" ColumnName="AL" />
+          <ScalarProperty Name="PH" ColumnName="PH" />
+          <ScalarProperty Name="OFF" ColumnName="OFF" />
+          <ScalarProperty Name="DAY31" ColumnName="DAY31" />
+          <ScalarProperty Name="DAY30" ColumnName="DAY30" />
+          <ScalarProperty Name="DAY29" ColumnName="DAY29" />
+          <ScalarProperty Name="DAY28" ColumnName="DAY28" />
+          <ScalarProperty Name="DAY27" ColumnName="DAY27" />
+          <ScalarProperty Name="DAY26" ColumnName="DAY26" />
+          <ScalarProperty Name="DAY25" ColumnName="DAY25" />
+          <ScalarProperty Name="DAY24" ColumnName="DAY24" />
+          <ScalarProperty Name="DAY23" ColumnName="DAY23" />
+          <ScalarProperty Name="DAY22" ColumnName="DAY22" />
+          <ScalarProperty Name="DAY21" ColumnName="DAY21" />
+          <ScalarProperty Name="DAY20" ColumnName="DAY20" />
+          <ScalarProperty Name="DAY19" ColumnName="DAY19" />
+          <ScalarProperty Name="DAY18" ColumnName="DAY18" />
+          <ScalarProperty Name="DAY17" ColumnName="DAY17" />
+          <ScalarProperty Name="DAY16" ColumnName="DAY16" />
+          <ScalarProperty Name="DAY15" ColumnName="DAY15" />
+          <ScalarProperty Name="DAY14" ColumnName="DAY14" />
+          <ScalarProperty Name="DAY13" ColumnName="DAY13" />
+          <ScalarProperty Name="DAY12" ColumnName="DAY12" />
+          <ScalarProperty Name="DAY11" ColumnName="DAY11" />
+          <ScalarProperty Name="DAY10" ColumnName="DAY10" />
+          <ScalarProperty Name="DAY9" ColumnName="DAY9" />
+          <ScalarProperty Name="DAY8" ColumnName="DAY8" />
+          <ScalarProperty Name="DAY7" ColumnName="DAY7" />
+          <ScalarProperty Name="DAY6" ColumnName="DAY6" />
+          <ScalarProperty Name="DAY5" ColumnName="DAY5" />
+          <ScalarProperty Name="DAY4" ColumnName="DAY4" />
+          <ScalarProperty Name="DAY3" ColumnName="DAY3" />
+          <ScalarProperty Name="DAY2" ColumnName="DAY2" />
+          <ScalarProperty Name="DAY1" ColumnName="DAY1" />
+          <ScalarProperty Name="Num_Month" ColumnName="Num_Month" />
+          <ScalarProperty Name="Num_Year" ColumnName="Num_Year" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="PK_Ros_Id" ColumnName="PK_Ros_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSalary_Type">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblSalary_Type">
+        <MappingFragment StoreEntitySet="tblSalary_Type">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="CM" ColumnName="CM" />
+          <ScalarProperty Name="AB" ColumnName="AB" />
+          <ScalarProperty Name="UPL" ColumnName="UPL" />
+          <ScalarProperty Name="Sick" ColumnName="Sick" />
+          <ScalarProperty Name="PH_Day" ColumnName="PH_Day" />
+          <ScalarProperty Name="AL_Day" ColumnName="AL_Day" />
+          <ScalarProperty Name="Off_Day" ColumnName="Off_Day" />
+          <ScalarProperty Name="Relax_Hour" ColumnName="Relax_Hour" />
+          <ScalarProperty Name="Work_Hour_Taget" ColumnName="Work_Hour_Taget" />
+          <ScalarProperty Name="OT_Unit_Price" ColumnName="OT_Unit_Price" />
+          <ScalarProperty Name="Gasoline" ColumnName="Gasoline" />
+          <ScalarProperty Name="Travel" ColumnName="Travel" />
+          <ScalarProperty Name="Money_Prim" ColumnName="Money_Prim" />
+          <ScalarProperty Name="insurance" ColumnName="insurance" />
+          <ScalarProperty Name="Food" ColumnName="Food" />
+          <ScalarProperty Name="Accommodation" ColumnName="Accommodation" />
+          <ScalarProperty Name="Gym" ColumnName="Gym" />
+          <ScalarProperty Name="Card_Phone" ColumnName="Card_Phone" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Sal_Type" ColumnName="Sal_Type" />
+          <ScalarProperty Name="FK_Sta_Id" ColumnName="FK_Sta_Id" />
+          <ScalarProperty Name="PK_Sal_Type_Id" ColumnName="PK_Sal_Type_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblShareHolders">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblShareHolder">
+        <MappingFragment StoreEntitySet="tblShareHolder">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Increase_Money" ColumnName="Increase_Money" />
+          <ScalarProperty Name="Time_Input" ColumnName="Time_Input" />
+          <ScalarProperty Name="Date_Input" ColumnName="Date_Input" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="PK_ShareHolder_Id" ColumnName="PK_ShareHolder_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStaffs">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblStaff">
+        <MappingFragment StoreEntitySet="tblStaff">
+          <ScalarProperty Name="LoginCodeGeneration" ColumnName="LoginCodeGeneration" />
+          <ScalarProperty Name="FingerPrintTemplate" ColumnName="FingerPrintTemplate" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="No_Scan" ColumnName="No_Scan" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+          <ScalarProperty Name="Join_date" ColumnName="Join_date" />
+          <ScalarProperty Name="Staff_Status" ColumnName="Staff_Status" />
+          <ScalarProperty Name="Serail_Card" ColumnName="Serail_Card" />
+          <ScalarProperty Name="Staff_Id_Card" ColumnName="Staff_Id_Card" />
+          <ScalarProperty Name="Identify_Picture" ColumnName="Identify_Picture" />
+          <ScalarProperty Name="Identity_Card" ColumnName="Identity_Card" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Account_Number" ColumnName="Account_Number" />
+          <ScalarProperty Name="Account_Name" ColumnName="Account_Name" />
+          <ScalarProperty Name="Tell" ColumnName="Tell" />
+          <ScalarProperty Name="Daughter" ColumnName="Daughter" />
+          <ScalarProperty Name="Son" ColumnName="Son" />
+          <ScalarProperty Name="Wife" ColumnName="Wife" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Marry_Status" ColumnName="Marry_Status" />
+          <ScalarProperty Name="Staff_DOB" ColumnName="Staff_DOB" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Staff_Name" ColumnName="Staff_Name" />
+          <ScalarProperty Name="FK_Pos_Id" ColumnName="FK_Pos_Id" />
+          <ScalarProperty Name="PK_Staff_Id" ColumnName="PK_Staff_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStock_In_Inventory_Id">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblStock_In_Inventory_Id">
+        <MappingFragment StoreEntitySet="tblStock_In_Inventory_Id">
+          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
+          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
+          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
+          <ScalarProperty Name="In_Status" ColumnName="In_Status" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+          <ScalarProperty Name="Stock_In" ColumnName="Stock_In" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Supp_Id" ColumnName="FK_Supp_Id" />
+          <ScalarProperty Name="FK_Inventory_Id" ColumnName="FK_Inventory_Id" />
+          <ScalarProperty Name="PK_Stock_In_Inventory_Id" ColumnName="PK_Stock_In_Inventory_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStockBalance_Inventory">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblStockBalance_Inventory">
+        <MappingFragment StoreEntitySet="tblStockBalance_Inventory">
+          <ScalarProperty Name="Stock_Bal_Qty" ColumnName="Stock_Bal_Qty" />
+          <ScalarProperty Name="FK_Com_Id" ColumnName="FK_Com_Id" />
+          <ScalarProperty Name="FK_Inventory_Id" ColumnName="FK_Inventory_Id" />
+          <ScalarProperty Name="PK_StockBl_Id" ColumnName="PK_StockBl_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStockBalanceInventoryInDepartments">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblStockBalanceInventoryInDepartment">
+        <MappingFragment StoreEntitySet="tblStockBalanceInventoryInDepartment">
+          <ScalarProperty Name="QTY_Balance" ColumnName="QTY_Balance" />
+          <ScalarProperty Name="FK_Depart_Id" ColumnName="FK_Depart_Id" />
+          <ScalarProperty Name="FK_Inventory_Id" ColumnName="FK_Inventory_Id" />
+          <ScalarProperty Name="PK_StockBal_InDepartment_ID" ColumnName="PK_StockBal_InDepartment_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStockinventoryOnDepartments">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblStockinventoryOnDepartment">
+        <MappingFragment StoreEntitySet="tblStockinventoryOnDepartment">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Time_Confirm" ColumnName="Time_Confirm" />
+          <ScalarProperty Name="Date_Confirm" ColumnName="Date_Confirm" />
+          <ScalarProperty Name="User_Confirm" ColumnName="User_Confirm" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Time_StockIn" ColumnName="Time_StockIn" />
+          <ScalarProperty Name="Date_StockIn" ColumnName="Date_StockIn" />
+          <ScalarProperty Name="StockIn_By" ColumnName="StockIn_By" />
+          <ScalarProperty Name="Type_Inventory" ColumnName="Type_Inventory" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="FK_Department_ID" ColumnName="FK_Department_ID" />
+          <ScalarProperty Name="FK_Inventory_ID" ColumnName="FK_Inventory_ID" />
+          <ScalarProperty Name="Pk_StockIN_Inventory_On_Department_Id" ColumnName="Pk_StockIN_Inventory_On_Department_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSum_Sal">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblSum_Sal">
+        <MappingFragment StoreEntitySet="tblSum_Sal">
+          <ScalarProperty Name="Grand_Total" ColumnName="Grand_Total" />
+          <ScalarProperty Name="Input_Money" ColumnName="Input_Money" />
+          <ScalarProperty Name="Company_Mission" ColumnName="Company_Mission" />
+          <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+          <ScalarProperty Name="Check_In_Late" ColumnName="Check_In_Late" />
+          <ScalarProperty Name="Forget_Scan_Total" ColumnName="Forget_Scan_Total" />
+          <ScalarProperty Name="OT_Total" ColumnName="OT_Total" />
+          <ScalarProperty Name="Leave_Total" ColumnName="Leave_Total" />
+          <ScalarProperty Name="Sal_Total" ColumnName="Sal_Total" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="Travel" ColumnName="Travel" />
+          <ScalarProperty Name="Card_Phone" ColumnName="Card_Phone" />
+          <ScalarProperty Name="NetCash" ColumnName="NetCash" />
+          <ScalarProperty Name="Money_Lo" ColumnName="Money_Lo" />
+          <ScalarProperty Name="Gasoline" ColumnName="Gasoline" />
+          <ScalarProperty Name="Money_LastYear" ColumnName="Money_LastYear" />
+          <ScalarProperty Name="Money_Prim" ColumnName="Money_Prim" />
+          <ScalarProperty Name="Gym" ColumnName="Gym" />
+          <ScalarProperty Name="insurance" ColumnName="insurance" />
+          <ScalarProperty Name="Food" ColumnName="Food" />
+          <ScalarProperty Name="Accommodation" ColumnName="Accommodation" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Sal_Type" ColumnName="Sal_Type" />
+          <ScalarProperty Name="DAY31" ColumnName="DAY31" />
+          <ScalarProperty Name="DAY30" ColumnName="DAY30" />
+          <ScalarProperty Name="DAY29" ColumnName="DAY29" />
+          <ScalarProperty Name="DAY28" ColumnName="DAY28" />
+          <ScalarProperty Name="DAY27" ColumnName="DAY27" />
+          <ScalarProperty Name="DAY26" ColumnName="DAY26" />
+          <ScalarProperty Name="DAY25" ColumnName="DAY25" />
+          <ScalarProperty Name="DAY24" ColumnName="DAY24" />
+          <ScalarProperty Name="DAY23" ColumnName="DAY23" />
+          <ScalarProperty Name="DAY22" ColumnName="DAY22" />
+          <ScalarProperty Name="DAY21" ColumnName="DAY21" />
+          <ScalarProperty Name="DAY20" ColumnName="DAY20" />
+          <ScalarProperty Name="DAY19" ColumnName="DAY19" />
+          <ScalarProperty Name="DAY18" ColumnName="DAY18" />
+          <ScalarProperty Name="DAY17" ColumnName="DAY17" />
+          <ScalarProperty Name="DAY16" ColumnName="DAY16" />
+          <ScalarProperty Name="DAY15" ColumnName="DAY15" />
+          <ScalarProperty Name="DAY14" ColumnName="DAY14" />
+          <ScalarProperty Name="DAY13" ColumnName="DAY13" />
+          <ScalarProperty Name="DAY12" ColumnName="DAY12" />
+          <ScalarProperty Name="DAY11" ColumnName="DAY11" />
+          <ScalarProperty Name="DAY10" ColumnName="DAY10" />
+          <ScalarProperty Name="DAY9" ColumnName="DAY9" />
+          <ScalarProperty Name="DAY8" ColumnName="DAY8" />
+          <ScalarProperty Name="DAY7" ColumnName="DAY7" />
+          <ScalarProperty Name="DAY6" ColumnName="DAY6" />
+          <ScalarProperty Name="DAY5" ColumnName="DAY5" />
+          <ScalarProperty Name="DAY4" ColumnName="DAY4" />
+          <ScalarProperty Name="DAY3" ColumnName="DAY3" />
+          <ScalarProperty Name="DAY2" ColumnName="DAY2" />
+          <ScalarProperty Name="DAY1" ColumnName="DAY1" />
+          <ScalarProperty Name="Num_Month" ColumnName="Num_Month" />
+          <ScalarProperty Name="Num_Year" ColumnName="Num_Year" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="PK_Sum_sal_Id" ColumnName="PK_Sum_sal_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSupplyers">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblSupplyer">
+        <MappingFragment StoreEntitySet="tblSupplyer">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="FK_Loc_Id" ColumnName="FK_Loc_Id" />
+          <ScalarProperty Name="PK_Supp_Id" ColumnName="PK_Supp_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTaxes">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblTax">
+        <MappingFragment StoreEntitySet="tblTax">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="Decrease_Tax_Foreign" ColumnName="Decrease_Tax_Foreign" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Decrease_Tax_From_Fammily" ColumnName="Decrease_Tax_From_Fammily" />
+          <ScalarProperty Name="Decrease_Tax" ColumnName="Decrease_Tax" />
+          <ScalarProperty Name="End_Rank_Salary" ColumnName="End_Rank_Salary" />
+          <ScalarProperty Name="Start_Rank_Salary" ColumnName="Start_Rank_Salary" />
+          <ScalarProperty Name="Tax_Percent" ColumnName="Tax_Percent" />
+          <ScalarProperty Name="FK_Comp_Id" ColumnName="FK_Comp_Id" />
+          <ScalarProperty Name="PK_Tax_Id" ColumnName="PK_Tax_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTrack_User">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblTrack_User">
+        <MappingFragment StoreEntitySet="tblTrack_User">
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Map" ColumnName="Map" />
+          <ScalarProperty Name="POS_Code" ColumnName="POS_Code" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="IP" ColumnName="IP" />
+          <ScalarProperty Name="Online" ColumnName="Online" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="PK_Track_User_Id" ColumnName="PK_Track_User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblType_Of_Inventory">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblType_Of_Inventory">
+        <MappingFragment StoreEntitySet="tblType_Of_Inventory">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="FK_Boss_Id" ColumnName="FK_Boss_Id" />
+          <ScalarProperty Name="PK_Type_Inventory_Id" ColumnName="PK_Type_Inventory_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUser_Tracking">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblUser_Tracking">
+        <MappingFragment StoreEntitySet="tblUser_Tracking">
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Organization" ColumnName="Organization" />
+          <ScalarProperty Name="ISP" ColumnName="ISP" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Continent_Name" ColumnName="Continent_Name" />
+          <ScalarProperty Name="Country_Code" ColumnName="Country_Code" />
+          <ScalarProperty Name="Country_Name" ColumnName="Country_Name" />
+          <ScalarProperty Name="Region_Code" ColumnName="Region_Code" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="IP" ColumnName="IP" />
+          <ScalarProperty Name="Online" ColumnName="Online" />
+          <ScalarProperty Name="U_Id" ColumnName="U_Id" />
+          <ScalarProperty Name="PK_U_Tracking_Id" ColumnName="PK_U_Tracking_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblVouchers">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblVoucher">
+        <MappingFragment StoreEntitySet="tblVoucher">
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Confirm_time" ColumnName="Confirm_time" />
+          <ScalarProperty Name="Confirm_Date" ColumnName="Confirm_Date" />
+          <ScalarProperty Name="Confirm_PK_U_Id" ColumnName="Confirm_PK_U_Id" />
+          <ScalarProperty Name="Voucher_Picure" ColumnName="Voucher_Picure" />
+          <ScalarProperty Name="Voucher_Status" ColumnName="Voucher_Status" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Unit_Cost" ColumnName="Unit_Cost" />
+          <ScalarProperty Name="UoM" ColumnName="UoM" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="PCC" ColumnName="PCC" />
+          <ScalarProperty Name="Time_Voucher" ColumnName="Time_Voucher" />
+          <ScalarProperty Name="Date_Voucher" ColumnName="Date_Voucher" />
+          <ScalarProperty Name="Voucher_FK_Staff_Id" ColumnName="Voucher_FK_Staff_Id" />
+          <ScalarProperty Name="Voucher_Name" ColumnName="Voucher_Name" />
+          <ScalarProperty Name="Rec_Time" ColumnName="Rec_Time" />
+          <ScalarProperty Name="Rec_Date" ColumnName="Rec_Date" />
+          <ScalarProperty Name="FK_Staff_Id" ColumnName="FK_Staff_Id" />
+          <ScalarProperty Name="FK_Voucher_No_Id" ColumnName="FK_Voucher_No_Id" />
+          <ScalarProperty Name="FK_Voucher_Rent_Other_Id" ColumnName="FK_Voucher_Rent_Other_Id" />
+          <ScalarProperty Name="PK_Voucher_Id" ColumnName="PK_Voucher_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblVoucher_No">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblVoucher_No">
+        <MappingFragment StoreEntitySet="tblVoucher_No">
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Aprove_Time" ColumnName="Aprove_Time" />
+          <ScalarProperty Name="Aprove_Date" ColumnName="Aprove_Date" />
+          <ScalarProperty Name="Aprove_PK_U_Id" ColumnName="Aprove_PK_U_Id" />
+          <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+          <ScalarProperty Name="PK_Voucher_No_Id" ColumnName="PK_Voucher_No_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher">
+      <EntityTypeMapping TypeName="PAYROLL_20211Model.tblVoucher_Rent_Invertory_Rent_And_Other_Voucher">
+        <MappingFragment StoreEntitySet="tblVoucher_Rent_Invertory_Rent_And_Other_Voucher">
+          <ScalarProperty Name="Time_Update" ColumnName="Time_Update" />
+          <ScalarProperty Name="Date_Update" ColumnName="Date_Update" />
+          <ScalarProperty Name="User_Update" ColumnName="User_Update" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Amount_Month_Year_Rent" ColumnName="Amount_Month_Year_Rent" />
+          <ScalarProperty Name="End_Rent" ColumnName="End_Rent" />
+          <ScalarProperty Name="Start_Rent" ColumnName="Start_Rent" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Amount_In_Month" ColumnName="Amount_In_Month" />
+          <ScalarProperty Name="Unit_Price_in_Month" ColumnName="Unit_Price_in_Month" />
+          <ScalarProperty Name="QTY_in_Month" ColumnName="QTY_in_Month" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="FK_loc_id" ColumnName="FK_loc_id" />
+          <ScalarProperty Name="PK_Voucher_Rent_Other_Id" ColumnName="PK_Voucher_Rent_Other_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddTrackingUser" FunctionName="PAYROLL_20211Model.Store.AddTrackingUser" />
+    <FunctionImportMapping FunctionImportName="UpdateTrackingUserOffline" FunctionName="PAYROLL_20211Model.Store.UpdateTrackingUserOffline" />
   </EntityContainerMapping>
 </Mapping>

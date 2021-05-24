@@ -1,4 +1,4 @@
-﻿@using PagedList.Mvc
+@using PagedList.Mvc
 @model PagedList.IPagedList<web_payrolls.Models.GetAllStaffs_Result>
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -192,7 +192,7 @@
                     @Html.DisplayFor(modelItem => item.Staff_Id_Card)
                 </td>
                 <td class="text-center">
-                    @if (item.Photo == null)
+                    @if (item.Photo == null | item.Photo == "")
                     {
                         <img id="image_view_has_ann"
                              class="img-fluid img-thumbnail"
@@ -214,7 +214,7 @@
                     }
                 </td>
                 <td class="text-center">
-                    @if (item.Identify_Picture == null)
+                    @if (item.Identify_Picture == null | item.Identify_Picture == "")
                     {
                         <img id="image_view_has_ann"
                              class="img-fluid img-thumbnail"

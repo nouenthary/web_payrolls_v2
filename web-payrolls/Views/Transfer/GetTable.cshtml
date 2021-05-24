@@ -1,0 +1,105 @@
+@using PagedList.Mvc
+@using web_payrolls.Models
+@model  PagedList.IPagedList<web_payrolls.Models.GetAllTransferLocation_Result>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+
+<div class="table-responsive m-t-0 bg-white">
+  <table class="table table-sm text-center table-bordered" id="table-transfer">
+    <thead class="text-capitalize font-weight-bold table-header-shadow">
+    <tr style="border: 1px solid #f3f1f1">
+      <td>No.</td>
+      <td>Modify</td>
+      <td>Confirm</td>
+      <td>Reject</td>
+      <td>HOD</td>
+      <td>Company</td>
+      <td>Location</td>
+      <td>Type</td>
+      <td>Type_Name</td>
+      <td>Product</td>
+      <td>Color</td>
+      <td>Size</td>
+      <td>Grade</td>
+      <td>Measure</td>
+      <td>Code</td>
+      <td>Barcode</td>
+      <td>Qr_Code</td>
+      <td>Invoice</td>
+      <td>QTY</td>
+      <td>Date </td>
+      <td>Time </td>
+      <td>Status</td>
+      <td>User_Update</td>
+      <td>User_Confirm</td>
+      <td>Date_Confirm</td>
+      <td>Time_Confirm</td>
+    </tr>
+    </thead>
+    <tbody>
+    @{ var rowNo = 0; }
+    @foreach (var row in Model)
+    {
+      <tr data-id="@row.Id">
+
+        <td>@(rowNo += 1)</td>
+        <td>
+          <button type="button" id="btn-edit" class="btn btn-default btn-sm" @(row.Status != "Pending" ? "disabled" : "")>
+            <i class="ti-pencil"></i>
+          </button>
+        </td>
+        <td>
+          <button type="button" id="btn-confirm" class="btn btn-info btn-sm" @(row.Status != "Pending" ? "disabled" : "")>
+            <i class="ti-check"></i>
+          </button>
+        </td>
+        <td>
+          <button type="button" id="btn-reject" class="btn btn-danger btn-sm" @(row.Status != "Pending" ? "disabled" : "")>
+            <i class="ti-close"></i>
+          </button>
+        </td>
+        <td>@row.Name</td>
+        <td>@row.Company</td>
+        <td>@row.Location</td>
+        <td>
+          <span class="label label-success">@row.ProductType</span>
+        </td>
+        <td>
+          <span class="">@row.TypeName</span>
+        </td>
+        <td>@row.Product</td>
+        <td>@row.Color</td>
+        <td>@row.Size</td>
+        <td>@row.Grade</td>
+        <td>@row.Measure</td>
+        <td>@row.Code</td>
+        <td>@row.QrCode</td>
+        <td>@row.Barcode</td>
+        <td>
+          <span class="label label-light-danger">#@row.No</span>
+        </td>
+        <td>@row.Qty</td>
+        <td>
+          <div style="width: 80px">@row.InDate</div></td>
+        <td>@row.InTime</td>
+        <td>
+          <span style="width: 60px" class="label label-@Constraint.StatusColor(row.Status)">@row.Status</span>
+        </td>
+        <td>@row.UserUpdate</td>
+        <td>@row.UserConfirm</td>
+        <td>@row.DateConfirm</td>
+        <td>@row.TimeConfirm</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+
+</div>
+
+<div class="pagination">
+  <div id="show-page">
+    <span>
+      Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, Page => Url.Action("Index", "Transfer", new {Page}))
+    </span>
+  </div>
+</div>

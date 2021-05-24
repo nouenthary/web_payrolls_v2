@@ -17,7 +17,7 @@ namespace web_payrolls.Controllers
         // Context
         private readonly ClHelper _helper = new ClHelper();
 
-        private string _sqlQuery = "";
+        //private string _sqlQuery = "";
         // GET
         public ActionResult Index()
         {
