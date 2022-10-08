@@ -1,0 +1,94 @@
+@using PagedList.Mvc
+@model PagedList.IPagedList<DataRow>
+@using System.Data
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+
+  table {
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .label-succes s{
+    background-color: forestgreen !important;
+  }
+</style>
+
+<div class="table-responsive m-t-0 bg-white">
+  <table class="table table-sm text-center table-bordered table-striped" id="table-over">
+    <thead class="text-capitalize font-weight-bold">
+      <tr style="border: 1px solid #f3f1f1">
+        <td>No.</td>
+        <td>HOD</td>
+        <td>Company</td>
+        <td>Location</td>
+        <td>Department</td>
+        <td>Position</td>
+        <td>Staff Name</td>
+        <td>Photo</td>
+        <td>Gender</td>
+        <td>Tell</td>
+        <td>Staff Id Card</td>
+        <td>In Date</td>
+        <td>Out Date</td>
+        <td>Check Type</td>
+      </tr>
+    </thead>
+    <tbody>
+      @{ var rowNo = 0; }
+      @foreach (var row in Model)
+      {
+<tr data-id="@row["PK_Staff_Id"]">
+  <td>@(rowNo += 1)</td>
+  <td>@row["Name"]</td>
+  <td>@row["Comp_Name"]</td>
+  <td>@row["Loc_Name"]</td>
+  <td>@row["Deppart_Name"]</td>
+  <td>@row["Pos_Name"]</td>
+  <td>@row["Staff_Name"]</td>
+  <td>
+    <img class="mr-2"
+         id="image_view_no"
+         alt="attachment"
+         height="30"
+         width="30"
+         src="~/Content/images/users/@row["Photo"]"
+         onerror="this.src=src='@Url.Content("~/Content/images/avatar.png")'">
+  </td>
+  <td>@row["Sex"]</td>
+  <td>@row["Tell"]</td>
+  <td>@row["Staff_Id_Card"]</td>
+  <td>@row["Tran_In_Date"]</td>
+  <td>@row["Tran_In_Time"]</td>
+  <td>
+    @if (@row["Tran_In_Type"].ToString() == "Morning In")
+    {
+    <label class="label label-info">@row["Tran_In_Type"]</label>
+    }
+    else if (@row["Tran_In_Type"].ToString() == "Morning Out")
+    {
+    <label class="label label-warning">@row["Tran_In_Type"]</label> }
+    else if (@row["Tran_In_Type"].ToString() == "Evening In")
+    {
+    <label class="label label-success">@row["Tran_In_Type"]</label>}
+    else if (@row["Tran_In_Type"].ToString() == "Evening Out")
+    {
+    <label class="label label-danger">@row["Tran_In_Type"]</label>}
+  </td>
+    </tr>}
+    </tbody>
+  </table>
+
+</div>
+
+<div class="pagination">
+  <div id="show-page">
+    <span>
+      Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+      of @Model.PageCount
+      @Html.PagedListPager(Model, Page => Url.Action("Index", "CheckIn", new { Page }))
+    </span>
+  </div>
+</div>

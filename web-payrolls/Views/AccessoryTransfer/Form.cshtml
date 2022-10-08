@@ -1,0 +1,182 @@
+@model System.Data.DataTable
+
+@using web_payrolls.Models
+@{
+  var db = new DB_Connection();
+
+  var recycling = db.tblProduction_ProductType
+    .Where(t => t.Pro_Type == "Accessory")
+    .ToList();
+}
+<style>
+  .input-group-text{
+    background: transparent !important;
+  }
+</style>
+
+<div class="card">
+  <div class="card-header">
+    <i class="ti-shopping-cart"></i>
+    Add Product Stock Accessory
+  </div>
+  <div class="card-body">
+    <form id="form-add" name="form-add">
+      @Html.AntiForgeryToken()
+
+      <div class="form-group row">
+        <label for="PK_Boss_Id" class="col-sm-2 col-form-label col-form-label-sm text-right">HOD :</label>
+        <div class="col-lg-6 col-sm-10">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="ti-user"></i>
+              </div>
+            </div>
+
+            <select id="PK_Boss_Id" name="PK_Boss_Id" class="form-control" required>
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="CompanyId" class="col-sm-2 col-form-label col-form-label-sm text-right">Company :</label>
+        <div class="col-lg-6 col-sm-10">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="ti-home"></i>
+              </div>
+            </div>
+
+            <select id="CompanyId" name="CompanyId" class="form-control" required>
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="LocationId" class="col-sm-2 col-form-label col-form-label-sm text-right">To Location :</label>
+        <div class="col-lg-6 col-sm-10">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="ti-location-pin"></i>
+              </div>
+            </div>
+
+            <select id="LocationId" name="LocationId" class="form-control" required>
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="Name_Product" class="col-sm-2 col-form-label col-form-label-sm text-right">Product Type Name :</label>
+        <div class="col-lg-6 col-sm-10">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="ti-package"></i>
+              </div>
+            </div>
+
+            <select id="Type_Product" name="Type_Product" class="form-control" required>
+              <option value="">All</option>
+              @foreach (var item in recycling)
+              {
+                <option value="@item.PK_ProType_Id">@item.ProType_Name</option>
+              }
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="ProductTypeId" class="col-sm-2 col-form-label col-form-label-sm text-right">Product :</label>
+        <div class="col-lg-6 col-sm-10">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="ti-apple"></i>
+              </div>
+            </div>
+            <select id="ProductId" name="ProductId" class="form-control" required>
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="GradeId" class="col-sm-2 col-form-label col-form-label-sm text-right">Product Grade :</label>
+        <div class="col-lg-6 col-sm-10">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="ti-file"></i>
+              </div>
+            </div>
+            <select id="GradeId" name="GradeId" class="form-control" required>
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm text-right">Quality :</label>
+        <div class="col-lg-6 col-sm-10">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="ti-tablet"></i>
+              </div>
+            </div>
+            <input type="text" autocomplete="off" class="form-control" onkeypress="return isDecimalInt(event)" id="Qty" name="Qty" placeholder="Enter Qty" required>
+          </div>
+        </div>
+      </div>
+
+
+      @* <div class="form-group row"> *@
+      @*   <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm text-right">Description :</label> *@
+      @*   <div class="col-lg-6 col-sm-10"> *@
+      @*     <div class="input-group mb-2"> *@
+      @*       <textarea rows="4" class="form-control" id="Desc" name="Desc" placeholder="Enter Description"></textarea> *@
+      @*     </div> *@
+      @*   </div> *@
+      @* </div> *@
+
+
+      <div class="form-group row">
+        <label for="" class="col-sm-2 col-form-label col-form-label-sm text-right"></label>
+        <div class="col-lg-6 col-sm-10">
+          <div class="input-group mb-2">
+            <button type="submit" class="btn btn-default btn-sm">
+              <i class="ti-plus"></i> Save Item
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+    @Html.Partial("GetTableCreate", Model)
+
+    <form id="#" method="post">
+      @Html.AntiForgeryToken()
+      <button type="button" id="btn-save-all" class="btn btn-info btn-sm float-right">
+        <i class="ti-save-alt"></i> Save Close
+      </button>
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,80 @@
+@model List<web_payrolls.Models.tblProduction_Repair_Closth>
+
+<style>
+
+  .label-success{
+    background-color: #52c41a !important;
+    color: #fff !important;
+  }
+
+</style>
+
+<div class="table-responsive">
+  <table class="table table-sm table-bordered bg-white" id="table-item">
+    <thead>
+    <tr>
+      <td width="50px">#</td>
+      <td>Product_Type</td>
+      <td>Product_Type_Name</td>
+      <td>@Resources.Voucher.Product</td>
+      <td>Color</td>
+      <td>Size</td>
+      <td>Grade</td>
+      <td>@Resources.Voucher.Quantity</td>
+      <td>Price</td>
+      <td>Total</td>
+      <td style="width: 20px"></td>
+    </tr>
+    </thead>
+    <tbody>
+
+    @{ var rowNo = 0; }
+    @foreach (var row in Model)
+    {
+      <tr id="@row.PK_Repair_Closth_Id">
+        <td>@(rowNo += 1)</td>
+        <td>
+          <span class="label label-info">@row.tblProduction_Grade.tblProduction_Product.tblProduction_ProductType.Pro_Type</span>
+        </td>
+        <td>@row.tblProduction_Grade.tblProduction_Product.tblProduction_ProductType.ProType_Name</td>
+        <td>@row.tblProduction_Grade.tblProduction_Product.Pro_Name</td>
+        <td>@row.tblProduction_Grade.Color</td>
+        <td>@row.tblProduction_Grade.Size</td>
+        <td>@row.tblProduction_Grade.Grade_Name</td>
+        <td width="150px">
+          <input class="form-control text-center" onkeypress="return isDecimalInt(event)" id="txtQty" value="@row.QTY"/>
+        </td>
+
+        <td width="150px">
+          <input class="form-control text-center" onkeypress="return isDecimalNumber(event)" id="txtPrice" value="@row.Price"/>
+        </td>
+        <td>@row.Total</td>
+        <td>
+          <button class="btn btn-danger btn-sm" id="btn-remove">
+            <i class="ti-minus"></i>
+          </button>
+        </td>
+      </tr>
+    }
+    </tbody>
+    <tfoot>
+    <tr class="text-uppercase">
+      <th class="text-center"></th>
+      <th class="text-center bg-warning text-white">@Resources.Voucher.Total</th>
+      <th class="text-center"></th>
+      <th class="text-center"></th>
+      <th class="text-center"></th>
+      <th class="text-center"></th>
+      <th class="text-center"></th>
+      <th class="text-center font-weight-bold text-white" style="background-color: #52c41a">
+        @Model.Sum(t => t.QTY)
+      </th>
+       <th class="text-center"></th>
+      <th class="text-center font-weight-bold text-white" style="background-color: #52c41a">
+        @Model.Sum(t => t.Total) $
+      </th>
+      <th class="text-center"></th>
+    </tr>
+    </tfoot>
+  </table>
+</div>

@@ -1,0 +1,194 @@
+@using web_payrolls.Models
+@{
+  ViewBag.Title = "Repair Complete";
+
+  var db = new DB_Connection();
+
+  var recycling = db.tblProduction_ProductType
+    .Where(t => t.Pro_Type == "Recycling")
+    .ToList();
+}
+
+<!--Form Create-->
+<div class="modal fade" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" style="border-top: #28A745 3px solid;">
+      <div class="modal-header">
+
+        <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+          <i class="ti-arrow-up pr-2"></i> Transfer Repair Complete
+        </h2>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form method="post" id="form-create">
+        <div class="modal-body">
+
+          <input type="hidden" id="PK_Grade_Id" name="PK_Grade_Id"/>
+
+          @Html.AntiForgeryToken()
+          <div class="row">
+
+            <div class="col-md-6">
+
+
+              <div class="form-group col-md-12">
+                <label for="qty">HOD</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="ti-home"></i>
+                    </div>
+                  </div>
+                  <select id="PK_Boss_Id" name="PK_Boss_Id" class="form-control" required>
+                    <option value="">All</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <label for="qty">Company</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="ti-home"></i>
+                    </div>
+                  </div>
+                  <select id="FK_From_Com_Id" name="FK_From_Com_Id" class="form-control" required>
+                    <option value="">All</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <label for="qty">Location</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="ti-location-pin"></i>
+                    </div>
+                  </div>
+                  <select id="FK_To_Loc_Id" name="FK_To_Loc_Id" class="form-control" required>
+                    <option value="">All</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <label for="qty">Product Type Name</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="ti-package"></i>
+                    </div>
+                  </div>
+                  <select id="Product_Type_Name" name="Product_Type_Name" class="form-control" required>
+                    <option value="">All</option>
+                    @foreach (var item in recycling)
+                    {
+                      <option value="@item.PK_ProType_Id">@item.ProType_Name</option>
+                    }
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <label for="qty">Product </label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="ti-apple"></i>
+                    </div>
+                  </div>
+                  <select id="PK_Product_Id" name="PK_Product_Id" class="form-control" required>
+                    <option value="">All</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+
+              <div class="form-group col-md-12">
+                <label for="qty">Grade</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="ti-file"></i>
+                    </div>
+                  </div>
+                  <select id="FK_Grade_Id" name="FK_Grade_Id" class="form-control" required>
+                    <option value="">All</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <label for="qty">Qty Balance :</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="ti-bag"></i>
+                    </div>
+                  </div>
+                  <select id="PK_Reepair_Closth_Balance_Id" name="PK_Reepair_Closth_Balance_Id" class="form-control" required readonly="">
+                    <option value="">0</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <label for="qty">Quality </label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="ti-tablet"></i>
+                    </div>
+                  </div>
+                  <input name="QTY" id="QTY" onkeypress="return isDecimalInt(event)" placeholder="Enter Qty" class="form-control" required=""/>
+                </div>
+              </div>
+
+
+              <div class="form-group col-md-12">
+                <label for="TypeTransfer">Stock In Type</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="ti-book"></i>
+                    </div>
+                  </div>
+                  <select id="Type_Transfer" name="Type_Transfer" class="form-control" required="">
+                    <option value="">All</option>
+                    <option value="Complete">Complete</option>
+                    <option value="Lost">Lost</option>
+                    <option value="Broken">Broken</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-sm" id="btn-save" style="background: #28a745; color: #fff; font-size: 16px">
+            <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Save Close
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+<!--Form Create-->

@@ -1,0 +1,154 @@
+@using Resources
+@{
+  ViewBag.Title = "Deduct Wage";
+  ViewBag.Page = "Deduct Wage";
+}
+
+<style>
+
+  .table td, .table th {
+      border-Color: #ced4da;
+  }
+
+  th,  td {
+      border: 1px solid #3AC0F2 !important;
+      padding: 5px !important;
+  }
+
+  thead{
+   background: #1890ff !important;
+   color: #fff !important;
+  }
+
+
+</style>
+
+@* Card Filter *@
+<div class="card" style="margin-bottom: 0;border-top: #428bca 3px solid">
+  <div class="card-header">
+    <div class="card-actions">
+      <a class="" data-action="collapse">
+        <i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide
+      </a>
+    </div>
+    <h4 class="card-title m-b-0 card-text">
+      <i class="ti-filter"></i> @Resources.Voucher.Filter
+    </h4>
+  </div>
+  <div class="card-body collapse show b-t">
+    <form method="get" id="form-search">
+      <div class="row">
+
+        <div class="form-group col-xlg-3 col-md-3 pb-2">
+          <label for="BossId">@Voucher.HOD</label>
+          <div class="input-group">
+            <select id="BossId" name="BossId" class="form-control">
+              <option Value="">All</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group col-xlg-3 col-md-3 pb-2">
+          <label for="CompanyId">@Voucher.Company</label>
+          <div class="input-group">
+            <select id="CompanyId" name="CompanyId" class="form-control">
+              <option Value="">All</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-3 pb-2">
+          <label for="LocationId">@Voucher.Location</label>
+          <div class="input-group">
+            <select id="LocationId" name="LocationId" class="form-control">
+              <option Value="">All</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group col-xlg-3 col-md-3 pb-2">
+          <label for="DepartmentId">@Voucher.Department</label>
+          <div class="input-group">
+            <select id="DepartmentId" name="DepartmentId" class="form-control">
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-3 pb-2">
+          <label for="PositionId">@Voucher.Position</label>
+          <div class="input-group">
+            <select id="PositionId" name="PositionId" class="form-control">
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-3 pb-2">
+          <label for="StaffId">@Voucher.Staff @Voucher.Name</label>
+          <div class="input-group">
+            <select id="StaffId" name="StaffId" class="form-control">
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-3 pb-2">
+          <label for="Tell">@Voucher.Phone</label>
+          <div class="input-group">
+            <select id="Tell" name="Tell" class="form-control">
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-3 pb-2">
+          <label for="IdCard">@Voucher.idcard</label>
+          <div class="input-group">
+            <select id="IdCard" name="IdCard" class="form-control">
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-3 pb-2">
+          <label for="Status">@Voucher.Status</label>
+          <div class="input-group">
+            <select id="Status" name="Status" class="form-control">
+              <option value="">All</option>
+              <option value="Enable">Enable</option>
+              <option value="Disable">Disable</option>
+            </select>
+          </div>
+        </div>
+
+        <input type="hidden" id="PageSize" name="PageSize" value="20"/>
+
+        @Html.AntiForgeryToken()
+
+      </div>
+      <button class="btn btn-info btn-sm">
+        <i class="ti-search"></i> @Voucher.Search</button>
+    </form>
+  </div>
+
+</div>
+@* Card Filter *@
+
+<div style="padding: 5px 0 ; float: right">
+  <a class="btn btn-default btn-sm" id="btn-export"><i class="ti-export"></i> Export</a>
+</div>
+
+<div style="padding-top: 5px"></div>
+
+@Html.Partial("~/Views/Components/Controls/PageSize.cshtml")
+
+<div id="show"></div>
+
+@section Scripts
+{
+  <script src="~/Scripts/views/utils.js"></script>
+  <script src="~/Scripts/views/cutMoneyStaff/cutMoneyStaff.js"></script>
+}

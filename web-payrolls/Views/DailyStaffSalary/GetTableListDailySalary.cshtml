@@ -1,0 +1,205 @@
+@using PagedList.Mvc
+@model PagedList.IPagedList<DataRow>
+@using System.Data
+
+<style>
+  .bg-green{
+    background-color: #52c41a !important;
+  }
+</style>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+
+<div class="table-responsive m-t-0 bg-white">
+  <table class="table table-sm text-center table-bordered table-striped" id="table-complete">
+    <thead class="text-capitalize font-weight-bold">
+    <tr style="border: 1px solid #f3f1f1">
+      <td>No.</td>
+      <td>Modify</td>
+      <td>Confirm</td>
+      <td>Reject</td>
+      <td>Price</td>
+      <td>HOD</td>
+      <td>Company</td>
+      <td>From_Location</td>
+      <td>Type</td>
+      <td>Type_Name</td>
+      <td>Product</td>
+      <td>Color</td>
+      <td>Size</td>
+      <td>Grade</td>
+      <td>Measure</td>
+      <td>Code</td>
+      <td>Barcode</td>
+      <td>Qr_Code</td>
+      <td>Invoice</td>
+      <td>QTY</td>
+      <td>Cost</td>
+      <td>Total_Cost</td>
+      <td>Price</td>
+      <td>Total_Price</td>
+      <td>Get_Price</td>
+      <td>Other_Spend</td>
+      <td>Total</td>
+      <td>Stock_In_Type</td>
+      <td>Date </td>
+      <td>Time </td>
+      <td>Status</td>
+      <td>User_Update</td>
+      <td>User_Confirm</td>
+      <td>Date_Confirm</td>
+      <td>Time_Confirm</td>
+    </tr>
+    </thead>
+    <tbody>
+    @{ var rowNo = 0; }
+    @foreach (var row in Model)
+    {
+      <tr data-id="@row["StockIn_Complete_No"]">
+        <td>@(rowNo += 1)</td>
+        <td>
+          <button type="button" id="btn-edit" class="btn @(row["Confirm_Status"].ToString() != "Pending" ? " btn-instagram " : "  btn-default ") btn-sm" @(row["Confirm_Status"].ToString() != "Pending" ? "disabled" : "")>
+            <i class="ti-pencil"></i>
+          </button>
+        </td>
+        <td>
+          <button type="button" id="btn-confirm" class="btn @(row["Confirm_Status"].ToString() != "Pending" ? " btn-instagram " : "  btn-info ")  btn-sm" @(row["Confirm_Status"].ToString() != "Pending" ? "disabled" : "")>
+            <i class="ti-check"></i>
+          </button>
+        </td>
+        <td>
+          <button type="button" id="btn-reject" class="btn @(row["Confirm_Status"].ToString() != "Pending" ? " btn-instagram " : "  btn-danger ") btn-sm" @(row["Confirm_Status"].ToString() != "Pending" ? "disabled" : "")>
+            <i class="ti-close"></i>
+          </button>
+        </td>
+        <td>
+          <button type="button" data-id="@row["PK_Grade_Id"]" id="btn-set" class="btn btn-default btn-sm" )>
+            <i class="ti-plus"></i>
+          </button>
+        </td>
+        <td>@row["Name"]</td>
+        <td>@row["FromCompany"]</td>
+        <td>@row["Location"]</td>
+        <td>
+          @{
+            if (row["Pro_Type"] == "Fabric")
+            {
+              <span class="label label-success text-center" style="width: 70px">@row["Pro_Type"]</span>
+            }
+            else if (row["Pro_Type"].ToString().Trim() == "Recycling")
+            {
+              <span class="label label-danger text-center" style="width: 70px">@row["Pro_Type"]</span>
+            }
+            else if (row["Pro_Type"] == "Accessory")
+            {
+              <span class="label label-info text-center" style="width: 70px">@row["Pro_Type"]</span>
+            }
+            else
+            {
+              <span class="label label-success text-center" style="width: 70px; background: #28a745">@row["Pro_Type"]</span>
+            }
+          }
+        </td>
+        <td>
+          <span class="">@row["ProType_Name"]</span>
+        </td>
+        <td>@row["Pro_Name"]</td>
+        <td>@row["Color"]</td>
+        <td>@row["Size"]</td>
+        <td>@row["Grade_Name"]</td>
+        <td>@row["Measu_Name"]</td>
+        <td>@row["Code_Product"]</td>
+        <td>@row["QR_Code"]</td>
+        <td>@row["BarCode"]</td>
+        <td>
+          <span class="label label-light-danger font-weight-bold">@row["StockIn_Complete_No"]</span>
+        </td>
+        <td>@row["In_QTY"]</td>
+        <td>@row["Unit_Price"]</td>
+        <td>@row["Total_Price"]</td>
+        <td>@row["Cost"]</td>
+        <td>@row["Total_Cost"]</td>
+        <td>@row["Get_Price"]</td>
+        <td>@row["Other_Spend"]</td>
+        <td>@row["Total"]</td>
+        <td>
+          @if (row["Stock_In_Type"].ToString() == "Complete")
+          {
+            <span class="label label-success text-center" style="width: 60px">@row["Stock_In_Type"]</span>
+          }
+          else if (row["Stock_In_Type"].ToString() == "Broken")
+          {
+            <span class="label label-danger text-center" style="width: 60px">@row["Stock_In_Type"]</span>
+          }
+          else
+          {
+            <span class="label label-warning text-center" style="width: 60px">@row["Stock_In_Type"]</span>
+          }
+
+        </td>
+        <td>
+          <div style="width: 80px">@row["In_Date"]</div>
+        </td>
+        <td>@row["In_Time"]</td>
+        <td>
+          <span style="width: 60px" class="label label-@web_payrolls.Models.Constraint.StatusColor(row["Confirm_Status"] + "")">@row["Confirm_Status"]</span>
+        </td>
+        <td>@row["UserUpdate"]</td>
+        <td>@row["UserConfirm"]</td>
+        <td>@row["Confirm_Date"]</td>
+        <td>@row["Confirm_Time"]</td>
+      </tr>
+    }
+    </tbody>
+    <tfoot>
+    <tr style="border: 1px solid #f3f1f1">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="bg-warning font-weight-bold text-white"> @Model.Sum(x => (int) x["In_QTY"])</td>
+      <td></td>
+      <td class="bg-info font-weight-bold text-white"> @Model.Sum(x => (double) x["Total_Cost"])</td>
+      <td></td>
+      <td class="bg-info font-weight-bold text-white">@Model.Sum(x => (double) x["Total_Price"])</td>
+      <td class="bg-green font-weight-bold text-white"> @Model.Sum(x => (double) x["Get_Price"])</td>
+      <td class="bg-green font-weight-bold text-white"> @Model.Sum(x => (double) x["Other_Spend"])</td>
+      <td class="bg-green font-weight-bold text-white"> @Model.Sum(x => (double) x["Total"])</td>
+      <td></td>
+      <td> </td>
+      <td> </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+
+</div>
+
+<div class="pagination">
+  <div id="show-page">
+    <span>
+      Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+      of @Model.PageCount
+      @Html.PagedListPager(Model, Page => Url.Action("Index", "StockInComplete", new {Page}))
+    </span>
+  </div>
+</div>

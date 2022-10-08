@@ -1,0 +1,15 @@
+@model System.Data.DataTable
+
+@{
+  ViewBag.Title = "Import Accessory";
+  ViewBag.Page = "Import Accessory";
+}
+
+@Html.Partial("Form", Model)
+
+@section Scripts
+{
+  <script src="~/Scripts/views/utils.js"></script>
+  <script src="~/Scripts/views/accessory/accessoryCreate.js"></script>
+  <script src="~/Scripts/views/accessory/accessoryAdd.js"></script>
+}

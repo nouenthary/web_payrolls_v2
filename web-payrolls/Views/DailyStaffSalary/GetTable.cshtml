@@ -1,0 +1,138 @@
+@using PagedList.Mvc
+@model PagedList.IPagedList<DataRow>
+@using System.Data
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+
+<div class="table-responsive m-t-0 bg-white">
+  <table class="table table-sm text-center table-bordered table-striped" id="table-over">
+    <thead class="text-capitalize font-weight-bold">
+    <tr style="border: 1px solid #f3f1f1">
+      <td>No.</td>
+      <td>SetPercent</td>
+      <td>HOD</td>
+      <td>Type</td>
+      <td>TypeName</td>
+      <td>Product</td>
+      <td>Color</td>
+      <td>Size</td>
+      <td>Grade</td>
+      <td>Measure</td>
+      <td>Code</td>
+      <td>Barcode</td>
+      <td>QrCode</td>
+      <td>UnitPrice</td>
+      <td>Cost</td>
+      <td>NormalPrice</td>
+      <td>WholePrice</td>
+      <td>DoubleWholePrice</td>
+      <td>Discount</td>
+      <td>StartDate</td>
+      <td>EndDate</td>
+      <td>StatusDiscount</td>
+      <td>Status</td>
+      <td>GetPrice</td>
+      <td>OtherSpend</td>
+      <td>PercentOver</td>
+      <td>UserUpdate</td>
+      <td>DateUpdate</td>
+      <td>TimeUpdate</td>
+    </tr>
+    </thead>
+    <tbody>
+    @{ var rowNo = 0; }
+    @foreach (var row in Model)
+    {
+      <tr id="@row["PK_Grade_Id"]">
+        <td>@(rowNo += 1)</td>
+        <td>
+          <button type="button" id="btn-add" class="btn btn-default btn-sm">
+            <i class="ti-plus"></i> Set Percent
+          </button>
+        </td>
+        <td>@row["Name"]</td>
+        <td>
+          @{
+            if (row["Pro_Type"] == "Fabric")
+            {
+              <span class="label label-success text-center" style="width: 70px">@row["Pro_Type"]</span>
+            }
+            else if (row["Pro_Type"].ToString().Trim() == "Recycling")
+            {
+              <span class="label label-danger text-center" style="width: 70px">@row["Pro_Type"]</span>
+            }
+            else if (row["Pro_Type"] == "Accessory")
+            {
+              <span class="label label-info text-center" style="width: 70px">@row["Pro_Type"]</span>
+            }
+            else
+            {
+              <span class="label label-success text-center" style="width: 70px; background: #28a745">@row["Pro_Type"]</span>
+            }
+          }
+        </td>
+        <td>@row["ProType_Name"]</td>
+        <td>@row["Pro_Name"]</td>
+        <td>@row["Color"]</td>
+        <td>@row["Size"]</td>
+        <td>@row["Grade_Name"]</td>
+        <td>@row["Measu_Name"]</td>
+        <td>@row["Code_Product"]</td>
+        <td>@row["BarCode"]</td>
+        <td>@row["QR_Code"]</td>
+        <td>
+          @row["Unit_Price"]
+        </td>
+        <td>@row["Cost"]</td>
+        <td>@row["Normal_Price"]</td>
+        <td>@row["Whole_Price"]</td>
+        <td>@row["Double_Whole_Price"]</td>
+        <td>@row["Discount"]</td>
+        <td>@row["Start_Dis"]</td>
+        <td>@row["End_Dis"]</td>
+        <td>
+          @{
+            if (row["Status_Dis"].ToString() == "Enable")
+            {
+              <span class="label label-success text-center" style="width: 70px; background: #28a745">@row["Status_Dis"]</span>
+            }
+            else
+            {
+              <span class="label label-danger text-center" style="width: 70px; background: #28a745">@row["Status_Dis"]</span>
+            }
+          }
+        </td>
+        <td>
+          @{
+            if (row["Pro_Status"].ToString() == "Enable")
+            {
+              <span class="label label-success text-center" style="width: 70px; background: #28a745">@row["Pro_Status"]</span>
+            }
+            else
+            {
+              <span class="label label-danger text-center" style="width: 70px; background: #28a745">@row["Pro_Status"]</span>
+            }
+          }
+        </td>
+        <td>@row["Get_Price"]</td>
+        <td>@row["Other_Spend"]</td>
+        <td>@row["Percent_Over"] %</td>
+        <td>@row["User_Update"]</td>
+        <td>@row["Date_Update"]</td>
+        <td>@row["Time_Update"]</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+
+</div>
+
+<div class="pagination">
+  <div id="show-page">
+    <span>
+      Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+      of @Model.PageCount
+      @Html.PagedListPager(Model, Page => Url.Action("Index", "SetOverPercent", new {Page}))
+    </span>
+  </div>
+</div>

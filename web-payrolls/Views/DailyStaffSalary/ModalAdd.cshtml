@@ -1,0 +1,89 @@
+@using web_payrolls.Helpers
+@using web_payrolls.Models
+@{
+
+  var db = new DB_Connection();
+
+  var products = db.tblProduction_Product.Where(x => x.tblProduction_ProductType.Pro_Type == "Processing").ToList();
+
+  var provider = new ContextProvider(new ClHelper(), new DB_Connection());
+
+  // CompanyId
+  var company = db
+    .tblCompanies
+    .Select(com => new SelectListItem()
+    {
+      Value = com.PK_Comp_Id + "",
+      Text = com.Comp_Name,
+      Selected = com.PK_Comp_Id == provider.CompanyId
+    })
+    .ToList();
+}
+<!--Form Create-->
+<div class="modal fade" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-top: #28A745 3px solid;">
+      <div class="modal-header">
+
+        <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+          <i class="ti-plus pr-2"></i> Add Product Grade
+        </h2>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form method="post" id="form-create">
+        <div class="modal-body">
+          @Html.AntiForgeryToken()
+          <div class="row">
+
+
+            <div class="form-group col-md-12">
+              <label>Form Company</label>
+              <div class="input-group">
+                @Html.DropDownList("FK_Comp_From_Id", company, "-- Choose Company --", new {@class = "form-control"})
+              </div>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="product_name">Product Name</label>
+              <select class="form-control" id="product_name" name="product_name" required="required">
+                <option value="">-- Choose Product Name -- </option>
+                @foreach (var row in products)
+                {
+                  <option value="@row.PK_Pro_Id">@row.Pro_Name</option>
+                }
+              </select>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="product_grade">Product Grade</label>
+              <select class="form-control" id="product_grade" name="product_grade" required="required" style="width: 100%">
+                <option value="">-- Choose Grade -- </option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="qty">Quantity</label>
+              <input class="form-control" id="qty" autocomplete="off" name="qty" placeholder="Enter Quantity" maxlength="50" value="0" required=""/>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-block btn-sm" id="btn-save-more-grade" style="background: #28a745; color: #fff; font-size: 20px">
+            <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Add More Grade
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+<!--Form Create-->

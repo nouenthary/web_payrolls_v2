@@ -1,0 +1,107 @@
+<!--Form Create-->
+<div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" style="border-top: #28A745 3px solid;">
+      <div class="modal-header">
+
+        <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+          <i class="ti-shopping-cart pr-2"></i> Add Product To Bill
+        </h2>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form method="post" id="form-create">
+        <div class="modal-body">
+          @Html.AntiForgeryToken()
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>HOD</label>
+              <div class="input-group">
+                <select id="BossId" name="BossId" class="form-control form-control-sm" required>
+                  <option value="">All</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="Location">Location</label>
+              <select class="form-control form-control-sm" id="LocationId" name="LocationId" required="required">
+                <option value="">All</option>
+              </select>
+            </div>
+          </div>
+
+          <h5>Details</h5>
+          <hr/>
+
+          <div class="row">
+
+            <div class="form-group col-md-12">
+              <label for="ProductTypeId">Product Type Name</label>
+              <select class="form-control form-control-sm" id="ProductTypeId" name="ProductTypeId" required="required" style="width: 100%">
+                <option value="">All</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="productTypeId">Product </label>
+              <select class="form-control form-control-sm" id="ProductId" name="ProductId" required="required" style="width: 100%">
+                <option value="">All</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="GradeId">Product Grade</label>
+              <select class="form-control form-control-sm" id="GradeId" name="GradeId" required="required" style="width: 100%">
+                <option value="">All</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="BalanceId">Stock Balance</label>
+              <select class="form-control form-control-sm" id="BalanceId" name="BalanceId" required="required" readonly="readonly">
+                <option value="">0</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="Qty">Quantity</label>
+              <input onkeypress="return isDecimalInt(event)" class="form-control form-control-sm" id="Qty" autocomplete="off" name="Qty" placeholder="Enter Quantity"  required=""/>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="MakeDate">Use Date</label>
+              <input type="date" class="form-control form-control-sm" id="MakeDate" autocomplete="off" name="MakeDate" required="required"/>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="MakeTime">Use Time</label>
+              <input type="text" class="form-control form-control-sm clockpicker-popover" placeholder="HH:mm" id="MakeTime" autocomplete="off" name="MakeTime" required="required"/>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="Desc">Description</label>
+              <textarea class="form-control form-control-sm" id="Desc" name="Desc" rows="4" placeholder="Enter Description"></textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-sm" id="btn-save-more-grade" style="background: #28a745; color: #fff; font-size: 16px">
+            <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Save Close
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+<!--Form Create-->

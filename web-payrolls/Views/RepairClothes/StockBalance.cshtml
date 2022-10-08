@@ -1,0 +1,173 @@
+@{
+  ViewBag.Title = "Stock Balance";
+}
+
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+
+<style>
+  .custom-select-form {
+      padding: 2px;
+      border: #dddddd 1px solid;
+  }
+
+  .table {
+       margin-bottom: 0;
+  }
+</style>
+
+@* Card Filter *@
+<div class="card" style="margin-bottom: 0;border-top: #428bca 3px solid">
+  <div class="card-header">
+    <div class="card-actions">
+      <a class="" data-action="collapse">
+        <i class="ti-minus"></i> @Resources.Voucher.Show / @Resources.Voucher.Hide
+      </a>
+    </div>
+    <h4 class="card-title m-b-0 card-text">
+      <i class="ti-filter"></i> @Resources.Voucher.Filter
+    </h4>
+  </div>
+  <div class="card-body collapse show b-t">
+    @using (Html.BeginForm(null, null, FormMethod.Get, new {name = "form-search", id = "form-search"}))
+    {
+      <div class="row">
+
+        <div class="form-group col-xlg-3 col-md-4">
+          <label>HOD</label>
+          <div class="input-group">
+            <select id="BossId" name="BossId" class="form-control">
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group col-xlg-3 col-md-4">
+          <label>Company</label>
+          <div class="input-group">
+            <select id="CompanyId" name="CompanyId" class="form-control">
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group col-xlg-3 col-md-4">
+          <label>Location</label>
+          <div class="input-group">
+            <select id="LocationId" name="LocationId" class="form-control">
+              <option value="">All</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label for="ProductTypeId">Product Type</label>
+          <div class="input-group">
+            <select id="TypeName" name="TypeName" class="form-control">
+              <option value="">All</option>
+              <option value="Processing">Processing</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label for="TypeName">Type Name</label>
+          <div class="input-group">
+            <select id="ProductTypeId" name="ProductTypeId" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose Type Name --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label for="ProductId">Product Name</label>
+          <div class="input-group">
+            <select id="ProductId" name="ProductId" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose Product Name --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label for="Color">Color</label>
+          <div class="input-group">
+            <select id="Color" name="Color" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose Color --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label for="Size">Size</label>
+          <div class="input-group">
+            <select id="Size" name="Size" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose Size --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label for="Grade">Grade</label>
+          <div class="input-group">
+            <select id="Grade" name="Grade" class="form-control">
+              <option value="">-- @Resources.Voucher.Choose Grade --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label for="Barcode">Barcode</label>
+          <div class="input-group">
+            <input class="form-control" id="Barcode" name="Barcode" placeholder="Search Barcode" autocomplete="off"/>
+
+          </div>
+        </div>
+
+        <div class="form-group col-xlg-3 col-md-4 pb-2">
+          <label for="QrCode">Qr Code</label>
+          <div class="input-group">
+            <input class="form-control" id="QrCode" name="QrCode" placeholder="Search Qr code" autocomplete="off"/>
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-xlg-3 col-md-4">
+          <label for="type">Status</label>
+          <div class="input-group">
+            <select id="Status" name="Status" class="form-control">
+              <option value="">All</option>
+              <option value="Enable">Enable</option>
+              <option value="Disable">Disable</option>
+            </select>
+          </div>
+        </div>
+
+        <input type="hidden" id="PageSize" name="PageSize" value="20"/>
+
+      </div>
+      <button class="btn btn-info btn-sm"><i class="ti-search"></i> Searching</button>
+    }
+  </div>
+
+</div>
+@* Card Filter *@
+
+<div style="padding: 5px 0 ; float: right">
+  <a href="@Url.Action("Index", "StockInComplete")" class="btn btn-dropbox btn-sm text-white"><i class="ti-shopping-cart"></i> Transfer</a>
+  <a class="btn btn-default btn-sm" id="btn-export"><i class="ti-export"></i> Export</a>
+</div>
+
+@Html.Partial("~/Views/Components/Controls/PageSize.cshtml")
+
+<div id="show"></div>
+
+@section Scripts
+{
+  <script src="~/Scripts/views/stockCompleteBalance.js"></script>
+  <script src="~/Scripts/views/utils.js"></script>
+}
+

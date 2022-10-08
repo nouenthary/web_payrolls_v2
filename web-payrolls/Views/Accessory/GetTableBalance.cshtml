@@ -1,0 +1,63 @@
+@using PagedList.Mvc
+@model PagedList.IPagedList<DataRow>
+@using System.Data
+
+<div class="table-responsive m-t-0 bg-white">
+  <table class="table table-sm text-center table-striped table-bordered" id="table-transfer-balance">
+    <thead class="text-capitalize font-weight-bold table-header-shadow">
+    <tr class="" style="border: 1px solid #f3f1f1">
+      <td>No.</td>
+      <td>HOD</td>
+      <td>From_Company</td>
+      <td>To_Location</td>
+      <td>Type</td>
+      <td>Type_Name</td>
+      <td>Product</td>
+      <td>Color</td>
+      <td>Size</td>
+      <td>Grade</td>
+      <td>Measure</td>
+      <td>Code</td>
+      <td>Barcode</td>
+      <td>Qr_Code</td>
+      <td>QTY</td>
+    </tr>
+    </thead>
+    <tbody>
+    @{ var rowNo = 0; }
+    @foreach (var row in Model)
+    {
+      <tr>
+        <td style="width: 80px">@(rowNo += 1)</td>
+        <td>@row["Boss"]</td>
+        <td>@row["Comp_Name"]</td>
+        <td>@row["Loc_Name"]</td>
+        <td>
+          <span class="label label-success">@row["Type"]</span>
+        </td>
+        <td>
+          <span class="">@row["TypeName"]</span>
+        </td>
+        <td>@row["Product"]</td>
+        <td>@row["Color"]</td>
+        <td>@row["Size"]</td>
+        <td>@row["Grade"]</td>
+        <td>@row["Measure"]</td>
+        <td>@row["Code"]</td>
+        <td>@row["QrCode"]</td>
+        <td>@row["Bacode"]</td>
+        <td>@row["Qty"]</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+
+</div>
+
+<div class="pagination">
+  <div id="show-page">
+    <span>
+      Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, Page => Url.Action("TransferBalance", "Transfer", new {Page}))
+    </span>
+  </div>
+</div>

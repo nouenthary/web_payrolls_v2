@@ -1,0 +1,129 @@
+﻿@using Microsoft.Ajax.Utilities
+@using web_payrolls.Helpers
+@using web_payrolls.Models
+@{
+  var db = new DB_Connection();
+
+  var provider = new ContextProvider(new ClHelper(), new DB_Connection());
+
+  var hod = db
+    .tblBosses
+    .Select(boss => new SelectListItem
+    {
+      Value = boss.PK_Boss_Id + "",
+      Text = boss.Name,
+      Selected = provider.ManagerId == boss.PK_Boss_Id
+    });
+
+  var productType = db.tblProduction_ProductType
+    .DistinctBy(x => x.Pro_Type)
+    .ToList();
+}
+
+<!--Form Create-->
+<div class="modal fade" id="modal-color-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h2 class="modal-title text-primary card-text" style="font-weight:600" id="exampleModalLabel">
+          <i class="ti-apple pr-2"></i>@Resources.Voucher.Update @Resources.Voucher.ProductColor</h2>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="#" action="#" id="form-color-edit">
+        <div class="modal-body">
+
+          <input type="hidden" id="PK_Color_Id" name="PK_Color_Id"/>
+
+          <div class="row">
+
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label>HOD</label>
+                <div class="input-group">
+                  @Html.DropDownList("FK_Boss_Id", hod, "-- Choose HOD --", new {@class = "form-control form-control-sm"})
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Product Type</label>
+                <div class="input-group">
+                  <select class="form-control form-control-sm" id="ProductType" name="ProductType" required>
+                    <option value="">All</option>
+                    @foreach (var i in productType)
+                    {
+                      <option value="@i.Pro_Type">@i.Pro_Type</option>
+                    }
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Product Type Name</label>
+                <div class="input-group">
+                  <select class="form-control form-control-sm" id="ProductTypeName" name="ProductTypeName" required>
+                    <option value="">All</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Product Name</label>
+                <div class="input-group">
+                  <select class="form-control form-control-sm" id="FK_Pro_Id" name="FK_Pro_Id" required>
+                    <option value="">All</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="">
+                  Color Name
+                </label>
+                <input type="text" class="form-control" id="Color_Name" name="Color_Name" placeholder="Color Name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="">
+                  Barcode
+                </label>
+                <input type="text" class="form-control" id="BarCode" name="BarCode" placeholder="BarCode" required>
+              </div>
+
+              <div class="form-group">
+                <label for="">
+                  Qr code
+                </label>
+                <input type="text" class="form-control" id="QR_Code" name="QR_Code" placeholder="QR Code" required>
+              </div>
+
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="">Noted</label>
+                <textarea class="form-control" id="Descr" name="Descr" placeholder="Description" rows="4"></textarea>
+              </div>
+            </div>
+
+
+            @Html.AntiForgeryToken()
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-sm" id="btn-save-boss" style="background: #28a745; color: #fff; font-size: 16px">
+            <i class="ti-save-alt pr-2"></i>@Resources.Voucher.Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--Form Create-->
